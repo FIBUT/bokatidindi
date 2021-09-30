@@ -9,8 +9,9 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 import "jquery";
-import "bootstrap";
-import "../../assets/stylesheets/application";
+import { createPopper } from '@popperjs/core'
+import 'bootstrap'
+import './src/application.scss'
 
 Rails.start()
 Turbolinks.start()

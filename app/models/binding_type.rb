@@ -1,0 +1,2 @@
+class BindingType < ApplicationRecord
+end

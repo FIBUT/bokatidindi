@@ -29,5 +29,17 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+is:
+  hello: "Halló heimur"
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " og "
+      last_word_connector: " og "
+  views:
+    pagination:
+      first: "Fyrsta"
+      last: "Síðasta"
+      previous: "Fyrri"
+      next: "Næsta"
+      truncate: "…"

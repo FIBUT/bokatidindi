@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang=is>
   <head>
-    <title>Bokatidindi</title>
+    <title>Bókatíðndi</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -12,6 +14,39 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <div class="container">
+      <header class="row p-5 mb-5 border-bottom">
+        <h1 id="site-title"><%= link_to 'Bókatíðindi', root_path %></h1>
+        <form class="col-6 offset-4">
+          <div class="input-group">
+            <input type="search" class="form-control" placeholder="Leitarorð…" aria-label="Search">
+            <input type="submit" value="Leita" class="btn btn-primary">
+          </div>
+        </form>
+      </header>
+
+      <nav class="dropdown" aria-labelledby="category-menu-button">
+        <button
+          id="category-menu-button"
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Vöruflokkar
+        </button>
+        <ul class="dropdown-menu">
+          <% Category.all.order('rod ASC').each do |category| %>
+          <li class="dropdown-item">
+            <%= link_to category.name, controller: 'books', category: category.slug %>
+          </li>
+          <% end %>
+        </ul>
+      </nav>
+      <%= yield %>
+    </div>
   </body>
 </html>

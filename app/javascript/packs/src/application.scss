@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/bootstrap';
+
+#site-title { font-size: 1em; font-weight: bold; margin: 0; }
+
+.book {
+    .title { font-weight: bold; }
+    .pre-title, .post-title { font-size: 1.2em; }
+    .authors { margin: 1em 0; }
+    hgroup {
+        h2, h3, h4 { line-height: 1em; }
+    }
+}
