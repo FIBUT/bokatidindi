@@ -34,6 +34,19 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
     t.index ["source_id"], name: "index_authors_on_source_id", unique: true
   end
 
+  create_table "binding_types", force: :cascade do |t|
+    t.integer "source_id"
+    t.string "name"
+    t.string "slug"
+    t.integer "rod"
+    t.boolean "open"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_binding_types_on_name", unique: true
+    t.index ["slug"], name: "index_binding_types_on_slug", unique: true
+    t.index ["source_id"], name: "index_binding_types_on_source_id", unique: true
+  end
+
   create_table "book_authors", force: :cascade do |t|
     t.integer "source_id"
     t.integer "book_id"
@@ -45,6 +58,15 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
     t.index ["author_type_id"], name: "index_book_authors_on_author_type_id"
     t.index ["book_id"], name: "index_book_authors_on_book_id"
     t.index ["source_id"], name: "index_book_authors_on_source_id", unique: true
+  end
+
+  create_table "book_binding_types", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "binding_type_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["binding_type_id"], name: "index_book_binding_types_on_binding_type_id"
+    t.index ["book_id"], name: "index_book_binding_types_on_book_id"
   end
 
   create_table "books", force: :cascade do |t|

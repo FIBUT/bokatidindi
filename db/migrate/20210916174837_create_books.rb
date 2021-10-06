@@ -45,12 +45,40 @@ class CreateBooks < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
+    create_table :binding_types do |t|
+      t.integer :source_id, index: { unique: true }
+  
+      t.string :name, index: { unique: true }
+      t.string :slug, index: { unique: true }
+      t.integer :rod
+      t.boolean :open
+
+      t.timestamps
+    end
+
+    create_table :book_binding_types do |t|
+      t.belongs_to :book, index: true
+      t.belongs_to :binding_type, index: true
+
+      t.timestamps
+    end
+
     create_table :authors do |t|
       t.integer :source_id, index: { unique: true }
 
       t.string :firstname
       t.string :lastname
       t.string :slug, index: { unique: true }
+
+      t.timestamps
+    end
+
+    create_table :author_types do |t|
+      t.integer :source_id, index: { unique: true }
+
+      t.string :name
+      t.string :slug, index: { unique: true }
+      t.integer :rod
 
       t.timestamps
     end
@@ -65,27 +93,5 @@ class CreateBooks < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-
-    create_table :author_types do |t|
-      t.integer :source_id, index: { unique: true }
-
-      t.string :name
-      t.string :slug, index: { unique: true }
-      t.integer :rod
-
-      t.timestamps
-    end
-  end
-
-  create_table :binding_type do |t|
-    t.integer :source_id, index: { unique: true }
-
-    t.string :name, index: { inique: true }
-    t.integer :rod
-  end
-
-  create_table :book_binding_type do |t|
-    t.belongs_to :book
-    t.belongs_to :binding_type
   end
 end

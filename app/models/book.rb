@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   has_many :book_authors
   has_many :authors, through: :book_authors
   has_many :author_types, through: :book_authors
+  has_many :book_binding_types
+  has_many :binding_types, through: :book_binding_types
   belongs_to :publisher
   belongs_to :category
 
