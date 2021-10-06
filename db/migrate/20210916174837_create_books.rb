@@ -39,9 +39,15 @@ class CreateBooks < ActiveRecord::Migration[6.1]
       t.string :audio_url
 
       t.belongs_to :publisher, index: true
-      t.belongs_to :category, index: true
       t.belongs_to :book_author, index: true
   
+      t.timestamps
+    end
+
+    create_table :book_categories do |t|
+      t.belongs_to :book
+      t.belongs_to :category
+
       t.timestamps
     end
 
@@ -57,6 +63,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     end
 
     create_table :book_binding_types do |t|
+      t.string :barcode, index: true
       t.belongs_to :book, index: true
       t.belongs_to :binding_type, index: true
 

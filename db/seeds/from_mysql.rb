@@ -18,11 +18,15 @@ binding_type_result.each do |binding_type_row|
   )
 end
 
-book_query = "SELECT `book`.`book_id`, `pretitle`, `title`, `posttitle`,
-`description`, `description_long`,
-`book`.`category_id`, `nr_of_pages`, `nr_of_minutes`,
+book_query = "SELECT `book`.`book_id`,
+TRIM(`bookid_bindingtype_eannr`.eannr) AS eannr,
+bindingtype.bindingtype_id, bindingtype.name,
+`book`.`category_id`,
 `category`.`name` AS `category_name`,
 `category`.`rodun` AS `category_rodun`,
+`pretitle`, `title`, `posttitle`,
+`description`, `description_long`,
+`nr_of_pages`, `nr_of_minutes`,
 `book`.`publisher_id`,
 `publisher`.`name` AS `publisher_name`,
 `publisher`.`veffang` AS `publisher_url`
@@ -31,7 +35,12 @@ LEFT JOIN `publisher`
 ON `book`.`publisher_id` = `publisher`.`publisher_id`
 LEFT JOIN `category`
 ON `book`.`category_id` = `category`.`category_id`
-WHERE `book`.`editionid` = 'BT2020'"
+JOIN `bookid_bindingtype_eannr`
+ON bookid_bindingtype_eannr.book_id = book.book_id
+LEFT JOIN bindingtype
+ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
+WHERE `book`.`editionid` = 'BT2020'
+ORDER BY book_id"
 
 book_result = client.query book_query
 
@@ -52,7 +61,13 @@ book_result.each do |book_row|
     rod: book_row['category_rodun']
   )
 
-  book = Book.create(
+  if book_row['eannr'] == 'ISBN/EAN13 nr' || book_row['eannr'].empty?
+    book = Book.find_by(source_id: book_row['book_id'])
+  else
+    book = Book.joins(:book_binding_types).find_by(book_binding_types: { barcode: book_row['eannr'] })
+  end
+
+  book ||= Book.create(
     source_id: book_row['book_id'],
     pre_title: book_row['pretitle'].strip,
     title: book_row['title'].strip,
@@ -60,20 +75,38 @@ book_result.each do |book_row|
     description: book_row['description'].strip,
     long_description: book_row['description_long'],
     page_count: book_row['nr_of_pages'],
-    publisher_id: publisher['id'],
-    category_id: category['id']
+    publisher_id: publisher['id']
   )
 
-  puts book.slug
+  puts "Book: #{book.source_id} to #{book.id} - #{book.title} - #{category.name}" 
 
-  book_binding_type_query = "SELECT `bookid_bindingtype_eannr`.bindingtype_id
+  book_category = BookCategory.find_by(book_id: book.id, category_id: category.id)
+  book_category ||= BookCategory.create(
+    book_id: book.id,
+    category_id: category.id
+  );
+
+  book_binding_type_query = "SELECT bookid_bindingtype_eannr.bindingtype_id, TRIM(bookid_bindingtype_eannr.eannr) AS barcode, bindingtype.name
   FROM `bookid_bindingtype_eannr`
+  LEFT JOIN bindingtype
+  ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
   WHERE `bookid_bindingtype_eannr`.`book_id` = #{book_row['book_id']}"
 
   book_binding_type_result = client.query book_binding_type_query
 
   book_binding_type_result.each do |book_binding_type_row|
-    BookBindingType.create(
+    if book_binding_type_row['barcode'] == 'ISBN/EAN13 nr' || book_binding_type_row['barcode'].empty?
+      barcode = nil
+    else
+      barcode = book_binding_type_row['barcode']
+    end
+    book_binding_type = BookBindingType.find_by(
+      barcode: barcode,
+      book_id: book.id,
+      binding_type: BindingType.find_by(source_id: book_binding_type_row['bindingtype_id'])
+    )
+    book_binding_type ||= BookBindingType.create(
+      barcode: barcode,
       book_id: book.id,
       binding_type: BindingType.find_by(source_id: book_binding_type_row['bindingtype_id'])
     )
@@ -106,7 +139,10 @@ book_result.each do |book_row|
       rod: book_author_row['order']
     )
 
-    book_author = BookAuthor.create(
+    book_author = BookAuthor.find_by(
+      source_id: book_author_row['isWrittenBy_id'],
+    )
+    book_author ||= BookAuthor.create(
       source_id: book_author_row['isWrittenBy_id'],
       book_id: book['id'],
       author_id: author['id'],

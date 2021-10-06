@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :books
+  has_many :books, through: :book_categories
 
   before_create :set_slug
 

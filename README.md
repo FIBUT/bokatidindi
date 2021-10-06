@@ -1,24 +1,7 @@
-# README
+# Generating production seeds
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+`$ rake db:seed:dump MODELS=category,publisher,author,author_type,binding_type,book,book_category,book_author,book_binding_type FILE=db/seeds/from_dev_data.rb`
 
-Things you may want to cover:
+# Deployment
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`$ git push heroku main`

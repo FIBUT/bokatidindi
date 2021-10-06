@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   def index
     @books = Book.order(:title).eager_load(
-      :book_authors, :authors, :publisher, :category, :book_binding_types
+      :book_authors, :authors, :publisher, :book_categories, :book_binding_types
     )
     @books = @books.where(publishers: { slug: params[:publisher] }) if params[:publisher]
     @books = @books.where(categories: { slug: params[:category] }) if params[:category]

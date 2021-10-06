@@ -61,12 +61,23 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
   end
 
   create_table "book_binding_types", force: :cascade do |t|
+    t.string "barcode"
     t.integer "book_id"
     t.integer "binding_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["barcode"], name: "index_book_binding_types_on_barcode"
     t.index ["binding_type_id"], name: "index_book_binding_types_on_binding_type_id"
     t.index ["book_id"], name: "index_book_binding_types_on_book_id"
+  end
+
+  create_table "book_categories", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_categories_on_book_id"
+    t.index ["category_id"], name: "index_book_categories_on_category_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -83,12 +94,10 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
     t.string "sample_url"
     t.string "audio_url"
     t.integer "publisher_id"
-    t.integer "category_id"
     t.integer "book_author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_author_id"], name: "index_books_on_book_author_id"
-    t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
     t.index ["source_id"], name: "index_books_on_source_id", unique: true

@@ -126,13 +126,9 @@
             id="book-meta-category-label<%= book.id %>"
             class="book-meta-category-label"
           >
-            Vöruflokkur
+            <%= book.categories_label %>
           </strong>
-          <%=
-            link_to book.category.name,
-            "/baekur/?category=#{book.category.slug}",
-            title: "Skoða fleiri bækur í flokknum #{book.category.name}"
-          %>
+          <%= raw book.category_links %>
         </li>
         <li
           class="book-meta-page-count"

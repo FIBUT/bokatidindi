@@ -3,11 +3,12 @@ class Book < ApplicationRecord
 
   has_many :book_authors
   has_many :authors, through: :book_authors
+  has_many :book_categories
+  has_many :categories, through: :book_categories
   has_many :author_types, through: :book_authors
   has_many :book_binding_types
   has_many :binding_types, through: :book_binding_types
   belongs_to :publisher
-  belongs_to :category
 
   paginates_per 25
 
@@ -29,6 +30,19 @@ class Book < ApplicationRecord
     return nil if minutes.nil? || minutes <= 1
 
     minutes / 60
+  end
+
+  def categories_label
+    return 'Vöruflokkar' if categories.count > 1
+    'Vöruflokkur'
+  end
+
+  def category_links
+    links = []
+    categories.each_with_index do |c|
+      links << link_to( c.name, "/baekur/?author=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}" )
+    end
+    links.to_sentence
   end
 
   def author_groups
