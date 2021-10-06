@@ -48,7 +48,7 @@ class Book < ApplicationRecord
 
   def mock_image
     return [
-      'satan.jpeg', 'lesbian-pulp-1.jpg', 'price-of-salt.jpg', 'barracks.jpg',
+      'satan.jpg', 'lesbian-pulp-1.jpg', 'price-of-salt.jpg', 'barracks.jpg',
       'lion-house.jpg', 'queer-affair.jpg', 'sin-girls.jpg'
     ].sample
   end
