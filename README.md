@@ -23,8 +23,8 @@ $ rake yarn:install
 ## The production environment
 
 We are currently hosting at Heroku. Our staging instance can be reached at
-http://127.0.0.1:3000/. We are using a Postgres database there, which may behave
-differently from SQLite.
+https://bokatidindi-staging.herokuapp.com/. We are using a Postgres database
+there, which may behave differently from SQLite.
 
 ### Deployment
 
