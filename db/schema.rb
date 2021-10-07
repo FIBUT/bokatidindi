@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "author_types", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
+    t.string "name", collation: "is_IS.utf8"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", precision: 6, null: false
@@ -25,8 +28,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "authors", force: :cascade do |t|
     t.integer "source_id"
-    t.string "firstname"
-    t.string "lastname"
+    t.string "firstname", collation: "is_IS.utf8"
+    t.string "lastname", collation: "is_IS.utf8"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "binding_types", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
-    t.string "slug"
+    t.string "name", collation: "is_IS.utf8"
+    t.string "slug", collation: "is_IS.utf8"
     t.integer "rod"
     t.boolean "open"
     t.datetime "created_at", precision: 6, null: false
@@ -49,9 +52,9 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "book_authors", force: :cascade do |t|
     t.integer "source_id"
-    t.integer "book_id"
-    t.integer "author_id"
-    t.integer "author_type_id"
+    t.bigint "book_id"
+    t.bigint "author_id"
+    t.bigint "author_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_book_authors_on_author_id"
@@ -62,8 +65,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "book_binding_types", force: :cascade do |t|
     t.string "barcode"
-    t.integer "book_id"
-    t.integer "binding_type_id"
+    t.bigint "book_id"
+    t.bigint "binding_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["barcode"], name: "index_book_binding_types_on_barcode"
@@ -72,8 +75,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
   end
 
   create_table "book_categories", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "category_id"
+    t.bigint "book_id"
+    t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_book_categories_on_book_id"
@@ -82,9 +85,9 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "books", force: :cascade do |t|
     t.integer "source_id"
-    t.string "pre_title"
-    t.string "title"
-    t.string "post_title"
+    t.string "pre_title", collation: "is_IS.utf8"
+    t.string "title", collation: "is_IS.utf8"
+    t.string "post_title", collation: "is_IS.utf8"
     t.string "slug"
     t.string "description"
     t.string "long_description"
@@ -93,8 +96,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
     t.string "store_url"
     t.string "sample_url"
     t.string "audio_url"
-    t.integer "publisher_id"
-    t.integer "book_author_id"
+    t.bigint "publisher_id"
+    t.bigint "book_author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_author_id"], name: "index_books_on_book_author_id"
@@ -105,7 +108,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
+    t.string "name", collation: "is_IS"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", precision: 6, null: false
@@ -116,7 +119,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "publishers", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
+    t.string "name", collation: "is_IS.utf8"
     t.string "slug"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false

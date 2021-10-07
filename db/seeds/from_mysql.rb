@@ -113,7 +113,8 @@ book_result.each do |book_row|
   end
 
   book_author_query = 'SELECT isWrittenBy_id, book_id,
-  `isWrittenBy`.`author_id`, `isWrittenBy`.authorType_id, TRIM(firstname), TRIM(lastname),
+  `isWrittenBy`.`author_id`, `isWrittenBy`.authorType_id,
+  TRIM(firstname) AS firstname, TRIM(lastname) AS lastname,
   TRIM(`authorType`.name) AS `type_name`, icelandic, `authorType`.rod as `order`
   FROM `isWrittenBy`
   INNER JOIN `author` ON `author`.`author_id` = `isWrittenBy`.`author_id`

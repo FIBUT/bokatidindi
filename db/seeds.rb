@@ -6,5 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-require_relative './seeds/from_mysql.rb' if Rails.env.development?
-require_relative './seeds/from_dev_data.rb' if Rails.env.production?
+if ENV['SEED_FROM'] == 'mysql'
+  require_relative './seeds/from_mysql.rb'
+else
+  require_relative './seeds/from_dev_data.rb'
+end
