@@ -1,0 +1,65 @@
+<ul
+  id="book-meta-list-<%= local_assigns[:book].id %>"
+  class="book-meta-list"
+  aria-label="Upplýsingar um bók"
+>
+
+  <li
+    class="book-meta-publisher"
+    aria-labelledby="book-meta-publisher-label-<%= local_assigns[:book].id %>"
+  >
+    <strong
+      id="book-meta-publisher-label-<%= local_assigns[:book].id %>"
+      class="book-meta-publisher-label"
+    >
+      Útgefandi
+    </strong>
+    <%=
+      link_to local_assigns[:book].publisher.name,
+      "/baekur/?publisher=#{local_assigns[:book].publisher.slug}",
+      title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
+    %>
+  </li>
+
+  <li
+    class="book-meta-category"
+    aria-labelledby="book-meta-category-label<%= local_assigns[:book].id %>"
+  >
+    <strong
+      id="book-meta-category-label<%= local_assigns[:book].id %>"
+      class="book-meta-category-label"
+    >
+      <%= local_assigns[:book].categories_label %>
+    </strong>
+    <%= raw local_assigns[:book].category_links %>
+  </li>
+
+  <li
+    class="book-meta-page-count"
+    aria-labelledby="book-meta-page-count-label<%= local_assigns[:book].id %>"
+  >
+    <strong
+      id="book-meta-page-count-label<%= local_assigns[:book].id %>"
+      class="book-meta-page-count-label"
+    >
+      Blaðsíðutal
+    </strong>
+    <%= local_assigns[:book].page_count %>
+  </li>
+
+  <% unless local_assigns[:book].hours.nil? %>
+  <li
+    class="book-meta-hours"
+    aria-labelledby="book-meta-hours-label<%= local_assigns[:book].id %>"
+  >
+    <strong
+    id="book-meta-hours-label<%= local_assigns[:book].id %>"
+    class="book-meta-hours-label"
+    >
+    Upplestrartími
+    </strong>
+    <%= local_assigns[:book].hours %>
+    <abbr title="klukkustundir">klst.</abbr>
+  </li>
+  <% end %>
+</ul>

@@ -56,68 +56,7 @@
 
       <% end %>
 
-      <ul
-        id="book-meta-list-<%= book.id %>"
-        class="book-meta-list"
-        aria-label="Upplýsingar um bók"
-      >
-        <li
-          class="book-meta-publisher"
-          aria-labelledby="book-meta-publisher-label-<%= book.id %>"
-        >
-          <strong
-            id="book-meta-publisher-label-<%= book.id %>"
-            class="book-meta-publisher-label"
-          >
-            Útgefandi
-          </strong>
-          <%=
-            link_to book.publisher.name,
-            "/baekur/?publisher=#{book.publisher.slug}",
-            title: "Skoða fleiri bækur frá útgefandanum #{book.publisher.name}"
-          %>
-        </li>
-        <li
-          class="book-meta-category"
-          aria-labelledby="book-meta-category-label<%= book.id %>"
-        >
-          <strong
-            id="book-meta-category-label<%= book.id %>"
-            class="book-meta-category-label"
-          >
-            <%= book.categories_label %>
-          </strong>
-          <%= raw book.category_links %>
-        </li>
-        <li
-          class="book-meta-page-count"
-          aria-labelledby="book-meta-page-count-label<%= book.id %>"
-        >
-          <strong
-            id="book-meta-page-count-label<%= book.id %>"
-            class="book-meta-page-count-label"
-          >
-            Blaðsíðutal
-          </strong>
-          <%= book.page_count %>
-        </li>
-        <% unless book.hours.nil? %>
-        <li
-          class="book-meta-hours"
-          aria-labelledby="book-meta-hours-label<%= book.id %>"
-        >
-          <strong
-            id="book-meta-hours-label<%= book.id %>"
-            class="book-meta-hours-label"
-          >
-            Upplestrartími
-          </strong>
-          <%= book.hours %>
-          <abbr title="klukkustundir">klst.</abbr>
-        </li>
-        <% end %>
-
-      </ul>
+      <%= render 'books/meta', book: book %>
 
       <ul
         id="book-binding-list-<%= book.id %>"
