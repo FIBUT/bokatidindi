@@ -1,0 +1,15 @@
+<ul class="book-authors">
+  <% local_assigns[:author_groups].each_with_index do |g,i| %>
+  <li
+    id="book-<%= local_assigns[:book_id] %>-authors--<%= i %>"
+    aria-labelledby="book-<%= local_assigns[:book_id] %>-authors-label--<%= i %>"
+  >
+    <strong
+      id="book-<%= local_assigns[:book_id] %>-authors-label--<%= i %>"
+    >
+      <%= g[:name] %>
+    </strong>
+    <%= raw g[:author_links] %>
+  </li>
+  <% end %>
+</ul>

@@ -35,56 +35,15 @@
     aria-labelledby="book-<%= book.id %>-hgroup"
   >
 
-    <figure class="figure col py-5 col-4">
-      <%= image_tag book.mock_image, class: 'img-fluid' %>
-    </figure>
+    <%= render 'books/figure', mock_image: book.mock_image %>
 
     <div class="col py-5">
 
       <a href="<%= book_path(book.slug) %>">
-
-      <hgroup id="book-<%= book.id %>-hgroup" class="py-3 inline-block">
-      <% unless book.pre_title.empty? %>
-        <h2 class="h3 pre-title">
-          <%= book.pre_title %>
-        </h2>
-        <h3 class="h2 title">
-          <%= book.title %>
-        </h3>
-        <% unless book.post_title.empty? %>
-        <h4 class="h3 post-title">
-          <%= book.post_title %>
-        </h4>
-        <% end %>
-      <% else %>
-        <h2 class="h2 title">
-          <%= book.title %>
-        </h2>
-        <% unless book.post_title.empty? %>
-        <h3 class="h3 post-title">
-          <%= book.post_title %>
-        </h3>
-        <% end %>
-      <% end %>
-      </hgroup>
-
+        <%= render 'books/hgroup', book_id: book.id, pre_title: book.pre_title, title: book.title, post_title: book.post_title %>
       </a>
 
-      <ul class="book-authors">
-        <% book.author_groups.each_with_index do |g,i| %>
-        <li
-          id="book-<%= book.id %>-authors--<%= i %>"
-          aria-labelledby="book-<%= book.id %>-authors-label--<%= i %>"
-        >
-          <strong
-            id="book-<%= book.id %>-authors-label--<%= i %>"
-          >
-            <%= g[:name] %>
-          </strong>
-          <%= raw g[:author_links] %>
-        </li>
-        <% end %>
-      </ul>
+      <%= render 'books/authors', book_id: book.id, author_groups: book.author_groups %>
 
       <% unless book.description.empty? %>
 
