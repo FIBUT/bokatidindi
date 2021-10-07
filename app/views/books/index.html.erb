@@ -40,10 +40,10 @@
     <div class="col py-5">
 
       <a href="<%= book_path(book.slug) %>">
-        <%= render 'books/hgroup', book_id: book.id, pre_title: book.pre_title, title: book.title, post_title: book.post_title %>
+        <%= render 'books/hgroup', book: book %>
       </a>
 
-      <%= render 'books/authors', book_id: book.id, author_groups: book.author_groups %>
+      <%= render 'books/authors', book: book %>
 
       <% unless book.description.empty? %>
 
