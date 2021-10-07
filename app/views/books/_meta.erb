@@ -34,6 +34,7 @@
     <%= raw local_assigns[:book].category_links %>
   </li>
 
+  <% if local_assigns[:book].page_count > 0 %>
   <li
     class="book-meta-page-count"
     aria-labelledby="book-meta-page-count-label<%= local_assigns[:book].id %>"
@@ -46,6 +47,7 @@
     </strong>
     <%= local_assigns[:book].page_count %>
   </li>
+  <% end %>
 
   <% unless local_assigns[:book].hours.nil? %>
   <li
