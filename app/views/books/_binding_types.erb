@@ -1,0 +1,11 @@
+<ul
+  id="book-binding-list-<%= local_assigns[:book].id %>"
+  class="book-binding-list"
+  aria-label="Bókin er til sem"
+>
+  <% local_assigns[:book].book_binding_types.each do |b| %>
+    <li class="binding--<%= b.binding_type.slug %>">
+    <%= b.binding_type.name %>
+    </li>
+  <% end %>
+</ul>

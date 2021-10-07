@@ -58,17 +58,7 @@
 
       <%= render 'books/meta', book: book %>
 
-      <ul
-        id="book-binding-list-<%= book.id %>"
-        class="book-binding-list"
-        aria-label="Bókin er til sem"
-      >
-        <% book.book_binding_types.each do |b| %>
-          <li class="binding--<%= b.binding_type.slug %>">
-            <%= b.binding_type.name %>
-          </li>
-        <% end %>
-      </ul>
+      <%= render 'books/binding_types', book: book %>
 
       <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary" %>
 
