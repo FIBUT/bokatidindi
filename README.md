@@ -11,6 +11,15 @@
 - To simplify the local development efforts, we are sticking with SQLite.
 - Run the local web server using `rails s`. You can stop it using `ctrl-c` at any time.
 
+### Setting the environment up using RVM
+
+```
+$ rvm install 2.7.4
+$ rvm use 2.7.4
+$ bundle install
+$ rake yarn:install
+```
+
 ## The production environment
 
 We are currently hosting at Heroku. Our staging instance can be reached at
@@ -19,7 +28,9 @@ differently from SQLite.
 
 ### Deployment
 
-`$ git push heroku main`
+```
+$ git push heroku main
+```
 
 ### Resetting the production database
 
@@ -35,7 +46,9 @@ As we are currently loading the data from MySQL and into SQLite locally for
 development, the following is the way we create seeds for the production
 environment:
 
-`$ rake db:seed:dump MODELS=category,publisher,author,author_type,binding_type,book,book_category,book_author,book_binding_type FILE=db/seeds/from_dev_data.rb`
+```
+$ rake db:seed:dump MODELS=category,publisher,author,author_type,binding_type,book,book_category,book_author,book_binding_type FILE=db/seeds/from_dev_data.rb
+```
 
 We intend to connect directly with FÍBÚT's database, but as of now we need to
 rely on those daily dumps.
