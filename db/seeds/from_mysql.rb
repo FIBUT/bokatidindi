@@ -101,7 +101,6 @@ book_result.each do |book_row|
       barcode = book_binding_type_row['barcode']
     end
     book_binding_type = BookBindingType.find_by(
-      barcode: barcode,
       book_id: book.id,
       binding_type: BindingType.find_by(source_id: book_binding_type_row['bindingtype_id'])
     )

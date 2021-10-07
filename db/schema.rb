@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name", collation: "is_IS"
+    t.string "name", collation: "is_IS.utf8"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", precision: 6, null: false
