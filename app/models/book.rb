@@ -14,6 +14,10 @@ class Book < ApplicationRecord
 
   before_create :set_slug
 
+  def original_cover_bucket_url
+    "https://storage.googleapis.com/bokatidindi-covers-original/#{source_id}_86941.jpg"
+  end
+
   def show_description
     return description if long_description.empty?
 
