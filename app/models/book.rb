@@ -40,7 +40,7 @@ class Book < ApplicationRecord
   def category_links
     links = []
     categories.each_with_index do |c|
-      links << link_to( c.name, "/baekur/?author=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}" )
+      links << link_to( c.name, "/baekur/?category=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}" )
     end
     links.to_sentence
   end

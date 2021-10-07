@@ -3,8 +3,14 @@ class BooksController < ApplicationController
     @books = Book.order(:title).eager_load(
       :book_authors, :authors, :publisher, :book_categories, :book_binding_types
     )
+
+    if params[:category]
+      @books = @books.joins(:categories).where(
+        book_categories: { categories: { slug: params[:category] } }
+      )
+    end
+
     @books = @books.where(publishers: { slug: params[:publisher] }) if params[:publisher]
-    @books = @books.where(categories: { slug: params[:category] }) if params[:category]
     @books = @books.where(authors: { slug: params[:author] }) if params[:author]
     @books = @books.page params[:page]
   end
