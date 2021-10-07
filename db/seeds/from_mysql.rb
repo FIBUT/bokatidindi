@@ -112,10 +112,9 @@ book_result.each do |book_row|
     )
   end
 
-
   book_author_query = 'SELECT isWrittenBy_id, book_id,
-  `isWrittenBy`.`author_id`, `isWrittenBy`.authorType_id, firstname, lastname,
-  `authorType`.name AS `type_name`, icelandic, `authorType`.rod as `order`
+  `isWrittenBy`.`author_id`, `isWrittenBy`.authorType_id, TRIM(firstname), TRIM(lastname),
+  TRIM(`authorType`.name) AS `type_name`, icelandic, `authorType`.rod as `order`
   FROM `isWrittenBy`
   INNER JOIN `author` ON `author`.`author_id` = `isWrittenBy`.`author_id`
   INNER JOIN `authorType` ON `isWrittenBy`.`authorType_id` = `authorType`.`authorType_id`
@@ -140,10 +139,12 @@ book_result.each do |book_row|
     )
 
     book_author = BookAuthor.find_by(
-      source_id: book_author_row['isWrittenBy_id'],
+      book_id: book['id'],
+      author_id: author['id'],
+      author_type_id: author_type['id']
     )
     book_author ||= BookAuthor.create(
-      source_id: book_author_row['isWrittenBy_id'],
+      source_id: nil,
       book_id: book['id'],
       author_id: author['id'],
       author_type_id: author_type['id']
