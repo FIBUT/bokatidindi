@@ -1,31 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<hgroup>
-<% unless @book.pre_title.empty? %>
-  <h1 class="pre-title">
-    <%= @book.pre_title %>
-  </h1>
-  <h2 class="title">
-    <%= @book.title %>
-  </h2>
-  <% unless @book.post_title.empty? %>
-  <h3 class="post-title">
-    <%= @book.post_title %>
-  </h3>
-  <% end %>
-<% else %>
-  <h1 class="title">
-    <%= @book.title %>
-  </h1>
-  <% unless @book.post_title.empty? %>
-  <h2 class="post-title">
-    <%= @book.post_title %>
-  </h2>
-  <% end %>
-<% end %>
-</hgroup>
+  <section
+    id="book-<%= @book.id %>"
+    class="book row"
+    aria-labelledby="book-<%= @book.id %>-hgroup"
+  >
 
-<section class="description">
-  <%= @book.show_description %>
-</section>
+    <%= render 'books/figure', image_url: @book.original_cover_bucket_url %>
+
+    <div class="col py-5">
+
+      <%= render 'books/hgroup', book: @book %>
+
+      <%= render 'books/authors', book: @book %>
+
+      <% unless @book.description.empty? %>
+
+      <div
+        aria-label="Lýsing"
+        class="book-full-description overflow-hidden"
+      >
+        <%= @book.show_description %>
+      </div>
+
+      <% end %>
+
+      <%= render 'books/meta', book: @book %>
+
+      <%= render 'books/binding_types', book: @book %>
+
+    </div>
+  </section>
 
