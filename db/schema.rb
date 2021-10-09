@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "author_types", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name", collation: "is_IS.utf8"
+    t.string "name", collation: "is_IS.UTF8"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", precision: 6, null: false
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "authors", force: :cascade do |t|
     t.integer "source_id"
-    t.string "firstname", collation: "is_IS.utf8"
-    t.string "lastname", collation: "is_IS.utf8"
+    t.string "firstname", collation: "is_IS.UTF8"
+    t.string "lastname", collation: "is_IS.UTF8"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "binding_types", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name", collation: "is_IS.utf8"
-    t.string "slug", collation: "is_IS.utf8"
+    t.string "name", collation: "is_IS.UTF8"
+    t.string "slug", collation: "is_IS.UTF8"
     t.integer "rod"
     t.boolean "open"
     t.datetime "created_at", precision: 6, null: false
@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "books", force: :cascade do |t|
     t.integer "source_id"
-    t.string "pre_title", collation: "is_IS.utf8"
-    t.string "title", collation: "is_IS.utf8"
-    t.string "post_title", collation: "is_IS.utf8"
+    t.string "pre_title", collation: "is_IS.UTF8"
+    t.string "title", collation: "is_IS.UTF8"
+    t.string "post_title", collation: "is_IS.UTF8"
     t.string "slug"
     t.string "description"
     t.string "long_description"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name", collation: "is_IS.utf8"
+    t.string "name", collation: "is_IS.UTF8"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", precision: 6, null: false
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_174837) do
 
   create_table "publishers", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name", collation: "is_IS.utf8"
+    t.string "name", collation: "is_IS.UTF8"
     t.string "slug"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
