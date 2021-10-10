@@ -1,6 +1,40 @@
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// Google Fonts
+@import url(http://fonts.googleapis.com/css?family=Montserrat|Roboto);
+
+// Breytur hér
+
+$font-family-sans-serif: 'Montserrat', 'sans-serif';
+$roboto: 'Roboto', sans-serif;
+
+
+
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/utilities";
+
+// Allt annað hér
 
 #site-title { font-size: 1em; font-weight: bold; margin: 0; }
+
+p, ul, li, input, a {font-family: $font-family-sans-serif;}
+
+h1, h2, h3, h4, h5, h6 {font-family: Roboto;}
+
 
 .book {
     .title { font-weight: bold; }
