@@ -30,65 +30,93 @@ $montserrat: 'montserrat', sans-serif;
 // Allt annað hér
 body
 {
-    background-color: #ece8e1;
+  background-color: #ece8e1;
 }
 #site-title { font-size: 1em; font-weight: bold; margin: 0; }
 
 p, ul, li, input, a {
-    font-family: Montserrat;
-    font-weight: 300;
-    font-size: 1.2em;
-    color: #151515;
+  font-family: Montserrat;
+  font-weight: 300;
+  font-size: 1.2em;
+  color: #151515;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: $lora;
-    font-weight: medium;
-    color: #514f49;
+  font-family: $lora;
+  font-weight: medium; 
+  color: #514f49;
 }
 h1 {
-    font-size: 3em;
+  font-size: 3em;
 }
 h2,.h2 {
-    font-size: 2em;
-    line-height: 2em;
+  font-size: 2em;
+  line-height: 2em;
 }
 h3 {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 a {
-    color: #5f2835;
+  color: #5f2835;
 }
 
 a:hover {
-    color: #30131a;
+  color: #30131a;
 }
 
 ul {
-    list-style: none outside none;
-    margin-left: 0;
-    padding-left: 0;
+  list-style: none outside none; 
+  margin-left: 0; 
+  padding-left: 0;
 }
 
 li {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 .book {
-    .title { font-weight: bold; }
-    .pre-title, .post-title { font-size: 1.2em; }
-    hgroup {
-        h2, h3, h4 { line-height: 1.5em; }
-    }
-    .binding-type {
-        border: 1px solid #333;
-        color: #fff;
-        background: #666;
-        padding: 0.5em;
-        margin-bottom: 0.5em;
-        border-radius: 5px;
-        font-size: 0.8em;
-        font-weight: bold;
-    }
+  .title { font-weight: bold; }
+  .pre-title, .post-title { font-size: 1.2em; }
+  hgroup {
+    h2, h3, h4 { line-height: 1.5em; }
+  }
+  .binding-type {
+    border: 1px solid #333;
+    color: #fff;
+    background: #666;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+  background-color: #fff;
+  margin: 40px 0;
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.book-authors strong, .book-meta-publisher-label, .book-meta-category-label, .book-meta-page-count-label {
+  font-family: $lora;
+}
+.book-authors a, .book-meta-list a, .book-binding-list, .book-binding-list a {
+  font-family: $roboto;
+  font-size: 1em;
+}
+
+
+.btn {
+  background-color: #5f2835;
+  border-style: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+}
+
+.btn:hover {
+  background-color: #30131a;
+}
+
+.figure {
+  margin-top: 25px;
 }
