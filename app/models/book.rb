@@ -10,7 +10,7 @@ class Book < ApplicationRecord
   has_many :binding_types, through: :book_binding_types
   belongs_to :publisher
 
-  paginates_per 25
+  paginates_per 18
 
   before_create :set_slug
 
@@ -25,9 +25,9 @@ class Book < ApplicationRecord
   end
 
   def short_description
-    return long_description.truncate(256) if description.empty?
+    return long_description.truncate(128) if description.empty?
 
-    description
+    description.truncate(128)
   end
 
   def hours

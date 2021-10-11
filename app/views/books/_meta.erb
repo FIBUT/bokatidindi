@@ -1,19 +1,13 @@
 <ul
   id="book-meta-list-<%= local_assigns[:book].id %>"
-  class="book-meta-list"
+  class="book-meta-list d-block pl-0"
   aria-label="Upplýsingar um bók"
 >
 
   <li
-    class="book-meta-publisher"
-    aria-labelledby="book-meta-publisher-label-<%= local_assigns[:book].id %>"
+    class="book-meta-publisher d-block font-weight-bold pb-1"
+    aria-label="Útgefandi"
   >
-    <strong
-      id="book-meta-publisher-label-<%= local_assigns[:book].id %>"
-      class="book-meta-publisher-label"
-    >
-      Útgefandi
-    </strong>
     <%=
       link_to local_assigns[:book].publisher.name,
       "/baekur/?publisher=#{local_assigns[:book].publisher.slug}",
@@ -22,36 +16,25 @@
   </li>
 
   <li
-    class="book-meta-category"
+    class="book-meta-category d-block pb-1"
     aria-labelledby="book-meta-category-label<%= local_assigns[:book].id %>"
+    aria-label="<%= local_assigns[:book].categories_label %>"
   >
-    <strong
-      id="book-meta-category-label<%= local_assigns[:book].id %>"
-      class="book-meta-category-label"
-    >
-      <%= local_assigns[:book].categories_label %>
-    </strong>
     <%= raw local_assigns[:book].category_links %>
   </li>
 
   <% if local_assigns[:book].page_count > 0 %>
   <li
-    class="book-meta-page-count"
-    aria-labelledby="book-meta-page-count-label<%= local_assigns[:book].id %>"
+    class="book-meta-page-count d-block pb-1"
+    aria-label="Blaðsíðutal"
   >
-    <strong
-      id="book-meta-page-count-label<%= local_assigns[:book].id %>"
-      class="book-meta-page-count-label"
-    >
-      Blaðsíðutal
-    </strong>
-    <%= local_assigns[:book].page_count %>
+    <%= pluralize(local_assigns[:book].page_count, 'blaðsíða', plural: 'blaðsíður') %>
   </li>
   <% end %>
 
   <% unless local_assigns[:book].hours.nil? %>
   <li
-    class="book-meta-hours"
+    class="book-meta-hours d-block pb-1"
     aria-labelledby="book-meta-hours-label<%= local_assigns[:book].id %>"
   >
     <strong

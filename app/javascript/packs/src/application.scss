@@ -39,8 +39,17 @@ h1, h2, h3, h4, h5, h6 {font-family: Roboto;}
 .book {
     .title { font-weight: bold; }
     .pre-title, .post-title { font-size: 1.2em; }
-    .authors { margin: 1em 0; }
     hgroup {
         h2, h3, h4 { line-height: 1em; }
+    }
+    .binding-type {
+        border: 1px solid #333;
+        color: #fff;
+        background: #666;
+        padding: 0.5em;
+        margin-bottom: 0.5em;
+        border-radius: 5px;
+        font-size: 0.8em;
+        font-weight: bold;
     }
 }

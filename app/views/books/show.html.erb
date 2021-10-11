@@ -1,27 +1,37 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row justify-content-center">
+
   <section
     id="book-<%= @book.id %>"
-    class="book row"
+    class="book col-lg-8 col-md-12"
     aria-labelledby="book-<%= @book.id %>-hgroup"
   >
 
-    <%= render 'books/figure', image_url: @book.original_cover_bucket_url %>
+    <div class="row">
 
-    <div class="col py-5">
+      <div class="col-lg-4 col-sm-6 p-3">
 
-      <%= render 'books/hgroup', book: @book %>
+      <%= render 'books/figure', book: @book %>
+
+      </div>
+
+      <div class="col-lg-8 col-sm-12">
+
+      <a href="<%= book_path(@book.slug) %>">
+        <%= render 'books/hgroup', book: @book %>
+      </a>
 
       <%= render 'books/authors', book: @book %>
 
       <% unless @book.description.empty? %>
 
-      <div
+      <p
         aria-label="Lýsing"
-        class="book-full-description overflow-hidden"
+        class="book-description overflow-hidden"
       >
         <%= @book.show_description %>
-      </div>
+      </p>
 
       <% end %>
 
@@ -29,6 +39,10 @@
 
       <%= render 'books/binding_types', book: @book %>
 
+      </div>
+
     </div>
   </section>
+
+</div>
 

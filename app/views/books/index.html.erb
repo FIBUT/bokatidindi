@@ -28,16 +28,24 @@
 
   <p id="notice"><%= notice %></p>
 
+  <div class="row justify-content-center">
+
   <% @books.each do |book| %>
   <section
     id="book-<%= book.id %>"
-    class="book row"
+    class="book col-xl-4 col-lg-6 col-sm-12 p-5"
     aria-labelledby="book-<%= book.id %>-hgroup"
   >
 
-    <%= render 'books/figure', image_url: book.original_cover_bucket_url %>
+    <div class="row">
 
-    <div class="col py-5">
+      <div class="col-xl-6 col-lg-6 col-sm-6 p-3">
+        <a href="<%= book_path(book.slug) %>">
+          <%= render 'books/figure', book: book %>
+        </a>
+      </div>
+
+      <div class="col-xl-6 col-lg-6">
 
       <a href="<%= book_path(book.slug) %>">
         <%= render 'books/hgroup', book: book %>
@@ -62,10 +70,14 @@
 
       <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary" %>
 
+      </div>
+
     </div>
   </section>
 
   <% end %>
+
+  </div>
 
   <%= paginate @books %>
 
