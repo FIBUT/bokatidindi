@@ -2,17 +2,35 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-// Google Fonts
-@import url(http://fonts.googleapis.com/css?family=Lora|Roboto|Montserrat);
-
 // Breytur hér
 
-$roboto: 'Roboto', sans-serif;
 $lora: 'Lora', serif;
-$montserrat: 'montserrat', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
 
+$font-family-base: $montserrat;
+$headings-font-family: $lora;
+$font-weight-base: 500;
+$btn-font-weight: $font-weight-bold;
+
+$theme-colors: (
+  "primary": #5f2835,
+  "darkgrey": #333,
+);
+
+$body-bg: #ece8e1;
+$body-color: theme-color("darkgrey");
+$link-color: #5f2835;
+$link-hover-color: #30131a;
+
+$pagination-color: $link-color;
+$pagination-active-bg: $link-color;
+$pagination-active-border-color: $link-hover-color;
+$pagination-hover-color: $link-hover-color;
+
+$dropdown-min-width: 20rem;
 
 @import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/print";
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/images";
 @import "~bootstrap/scss/code";
@@ -26,97 +44,44 @@ $montserrat: 'montserrat', sans-serif;
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/input-group";
 @import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/badge";
 
 // Allt annað hér
-body
-{
-  background-color: #ece8e1;
-}
-#site-title { font-size: 1em; font-weight: bold; margin: 0; }
-
-p, ul, li, input, a {
-  font-family: Montserrat;
-  font-weight: 300;
-  font-size: 1.2em;
-  color: #151515;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: $lora;
-  font-weight: medium; 
-  color: #514f49;
-}
-h1 {
-  font-size: 3em;
-}
-h2,.h2 {
-  font-size: 2em;
-  line-height: 2em;
-}
-h3 {
-  font-size: 1.5em;
-}
-
-a {
-  color: #5f2835;
-}
-
-a:hover {
-  color: #30131a;
-}
-
-ul {
-  list-style: none outside none; 
-  margin-left: 0; 
-  padding-left: 0;
-}
-
-li {
-  padding-left: 0;
-}
 
 .book {
-  .title { font-weight: bold; }
-  .pre-title, .post-title { font-size: 1.2em; }
+
   hgroup {
-    h2, h3, h4 { line-height: 1.5em; }
+    word-break: break-word;
   }
-  .binding-type {
-    border: 1px solid #333;
-    color: #fff;
-    background: #666;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
+
+  .title { font-weight: $font-weight-bold; }
+  .pre-title, .post-title { font-size: 1.2em; }
+
+  .book-column-container {
+    background-color: $white;
     border-radius: 5px;
-    font-size: 0.8em;
-    font-weight: bold;
   }
-  background-color: #fff;
-  margin: 40px 0;
-  padding: 40px;
-  border-radius: 5px;
+
+  .book-authors, .book-meta-list {
+    font-size: $small-font-size;
+    strong {
+      font-family: $lora;
+    }
+    a {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .book-description {
+    font-size: $small-font-size;
+  }
 }
 
-.book-authors strong, .book-meta-publisher-label, .book-meta-category-label, .book-meta-page-count-label {
-  font-family: $lora;
-}
-.book-authors a, .book-meta-list a, .book-binding-list, .book-binding-list a {
-  font-family: $roboto;
-  font-size: 1em;
-}
+.book-single {
+  .title { font-weight: $font-weight-bold; font-size: 2.5em; }
+  .pre-title, .post-title { font-size: 1.8em; }
 
-
-.btn {
-  background-color: #5f2835;
-  border-style: none;
-  padding: 15px 30px;
-  font-size: 1.2em;
-}
-
-.btn:hover {
-  background-color: #30131a;
-}
-
-.figure {
-  margin-top: 25px;
+  .book-description {
+    font-size: $font-size-base;
+  }
 }

@@ -1,37 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row justify-content-center">
+<div class="container-fluid">
+
+<div class="row">
 
   <section
     id="book-<%= @book.id %>"
-    class="book col-lg-8 col-md-12"
+    class="book book-single col-lg-12 col-md-12"
     aria-labelledby="book-<%= @book.id %>-hgroup"
   >
 
-    <div class="row">
+    <div class="row book-column-container m-2 p-2 pt-5 pb-5">
 
-      <div class="col-lg-4 col-sm-6 p-3">
+      <div class="col-lg-4 col-sm-6 p-3 offset-lg-1 text-right">
 
       <%= render 'books/figure', book: @book %>
 
       </div>
 
-      <div class="col-lg-8 col-sm-12">
+      <div class="col-lg-4 col-sm-12 offset-lg-1">
 
-      <a href="<%= book_path(@book.slug) %>">
-        <%= render 'books/hgroup', book: @book %>
-      </a>
+      <%= render 'books/hgroup', book: @book %>
 
       <%= render 'books/authors', book: @book %>
 
       <% unless @book.description.empty? %>
 
-      <p
+      <div
         aria-label="Lýsing"
-        class="book-description overflow-hidden"
+        class="book-description mb-5 bt-5 overflow-hidden"
       >
         <%= @book.show_description %>
-      </p>
+      </div>
 
       <% end %>
 
@@ -46,3 +46,4 @@
 
 </div>
 
+</div>

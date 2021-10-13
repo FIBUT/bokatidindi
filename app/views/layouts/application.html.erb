@@ -3,29 +3,26 @@
   <head>
     <title>Bókatíðndi</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <link href="<%= asset_path 'favicon.png' %>" rel="icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
 
-  <body>
+  <div class="container-fluid">
+  <%= render 'layouts/header' %>
+  </div>
 
-    <div class="container-fluid">
-      <header class="row p-5 mb-5 justify-content-between border-bottom">
-        <h1 id="site-title"><%= link_to 'Bókatíðindi', root_path %></h1>
-        <form class="col-6">
-          <div class="input-group">
-            <input type="search" class="form-control" placeholder="Leitarorð…" aria-label="Search">
-            <input type="submit" value="Leita" class="btn btn-primary">
-          </div>
-        </form>
-      </header>
-      <%= yield %>
-    </div>
+  <body>
+    <%= yield %>
   </body>
 </html>

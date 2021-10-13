@@ -4,8 +4,10 @@
   aria-label="Bókin er til sem"
 >
   <% local_assigns[:book].book_binding_types.each do |b| %>
-    <li class="binding-type binding--<%= b.binding_type.slug %> d-inline-block">
-    <%= b.binding_type.name %>
+    <li
+      class="binding-type binding--<%= b.binding_type.slug %> d-inline-block badge badge-darkgrey"
+    >
+      <%= b.binding_type.name %>
     </li>
   <% end %>
 </ul>
