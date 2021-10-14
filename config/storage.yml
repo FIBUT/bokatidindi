@@ -21,6 +21,8 @@ google:
     client_x509_cert_url: ""
   project: "bokatidindi"
   bucket: "bokatidindi-staging-bucket"
+  public: true
+  cache_control: "public, max-age=31536000"
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
