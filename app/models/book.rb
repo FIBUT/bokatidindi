@@ -10,9 +10,68 @@ class Book < ApplicationRecord
   has_many :binding_types, through: :book_binding_types
   belongs_to :publisher
 
+  has_one_attached :cover_image
+
   paginates_per 18
 
   before_create :set_slug
+
+  def cover_image_url(format = 'webp')
+    Rails.application.routes.url_helpers.url_for(
+      cover_image.variant(format: format)
+    )
+  end
+
+  def attach_cover_image
+    cover_image.attach(io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg")
+  end
+
+  def cover_image_variant_url(width, format = 'webp')
+    Rails.application.routes.url_helpers.url_for(
+      cover_image.variant(resize: width, quality: 80, format: format)
+    )
+  end
+
+  def srcset_variants(format = 'webp')
+    [
+      { url: cover_image_variant_url(266, format), w: 266 },
+      { url: cover_image_variant_url(364, format), w: 364 },
+      { url: cover_image_variant_url(550, format), w: 550 },
+      { url: cover_image_variant_url(768, format), w: 768 },
+      { url: cover_image_variant_url(992, format), w: 992 },
+      { url: cover_image_variant_url(1200, format), w: 1200 },
+      { url: cover_image_variant_url(1386, format), w: 1386 },
+      { url: cover_image_variant_url(1600, format), w: 1600 }
+    ]
+  end
+
+  def cover_img_srcset(format = 'webp')
+    output = ''
+    srcset_variants(format).each do |v|
+      output << "#{v[:url]} #{v[:w]}w,"
+    end
+    output.delete_suffix(',')
+  end
+
+  def cover_img_tag_sizes
+    '(max-width: 768px) 1386px, (max-width: 992px) 550px, (min-width: 1200px) 1200px, 1600px'
+  end
+
+  def thumbnail_img_tag_sizes
+    '(max-width: 576px) 364px, (max-width: 768px) 556px, (max-width: 992px) 780px, (min-width: 1200px) 266px, 992px'
+  end
+
+  def cover_img_tag(format = 'webp')
+    return "<img src=\"#{original_cover_bucket_url}\" class=\"img-fluid\">" unless cover_image.attached?
+ 
+    "<img src=\"#{cover_image_url(format)}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{cover_img_tag_sizes}\" class=\"img-fluid\">"
+  end
+
+  def thumbnail_img_tag(format = 'webp')
+    return "<img src=\"#{original_cover_bucket_url}\" class=\"img-fluid\">" unless cover_image.attached?
+ 
+    "<img src=\"#{cover_image_url(format)}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{thumbnail_img_tag_sizes}\" class=\"img-fluid\">"
+  end
 
   def original_cover_bucket_url
     "https://storage.googleapis.com/bokatidindi-covers-original/#{source_id}_86941.jpg"
@@ -43,7 +102,7 @@ class Book < ApplicationRecord
 
   def category_links
     links = []
-    categories.each_with_index do |c|
+    categories.each do |c|
       links << link_to( c.name, "/baekur/?category=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}" )
     end
     links.to_sentence

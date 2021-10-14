@@ -12,13 +12,15 @@
 
     <div class="row book-column-container m-2 p-2 pt-5 pb-5">
 
-      <div class="col-lg-4 col-sm-6 p-3 offset-lg-1 text-right">
+      <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 text-right">
 
-      <%= render 'books/figure', book: @book %>
+        <figure class="figure mt-4">
+          <%= raw @book.cover_img_tag(@image_format) %>
+        </figure>
 
       </div>
 
-      <div class="col-lg-4 col-sm-12 offset-lg-1">
+      <div class="col-lg-4 col-md-8 col-sm-12 offset-lg-1">
 
       <%= render 'books/hgroup', book: @book %>
 

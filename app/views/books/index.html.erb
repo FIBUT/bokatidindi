@@ -44,7 +44,9 @@
 
           <div class="col-xl-6 mt-2 text-right">
             <a href="<%= book_path(book.slug) %>">
-              <%= render 'books/figure', book: book %>
+              <figure class="figure mt-4">
+                <%= raw book.thumbnail_img_tag(@image_format) %>
+              </figure>
             </a>
           </div>
 

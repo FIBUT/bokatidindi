@@ -1,5 +1,11 @@
 class BooksController < ApplicationController
   def index
+    @image_format = if browser.ie?
+                      'jpg'
+                    else
+                      'webp'
+                    end
+
     @books = Book.order(:title).eager_load(
       :book_authors, :authors, :publisher, :book_categories, :book_binding_types
     )
@@ -16,6 +22,12 @@ class BooksController < ApplicationController
   end
 
   def show
+    @image_format = if browser.ie?
+                      'jpg'
+                    else
+                      'webp'
+                    end
+
     @book = Book.find_by(slug: params[:slug])
   end
 

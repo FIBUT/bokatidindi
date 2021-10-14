@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 gem 'pg'
 
@@ -31,6 +31,12 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'mysql2', '>= 0.5.3'
 gem 'rubocop', require: false
 gem 'kaminari', '>=1.2.0'
+
+gem 'open-uri'
+
+gem 'browser'
+
+gem "google-cloud-storage", "~> 1.11", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

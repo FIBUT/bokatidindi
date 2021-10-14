@@ -6,6 +6,22 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+google:
+  service: GCS
+  credentials:
+    type: "service_account"
+    project_id: "bokatidindi"
+    private_key_id: <%= Rails.application.credentials.dig(:gcs, :private_key_id) %>
+    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key).dump %>
+    client_email: "bokatidindi-images@bokatidindi.iam.gserviceaccount.com"
+    client_id: "116453892142185496143"
+    auth_uri: "https://accounts.google.com/o/oauth2/auth"
+    token_uri: "https://accounts.google.com/o/oauth2/token"
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+    client_x509_cert_url: ""
+  project: "bokatidindi"
+  bucket: "bokatidindi-staging-bucket"
+
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3
