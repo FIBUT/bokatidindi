@@ -18,7 +18,7 @@ class Book < ApplicationRecord
 
   def cover_image_url(format = 'webp')
     Rails.application.routes.url_helpers.url_for(
-      cover_image.variant(format: format)
+      cover_image.variant(format: format, vibrance: 20)
     )
   end
 
