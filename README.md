@@ -7,8 +7,10 @@
 
 ## The development environment.
 
-- To simplify the local development efforts, we are sticking with SQLite.
 - Run the local web server using `rails s`. You can stop it using `ctrl-c` at any time.
+- Push and checkout code regularly.
+- Do (`git fetch --all` and `git rebase master`) if you are working on a single branch for too long.
+- In case there are database updates, make sure to run `rake db:migrate` every time you checkout from the main branch.
 
 ### Setting up Postges
 
@@ -38,13 +40,13 @@ $ rake yarn:install
 $ rake db:create
 $ rake db:schema:load
 $ rake db:seed
+$ rake bokatidindi:attach_cover_image
 ```
 
 ## The production environment
 
 We are currently hosting at Heroku. Our staging instance can be reached at
-https://bokatidindi-staging.herokuapp.com/. We are using a Postgres database
-there, which may behave differently from SQLite.
+https://bokatidindi-staging.herokuapp.com/.
 
 ### Deployment
 
@@ -58,6 +60,7 @@ $ git push heroku main
 $ heroku pg:reset DATABASE --confirm bokatidindi-staging
 $ heroku run rake db:schema:load
 $ heroku run rake db:seed
+$ heroku run rake bokatidindi:attach_cover_image
 ```
 
 ### Generating production seeds
@@ -91,3 +94,24 @@ $ git push heroku main
 ```
 
 Then follow the instructions under "Resetting the production database".
+
+## Rake Tasks
+
+### Attaching a book cover to each book
+
+Each book should has a cover image attached using ActiveStorage. We feed those
+book covers into both the development and production instances from a Google
+Cloud Services storage bucket (`gs://bokatidindi-covers-original`).
+
+```
+$ rake bokatidindi:attach_cover_image
+```
+
+In case the cover images have not been attached, the `<img>` tags for each will
+refer to the original cover images from that storage bucket. Those can be a
+couple of megabytes in size, so it may be much better to run the above rake task
+each time new data arrives or an environment is initialised.
+
+In the development environemnt, the different variants of each book cover are
+stored using the local environment. In production, we use a second GCS bucket
+(`gs://bokatidindi-staging-bucket`) to store and serve the same data.

@@ -1,5 +1,5 @@
 namespace :bokatidindi do
-  desc "TODO"
+  desc 'Attach images of each cover to the books'
   task attach_cover_image: :environment do
     Book.all.each do |b|
       unless b.cover_image.attached?
