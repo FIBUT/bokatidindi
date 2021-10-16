@@ -45,7 +45,14 @@
           <div class="col-xl-6 mt-2 text-right" aria-hidden="true">
             <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
               <figure class="figure mt-4">
-                <%= raw book.thumbnail_img_tag(@image_format) %>
+                <img
+                  src="<%= book.cover_image_url(@image_format) %>"
+                  height="<%= book.cover_image.metadata[:height] %>"
+                  width="<%= book.cover_image.metadata[:width] %>"
+                  srcset="<%= book.cover_img_srcset(@image_format) %>"
+                  sizes="(max-width: 576px) 364px, (max-width: 768px) 556px, (max-width: 992px) 780px, (min-width: 1200px) 266px, 992px"
+                  class="img-fluid"
+                >
               </figure>
             </a>
           </div>

@@ -32,45 +32,13 @@ class Book < ApplicationRecord
     )
   end
 
-  def srcset_variants(format = 'webp')
-    [
-      { url: cover_image_variant_url(266, format), w: 266 },
-      { url: cover_image_variant_url(364, format), w: 364 },
-      { url: cover_image_variant_url(550, format), w: 550 },
-      { url: cover_image_variant_url(768, format), w: 768 },
-      { url: cover_image_variant_url(992, format), w: 992 },
-      { url: cover_image_variant_url(1200, format), w: 1200 },
-      { url: cover_image_variant_url(1386, format), w: 1386 },
-      { url: cover_image_variant_url(1600, format), w: 1600 }
-    ]
-  end
-
   def cover_img_srcset(format = 'webp')
-    output = ''
-    srcset_variants(format).each do |v|
-      output << "#{v[:url]} #{v[:w]}w,"
+    srcset = ''
+    COVER_IMAGE_VARIANTS.each do |v|
+      srcset << cover_image_variant_url(v, format)
+      srcset << " #{v}w, "
     end
-    output.delete_suffix(',')
-  end
-
-  def cover_img_tag_sizes
-    '(max-width: 768px) 1386px, (max-width: 992px) 550px, (min-width: 1200px) 1200px, 1600px'
-  end
-
-  def thumbnail_img_tag_sizes
-    '(max-width: 576px) 364px, (max-width: 768px) 556px, (max-width: 992px) 780px, (min-width: 1200px) 266px, 992px'
-  end
-
-  def cover_img_tag(format = 'webp')
-    return "<img src=\"#{original_cover_bucket_url}\" class=\"img-fluid\">" unless cover_image.attached?
- 
-    "<img src=\"#{cover_image_url(format)}\" height=\"#{cover_image.metadata[:height]}\" width=\"#{cover_image.metadata[:width]}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{cover_img_tag_sizes}\" class=\"img-fluid\">"
-  end
-
-  def thumbnail_img_tag(format = 'webp')
-    return "<img src=\"#{original_cover_bucket_url}\" class=\"img-fluid\">" unless cover_image.attached?
- 
-    "<img src=\"#{cover_image_url(format)}\" height=\"#{cover_image.metadata[:height]}\" width=\"#{cover_image.metadata[:width]}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{thumbnail_img_tag_sizes}\" class=\"img-fluid\">"
+    srcset.delete_suffix(', ')
   end
 
   def original_cover_bucket_url

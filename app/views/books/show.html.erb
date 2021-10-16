@@ -15,7 +15,14 @@
       <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 text-right" aria-hidden="true">
 
         <figure class="figure mt-4">
-          <%= raw @book.cover_img_tag(@image_format) %>
+          <img
+            src="<%= @book.cover_image_url(@image_format) %>"
+            height="<%= @book.cover_image.metadata[:height] %>"
+            width="<%= @book.cover_image.metadata[:width] %>"
+            srcset="<%= @book.cover_img_srcset(@image_format) %>"
+            sizes="(max-width: 768px) 1386px, (max-width: 992px) 550px, (min-width: 1200px) 1200px, 1600px'"
+            class="img-fluid"
+          >
         </figure>
 
       </div>
