@@ -1,4 +1,8 @@
 class Book < ApplicationRecord
+  COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
+  IMAGE_QUALITY         = 80
+  IMAGE_VIBRANCE        = 20
+
   include ActionView::Helpers::UrlHelper
 
   has_many :book_authors
@@ -18,7 +22,7 @@ class Book < ApplicationRecord
 
   def cover_image_url(format = 'webp')
     Rails.application.routes.url_helpers.url_for(
-      cover_image.variant(format: format, vibrance: 20)
+      cover_image.variant(format: format, vibrance: IMAGE_VIBRANCE)
     )
   end
 
@@ -28,7 +32,7 @@ class Book < ApplicationRecord
 
   def cover_image_variant_url(width, format = 'webp')
     Rails.application.routes.url_helpers.url_for(
-      cover_image.variant(resize: width, quality: 80, format: format)
+      cover_image.variant(resize: width, quality: IMAGE_QUALITY, format: format)
     )
   end
 
@@ -65,13 +69,14 @@ class Book < ApplicationRecord
 
   def categories_label
     return 'Vöruflokkar' if categories.count > 1
+
     'Vöruflokkur'
   end
 
   def category_links
     links = []
     categories.each do |c|
-      links << link_to( c.name, "/baekur/?category=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}" )
+      links << link_to(c.name, "/baekur/?category=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}")
     end
     links.to_sentence
   end
@@ -91,13 +96,6 @@ class Book < ApplicationRecord
     groups
   end
 
-  def mock_image
-    return [
-      'satan.jpg', 'lesbian-pulp-1.jpg', 'price-of-salt.jpg', 'barracks.jpg',
-      'lion-house.jpg', 'queer-affair.jpg', 'sin-girls.jpg'
-    ].sample
-  end
-
   def full_title
     [pre_title, title, post_title].reject(&:blank?).flatten.compact.join(' ')
   end
@@ -115,8 +113,7 @@ class Book < ApplicationRecord
       name: author_group_name_plural(
         authors.count, author_type.name, author_type.plural_name
       ),
-      authors: authors,
-      author_links: (
+      authors: authors, author_links: (
         authors.map do |a|
           link_to a.name, "/baekur/?author=#{a.author.slug}"
         end
@@ -127,6 +124,6 @@ class Book < ApplicationRecord
   def set_slug
     parameterized_title = title.parameterize(locale: :is).first(64)
     parameterized_title = parameterized_title.chop if parameterized_title.end_with?('-')
-    self.slug = parameterized_title + '-' + source_id.to_s
+    self.slug = "#{parameterized_title}-#{source_id}"
   end
 end
