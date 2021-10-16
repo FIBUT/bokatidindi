@@ -64,13 +64,13 @@ class Book < ApplicationRecord
   def cover_img_tag(format = 'webp')
     return "<img src=\"#{original_cover_bucket_url}\" class=\"img-fluid\">" unless cover_image.attached?
  
-    "<img src=\"#{cover_image_url(format)}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{cover_img_tag_sizes}\" class=\"img-fluid\">"
+    "<img src=\"#{cover_image_url(format)}\" height=\"#{cover_image.metadata[:height]}\" width=\"#{cover_image.metadata[:width]}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{cover_img_tag_sizes}\" class=\"img-fluid\">"
   end
 
   def thumbnail_img_tag(format = 'webp')
     return "<img src=\"#{original_cover_bucket_url}\" class=\"img-fluid\">" unless cover_image.attached?
  
-    "<img src=\"#{cover_image_url(format)}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{thumbnail_img_tag_sizes}\" class=\"img-fluid\">"
+    "<img src=\"#{cover_image_url(format)}\" height=\"#{cover_image.metadata[:height]}\" width=\"#{cover_image.metadata[:width]}\" srcset=\"#{cover_img_srcset(format)}\" sizes=\"#{thumbnail_img_tag_sizes}\" class=\"img-fluid\">"
   end
 
   def original_cover_bucket_url
