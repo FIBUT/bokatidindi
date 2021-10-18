@@ -65,9 +65,8 @@ $dropdown-min-width: 20rem;
   }
 
   .book-authors, .book-meta-list {
-    font-size: $small-font-size;
-    strong {
-      font-family: $lora;
+    strong::after {
+      content: ':'
     }
     a {
       font-weight: $font-weight-bold;
@@ -75,7 +74,16 @@ $dropdown-min-width: 20rem;
   }
 
   .book-description {
-    font-size: $small-font-size;
+  }
+
+  .content-column {
+    padding-bottom: calc(40px + 1rem)
+  }
+
+  .more-button {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
   }
 }
 

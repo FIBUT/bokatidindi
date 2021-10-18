@@ -40,7 +40,7 @@
         aria-labelledby="book-<%= book.id %>-hgroup"
       >
 
-        <div class="row book-column-container m-1 p-3 mb-5">
+        <div class="row book-column-container m-2 p-2 pt-md-5 pb-4">
 
           <div class="col-xl-6 mt-2 text-right" aria-hidden="true">
             <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
@@ -57,7 +57,7 @@
             </a>
           </div>
 
-          <div class="col-xl-6">
+          <div class="content-column col-xl-6">
 
             <a href="<%= book_path(book.slug) %>">
             <%= render 'books/hgroup', book: book %>
@@ -78,9 +78,7 @@
 
             <%= render 'books/meta', book: book %>
 
-            <%= render 'books/binding_types', book: book %>
-
-            <div class="text-right m-4">
+            <div class="more-button text-right mt-4">
               <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary btn-lg" %>
             </div>
 

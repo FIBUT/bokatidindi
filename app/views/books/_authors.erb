@@ -2,15 +2,13 @@
   <% local_assigns[:book].author_groups.each_with_index do |g,i| %>
   <li
     id="book-<%= local_assigns[:book].id %>-authors--<%= i %>"
-    class="authors d-block"
+    class="authors mb-1 d-block"
     aria-labelledby="book-<%= local_assigns[:book].id %>-authors-label--<%= i %>"
   >
     <strong
       id="book-<%= local_assigns[:book].id %>-authors-label--<%= i %>"
-      class="book-author-group d-block mt-1"
-    >
-      <%= g[:name] %>
-    </strong>
+      class="book-author-group"
+    ><%= g[:name] %></strong>
     <%= raw g[:author_links] %>
   </li>
   <% end %>

@@ -76,7 +76,10 @@ class Book < ApplicationRecord
   def category_links
     links = []
     categories.each do |c|
-      links << link_to(c.name, "/baekur/?category=#{c.slug}", title: "Skoða fleiri bækur í flokknum #{c.name}")
+      links << link_to(
+        c.name, "/baekur/?category=#{c.slug}",
+        title: "Skoða fleiri bækur í flokknum #{c.name}",
+      )
     end
     links.to_sentence
   end
@@ -115,7 +118,11 @@ class Book < ApplicationRecord
       ),
       authors: authors, author_links: (
         authors.map do |a|
-          link_to a.name, "/baekur/?author=#{a.author.slug}"
+          link_to(
+            a.name,
+            "/baekur/?author=#{a.author.slug}",
+            class: 'author-link'
+          )
         end
       ).to_sentence
     }

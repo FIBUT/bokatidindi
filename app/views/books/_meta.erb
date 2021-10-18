@@ -7,7 +7,11 @@
   <li
     class="book-meta-publisher d-block font-weight-bold pb-1"
     aria-label="Útgefandi"
+    aria-labelledby="book-meta-publisher-label<%= local_assigns[:book].id %>"
   >
+    <strong
+      id="book-meta-publisher-label<%= local_assigns[:book].id %>"
+    >Útgefandi</strong>
     <%=
       link_to local_assigns[:book].publisher.name,
       "/baekur/?publisher=#{local_assigns[:book].publisher.slug}",
@@ -22,6 +26,8 @@
   >
     <%= raw local_assigns[:book].category_links %>
   </li>
+
+  <% if action_name == 'show' %>
 
   <% if local_assigns[:book].page_count > 0 %>
   <li
@@ -46,5 +52,7 @@
     <%= local_assigns[:book].hours %>
     <abbr title="klukkustundir">klst.</abbr>
   </li>
+  <% end %>
+
   <% end %>
 </ul>
