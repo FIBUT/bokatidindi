@@ -95,3 +95,24 @@ $dropdown-min-width: 20rem;
     font-size: $font-size-base;
   }
 }
+
+.footer-container
+{
+  background-color: #4a242e;
+  h5 {
+    color: #fff;
+  }
+  li {
+    color: $body-bg;
+    padding-left: 1rem;
+  }
+  a {
+    color: $body-bg;
+  }  
+  .col-12 li {
+    padding-left: 0;
+  }
+  .text-footer {
+    color: #bdb9b1;
+  }
+}
