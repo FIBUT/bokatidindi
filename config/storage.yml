@@ -12,7 +12,7 @@ google:
     type: "service_account"
     project_id: "bokatidindi"
     private_key_id: <%= Rails.application.credentials.dig(:gcs, :private_key_id) %>
-    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key).dump %>
+    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key).dump unless Rails.application.credentials.dig(:gcs, :private_key).nil? %>
     client_email: "bokatidindi-images@bokatidindi.iam.gserviceaccount.com"
     client_id: "116453892142185496143"
     auth_uri: "https://accounts.google.com/o/oauth2/auth"
