@@ -20,6 +20,7 @@ $theme-colors: (
 );
 
 $body-bg: #ece8e1;
+$footer-bg: #4a242e;
 $body-color: theme-color("darkgrey");
 $link-color: #5f2835;
 $link-hover-color: #30131a;
@@ -98,21 +99,16 @@ $dropdown-min-width: 20rem;
 
 .footer-container
 {
-  background-color: #4a242e;
-  h5 {
-    color: #fff;
+  background-color: $footer-bg;
+  h2, h3 {
+    font-size: $font-size-lg;
+    color: $white;
+    font-weight: $font-weight-bold;
   }
   li {
-    color: $body-bg;
-    padding-left: 1rem;
+    color: $white;
   }
   a {
     color: $body-bg;
   }  
-  .col-12 li {
-    padding-left: 0;
-  }
-  .text-footer {
-    color: #bdb9b1;
-  }
 }
