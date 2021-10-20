@@ -15,14 +15,14 @@ $font-weight-base: 500;
 $btn-font-weight: $font-weight-bold;
 
 $theme-colors: (
-  "primary": #5f2835,
+  "primary": #4a242e,
   "darkgrey": #333,
 );
 
 $body-bg: #ece8e1;
 $footer-bg: #4a242e;
 $body-color: theme-color("darkgrey");
-$link-color: #5f2835;
+$link-color: #4a242e;
 $link-hover-color: #30131a;
 
 $pagination-color: $link-color;
@@ -72,9 +72,6 @@ $dropdown-min-width: 20rem;
     a {
       font-weight: $font-weight-bold;
     }
-  }
-
-  .book-description {
   }
 
   .content-column {
