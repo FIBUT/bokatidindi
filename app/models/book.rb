@@ -21,13 +21,17 @@ class Book < ApplicationRecord
   before_create :set_slug
 
   def cover_image_url(format = 'webp')
+    return original_cover_bucket_url unless cover_image.attached?
+
     Rails.application.routes.url_helpers.url_for(
       cover_image.variant(format: format, vibrance: IMAGE_VIBRANCE)
     )
   end
 
   def attach_cover_image
-    cover_image.attach(io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg")
+    cover_image.attach(
+      io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg"
+    )
   end
 
   def cover_image_variant_url(width, format = 'webp')
@@ -37,6 +41,8 @@ class Book < ApplicationRecord
   end
 
   def cover_img_srcset(format = 'webp')
+    return '' unless cover_image.attached?
+
     srcset = ''
     COVER_IMAGE_VARIANTS.each do |v|
       srcset << cover_image_variant_url(v, format)

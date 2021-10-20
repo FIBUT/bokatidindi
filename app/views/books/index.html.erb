@@ -47,10 +47,12 @@
               <figure class="figure mt-4">
                 <img
                   src="<%= book.cover_image_url(@image_format) %>"
+                  <% if book.cover_image.attached? %>
                   height="<%= book.cover_image.metadata[:height] %>"
                   width="<%= book.cover_image.metadata[:width] %>"
                   srcset="<%= book.cover_img_srcset(@image_format) %>"
                   sizes="(max-width: 576px) 364px, (max-width: 768px) 556px, (max-width: 992px) 780px, (min-width: 1200px) 266px, 992px"
+                  <% end %>
                   class="img-fluid"
                 >
               </figure>
