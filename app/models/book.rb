@@ -55,16 +55,25 @@ class Book < ApplicationRecord
     "https://storage.googleapis.com/bokatidindi-covers-original/#{source_id}_86941.jpg"
   end
 
-  def show_description
-    return description if long_description.empty?
+  def show_title
+    coder = HTMLEntities.new
+    coder.decode(title)
+  end
 
-    long_description
+  def show_description
+    if long_description.empty?
+      return description.html_safe
+    end
+
+    long_description.html_safe
   end
 
   def short_description
-    return long_description.truncate(128) if description.empty?
+    if description.empty?
+      return long_description.truncate(128).html_safe
+    end
 
-    description.truncate(128)
+    description.truncate(128).html_safe
   end
 
   def hours

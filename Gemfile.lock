@@ -140,6 +140,7 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (>= 0.16, < 2.a)
+    htmlentities (4.3.4)
     httpclient (2.8.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -325,6 +326,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   google-cloud-storage (~> 1.11)
+  htmlentities
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (>= 1.2.0)

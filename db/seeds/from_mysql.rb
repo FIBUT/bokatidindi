@@ -72,8 +72,8 @@ book_result.each do |book_row|
     pre_title: book_row['pretitle'].strip,
     title: book_row['title'].strip,
     post_title: book_row['posttitle'].strip,
-    description: book_row['description'].strip,
-    long_description: book_row['description_long'],
+    description: book_row['description'].strip.gsub('>>>', '<em>').gsub('<<<', '</em>'),
+    long_description: book_row['description_long'].strip.gsub('>>>', '<em>').gsub('<<<', '</em>'),
     page_count: book_row['nr_of_pages'],
     publisher_id: publisher['id']
   )

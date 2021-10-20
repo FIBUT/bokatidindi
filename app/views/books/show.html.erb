@@ -41,7 +41,7 @@
         aria-label="Lýsing"
         class="book-description mb-5 bt-5 overflow-hidden"
       >
-        <%= @book.show_description %>
+        <%= sanitize @book.show_description, tags: ['em'] %>
       </div>
 
       <% end %>

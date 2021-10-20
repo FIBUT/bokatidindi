@@ -73,7 +73,7 @@
                 aria-label="Lýsing"
                 class="book-description overflow-hidden"
               >
-                <%= book.short_description %>
+                <%= sanitize book.short_description, tags: ['em'] %>
               </p>
 
             <% end %>
