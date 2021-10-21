@@ -82,14 +82,14 @@ $ SEED_FROM=mysql rake db:seed
 This generates a seed file based on the ingressed data:
 
 ```
-$ rake db:seed:dump MODELS=category,publisher,author,author_type,binding_type,book,book_category,book_author,book_binding_type FILE=db/seeds/from_dev_data.rb
+pg_dump -T active_storage* -T schema_migrations -T ar_internal_metadata -a bokatidindi_development > db/seeds/development.sql
 ```
 
 To deploy the seeded data into the production database, commit the changes to
 'main':
 
 ```
-$ git commit db/seeds/from_dev_data.rb -m "Updating seeds"
+$ git commit db/seeds/development.sql -m "Updating seeds"
 $ git push heroku main
 ```
 

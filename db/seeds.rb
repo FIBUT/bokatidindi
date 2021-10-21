@@ -9,5 +9,7 @@
 if ENV['SEED_FROM'] == 'mysql'
   require_relative './seeds/from_mysql.rb'
 else
-  require_relative './seeds/from_dev_data.rb'
+  database  = ActiveRecord::Base.connection.raw_connection.conninfo_hash[:dbname]
+  seed_file = File.join(File.dirname(__FILE__), '/seeds/development.sql')
+  sh "psql #{database} < #{seed_file}"
 end
