@@ -11,5 +11,9 @@ if ENV['SEED_FROM'] == 'mysql'
 else
   database  = ActiveRecord::Base.connection.raw_connection.conninfo_hash[:dbname]
   seed_file = File.join(File.dirname(__FILE__), '/seeds/development.sql')
-  sh "psql #{database} < #{seed_file}"
+  if Rails.env == 'development'
+    sh "psql #{database} < #{seed_file}"
+  else
+    sh "PGPASSWORD=#{ENV['MYAPP_DATABASE_PASSWORD']} psql -h #{ENV['DATABASE_URL']} -U bokatidindi  -d #{database} < #{seed_file}"
+  end
 end
