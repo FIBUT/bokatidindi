@@ -94,6 +94,18 @@ $dropdown-min-width: 20rem;
   }
 }
 
+.welcome {
+  .welcome-column-container {
+    background-color: $white;
+    border-radius: 5px;
+  }
+  .content-column {
+    padding-bottom: calc(40px + 1rem);
+  }
+  
+}
+
+
 .footer-container
 {
   background-color: $footer-bg;
