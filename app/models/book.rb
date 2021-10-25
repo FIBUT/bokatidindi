@@ -1,7 +1,6 @@
 class Book < ApplicationRecord
   COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY         = 80
-  IMAGE_VIBRANCE        = 20
 
   include ActionView::Helpers::UrlHelper
 
@@ -14,7 +13,7 @@ class Book < ApplicationRecord
   has_many :binding_types, through: :book_binding_types
   belongs_to :publisher
 
-  has_one_attached :cover_image
+  has_one_attached :cover_image, dependent: :destroy
 
   paginates_per 18
 
@@ -23,21 +22,48 @@ class Book < ApplicationRecord
   def cover_image_url(format = 'webp')
     return original_cover_bucket_url unless cover_image.attached?
 
-    Rails.application.routes.url_helpers.url_for(
-      cover_image.variant(format: format, vibrance: IMAGE_VIBRANCE)
+    cover_variant = cover_image.variant(
+      quality: IMAGE_QUALITY, format: format
     )
+
+    if ActiveStorage::Blob.service.name.to_s == 'local'
+      return Rails.application.routes.url_helpers.url_for(cover_variant)
+    end
+
+    cover_variant.processed.service_url
   end
 
   def attach_cover_image
     cover_image.attach(
       io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg"
     )
+
+    attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
+  end
+
+  def attach_cover_image_variants
+    cover_image.variant(quality: IMAGE_QUALITY, format: 'webp').process
+    cover_image.variant(quality: IMAGE_QUALITY, format: 'jpeg').process
+    COVER_IMAGE_VARIANTS.each do |v|
+      cover_image.variant(
+        resize: v, quality: IMAGE_QUALITY, format: 'webp'
+      ).process
+      cover_image.variant(
+        resize: v, quality: IMAGE_QUALITY, format: 'jpeg'
+      ).process
+    end
   end
 
   def cover_image_variant_url(width, format = 'webp')
-    Rails.application.routes.url_helpers.url_for(
-      cover_image.variant(resize: width, quality: IMAGE_QUALITY, format: format)
+    cover_variant = cover_image.variant(
+      resize: width, quality: IMAGE_QUALITY, format: format
     )
+
+    if ActiveStorage::Blob.service.name.to_s == 'local'
+      return Rails.application.routes.url_helpers.url_for(cover_variant)
+    end
+
+    cover_variant.processed.service_url
   end
 
   def cover_img_srcset(format = 'webp')

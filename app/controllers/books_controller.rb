@@ -8,7 +8,7 @@ class BooksController < ApplicationController
 
     @books = Book.order(:title).eager_load(
       :book_authors, :authors, :publisher, :book_categories, :book_binding_types
-    )
+    ).includes(cover_image_attachment: [:blob])
 
     if params[:category]
       @books = @books.joins(:categories).where(

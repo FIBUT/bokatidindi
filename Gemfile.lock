@@ -83,6 +83,7 @@ GEM
     declarative (0.0.20)
     digest-crc (0.6.4)
       rake (>= 12.0.0, < 14.0.0)
+    e2mmap (0.1.0)
     erubi (1.10.0)
     faraday (1.8.0)
       faraday-em_http (~> 1.0)
@@ -283,6 +284,8 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
     thor (1.1.0)
+    thwait (0.2.0)
+      e2mmap
     tilt (2.0.10)
     trailblazer-option (0.1.1)
     turbolinks (5.2.1)
@@ -338,6 +341,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   sqlite3 (~> 1.4)
+  thwait
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
