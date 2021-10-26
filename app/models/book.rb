@@ -144,6 +144,18 @@ class Book < ApplicationRecord
     [pre_title, title, post_title].reject(&:blank?).flatten.compact.join(' ')
   end
 
+  def full_title_with_author
+    author_names = []
+    selected_book_authors = book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
+    return full_title if selected_book_authors.empty?
+
+    selected_book_authors.each do |a|
+      author_names << a.author.name
+    end
+
+    "#{full_title} - #{author_names.to_sentence}"
+  end
+
   private
 
   def author_group_name_plural(count, singular, plural)

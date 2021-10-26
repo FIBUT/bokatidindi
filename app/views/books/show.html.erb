@@ -1,3 +1,34 @@
+<% content_for :meta do %>
+  <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
+
+  <%= preload_link_tag @book.cover_image_variant_url(1200, @image_format) %>
+
+  <%= tag 'meta', name: 'description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
+  <%= tag 'link', rel: 'canonical', href: url_for(controller: 'books', action: 'show', only_path: false) %>
+
+  <%= tag 'meta', property: 'og:type', content: 'book' %>
+  <% @book.book_authors.joins(:author_type, :author).where(author_type: { name: 'Höfundur' }).each do |a| %>
+  <%= tag 'meta', property: 'book:author', content: a.author.name %>
+  <% end %>
+  <% if @book.cover_image.attached? %>
+  <%= tag 'meta', property: 'og:image', content: @book.cover_image_variant_url(1200, @image_format) %>
+  <%= tag 'meta', property: 'og:image:width', content: @book.cover_image.metadata[:width] %>
+  <%= tag 'meta', property: 'og:image:height', content: @book.cover_image.metadata[:height] %>
+  <% end %>
+  <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
+  <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title) %>
+  <%= tag 'meta', property: 'og:description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
+  <%= tag 'meta', property: 'og:url', content: url_for(controller: 'books', action: 'show', only_path: false) %>
+  <%= tag 'meta', property: 'og:locale', content: I18n.locale %>
+
+  <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
+  <%= tag 'meta', name: 'twitter:title', content: html_escape_once(@book.full_title_with_author) %>
+  <%= tag 'meta', name: 'twitter:description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
+  <% if @book.cover_image.attached? %>
+  <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, @image_format) %>
+  <% end %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <div class="container-fluid">
@@ -41,7 +72,7 @@
         aria-label="Lýsing"
         class="book-description mb-5 bt-5 overflow-hidden"
       >
-        <%= sanitize @book.show_description, tags: ['em'] %>
+        <%= simple_format @book.show_description, tags: ['em'] %>
       </div>
 
       <% end %>

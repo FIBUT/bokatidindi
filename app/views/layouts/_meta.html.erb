@@ -1,0 +1,18 @@
+<%= preload_link_tag image_url('logotype-cropped.svg') %>
+
+<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/lora-v17-latin-500.woff2' ) %>
+<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/lora-v17-latin-700.woff2' ) %>
+
+<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/montserrat-v18-latin-500.woff2' ) %>
+<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/montserrat-v18-latin-500italic.woff2' ) %>
+<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/montserrat-v18-latin-700.woff2' ) %>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<link href="<%= asset_path 'favicon.png' %>" rel="icon" />
+
+<%= stylesheet_pack_tag 'application', media: 'all' %>
+<%= javascript_pack_tag 'application' %>

@@ -1,3 +1,16 @@
+<% content_for :meta do %>
+  <% unless params[:publisher] || params[:category] || params[:author] %>
+    <title>Bókatíðindi - Allar bækur</title>
+  <% else %>
+    <title>
+    Bókatíðindi
+    <%= "- #{@author.name}" unless params[:author].nil? %>
+    <%= "- #{@publisher.name}" unless params[:publisher].nil? %>
+    <%= "- #{@category.name}" unless params[:category].nil? %>
+    </title>
+  <% end %>
+<% end %>
+
 <main role="main" aria-label="Bækur">
 
   <p id="notice"><%= notice %></p>
@@ -13,17 +26,17 @@
         <ul class="d-block p-0">
           <% unless params[:author].nil? %>
           <li class="d-inline-block badge badge-darkgrey">
-            <%= Author.find_by(slug: params[:author]).name %>
+            <%= @author.name %>
           </li>
           <% end %>
           <% unless params[:publisher].nil? %>
           <li class="d-inline-block badge badge-darkgrey">
-            <%= Publisher.find_by(slug: params[:publisher]).name %>
+            <%= @publisher.name %>
           </li>
           <% end %>
           <% unless params[:category].nil? %>
           <li class="d-inline-block badge badge-darkgrey">
-            <%= Category.find_by(slug: params[:category]).name %>
+            <%= @category.name %>
           </li>
           <% end %>
         </ul>

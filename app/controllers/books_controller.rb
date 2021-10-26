@@ -14,10 +14,16 @@ class BooksController < ApplicationController
       @books = @books.joins(:categories).where(
         book_categories: { categories: { slug: params[:category] } }
       )
+      @category = Category.find_by(slug: params[:category])
     end
-
-    @books = @books.where(publishers: { slug: params[:publisher] }) if params[:publisher]
-    @books = @books.where(authors: { slug: params[:author] }) if params[:author]
+    if params[:publisher]
+      @books = @books.where(publishers: { slug: params[:publisher] })
+      @publisher = Publisher.find_by(slug: params[:publisher])
+    end
+    if params[:author]
+      @books = @books.where(authors: { slug: params[:author] })
+      @author = Author.find_by(slug: params[:author])
+    end
     @books = @books.page params[:page]
   end
 
