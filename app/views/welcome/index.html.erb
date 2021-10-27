@@ -1,90 +1,79 @@
-<main role="main" aria-label="Bækur">
+<main role="main">
 
   <p id="notice"><%= notice %></p>
 
   <div class="container-fluid">
-    <div class="row">
-      <section class="welcome col-12">
-        <div class="welcome-column-container p-5">
-          <p class="">
-            Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við flesta titla sem vísa inn á sölusíður útgefanda.
-          </p>
-          <p>
-            Hér má einnig finna brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar.
-          </p>
-          <p>
-            Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt úrval íslenskra bóka:
-          </p>
-            <ul class="list mt-4">
-              <li><a href="https://www.boksala.is/">Bóksala stúdenta</a><br></li>
-              <li><a href="https://www.forlagid.is/">Forlagið bókabúð</a><br></li>
-              <li><a href="https://www.penninn.is/">Penninn Eymundsson</a><br></li>
-              <li><a href="https://www.salka.is/">Salka bókabúð</a><br></li>
-              <li><a href="https://www.storytel.com/is/is/">Storytel</a></li>
-            </ul>
-          
-        </div>
-      </section>
-    </div>
-    <div class="row my-5">    
-      <section class="welcome col-xl-3 col-sm-6">
-        <div class="welcome-column-container m-2 p-2 pt-md-5 pb-4">
-          <div class="content-column">
-            <h2 class="ml-4">Barnabækur</h2>
-            <hr>
-            <ul class="list-unstyled ml-4">
-              <li class="my-2"><a href="#">Myndskreyttar 0-6 ára</a></li>
-              <li class="my-2"><a href="#">Skáldverk</a></li>
-              <li class="my-2"><a href="#">Fræðibækur/handbækur</a></li>
-              <li class="my-2"><a href="#">Ungmennabækur</a></li>
-            </ul>
-          </div>
-        </div> 
-      </section>
+    <div class="row m-5">
 
-      <section class="welcome col-xl-3 col-sm-6">
-        <div class="welcome-column-container m-2 p-2 pt-md-5 pb-4">
-          <div class="content-column">
-            <h2 class="ml-4">Skáldverk</h2>
-            <hr>
-            <ul class="list-unstyled ml-4">
-              <li class="my-2"><a href="#">Íslensk skáldverk</a></li>
-              <li class="my-2"><a href="#">Þýdd skáldverk</a></li>
-              <li class="my-2"><a href="#">Ljóð og leikrit</a></li>
-            </ul>
-          </div>
-        </div> 
-      </section>
+      <div class="welcome-content col-12 p-5">
+        <p class="">
+          Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við flesta titla sem vísa inn á sölusíður útgefanda.
+        </p>
+        <p>
+          Hér má einnig finna brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar.
+        </p>
+        <p>
+          Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt úrval íslenskra bóka:
+        </p>
+        <ul class="list mt-4">
+          <li><a href="https://www.boksala.is/">Bóksala stúdenta</a><br></li>
+          <li><a href="https://www.forlagid.is/">Forlagið bókabúð</a><br></li>
+          <li><a href="https://www.penninn.is/">Penninn Eymundsson</a><br></li>
+          <li><a href="https://www.salka.is/">Salka bókabúð</a><br></li>
+          <li><a href="https://www.storytel.com/is/is/">Storytel</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="row m-5" aria-label="Efnisflokkar">
+
+      <div class="col-3">
+        <div class="welcome-content p-5 mx-2">
+          <h2 class="">Barnabækur</h2>
+          <ul class="list-unstyled">
+            <li class="my-2"><a href="#">Myndskreyttar 0-6 ára</a></li>
+            <li class="my-2"><a href="#">Skáldverk</a></li>
+            <li class="my-2"><a href="#">Fræðibækur/handbækur</a></li>
+            <li class="my-2"><a href="#">Ungmennabækur</a></li>
+          </ul>
+        </div>
+      </div> 
+
+      <div class="col-3">
+        <div class="welcome-content p-5 mx-2">
+          <h2 class="">Skáldverk</h2>
+          <ul class="list-unstyled">
+            <li class="my-2"><a href="#">Íslensk skáldverk</a></li>
+            <li class="my-2"><a href="#">Þýdd skáldverk</a></li>
+            <li class="my-2"><a href="#">Ljóð og leikrit</a></li>
+          </ul>
+        </div>
+      </div>
       
-      <section class="welcome col-xl-3 col-sm-6">
-        <div class="welcome-column-container m-2 p-2 pt-md-5 pb-4">
-          <div class="content-column">
-            <h2 class="ml-4">Fræðibækur</h2>
-            <hr>
-            <ul class="list-unstyled ml-4">
-              <li class="my-2"><a href="#">Listir og ljósmyndir</a></li>
-              <li class="my-2"><a href="#">Matur</a></li>
-              <li class="my-2"><a href="#">Saga, ættfræði og héraðslýsingar</a></li>
-              <li class="my-2"><a href="#">Hannyrðir, íþróttir og útivist</a></li>
-            </ul>
-          </div>
-        </div> 
-      </section>
+      <div class="col-3">
+        <div class="welcome-content p-5 mx-2">
+          <h2 class="">Fræðibækur</h2>
+          <ul class="list-unstyled">
+            <li class="my-2"><a href="#">Listir og ljósmyndir</a></li>
+            <li class="my-2"><a href="#">Matur</a></li>
+            <li class="my-2"><a href="#">Saga, ættfræði og héraðslýsingar</a></li>
+            <li class="my-2"><a href="#">Hannyrðir, íþróttir og útivist</a></li>
+          </ul>
+        </div>
+      </div>
     
-      <section class="welcome col-xl-3 col-sm-6">
-        <div class="welcome-column-container m-2 p-2 pt-md-5 pb-4">
-          <div class="content-column">
-            <h2 class="ml-4">Ævisögur</h2>
-            <hr>
-            <ul class="list-unstyled ml-4">
-              <li class="my-2"><a href="#">Ævisögur</a></li>
-            </ul>
-          </div>
-        </div> 
-     </section>
+      <div class="col-3">
+        <div class="welcome-content p-5 mx-2">
+          <h2 class="">Ævisögur</h2>
+          <ul class="list-unstyled">
+            <li class="my-2"><a href="#">Ævisögur</a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
-
 </main>
 
 

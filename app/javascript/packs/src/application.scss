@@ -54,12 +54,6 @@ $dropdown-min-width: 20rem;
 
 // Allt annað hér
 
-p {
-  font-size: 1.3rem;
-  line-height: 2.2rem;
-}
-
-
 .book {
 
   hgroup {
@@ -99,22 +93,25 @@ p {
   .pre-title, .post-title { font-size: 1.8em; }
 
   .book-description {
-    font-size: $font-size-base;
+    font-size: $font-size-lg;
   }
 }
 
-.welcome {
-  .welcome-column-container {
-    background-color: $white;
-    border-radius: 5px;
+.welcome-content {
+  background-color: $white;
+  border-radius: 5px;
+  h2 {
+    font-weight: $font-weight-bold;
+    border-bottom: 2px solid theme-color("lightgrey");
+    padding-bottom: 0.5em;
+    margin-bottom: 0.75em;
   }
-  .content-column {
-    padding-bottom: calc(40px + 1rem);
+  ul a {
+    font-weight: bold;
   }
 }
 
-.footer-container
-{
+.footer-container {
   background-color: $footer-bg;
   h2, h3 {
     font-size: $font-size-lg;
