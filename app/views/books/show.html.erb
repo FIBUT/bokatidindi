@@ -19,7 +19,8 @@
   <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title) %>
   <%= tag 'meta', property: 'og:description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
   <%= tag 'meta', property: 'og:url', content: url_for(controller: 'books', action: 'show', only_path: false) %>
-  <%= tag 'meta', property: 'og:locale', content: I18n.locale %>
+  <%= tag 'meta', property: 'og:locale', content: 'is_IS' %>
+  <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
 
   <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
   <%= tag 'meta', name: 'twitter:title', content: html_escape_once(@book.full_title_with_author) %>
