@@ -1,7 +1,13 @@
 <% content_for :meta do %>
   <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
 
-  <%= preload_link_tag @book.cover_image_variant_url(1200, @image_format) %>
+  <link
+    rel="preload"
+    as="image"
+    href="<%= @book.cover_image_url %>"
+    imagesrcset="<%= @book.cover_img_srcset(@image_format) %>"
+    imagesizes="(max-width: 768px) 1386px, (max-width: 992px) 550px, (min-width: 1200px) 1200px"
+  >
 
   <%= tag 'meta', name: 'description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
   <%= tag 'link', rel: 'canonical', href: url_for(controller: 'books', action: 'show', only_path: false) %>
@@ -53,7 +59,7 @@
             height="<%= @book.cover_image.metadata[:height] %>"
             width="<%= @book.cover_image.metadata[:width] %>"
             srcset="<%= @book.cover_img_srcset(@image_format) %>"
-            sizes="(max-width: 768px) 1386px, (max-width: 992px) 550px, (min-width: 1200px) 1200px, 1600px"
+            sizes="(max-width: 768px) 1386px, (max-width: 992px) 550px, (min-width: 1200px) 1200px"
             <% end %>
             class="img-fluid"
           >
