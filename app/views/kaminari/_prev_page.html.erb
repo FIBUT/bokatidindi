@@ -6,6 +6,9 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="prev page-item">
+<li class="prev page-item d-none d-md-flex">
   <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, rel: 'prev', remote: remote, class: 'page-link' %>
+</li>
+<li class="next page-item d-md-none d-sm-flex">
+  <%= link_to_unless current_page.first?, '&laquo;'.html_safe, url, rel: 'prev', remote: remote, class: 'page-link', 'aria-label': t('views.pagination.previous').html_safe %>
 </li>
