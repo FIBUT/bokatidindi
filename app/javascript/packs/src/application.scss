@@ -17,6 +17,7 @@ $btn-font-weight: $font-weight-bold;
 $theme-colors: (
   "primary": #37171f,
   "darkgrey": #333,
+  "lightgrey": #ece8e1,
 );
 
 $body-bg: #ece8e1;
@@ -24,6 +25,8 @@ $footer-bg: #37171f;
 $body-color: theme-color("darkgrey");
 $link-color: #4a242e;
 $link-hover-color: #30131a;
+
+$header-link-color: theme-color("lightgrey");
 
 $pagination-color: $link-color;
 $pagination-active-bg: $link-color;
@@ -105,7 +108,6 @@ $dropdown-min-width: 20rem;
   
 }
 
-
 .footer-container
 {
   background-color: $footer-bg;
@@ -122,36 +124,23 @@ $dropdown-min-width: 20rem;
   }  
 }
 
-// Badges 
-.tegundir {
-  p, a {
-    font-family: $montserrat;
-    font-weight: $font-weight-base;
-    font-size: 1.1rem;
-  }
-}
-
-.badge-grey {
-  background-color: #fff;
-  border: 1px solid $link-color;
-}
-
-a.badge-grey:hover {
-  background-color: #333;
-  color: #fff;
-}
-
 // Header
 header {
   background-color: #37171f;
-
-  a {
-    color: $body-bg;
+  .nav-link {
+    color: $header-link-color;
   }
-}
-
-.btn-primary
-{
-  background-color: $body-bg;
-  color: $link-color;
+  .nav-link:hover {
+    color: $white;
+    text-decoration: underline;
+  }
+  .dropdown-menu {
+    .nav-link {
+      color: $link-color;
+    }
+    .nav-link:hover {
+      color: $link-hover-color;
+      text-decoration: underline;
+    }  
+  }
 }
