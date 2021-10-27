@@ -101,13 +101,13 @@ $dropdown-min-width: 20rem;
   background-color: $white;
   border-radius: 5px;
   h2 {
+    font-size: $font-size-lg;
     font-weight: $font-weight-bold;
     border-bottom: 2px solid theme-color("lightgrey");
-    padding-bottom: 0.5em;
-    margin-bottom: 0.75em;
   }
   ul a {
     font-weight: bold;
+    font-size: $font-size-sm;
   }
 }
 
