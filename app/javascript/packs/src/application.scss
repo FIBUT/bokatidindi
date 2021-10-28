@@ -38,6 +38,29 @@ $pagination-hover-color: $link-hover-color;
 
 $dropdown-min-width: 20rem;
 
+$grid-breakpoints: (
+  xs:   0,
+  sm:   576px,
+  md:   670px,
+  lg:   992px,
+  xl:   1200px,
+  xxl:  1690px
+) ;
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm:   540px,
+  md:   622px,
+  lg:   960px,
+  xl:   1140px,
+  xxl:  1630px
+) ;
+
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/print";
 @import "~bootstrap/scss/type";

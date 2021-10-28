@@ -55,13 +55,13 @@
       <% @books.each do |book| %>
       <section
         id="book-<%= book.id %>"
-        class="book col-xl-4 col-sm-6"
+        class="book col-xxl-4 col-md-6"
         aria-labelledby="book-<%= book.id %>-hgroup"
       >
 
         <div class="row book-column-container m-2 p-2 pt-md-5 pb-4">
 
-          <div class="col-xl-6 mt-2 text-right" aria-hidden="true">
+          <div class="col-xxl-6 mt-2 text-right" aria-hidden="true">
             <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
               <figure class="figure mt-4">
                 <img
