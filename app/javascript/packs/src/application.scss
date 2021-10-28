@@ -21,7 +21,7 @@ $theme-colors: (
 );
 
 $body-bg: #ece8e1;
-$footer-bg: #37171f;
+$footer-bg: theme-color("primary");
 $body-color: theme-color("darkgrey");
 $link-color: #4a242e;
 $link-hover-color: #30131a;
@@ -106,7 +106,6 @@ $dropdown-min-width: 20rem;
     border-bottom: 2px solid theme-color("lightgrey");
   }
   ul a {
-    font-weight: bold;
     font-size: $font-size-sm;
   }
 }
@@ -128,7 +127,7 @@ $dropdown-min-width: 20rem;
 
 // Header
 header {
-  background-color: #37171f;
+  background-color: theme-color("primary");
   .nav-link {
     color: $header-link-color;
   }
