@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY         = 80
+  IMAGE_FILE_SUFFIX     = '_89735.jpg'
 
   include ActionView::Helpers::UrlHelper
 
@@ -34,11 +35,18 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image
-    cover_image.attach(
-      io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg"
-    )
+    image_uri  = URI.parse(original_cover_bucket_url)
+    response   = Net::HTTP.get_response(image_uri)
 
-    attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
+    if response.code == '200'
+      cover_image.attach(
+        io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg"
+      )
+      attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
+      return true
+    else
+      return false
+    end
   end
 
   def attach_cover_image_variants
@@ -78,7 +86,7 @@ class Book < ApplicationRecord
   end
 
   def original_cover_bucket_url
-    "https://storage.googleapis.com/bokatidindi-covers-original/#{source_id}_86941.jpg"
+    "https://storage.googleapis.com/bokatidindi-covers-original/#{source_id}#{IMAGE_FILE_SUFFIX}"
   end
 
   def show_title
