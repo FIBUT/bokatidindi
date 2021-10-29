@@ -1,7 +1,34 @@
+edition_id = ENV['BOKATIDINDI_EDITION'] || 'BT2021'
+
+# The variables we use for MySQL authentication
+mysql_host     = ENV['MYSQL_HOST'] || 'localhost'
+mysql_database = ENV['MYSQL_DATABASE'] || 'bokatidindi-source'
+mysql_username = ENV['MYSQL_USERNAME'] || 'root'
+mysql_password = ENV['MYSQL_PASSWORD'] || 'root'
+
+# The variables we use for getting the database from the legacy system
+http_url       = 'http://bokatidindi.oddi.is/dataout/bokatidindi.gz'
+http_username  = Rails.application.credentials.dig(:bokatidindi_legacy, :username)
+http_password  = Rails.application.credentials.dig(:bokatidindi_legacy, :password)
+
+puts 'Getting the database dump from bokatidindi.oddi.is'
+gzipped_dump      = URI.open(http_url, http_basic_authentication: [http_username,http_password])
+uncompressed_dump = ActiveSupport::Gzip.decompress(gzipped_dump.read)
+
+puts 'Connecting to MySQL/MariaDB server'
 client = Mysql2::Client.new(
-  host: 'localhost', database: 'bokatidindi-source',
-  username: 'root', password: 'root'
+  host: mysql_host, database: mysql_database,
+  username: mysql_username, password: mysql_password,
+  flags: Mysql2::Client::MULTI_STATEMENTS
 )
+
+puts 'Writing MySQL dump into the MySQL/MariaDB server'
+client.query(uncompressed_dump)
+while client.next_result
+  client.store_result
+end
+
+puts 'Migrating the MySQL/MariaDB data to the ActiveRecord/Postgres database'
 
 binding_type_query = "SELECT bindingtype_id as source_id, name, rodun as rod, open
 FROM bindingtype
@@ -39,7 +66,7 @@ JOIN `bookid_bindingtype_eannr`
 ON bookid_bindingtype_eannr.book_id = book.book_id
 LEFT JOIN bindingtype
 ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
-WHERE `book`.`editionid` = 'BT2020'
+WHERE `book`.`editionid` = '#{edition_id}'
 ORDER BY book_id"
 
 book_result = client.query book_query
@@ -151,3 +178,5 @@ book_result.each do |book_row|
     )
   end
 end
+
+puts 'Done!'
