@@ -1,12 +1,12 @@
 <%= tag 'link', rel: 'preload', as: 'image', href: asset_path('favicon.png') %>
 <%= tag 'link', rel: 'preload', as: 'image', href: image_url('logotype-cropped.svg') %>
 
-<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/lora-v17-latin-500.woff2' ) %>
-<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/lora-v17-latin-700.woff2' ) %>
+<%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/lora-v17-latin-500.woff2' %>
+<%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/lora-v17-latin-700.woff2' %>
 
-<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/montserrat-v18-latin-500.woff2' ) %>
-<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/montserrat-v18-latin-500italic.woff2' ) %>
-<%= preload_link_tag asset_pack_path( 'media/packs/src/fonts/montserrat-v18-latin-700.woff2' ) %>
+<%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/montserrat-v18-latin-500.woff2' %>
+<%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/montserrat-v18-latin-500italic.woff2' %>
+<%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/montserrat-v18-latin-700.woff2' %>
 
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
