@@ -38,9 +38,9 @@ class Book < ApplicationRecord
     image_uri  = URI.parse(original_cover_bucket_url)
     response   = Net::HTTP.get_response(image_uri)
 
-    if response.code == '200'
+    if response.is_a?(Net::HTTPSuccess)
       cover_image.attach(
-        io: URI.parse(original_cover_bucket_url).open, filename: "#{id}.jpg"
+        io: StringIO.new(response.body), filename: "#{id}.jpg"
       )
       attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
       return true
