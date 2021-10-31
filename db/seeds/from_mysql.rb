@@ -84,7 +84,7 @@ book_result.each do |book_row|
 
   category ||= Category.create(
     source_id: book_row['category_id'],
-    name: book_row['category_name'].strip,
+    origin_name: book_row['category_name'].strip,
     rod: book_row['category_rodun']
   )
 
