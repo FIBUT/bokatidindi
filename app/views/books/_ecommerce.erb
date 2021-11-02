@@ -1,0 +1,39 @@
+<ul
+  id="book-binding-list-<%= local_assigns[:book].id %>"
+  class="book-binding-list list-unstyled"
+  aria-label="Vefverslun "
+>
+  <% if local_assigns[:book].uri_to_buy %>
+  <li class="my-2">
+    <a 
+      class="btn btn-lg btn-darkgrey"
+      href="<%= local_assigns[:book].uri_to_buy %>"
+      target="_blank"
+    >
+      Skoða í vefverslun á <%= local_assigns[:book].domain_to_buy %>
+    </a>
+  </li>
+  <% end %>
+  <% if local_assigns[:book].uri_to_sample %>
+  <li class="my-2">
+    <a 
+      class="btn btn-darkgrey"
+      href="<%= local_assigns[:book].uri_to_sample %>"
+      target="_blank"
+    >
+      Skoða sýnishorn á <%= local_assigns[:book].domain_to_sample %>
+    </a>
+  </li>
+  <% end %>
+  <% if local_assigns[:book].uri_to_audiobook %>
+  <li class="my-2">
+    <a 
+      class="btn btn-darkgrey"
+      href="<%= local_assigns[:book].uri_to_audiobook %>"
+      target="_blank"
+    >
+      Kaupa hljóðbók og rafbók á <%= local_assigns[:book].domain_to_audiobook %>
+    </a>
+  </li>
+  <% end %>
+</ul>

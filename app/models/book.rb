@@ -20,6 +20,21 @@ class Book < ApplicationRecord
 
   before_create :set_slug
 
+  def domain_to_buy
+    uri = URI.parse(uri_to_buy)
+    uri.host.delete_prefix('www.')
+  end
+
+  def domain_to_sample
+    uri = URI.parse(uri_to_sample)
+    uri.host.delete_prefix('www.')
+  end
+
+  def domain_to_audiobook
+    uri = URI.parse(uri_to_audiobook)
+    uri.host.delete_prefix('www.')
+  end
+
   def cover_image_url(format = 'webp')
     return original_cover_bucket_url unless cover_image.attached?
 

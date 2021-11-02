@@ -11,6 +11,21 @@ http_url       = 'http://bokatidindi.oddi.is/dataout/bokatidindi.gz'
 http_username  = Rails.application.credentials.dig(:bokatidindi_legacy, :username)
 http_password  = Rails.application.credentials.dig(:bokatidindi_legacy, :password)
 
+def secure_and_validate_uri_string(uri_string)
+  return nil if uri_string.to_s.empty?
+
+  uri = URI.parse(uri_string)
+  return nil if uri.scheme.nil?
+
+  uri.scheme = 'https'
+  uri.to_s
+rescue URI::InvalidURIError
+  escaped_uri = URI::DEFAULT_PARSER.escape(uri_string)
+  return nil if URI.parse(escaped_uri).scheme.nil?
+
+  escaped_uri
+end
+
 puts '⬇️  Getting the database dump from bokatidindi.oddi.is'
 gzipped_dump      = URI.open(http_url, http_basic_authentication: [http_username,http_password])
 uncompressed_dump = ActiveSupport::Gzip.decompress(gzipped_dump.read)
@@ -58,7 +73,8 @@ bindingtype.bindingtype_id, bindingtype.name,
 `nr_of_pages`, `nr_of_minutes`,
 `book`.`publisher_id`,
 `publisher`.`name` AS `publisher_name`,
-`publisher`.`veffang` AS `publisher_url`
+`publisher`.`veffang` AS `publisher_url`,
+`book`.`Link2Store`, `book`.`Link2Sample`, `book`.`Link2Listen`
 FROM `book`
 LEFT JOIN `publisher`
 ON `book`.`publisher_id` = `publisher`.`publisher_id`
@@ -104,10 +120,11 @@ book_result.each do |book_row|
     description: book_row['description'].strip.gsub('>>>', '<em>').gsub('<<<', '</em>'),
     long_description: book_row['description_long'].strip.gsub('>>>', '<em>').gsub('<<<', '</em>'),
     page_count: book_row['nr_of_pages'],
-    publisher_id: publisher['id']
+    publisher_id: publisher['id'],
+    uri_to_buy: secure_and_validate_uri_string(book_row['Link2Store']),
+    uri_to_sample: secure_and_validate_uri_string(book_row['Link2Sample']),
+    uri_to_audiobook: secure_and_validate_uri_string(book_row['Link2Listen'])
   )
-
-  puts "#{['📗','📘','📙'].sample} Book: #{book.slug} - #{category.name}" 
 
   book_category = BookCategory.find_by(book_id: book.id, category_id: category.id)
   book_category ||= BookCategory.create(
@@ -179,6 +196,8 @@ book_result.each do |book_row|
       author_type_id: author_type['id']
     )
   end
+
+  puts "#{['📗','📘','📙'].sample} Book: #{book.id}/#{book.slug} - #{category.name}"
 end
 
 puts "#{['😎','😊','🎉','🥂'].sample} #{Book.all.count} books imported!"
