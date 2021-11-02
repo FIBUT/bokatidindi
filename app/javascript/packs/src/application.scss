@@ -14,6 +14,9 @@ $headings-font-family: $lora;
 $font-weight-base: 500;
 $btn-font-weight: $font-weight-bold;
 
+$font-size-base: 1.2rem; // Assumes the browser default, typically `16px`
+$font-size-lg: $font-size-base * 1.55 ;
+
 $theme-colors: (
   "primary": #37171f,
   "darkgrey": #333,
@@ -92,7 +95,7 @@ $dropdown-min-width: 20rem;
   .title { font-weight: $font-weight-bold; font-size: 2.5em; }
   .pre-title, .post-title { font-size: 1.8em; }
 
-  .book-description {
+  .book-description { 
     font-size: $font-size-lg;
   }
 
@@ -104,14 +107,31 @@ $dropdown-min-width: 20rem;
 .welcome-content {
   background-color: $white;
   border-radius: 5px;
+  height: 100%;
   h2 {
     font-size: $font-size-lg;
-    font-weight: $font-weight-bold;
     border-bottom: 2px solid theme-color("lightgrey");
   }
-  ul a {
-    font-size: $font-size-sm;
-  }
+}
+
+.logo-list{
+  padding: 20px 0;
+  text-align: center;
+}
+
+.logo-list .row {
+  align-items: center;
+}
+
+.logo-list img {
+  display: inline-block;
+  max-width: 85%;
+  padding: 15px 0;
+  transition: all 0.3s ease-in-out;
+  vertical-align: middle;
+}
+.logo-list img:hover {
+  transform: scale(1.1)
 }
 
 .footer-container {
@@ -149,3 +169,4 @@ header {
     }  
   }
 }
+
