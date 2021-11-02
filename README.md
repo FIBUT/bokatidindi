@@ -60,7 +60,7 @@ $ git push heroku main
 $ heroku pg:reset DATABASE --confirm bokatidindi-staging
 $ heroku run rake db:schema:load
 $ heroku run rake db:seed
-$ heroku run:detached? rake bt:attach_covers
+$ heroku run:detached rake bt:attach_covers
 ```
 
 ### Generating production seeds

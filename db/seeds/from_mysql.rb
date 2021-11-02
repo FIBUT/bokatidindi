@@ -11,24 +11,26 @@ http_url       = 'http://bokatidindi.oddi.is/dataout/bokatidindi.gz'
 http_username  = Rails.application.credentials.dig(:bokatidindi_legacy, :username)
 http_password  = Rails.application.credentials.dig(:bokatidindi_legacy, :password)
 
-puts 'Getting the database dump from bokatidindi.oddi.is'
+puts '⬇️  Getting the database dump from bokatidindi.oddi.is'
 gzipped_dump      = URI.open(http_url, http_basic_authentication: [http_username,http_password])
 uncompressed_dump = ActiveSupport::Gzip.decompress(gzipped_dump.read)
 
-puts 'Connecting to MySQL/MariaDB server'
+puts "🕓 The remote database dump was created at: #{gzipped_dump.meta['last-modified']}"
+
+puts '🔗 Connecting to MySQL/MariaDB server'
 client = Mysql2::Client.new(
   host: mysql_host, database: mysql_database,
   username: mysql_username, password: mysql_password,
   flags: Mysql2::Client::MULTI_STATEMENTS
 )
 
-puts 'Writing MySQL dump into the MySQL/MariaDB server'
+puts '✍️  Writing MySQL dump into the MySQL/MariaDB server'
 client.query(uncompressed_dump)
 while client.next_result
   client.store_result
 end
 
-puts 'Migrating the MySQL/MariaDB data to the ActiveRecord/Postgres database'
+puts '🚢 Migrating the MySQL/MariaDB data to the ActiveRecord/Postgres database'
 
 binding_type_query = "SELECT bindingtype_id as source_id, name, rodun as rod, open
 FROM bindingtype
@@ -105,7 +107,7 @@ book_result.each do |book_row|
     publisher_id: publisher['id']
   )
 
-  puts "Book: #{book.source_id} to #{book.id} - #{book.title} - #{category.name}" 
+  puts "#{['📗','📘','📙'].sample} Book: #{book.slug} - #{category.name}" 
 
   book_category = BookCategory.find_by(book_id: book.id, category_id: category.id)
   book_category ||= BookCategory.create(
@@ -179,4 +181,4 @@ book_result.each do |book_row|
   end
 end
 
-puts 'Done!'
+puts "#{['😎','😊','🎉','🥂'].sample} #{Book.all.count} books imported!"
