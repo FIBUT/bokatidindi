@@ -6,7 +6,7 @@
     Bókatíðindi
     <%= "- #{@author.name}" unless params[:author].nil? %>
     <%= "- #{@publisher.name}" unless params[:publisher].nil? %>
-    <%= "- #{@category.name}" unless params[:category].nil? %>
+    <%= "- #{@category.name_with_group}" unless params[:category].nil? %>
     <%= "- #{params[:search]}" unless params[:search].nil? %>
     </title>
   <% end %>
@@ -37,7 +37,7 @@
           <% end %>
           <% unless params[:category].nil? %>
           <li class="d-inline-block badge badge-darkgrey">
-            <%= @category.name %>
+            <%= @category.name_with_group %>
           </li>
           <% end %>
           <% unless params[:search].nil? %>

@@ -10,18 +10,11 @@
         Barnabækur
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarBarnabaekurLink">
+        <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
         <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Myndskreyttar 0-6 ára</a>
+          <%= link_to c.name, c.books_url, class: 'nav-link pl-3' %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Skáldverk</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Fræðibækur / Handbækur</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Ungmennabækur</a>
-        </li>
+        <% end %>
       </ul>
     </li>
     <li class="nav-item dropdown">
@@ -34,18 +27,11 @@
         Skáldverk
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarSkaldverkLink">
+        <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
         <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Íslensk skáldverk</a>
+          <%= link_to c.name, c.books_url, class: 'nav-link pl-3' %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Þýdd skáldverk</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Ljóð og leikrit</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Fræðibækur</a>
-        </li>
+        <% end %>
       </ul>
     </li>
     <li class="nav-item">
@@ -58,22 +44,15 @@
         Fræðibækur
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarFraedikLink">
+        <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
         <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Listir og ljósmyndir</a>
+          <%= link_to c.name, c.books_url, class: 'nav-link pl-3' %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Matur</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Saga, ættfræði og héraðslýsingar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link pl-3" href="#">Hannyrðir, íþróttir og útivist</a>
-        </li>
+        <% end %>
       </ul>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Ævisögur</a>
+      <%= link_to 'Ævisögur', "/baekur/?category=aevisogur", class: 'nav-link' %>
     </li>
   </ul>
 </nav>

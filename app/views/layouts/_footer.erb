@@ -16,30 +16,33 @@
       <div class="col-6 col-md">
         <h3>Barnabækur</h3>
         <ul class="list-unstyled text-small">
-          <li class="my-2"><a href="#">Myndskreyttar 0-6 ára</a></li>
-          <li class="my-2"><a href="#">Skáldverk</a></li>
-          <li class="my-2"><a href="#">Fræðibækur/handbækur</a></li>
-          <li class="my-2"><a href="#">Ungmennabækur</a></li>
+          <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
+          <li class="my-2">
+            <%= link_to c.name, c.books_url %>
+          </li>
+          <% end %>
         </ul>
       </div>
 
       <div class="col-6 col-md">
         <h3>Skáldverk</h3>
         <ul class="list-unstyled text-small">
-          <li class="my-2"><a href="#">Íslensk skáldverk</a></li>
-          <li class="my-2"><a href="#">Þýdd skáldverk</a></li>
-          <li class="my-2"><a href="#">Ljóð og leikrit</a></li>
-          <li class="my-2"><a href="#">Fræðibækur</a></li>
+          <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
+          <li class="my-2">
+            <%= link_to c.name, c.books_url %>
+          </li>
+          <% end %>
         </ul>
       </div>
 
       <div class="col-6 col-md">
         <h3>Fræðibækur</h3>
         <ul class="list-unstyled text-small">
-          <li class="my-2"><a href="#">Listir og ljósmyndir</a></li>
-          <li class="my-2"><a href="#">Matur</a></li>
-          <li class="my-2"><a href="#">Saga, ættfræði og héraðslýsingar</a></li>
-          <li class="my-2"><a href="#">Hannyrðir, íþróttir og útivist</a></li>
+          <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
+          <li class="my-2">
+            <%= link_to c.name, c.books_url %>
+          </li>
+          <% end %>
         </ul>
       </div>
 
@@ -49,8 +52,6 @@
           <li class="my-2"><a href="#">Ævisögur</a></li>
         </ul>
       </div>
-
     </div>
-
   </div>
 </footer>
