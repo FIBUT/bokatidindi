@@ -1,9 +1,23 @@
 class Book < ApplicationRecord
   COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY         = 80
-  IMAGE_FILE_SUFFIX     = '_89735.jpg'
+  IMAGE_FILE_SUFFIX     = '_89735.jpg'.freeze
+
+  SEARCH_COLUMNS            = %i[source_id pre_title title post_title description long_description].freeze
+  AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
+  CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
 
   include ActionView::Helpers::UrlHelper
+  include PgSearch::Model
+
+  multisearchable against: [:pre_title, :title, :post_title, :description, :long_description]
+
+  pg_search_scope :search,
+    against: SEARCH_COLUMNS, associated_against: {
+      authors: AUTHORS_SEARCH_COLUMMNS,
+      categories: CATEGORIES_SEARCH_COLUMNS,
+      publisher: :name
+    }
 
   has_many :book_authors
   has_many :authors, through: :book_authors

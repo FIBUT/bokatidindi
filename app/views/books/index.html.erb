@@ -1,5 +1,5 @@
 <% content_for :meta do %>
-  <% unless params[:publisher] || params[:category] || params[:author] %>
+  <% unless params[:publisher] || params[:category] || params[:author] || params[:search] %>
     <title>Bókatíðindi - Allar bækur</title>
   <% else %>
     <title>
@@ -7,6 +7,7 @@
     <%= "- #{@author.name}" unless params[:author].nil? %>
     <%= "- #{@publisher.name}" unless params[:publisher].nil? %>
     <%= "- #{@category.name}" unless params[:category].nil? %>
+    <%= "- #{params[:search]}" unless params[:search].nil? %>
     </title>
   <% end %>
 <% end %>
@@ -19,7 +20,7 @@
 
     <div class="row">
       <div class="col-12 pl-5 pb-3">
-        <% unless params[:publisher] || params[:category] || params[:author] %>
+        <% unless params[:publisher] || params[:category] || params[:author] || params[:search] %>
           <h1>Allar bækur</h1>
         <% else %>
           <h1>Niðurstöður</h1>
@@ -37,6 +38,11 @@
           <% unless params[:category].nil? %>
           <li class="d-inline-block badge badge-darkgrey">
             <%= @category.name %>
+          </li>
+          <% end %>
+          <% unless params[:search].nil? %>
+          <li class="d-inline-block badge badge-darkgrey">
+            <%= params[:search] %>
           </li>
           <% end %>
         </ul>
@@ -109,6 +115,8 @@
 
   </div>
 
+  <% if @books.include? 'total_pages' %>
   <%= paginate @books %>
+  <% end %>
 
 </main>

@@ -4,9 +4,23 @@
       <%= image_tag 'logotype-cropped.svg', height: '105', width: '689', alt: 'Bókatíðindi', class: 'img-fluid' %>
     </a>
   </nav>
-  <form class="col-lg-6 col-sm-12 mt-5" aria-label="Leit">
+  <form
+    class="col-lg-6 col-sm-12 mt-5"
+    aria-label="Leit"
+    method="get"
+    action="/baekur"
+  >
     <div class="input-group">
-      <input aria-label="Leitarorð" type="search" class="form-control form-control-lg" placeholder="Leitarorð…" aria-label="Search">
+      <input
+        class="form-control form-control-lg"
+        aria-label="Leitarorð"
+        type="search"
+        name="search"
+        placeholder="Leitarorð…"
+        <% unless params[:search].nil? %>
+        value="<%= params[:search] %>"
+        <% end %>
+      >
       <input type="submit" value="Leita" class="btn btn-lightgrey ml-2">
     </div>
   </form>
