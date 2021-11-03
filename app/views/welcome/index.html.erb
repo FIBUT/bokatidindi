@@ -3,7 +3,7 @@
   <p id="notice"><%= notice %></p>
 
   <div class="container-fluid">
-    <div class="row mx-md-5 mb-5">
+    <div class="row mx-md-5 mb-5" aria-label="Vöruflokkar">
 
       <div class="col-lg-6 col-xl-3">
         <div class="welcome-content p-4 my-2 my-lg-4">
@@ -48,42 +48,87 @@
           </ul>
         </div>
       </div>
-
     </div>
-    <div class="row mx-md-5 mb-5">
 
+    <div class="row mx-md-5 mb-5">
       <div class="col-12">
-        <div class="welcome-content p-4 py-5 my-2">
-          <!--<h3 class="mb-3">Velkomin</h3>-->
+        <div class="welcome-content p-4 py-5 my-2" aria-label="Um bókatíðindi">
           <p>
-            Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við flesta titla sem vísa inn á sölusíður útgefanda. Hér má einnig finna brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar. Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt úrval íslenskra bóka:
+            Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við
+            flesta titla sem vísa inn á sölusíður útgefanda. Hér má einnig finna
+            brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar.
+            Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt
+            úrval íslenskra bóka:
           </p>
           <div class="logo-list">
             <div class="container">
               <div class="row">
                 <div class="col-lg-2 col-md-4 col-6">
-                  <a href="https://www.boksala.is/" target="_blank" rel="external">
-                    <img height="100" width="" alt="Merki Bóksölu stúdenta" class="img-fluid" src="/assets/boksala.svg">
+                  <a
+                    href="https://www.boksala.is/"
+                    target="_blank"
+                    rel="external"
+                    title="Heimsækja vefverslun Bóksölu stúdenta"
+                  >
+                    <img
+                      alt="Bóksala stúdenta"
+                      class="img-fluid"
+                    >
                   </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
-                  <a href="https://www.forlagid.is/" target="_blank" rel="external">
-                  <img height="100" width="" alt="Merki Forlagsins" class="img-fluid" src="/assets/forlagid.svg">
+                  <a
+                    href="https://www.forlagid.is/"
+                    target="_blank"
+                    rel="external"
+                    title="Heimsækja vefverslun Forlagsins"
+                  >
+                    <img
+                      alt="Forlagið"
+                      class="img-fluid"
+                      src="<%= asset_url('forlagid.svg') %>"
+                    >
                   </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
-                  <a href="https://www.penninn.is/" target="_blank" rel="external">
-                  <img height="100" width="" alt="Merki Pennans Eymundssonar" class="img-fluid" src="/assets/penninn-eymundsson.svg">
+                  <a
+                    href="https://www.penninn.is/"
+                    target="_blank"
+                    rel="external"
+                    title="Heimsækja vefverslun Pennans-Eymundsson"
+                  >
+                    <img
+                      alt="Pennin-Eymundsson"
+                      class="img-fluid"
+                      src="<%= asset_url('penninn-eymundsson.svg') %>"
+                    >
                   </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
-                  <a href="https://www.salka.is/" target="_blank" rel="external">
-                  <img height="" width="" alt="Merki Sölku" class="img-fluid" src="/assets/salka.svg">
+                  <a
+                    href="https://www.salka.is/"
+                    target="_blank"
+                    rel="external"
+                    title="Heimsækja vefverslun Sölku útgáfu"
+                  >
+                    <img
+                      alt="Salka"
+                      class="img-fluid"
+                      src="#"
+                    >
                   </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
-                  <a href="https://www.storytel.com/is/is/" target="_blank"  rel="external">
-                  <img height="" width="" alt="Merki Storytel" class="img-fluid" src="/assets/storytel.svg">
+                  <a
+                    href="https://www.storytel.com/is/is/"
+                    target="_blank"
+                    rel="external"
+                    title="Heimsækja vefverslun Storytel"
+                  >
+                    <img
+                      alt="Storytel"
+                      class="img-fluid"
+                      src="<%= asset_url('storytel.svg') %>">
                   </a>
                 </div>
             </div>
@@ -93,5 +138,3 @@
     </div>
   </div>
 </main>
-
-
