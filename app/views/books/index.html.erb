@@ -115,7 +115,7 @@
 
   </div>
 
-  <% if @books.include? 'total_pages' %>
+  <% unless params[:search] %>
   <%= paginate @books %>
   <% end %>
 
