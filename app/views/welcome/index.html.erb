@@ -2,7 +2,6 @@
 
   <p id="notice"><%= notice %></p>
 
-  <div class="container-fluid">
     <div class="row mx-md-5" aria-label="Vöruflokkar">
 
       <div class="col-lg-6 col-xl-3 my-3">
@@ -56,7 +55,6 @@
           </div>
         </div>
       </div>
-    </div>
 
     <div class="row mx-md-5 mb-5">
       <div class="col-12">
@@ -71,20 +69,7 @@
           <div class="logo-list">
             <div class="container">
               <div class="row">
-                <div class="col-lg-2 col-md-4 col-6">
-                  <a
-                    href="https://www.boksala.is/"
-                    target="_blank"
-                    rel="external"
-                    title="Heimsækja vefverslun Bóksölu stúdenta"
-                  >
-                    <img
-                      alt="Bóksala stúdenta"
-                      class="img-fluid"
-                    >
-                  </a>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
+                <div class="col-lg-2 col-md-4 col-6 offset-xl-2">
                   <a
                     href="https://www.forlagid.is/"
                     target="_blank"
@@ -122,7 +107,7 @@
                     <img
                       alt="Salka"
                       class="img-fluid"
-                      src="#"
+                      src="<%= asset_url('salka.svg') %>"
                     >
                   </a>
                 </div>
