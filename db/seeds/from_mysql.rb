@@ -74,7 +74,8 @@ bindingtype.bindingtype_id, bindingtype.name,
 `book`.`publisher_id`,
 `publisher`.`name` AS `publisher_name`,
 `publisher`.`veffang` AS `publisher_url`,
-`book`.`Link2Store`, `book`.`Link2Sample`, `book`.`Link2Listen`
+`book`.`Link2Store`, `book`.`Link2Sample`, `book`.`Link2Listen`,
+`book`.`part_of_group`
 FROM `book`
 LEFT JOIN `publisher`
 ON `book`.`publisher_id` = `publisher`.`publisher_id`
@@ -84,7 +85,7 @@ JOIN `bookid_bindingtype_eannr`
 ON bookid_bindingtype_eannr.book_id = book.book_id
 LEFT JOIN bindingtype
 ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
-WHERE `book`.`editionid` = '#{edition_id}'
+WHERE `book`.`editionid` = '#{edition_id}' AND `book`.`isgroup` = true
 ORDER BY book_id"
 
 book_result = client.query book_query
@@ -112,19 +113,41 @@ book_result.each do |book_row|
     book = Book.joins(:book_binding_types).find_by(book_binding_types: { barcode: book_row['eannr'] })
   end
 
+  if book_row['part_of_group'].positive?
+    book_group_query = "SELECT * FROM `book` WHERE `book_id` = #{book_row['part_of_group']}"
+    book_group_result = client.query book_group_query
+
+    if book_row['pretitle'].strip.empty?
+      pre_title = book_group_result.first['title'].strip
+    end
+
+    if book_row['description'].strip.empty?
+      description = book_group_result.first['description'].strip
+    end
+
+    if book_row['description_long'].strip.empty?
+      long_description = book_group_result.first['description_long'].strip
+    end
+  else
+    pre_title        = book_row['pretitle'].strip
+    description      = book_row['description'].strip
+    long_description = book_row['description_long'].strip
+  end
+
   book ||= Book.create(
     source_id: book_row['book_id'],
-    pre_title: book_row['pretitle'].strip,
+    pre_title: pre_title.strip,
     title: book_row['title'].strip,
     post_title: book_row['posttitle'].strip,
-    description: book_row['description'].strip.gsub('>>>', '<em>').gsub('<<<', '</em>'),
-    long_description: book_row['description_long'].strip.gsub('>>>', '<em>').gsub('<<<', '</em>'),
+    description: description.gsub('>>>', '<em>').gsub('<<<', '</em>'),
+    long_description: long_description.gsub('>>>', '<em>').gsub('<<<', '</em>'),
     page_count: book_row['nr_of_pages'],
     publisher_id: publisher['id'],
     uri_to_buy: secure_and_validate_uri_string(book_row['Link2Store']),
     uri_to_sample: secure_and_validate_uri_string(book_row['Link2Sample']),
     uri_to_audiobook: secure_and_validate_uri_string(book_row['Link2Listen'])
   )
+
 
   book_category = BookCategory.find_by(book_id: book.id, category_id: category.id)
   book_category ||= BookCategory.create(
@@ -197,7 +220,7 @@ book_result.each do |book_row|
     )
   end
 
-  puts "#{['📗','📘','📙'].sample} Book: #{book.id}/#{book.slug} - #{category.name}"
+  puts "#{['📗','📘','📙'].sample} Book: #{book.id} - #{book.slug} - #{book.full_title} - #{category.name}"
 end
 
 puts "#{['😎','😊','🎉','🥂'].sample} #{Book.all.count} books imported!"
