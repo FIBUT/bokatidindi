@@ -14,16 +14,28 @@ class BooksController < ApplicationController
       ).includes(cover_image_attachment: [:blob])
 
       if params[:category]
+        unless Category.find_by(slug: params[:category])
+          render file: 'public/404.html', status: 404, layout: false
+        end
+
         @books = @books.joins(:categories).where(
           book_categories: { categories: { slug: params[:category] } }
         )
         @category = Category.find_by(slug: params[:category])
       end
       if params[:publisher]
+        unless Category.find_by(slug: params[:publisher])
+          render file: 'public/404.html', status: 404, layout: false
+        end
+
         @books = @books.where(publishers: { slug: params[:publisher] })
         @publisher = Publisher.find_by(slug: params[:publisher])
       end
       if params[:author]
+        unless Category.find_by(slug: params[:author])
+          render file: 'public/404.html', status: 404, layout: false
+        end
+
         @books = @books.where(authors: { slug: params[:author] })
         @author = Author.find_by(slug: params[:author])
       end
@@ -39,6 +51,9 @@ class BooksController < ApplicationController
                     end
 
     @book = Book.find_by(slug: params[:slug])
-  end
 
+    unless @book
+      render file: 'public/404.html', status: 404, layout: false
+    end
+  end
 end
