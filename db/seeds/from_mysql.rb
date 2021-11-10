@@ -95,7 +95,6 @@ ORDER BY book_id"
 book_result = client.query book_query
 
 book_result.each do |book_row|
-  puts '!!!!!! DING DING DING !!!!!!!!' if book_row['book_id'] == 16_766
   publisher = Publisher.find_by source_id: book_row['publisher_id']
 
   publisher ||= Publisher.create(
@@ -192,7 +191,7 @@ book_result.each do |book_row|
   FROM `isWrittenBy`
   INNER JOIN `author` ON `author`.`author_id` = `isWrittenBy`.`author_id`
   INNER JOIN `authorType` ON `isWrittenBy`.`authorType_id` = `authorType`.`authorType_id`
-  WHERE book_id = ' + book_row['book_id'].to_s
+  WHERE book_id = ' + book_row['book_id'].to_s + ' AND `isWrittenBy`.authorType_id != 11'
 
   book_author_result = client.query book_author_query
 
