@@ -26,11 +26,13 @@ rescue URI::InvalidURIError
   escaped_uri
 end
 
-puts '⬇️  Getting the database dump from bokatidindi.oddi.is'
-gzipped_dump      = URI.open(http_url, http_basic_authentication: [http_username,http_password])
-uncompressed_dump = ActiveSupport::Gzip.decompress(gzipped_dump.read)
+unless ENV['SKIP_DUMP']
+  puts '⬇️  Getting the database dump from bokatidindi.oddi.is'
+  gzipped_dump      = URI.open(http_url, http_basic_authentication: [http_username,http_password])
+  uncompressed_dump = ActiveSupport::Gzip.decompress(gzipped_dump.read)
 
-puts "🕓 The remote database dump was created at: #{gzipped_dump.meta['last-modified']}"
+  puts "🕓 The remote database dump was created at: #{gzipped_dump.meta['last-modified']}"
+end
 
 puts '🔗 Connecting to MySQL/MariaDB server'
 client = Mysql2::Client.new(
@@ -39,10 +41,12 @@ client = Mysql2::Client.new(
   flags: Mysql2::Client::MULTI_STATEMENTS
 )
 
-puts '✍️  Writing MySQL dump into the MySQL/MariaDB server'
-client.query(uncompressed_dump)
-while client.next_result
-  client.store_result
+unless ENV['SKIP_DUMP']
+  puts '✍️  Writing MySQL dump into the MySQL/MariaDB server'
+  client.query(uncompressed_dump)
+  while client.next_result
+    client.store_result
+  end
 end
 
 puts '🚢 Migrating the MySQL/MariaDB data to the ActiveRecord/Postgres database'
@@ -85,12 +89,13 @@ JOIN `bookid_bindingtype_eannr`
 ON bookid_bindingtype_eannr.book_id = book.book_id
 LEFT JOIN bindingtype
 ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
-WHERE `book`.`editionid` = '#{edition_id}' AND `book`.`isgroup` = true
+WHERE `book`.`editionid` = '#{edition_id}' AND `book`.`isgroup` = '0'
 ORDER BY book_id"
 
 book_result = client.query book_query
 
 book_result.each do |book_row|
+  puts '!!!!!! DING DING DING !!!!!!!!' if book_row['book_id'] == 16_766
   publisher = Publisher.find_by source_id: book_row['publisher_id']
 
   publisher ||= Publisher.create(
