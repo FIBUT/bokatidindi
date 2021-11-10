@@ -2,7 +2,7 @@ class AuthorType < ApplicationRecord
   PLURALS = {
     'Höfundur': 'Höfundar',
     'Þýðandi': 'Þýðendur',
-    'Ritstjóri': 'Ritsjórar'
+    'Ritstjóri': 'Ritstjórar'
   }.freeze
 
   def plural_name
