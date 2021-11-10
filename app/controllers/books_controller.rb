@@ -24,7 +24,7 @@ class BooksController < ApplicationController
         @category = Category.find_by(slug: params[:category])
       end
       if params[:publisher]
-        unless Category.find_by(slug: params[:publisher])
+        unless Publisher.find_by(slug: params[:publisher])
           render file: 'public/404.html', status: 404, layout: false
         end
 
@@ -32,7 +32,7 @@ class BooksController < ApplicationController
         @publisher = Publisher.find_by(slug: params[:publisher])
       end
       if params[:author]
-        unless Category.find_by(slug: params[:author])
+        unless Author.find_by(slug: params[:author])
           render file: 'public/404.html', status: 404, layout: false
         end
 
