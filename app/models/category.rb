@@ -28,9 +28,11 @@ class Category < ApplicationRecord
 
   def name_with_group
     mapped_name = NAME_MAPPINGS.find { |c| c[:source_id] == source_id }
-    return "#{mapped_name[:group_h]} - #{mapped_name[:name]}" unless mapped_name.nil?
+    return origin_name if mapped_name.nil?
 
-    origin_name
+    return mapped_name[:name].to_s unless mapped_name[:group] == 'barnabaekur'
+
+    return "#{mapped_name[:group_h]} - #{mapped_name[:name]}"
   end
 
   def books_url

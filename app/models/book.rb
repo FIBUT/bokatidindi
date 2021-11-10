@@ -34,6 +34,14 @@ class Book < ApplicationRecord
 
   before_create :set_slug
 
+  def binding_types_string
+    binding_type_names = []
+    binding_types.each do |b|
+      binding_type_names << b.name
+    end
+    binding_type_names.to_sentence
+  end
+
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
     uri.host.delete_prefix('www.')
@@ -155,8 +163,8 @@ class Book < ApplicationRecord
     links = []
     categories.each do |c|
       links << link_to(
-        c.name, "/baekur/?category=#{c.slug}",
-        title: "Skoða fleiri bækur í flokknum #{c.name}",
+        c.name_with_group, "/baekur/?category=#{c.slug}",
+        title: "Skoða fleiri bækur í flokknum #{c.name}"
       )
     end
     links.to_sentence
