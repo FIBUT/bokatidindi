@@ -37,9 +37,9 @@ class Book < ApplicationRecord
   def binding_types_string
     binding_type_names = []
     binding_types.each do |b|
-      binding_type_names << b.name
+      binding_type_names << b.corrected_name
     end
-    binding_type_names.to_sentence
+    binding_type_names.uniq.to_sentence.downcase.capitalize
   end
 
   def domain_to_buy
