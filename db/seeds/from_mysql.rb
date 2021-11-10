@@ -118,10 +118,10 @@ book_result.each do |book_row|
     book = Book.joins(:book_binding_types).find_by(book_binding_types: { barcode: book_row['eannr'] })
   end
 
-  if book_row['part_of_group'].positive?
-    book_group_query = "SELECT * FROM `book` WHERE `book_id` = #{book_row['part_of_group']}"
-    book_group_result = client.query book_group_query
+  book_group_query = "SELECT * FROM `book` WHERE `book_id` = #{book_row['part_of_group']}"
+  book_group_result = client.query book_group_query
 
+  if book_row['part_of_group'].positive? && book_group_result.first
     if book_row['pretitle'].strip.empty?
       pre_title = book_group_result.first['title'].strip
     end
