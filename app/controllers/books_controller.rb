@@ -1,10 +1,6 @@
 class BooksController < ApplicationController
   def index
-    @image_format = if browser.ie?
-                      'jpg'
-                    else
-                      'webp'
-                    end
+    @image_format = image_format
 
     if params[:search]
       @books = Book.search(params[:search])
@@ -44,16 +40,23 @@ class BooksController < ApplicationController
   end
 
   def show
-    @image_format = if browser.ie?
-                      'jpg'
-                    else
-                      'webp'
-                    end
+    @image_format = image_format
 
     @book = Book.find_by(slug: params[:slug])
 
     unless @book
       render file: 'public/404.html', status: 404, layout: false
     end
+  end
+
+  private
+
+  def image_format
+    return 'jpg' if browser.ie?
+    return 'jpg' if browser.safari? && browser.platform.mac?('<11.6')
+    return 'jpg' if browser.platform.ios?('<14')
+    return 'jpg' if browser.platform.kai_os?
+
+    'webp'
   end
 end
