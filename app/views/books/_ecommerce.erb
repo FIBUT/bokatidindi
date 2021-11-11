@@ -32,7 +32,11 @@
       href="<%= local_assigns[:book].uri_to_audiobook %>"
       target="_blank"
     >
+      <% if local_assigns[:book].domain_to_audiobook == 'storytel.com' %>
       Hljóðbók og rafbók á <%= local_assigns[:book].domain_to_audiobook %>
+      <% else %>
+      Hljóðbók á <%= local_assigns[:book].domain_to_audiobook %>
+      <% end %>
     </a>
   </li>
   <% end %>
