@@ -10,7 +10,7 @@ class Book < ApplicationRecord
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
 
-  multisearchable against: [:pre_title, :title, :post_title, :description, :long_description]
+  multisearchable against: [:pre_title, :title_noshy, :post_title, :description, :long_description]
 
   pg_search_scope :search,
     against: SEARCH_COLUMNS, associated_against: {
@@ -32,7 +32,7 @@ class Book < ApplicationRecord
 
   paginates_per 18
 
-  before_create :set_slug
+  before_create :set_title_noshy, :set_slug
 
   def binding_types_string
     binding_type_names = []
@@ -203,6 +203,10 @@ class Book < ApplicationRecord
 
   private
 
+  def set_title_noshy
+    self.title_noshy = title.gsub('&shy;', '')
+  end
+
   def author_group_name_plural(count, singular, plural)
     return singular if count == 1
 
@@ -227,7 +231,7 @@ class Book < ApplicationRecord
   end
 
   def set_slug
-    parameterized_title = title.parameterize(locale: :is).first(64)
+    parameterized_title = title_noshy.parameterize(locale: :is).first(64)
     parameterized_title = parameterized_title.chop if parameterized_title.end_with?('-')
     self.slug = "#{parameterized_title}-#{source_id}"
   end
