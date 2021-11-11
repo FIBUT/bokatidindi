@@ -3,37 +3,48 @@ class BooksController < ApplicationController
     @image_format = image_format
 
     if params[:search]
+      @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
       @books = Book.search(params[:search])
     else
+      @title_tag = "Bókatíðindi"
       @books = Book.order(:title).eager_load(
         :book_authors, :authors, :publisher, :book_categories, :book_binding_types
       ).includes(cover_image_attachment: [:blob])
 
       if params[:category]
-        unless Category.find_by(slug: params[:category])
+        @category = Category.find_by(slug: params[:category])
+        unless @category
           render file: 'public/404.html', status: 404, layout: false
         end
+
+        @title_tag << " - Flokkur - #{@category.name_with_group}"
+        @meta_description = "Bækur í vöruflokknum #{@category.name_with_group}"
 
         @books = @books.joins(:categories).where(
           book_categories: { categories: { slug: params[:category] } }
         )
-        @category = Category.find_by(slug: params[:category])
       end
       if params[:publisher]
-        unless Publisher.find_by(slug: params[:publisher])
+        @publisher = Publisher.find_by(slug: params[:publisher])
+        unless @publisher
           render file: 'public/404.html', status: 404, layout: false
         end
+
+        @title_tag << " - Útgefandi - #{@publisher.name}"
+        @meta_description = "Bækur frá útgefandanum #{@publisher.name}"
 
         @books = @books.where(publishers: { slug: params[:publisher] })
-        @publisher = Publisher.find_by(slug: params[:publisher])
       end
       if params[:author]
-        unless Author.find_by(slug: params[:author])
+        @author = Author.find_by(slug: params[:author])
+        unless @author
           render file: 'public/404.html', status: 404, layout: false
         end
 
+        @title_tag << " - Höfundur - #{@author.name}"
+        @meta_description = "Bækur eftir höfundinn #{@author.name}"
+
         @books = @books.where(authors: { slug: params[:author] })
-        @author = Author.find_by(slug: params[:author])
       end
       @books = @books.page params[:page]
     end
