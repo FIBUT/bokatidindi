@@ -80,6 +80,15 @@ $container-max-widths: (
 
 // Allt annað hér
 
+body {
+  display: grid;
+  min-height: 100vh;
+}
+
+main {
+  min-height: calc(100vh - 450px);
+}
+
 .book {
 
   hgroup {
@@ -154,6 +163,7 @@ $container-max-widths: (
 }
 
 .footer-container {
+  grid-row: 3;
   background-color: $footer-bg;
   color: #fff;
   h2, h3 {
