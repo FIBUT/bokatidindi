@@ -3,55 +3,22 @@
 
     <div class="row">
 
-      <div class="col-12 col-md order-12">
-        <h2>Bókatíðindi 2021</h2>
-        <ul class="list-unstyled text-small">
-          <li class="my-2"><strong>Félag Íslenskra Bókaútgefenda</strong></a></li>
-          <li class="my-2">Barónstíg 5<br>101 Reykjavík</li>
-          <li class="my-2">Sími: <a href="tel:5118020">511 8020</a></li>
-          <li class="my-2"><a href="https://www.fibut.is">www.fibut.is</a></li>
-        </ul>
+      <div class="col-12 col-lg-8 col-xl-6 order-2">
+        <address class="adr text-lg-right">
+          Félag íslenskra Bókaútgefenda<br>
+          <span class="street-address">Barónstíg 5</span> -
+          <span class="postal-code">101</span> <span class="locality">Reykjavík</span> -
+          Sími <a href="tel:5118020">511 8020</a></li> -
+          <a rel="external" target="_blank" href="https://www.fibut.is">www.fibut.is</a>
+        </address>
       </div>
 
-      <div class="col-6 col-md">
-        <h3>Barnabækur</h3>
-        <ul class="list-unstyled text-small">
-          <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
-          <li class="my-2">
-            <%= link_to c.name, c.books_url %>
-          </li>
-          <% end %>
+      <nav class="col-12 col-lg-4 col-xl-6">
+        <ul class="list-unstyled">
+          <li><a href="/pages/um_bokatidindi">Um Bókatíðindi 2021</a></li>
+          <li><a href="/pages/privacy_policy">Köku- og friðhelgisstefna</a></li>
         </ul>
-      </div>
-
-      <div class="col-6 col-md">
-        <h3>Skáldverk</h3>
-        <ul class="list-unstyled text-small">
-          <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
-          <li class="my-2">
-            <%= link_to c.name, c.books_url %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-
-      <div class="col-6 col-md">
-        <h3>Fræðibækur</h3>
-        <ul class="list-unstyled text-small">
-          <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
-          <li class="my-2">
-            <%= link_to c.name, c.books_url %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-
-      <div class="col-6 col-md">
-        <h3>Ævisögur</h3>
-        <ul class="list-unstyled text-small">
-          <li class="my-2"><a href="#">Ævisögur</a></li>
-        </ul>
-      </div>
+      </nav>
     </div>
   </div>
 </footer>

@@ -155,6 +155,7 @@ $container-max-widths: (
 
 .footer-container {
   background-color: $footer-bg;
+  color: #fff;
   h2, h3 {
     font-size: $font-size-lg;
     color: $white;
@@ -165,6 +166,7 @@ $container-max-widths: (
   }
   a {
     color: $body-bg;
+    font-weight: $font-weight-bold;
   }  
 }
 
