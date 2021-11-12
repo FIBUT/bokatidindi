@@ -4,9 +4,9 @@
   aria-label="Upplýsingar um bók"
 >
 
+  <% if action_name == 'show' %>
   <li
     class="book-meta-publisher d-block font-weight-bold pb-1"
-    aria-label="Útgefandi"
     aria-labelledby="book-meta-publisher-label<%= local_assigns[:book].id %>"
   >
     <strong
@@ -18,6 +18,18 @@
       title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
     %>
   </li>
+  <% else %>
+    <li
+    class="book-meta-publisher d-block font-weight-bold pb-1"
+    aria-label="Útgefandi"
+  >
+    <%=
+      link_to local_assigns[:book].publisher.name,
+      "/baekur/?publisher=#{local_assigns[:book].publisher.slug}",
+      title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
+    %>
+  </li>
+  <% end %>
 
   <li
     class="book-meta-category d-block pb-1"

@@ -1,0 +1,20 @@
+<% if local_assigns[:book].authors_brief.count > 0 %>
+<ul
+  class="book-authors d-block pl-0"
+  aria-label="Höfundar"
+>
+  <% local_assigns[:book].authors_brief.each_with_index do |a,i| %>
+  <li
+    id="book-<%= local_assigns[:book].id %>-authors--<%= i %>"
+    class="authors mb-1 d-block"
+  >
+    <a
+      href="<%= "/baekur/?author=#{a.author.slug}" %>"
+      title="Skoða fleiri bækur eftir <%= a.name %>"
+    >
+      <%= a.name %>
+    </a>
+  </li>
+  <% end %>
+</ul>
+<% end %>

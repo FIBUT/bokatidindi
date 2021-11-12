@@ -190,6 +190,10 @@ class Book < ApplicationRecord
   end
 
   def full_title_with_author
+    "#{full_title} - #{author_names_string}"
+  end
+
+  def author_names_string
     author_names = []
     selected_book_authors = book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
     return full_title if selected_book_authors.empty?
@@ -198,7 +202,11 @@ class Book < ApplicationRecord
       author_names << a.author.name
     end
 
-    "#{full_title} - #{author_names.to_sentence}"
+    author_names.to_sentence
+  end
+
+  def authors_brief
+    book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
   end
 
   private
