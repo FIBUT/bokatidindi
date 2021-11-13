@@ -8,6 +8,7 @@ namespace :bt do
         else
           puts "❌ #{b.slug}: Image not found at #{b.original_cover_bucket_url}"
         end
+        GC.start
       end
     end
   end
