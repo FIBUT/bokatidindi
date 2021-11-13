@@ -199,9 +199,17 @@ main {
   }
 }
 
+@include media-breakpoint-down(lg) {
+  .logo-list figure {
+    width: calc(20% - 66px);
+    margin: 33px 15px;
+  }
+}
+
 @include media-breakpoint-down(md) {
   .logo-list figure {
-    width: calc(33% - 66px);
+    display: block !important;
+    width: 100%;
     margin: 33px auto;
   }
 }
