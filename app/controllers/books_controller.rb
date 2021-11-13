@@ -5,6 +5,9 @@ class BooksController < ApplicationController
     if params[:search]
       @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
       @books = Book.search(params[:search])
+      if @books.length == 1
+        redirect_to book_path(@books.first.slug)
+      end
     else
       @title_tag = "Bókatíðindi"
       @books = Book.order(:title).eager_load(
