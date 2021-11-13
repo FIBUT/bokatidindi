@@ -187,23 +187,23 @@ main {
 }
 
 .logo-list{
-  padding: 20px 0;
   text-align: center;
+  figure {
+    width: calc(20% - 80px);
+    max-width: 200px;
+    margin: 33px;
+    transition: all 0.1s ease-in-out;
+  }
+  figure:hover {
+    transform: scale(1.05);
+  }
 }
 
-.logo-list .row {
-  align-items: center;
-}
-
-.logo-list img {
-  display: inline-block;
-  max-width: 85%;
-  padding: 15px 0;
-  transition: all 0.3s ease-in-out;
-  vertical-align: middle;
-}
-.logo-list img:hover {
-  transform: scale(1.1)
+@include media-breakpoint-down(md) {
+  .logo-list figure {
+    width: calc(33% - 66px);
+    margin: 33px auto;
+  }
 }
 
 .footer-container {
