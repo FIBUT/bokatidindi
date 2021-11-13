@@ -14,7 +14,7 @@
     >Útgefandi</strong>
     <%=
       link_to local_assigns[:book].publisher.name,
-      "/baekur/?publisher=#{local_assigns[:book].publisher.slug}",
+      publisher_path(local_assigns[:book].publisher.slug),
       title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
     %>
   </li>
@@ -25,7 +25,7 @@
   >
     <%=
       link_to local_assigns[:book].publisher.name,
-      "/baekur/?publisher=#{local_assigns[:book].publisher.slug}",
+      publisher_path(local_assigns[:book].publisher.slug),
       title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
     %>
   </li>

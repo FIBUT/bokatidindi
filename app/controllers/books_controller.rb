@@ -9,7 +9,7 @@ class BooksController < ApplicationController
         return redirect_to book_path(@books.first.slug)
       end
     else
-      @title_tag = "Bókatíðindi"
+      @title_tag = 'Bókatíðindi'
       @books = Book.order(:title).eager_load(
         :book_authors, :authors, :publisher, :book_categories, :book_binding_types
       ).includes(cover_image_attachment: [:blob])

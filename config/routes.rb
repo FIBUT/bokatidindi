@@ -4,7 +4,18 @@ Rails.application.routes.draw do
   get 'pages/um_bokatidindi'
   get 'pages/privacy_policy'
 
-  resources :books, path: 'baekur', only: [:index]
-  resources :books, path: 'bok', param: :slug, only: [:show]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'baekur/', to: 'books#index'
+
+  get 'baekur/flokkur/:category', to: 'books#index', as: 'category'
+  get 'baekur/flokkur/:category/sida/:page', to: 'books#index'
+
+  get 'baekur/utgefandi/:publisher', to: 'books#index', as: 'publisher'
+  get 'baekur/utgefandi/:publisher/sida/:page', to: 'books#index'
+
+  get 'baekur/hofundur/:author', to: 'books#index', as: 'author'
+  get 'baekur/hofundur/:author/sida/:page', to: 'books#index'
+
+  get 'baekur/leit/:search', to: 'books#index'
+
+  get 'bok/:slug', to: 'books#show', as: 'book'
 end

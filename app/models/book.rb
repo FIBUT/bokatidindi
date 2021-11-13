@@ -163,7 +163,7 @@ class Book < ApplicationRecord
     links = []
     categories.each do |c|
       links << link_to(
-        c.name_with_group, "/baekur/?category=#{c.slug}",
+        c.name_with_group, "/baekur/flokkur/#{c.slug}",
         title: "Skoða fleiri bækur í flokknum #{c.name}"
       )
     end
@@ -230,7 +230,7 @@ class Book < ApplicationRecord
         authors.map do |a|
           link_to(
             a.name,
-            "/baekur/?author=#{a.author.slug}",
+            "/baekur/hofundur/#{a.author.slug}",
             class: 'author-link'
           )
         end

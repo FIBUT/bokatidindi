@@ -32,11 +32,7 @@ class Category < ApplicationRecord
 
     return mapped_name[:name].to_s unless mapped_name[:group] == 'barnabaekur'
 
-    return "#{mapped_name[:group_h]} - #{mapped_name[:name]}"
-  end
-
-  def books_url
-    "/baekur/?category=#{slug}"
+    "#{mapped_name[:group_h]} - #{mapped_name[:name]}"
   end
 
   private

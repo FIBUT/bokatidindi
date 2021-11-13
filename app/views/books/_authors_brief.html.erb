@@ -9,7 +9,7 @@
     class="authors mb-1 d-block"
   >
     <a
-      href="<%= "/baekur/?author=#{a.author.slug}" %>"
+      href="<%= author_path(a.author.slug) %>"
       title="Skoða fleiri bækur eftir <%= a.name %>"
     >
       <%= a.name %>
