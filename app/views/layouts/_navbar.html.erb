@@ -1,4 +1,4 @@
-<nav aria-label="Aðalvalmynd" class="navbar col-12 navbar-expand-md mt-3">
+<nav aria-label="Aðalvalmynd" class="navbar order-4 d-none d-sm-block col-12 navbar-expand-md mt-3">
   <ul class="navbar-nav">
     <li class="nav-item dropdown">
       <a
@@ -53,6 +53,50 @@
     </li>
     <li class="nav-item">
       <%= link_to 'Ævisögur', "/baekur/?category=aevisogur", class: 'nav-link' %>
+    </li>
+  </ul>
+</nav>
+
+<nav id="mobile-menu" aria-label="Aðalvalmynd" class="d-none">
+  <button id="mobile-menu-close-button" class="btn btn-lightgrey" aria-label="Loka valmynd">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+      <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+    </svg>
+  </button>
+  <ul class="nav-list list-unstyled mx-5">
+    <li>
+      <strong>Barnabækur</strong>
+      <ul class="sub-nav-list list-unstyled mb-5">
+        <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
+        <li class="my-3">
+          <%= link_to c.name, c.books_url, class: '' %>
+        </li>
+        <% end %>
+      </ul>
+    </li>
+    <li>
+      <strong>Skáldverk</strong>
+      <ul class="sub-nav-list list-unstyled mb-5">
+        <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
+        <li class="my-3">
+          <%= link_to c.name, c.books_url, class: '' %>
+        </li>
+        <% end %>
+      </ul>
+    </li>
+    <li>
+      <strong>Fræðibækur</strong>
+      <ul class="sub-nav-list list-unstyled mb-5">
+        <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
+        <li class="my-3">
+          <%= link_to c.name, c.books_url, class: '' %>
+        </li>
+        <% end %>
+      </ul>
+    </li>
+    <li>
+      <%= link_to 'Ævisögur', "/baekur/?category=aevisogur", class: '' %>
     </li>
   </ul>
 </nav>

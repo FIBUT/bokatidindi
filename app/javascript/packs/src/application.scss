@@ -89,6 +89,35 @@ main {
   min-height: calc(100vh - 450px);
 }
 
+#mobile-menu {
+  background-color: theme-color('darkgrey');
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 1000;
+  a {
+    color: theme-color('lightgrey');
+    text-decoration: underline;
+  }
+  strong {
+    color: $white;
+  }
+  .nav-list {
+    margin-top: 120px;
+  }
+  .sub-nav-list {
+    margin-bottom: 1.2em;
+  }
+}
+
+#mobile-menu-close-button {
+  position: fixed;
+  right: 30px;
+  top: 30px;
+}
+
 .book {
 
   hgroup {
@@ -171,7 +200,7 @@ main {
 .footer-container {
   grid-row: 3;
   background-color: $footer-bg;
-  color: #fff;
+  color: $white;
   h2, h3 {
     font-size: $font-size-lg;
     color: $white;
