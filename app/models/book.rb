@@ -75,28 +75,33 @@ class Book < ApplicationRecord
     image_uri  = URI.parse(original_cover_bucket_url)
     response   = Net::HTTP.get_response(image_uri)
 
-    if response.is_a?(Net::HTTPSuccess)
-      cover_image.attach(
-        io: StringIO.new(response.body), filename: "#{id}.jpg"
-      )
-      attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
-      return true
-    else
-      return false
-    end
+    return false unless response.is_a?(Net::HTTPSuccess)
+
+    attach_cover_image_from_string(response.body) if response.is_a?(Net::HTTPSuccess)
+    true
+  end
+
+  def attach_cover_image_from_string(string)
+    cover_image.attach(io: StringIO.new(string), filename: "#{id}.jpg")
+    attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
   end
 
   def attach_cover_image_variants
-    cover_image.variant(quality: IMAGE_QUALITY, format: 'webp').process
-    cover_image.variant(quality: IMAGE_QUALITY, format: 'jpeg').process
+    attach_cover_image_variant('webp')
+    attach_cover_image_variant('jpg')
     COVER_IMAGE_VARIANTS.each do |v|
-      cover_image.variant(
-        resize: v, quality: IMAGE_QUALITY, format: 'webp'
-      ).process
-      cover_image.variant(
-        resize: v, quality: IMAGE_QUALITY, format: 'jpeg'
+      attach_cover_image_variant('webp', v)
+      attach_cover_image_variant('jpg', v)
+    end
+  end
+
+  def attach_cover_image_variant(format, width = nil)
+    if width
+      return cover_image.variant(
+        resize: width, quality: IMAGE_QUALITY, format: format
       ).process
     end
+    cover_image.variant(quality: IMAGE_QUALITY, format: format).process
   end
 
   def cover_image_variant_url(width, format = 'webp')
