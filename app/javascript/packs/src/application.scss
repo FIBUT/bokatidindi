@@ -124,8 +124,17 @@ main {
     word-break: break-word;
   }
 
-  .title { font-weight: $font-weight-bold; }
-  .pre-title, .post-title { font-size: 1.2em; }
+  .title {
+    font-weight: $font-weight-bold;
+    font-size: 1.2em;
+  }
+  .book-description {
+    font-size: 0.8em;
+  }
+  ul li {
+    font-size: 0.8em;
+  }
+  .pre-title, .post-title { font-size: 0.8em; }
 
   .book-column-container {
     background-color: $white;
