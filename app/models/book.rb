@@ -141,10 +141,10 @@ class Book < ApplicationRecord
 
   def short_description
     if description.empty?
-      return long_description.truncate(128).html_safe
+      return long_description.truncate(256).html_safe
     end
 
-    description.truncate(128).html_safe
+    description.truncate(383).html_safe
   end
 
   def hours
