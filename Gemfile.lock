@@ -63,6 +63,9 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
+    barnes (0.0.9)
+      multi_json (~> 1)
+      statsd-ruby (~> 1.1)
     bindex (0.8.1)
     bootsnap (1.9.1)
       msgpack (~> 1.0)
@@ -286,6 +289,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    statsd-ruby (1.5.0)
     thor (1.1.0)
     thwait (0.2.0)
       e2mmap
@@ -324,6 +328,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  barnes
   bootsnap (>= 1.4.4)
   browser
   byebug
