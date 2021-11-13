@@ -81,29 +81,6 @@ class Book < ApplicationRecord
     true
   end
 
-  def attach_cover_image_from_string(string)
-    cover_image.attach(io: StringIO.new(string), filename: "#{id}.jpg")
-    attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
-  end
-
-  def attach_cover_image_variants
-    attach_cover_image_variant('webp')
-    attach_cover_image_variant('jpg')
-    COVER_IMAGE_VARIANTS.each do |v|
-      attach_cover_image_variant('webp', v)
-      attach_cover_image_variant('jpg', v)
-    end
-  end
-
-  def attach_cover_image_variant(format, width = nil)
-    if width
-      return cover_image.variant(
-        resize: width, quality: IMAGE_QUALITY, format: format
-      ).process
-    end
-    cover_image.variant(quality: IMAGE_QUALITY, format: format).process
-  end
-
   def cover_image_variant_url(width, format = 'webp')
     cover_variant = cover_image.variant(
       resize: width, quality: IMAGE_QUALITY, format: format
@@ -215,6 +192,29 @@ class Book < ApplicationRecord
   end
 
   private
+
+  def attach_cover_image_from_string(string)
+    cover_image.attach(io: StringIO.new(string), filename: "#{id}.jpg")
+    attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
+  end
+
+  def attach_cover_image_variants
+    attach_cover_image_variant('webp')
+    attach_cover_image_variant('jpg')
+    COVER_IMAGE_VARIANTS.each do |v|
+      attach_cover_image_variant('webp', v)
+      attach_cover_image_variant('jpg', v)
+    end
+  end
+
+  def attach_cover_image_variant(format, width = nil)
+    if width
+      return cover_image.variant(
+        resize: width, quality: IMAGE_QUALITY, format: format
+      ).process
+    end
+    cover_image.variant(quality: IMAGE_QUALITY, format: format).process
+  end
 
   def set_title_noshy
     self.title_noshy = title.gsub('&shy;', '')
