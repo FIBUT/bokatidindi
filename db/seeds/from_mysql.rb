@@ -58,9 +58,14 @@ ORDER BY rod ASC, name ASC"
 binding_type_result = client.query binding_type_query
 
 binding_type_result.each do |binding_type_row|
+  if binding_type_row['name'].strip == 'Harðspjalda bók 0-2 ára'
+    binding_type_name = 'Harðspjaldabók'
+  else
+    binding_type_name = binding_type_row['name'].strip
+  end
   BindingType.create(
     source_id: binding_type_row['source_id'],
-    name: binding_type_row['name'].strip,
+    name: binding_type_name,
     rod: binding_type_row['rod'],
     open: binding_type_row['open']
   )
