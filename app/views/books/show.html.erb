@@ -1,4 +1,10 @@
 <% content_for :meta do %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/boksala-square.svg' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/forlagid-square.svg' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/penninn-eymundsson-square.svg' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/salka-square.svg' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/storytel-square.svg' %>
+
   <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
 
   <%= tag 'meta', name: 'description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
