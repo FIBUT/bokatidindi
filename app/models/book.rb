@@ -172,13 +172,15 @@ class Book < ApplicationRecord
   end
 
   def full_title_with_author
-    "#{full_title} - #{author_names_string}"
+    return "#{full_title} - #{author_names_string}" if author_names_string
+
+    full_title
   end
 
   def author_names_string
     author_names = []
     selected_book_authors = book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
-    return full_title if selected_book_authors.empty?
+    return nil if selected_book_authors.empty?
 
     selected_book_authors.each do |a|
       author_names << a.author.name
