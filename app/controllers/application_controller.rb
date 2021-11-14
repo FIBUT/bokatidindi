@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def redirect_root_domain
-    return nil unless request.host == 'bokatidindi.is'
+    return nil unless request.host == 'bokatidindi.is' || request.host == 'bokatidindi-staging.herokuapp.com'
 
     redirect_to(
       "#{request.protocol}www.bokatidindi.is#{request.fullpath}",
