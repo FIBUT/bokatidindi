@@ -11,100 +11,17 @@
 
   <div class="container-fluid">
 
-    <div class="row">
-      <div class="col-12 pl-5 pb-3">
-        <% unless params[:publisher] || params[:category] || params[:author] || params[:search] %>
-          <h1>Allar bækur</h1>
-        <% else %>
-          <h1>Niðurstöður</h1>
-        <ul class="d-block p-0">
-          <% unless params[:author].nil? %>
-          <li class="d-inline-block badge badge-darkgrey">
-            <%= @author.name %>
-          </li>
-          <% end %>
-          <% unless params[:publisher].nil? %>
-          <li class="d-inline-block badge badge-darkgrey">
-            <%= @publisher.name %>
-          </li>
-          <% end %>
-          <% unless params[:category].nil? %>
-          <li class="d-inline-block badge badge-darkgrey">
-            <%= @category.name_with_group %>
-          </li>
-          <% end %>
-          <% unless params[:search].nil? %>
-          <li class="d-inline-block badge badge-darkgrey">
-            <%= params[:search] %>
-          </li>
-          <% end %>
-        </ul>
-        <% end %>
-      </div>
-    </div>
+    <% if @books.length.positive? %>
 
-    <div class="row">
+    <%= render 'books/results_heading' %>
 
-      <% @books.each do |book| %>
-      <section
-        id="book-<%= book.id %>"
-        class="book col-xl-4 col-md-6"
-        aria-labelledby="book-<%= book.id %>-hgroup"
-      >
+    <%= render 'books/results' %>
 
-        <div class="row book-column-container m-2 p-2 pb-4">
+    <% else %>
 
-          <div class="col-sm-8 offset-sm-2 offset-md-0 col-md-12 col-xl-6 mt-2 px-5 px-xl-2" aria-hidden="true">
-            <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
-              <figure class="figure mt-4">
-                <img
-                  src="<%= book.cover_image_url %>"
-                  <% if book.cover_image.attached? %>
-                  height="<%= book.cover_image.metadata[:height] %>"
-                  width="<%= book.cover_image.metadata[:width] %>"
-                  srcset="<%= book.cover_img_srcset(@image_format) %>"
-                  <% end %>
-                  class="img-fluid"
-                  loading="lazy"
-                >
-              </figure>
-            </a>
-          </div>
-
-          <div class="content-column col-xl-6 pt-xl-3">
-
-            <a href="<%= book_path(book.slug) %>">
-            <%= render 'books/hgroup', book: book %>
-            </a>
-
-            <%= render 'books/authors_brief', book: book %>
-            
-            <% unless book.description.empty? %>
-
-              <p
-                aria-label="Lýsing"
-                class="book-description overflow-hidden"
-              >
-                <%= sanitize book.short_description, tags: ['em'] %>
-              </p>
-
-            <% end %>
-
-            <%= render 'books/meta', book: book %>
-
-            <div class="more-button text-right mt-4">
-              <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary" %>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
+    <%= render 'books/no_results' %>
 
     <% end %>
-
-    </div>
 
   </div>
 

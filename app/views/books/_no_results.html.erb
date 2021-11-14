@@ -1,0 +1,38 @@
+<div class="row m-2 p-2 pb-4">
+  <div class="col-12 col-xl-10">
+
+    <h1 class="mb-4">Þetta er ekki alveg að virka — prófum aftur</h1>
+
+    <p>
+      Því miður fannst ekkert við leit eftir <%= @plural_query_label %>
+      <span class="badge badge-darkgrey"><%= params[:search] %></span>.
+    </p>
+    <p>
+      Þú gætir prófað að nota færri leitarorð, notað önnur orð á borð við
+      „<%= @search_terms_sample.sample %>“ eða eingöngu slegið inn nafn
+      útgefanda eða höfundar hér að neðan.
+    </p>
+  </div>
+
+  <form
+    class="col-12 col-lg-6"
+    aria-label="Leit"
+    method="get"
+    action="/baekur"
+  >
+    <div class="input-group">
+      <input
+        id="body-search-form"
+        class="form-control form-control-lg"
+        aria-label="Leitarorð"
+        type="search"
+        name="search"
+        placeholder="Leitarorð…"
+        <% unless params[:search].nil? %>
+        value="<%= params[:search] %>"
+        <% end %>
+      >
+      <input type="submit" value="Leita" class="btn btn-primary ml-2">
+    </div>
+  </form>
+</div>

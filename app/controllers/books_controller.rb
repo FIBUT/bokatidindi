@@ -5,6 +5,12 @@ class BooksController < ApplicationController
     if params[:search]
       @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
       @books = Book.search(params[:search])
+      @search_terms_sample = ['Reykjavík', 'barnabækur', 'kort', 'ljóð', 'ungmennabaekur', 'skáldsaga', 'glæpasaga']
+      if params[:search].split.size == 1
+        @plural_query_label = 'leitarorðinu'
+      else
+        @plural_query_label = 'leitaorðunum'
+      end
       if @books.length == 1
         return redirect_to book_path(@books.first.slug)
       end
