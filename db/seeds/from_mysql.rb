@@ -100,6 +100,7 @@ ORDER BY book_id"
 book_result = client.query book_query
 
 book_result.each do |book_row|
+  next if book_row['book_id'] == 16791 # Test record from Oddi
   publisher = Publisher.find_by source_id: book_row['publisher_id']
 
   publisher ||= Publisher.create(
@@ -201,6 +202,8 @@ book_result.each do |book_row|
   book_author_result = client.query book_author_query
 
   book_author_result.each do |book_author_row|
+    next if book_author_row['author_id'] == 984 # Ýmsir
+    next if book_author_row['author_id'] == 11636 # Test record
     author      = Author.find_by source_id: book_author_row['author_id']
     author_type = AuthorType.find_by source_id: book_author_row['authorType_id']
 
