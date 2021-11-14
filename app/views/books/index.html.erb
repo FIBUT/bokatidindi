@@ -1,6 +1,10 @@
 <% content_for :meta do %>
   <title><%= @title_tag %></title>
   <%= tag 'meta', name: 'description', content: @meta_description %>
+
+  <%= tag 'link', rel: 'canonical', href: author_url(params[:author]) unless params[:author].nil? %>
+  <%= tag 'link', rel: 'canonical', href: publisher_url(params[:publisher]) unless params[:publisher].nil? %>
+  <%= tag 'link', rel: 'canonical', href: publisher_url(params[:category]) unless params[:category].nil? %>
 <% end %>
 
 <main role="main" aria-label="Bækur">
