@@ -1,9 +1,9 @@
 <% content_for :meta do %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/boksala-square.svg' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/forlagid-square.svg' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/penninn-eymundsson-square.svg' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/salka-square.svg' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/storytel-square.svg' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/boksala-square.svg', as: 'image' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/forlagid-square.svg', as: 'image' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/penninn-eymundsson-square.svg', as: 'image' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/salka-square.svg', as: 'image' %>
+  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/storytel-square.svg', as: 'image' %>
 
   <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
 
