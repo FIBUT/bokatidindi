@@ -1,3 +1,5 @@
+require 'barnes'
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -46,4 +48,8 @@ on_worker_boot do
   # Worker specific setup for Rails 4.1+
   # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
   ActiveRecord::Base.establish_connection
+end
+
+before_fork do
+  Barnes.start # Must have enabled worker mode for this to block to be called
 end
