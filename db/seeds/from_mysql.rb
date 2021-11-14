@@ -85,7 +85,7 @@ LEFT JOIN `publisher`
 ON `book`.`publisher_id` = `publisher`.`publisher_id`
 LEFT JOIN `category`
 ON `book`.`category_id` = `category`.`category_id`
-JOIN `bookid_bindingtype_eannr`
+LEFT JOIN `bookid_bindingtype_eannr`
 ON bookid_bindingtype_eannr.book_id = book.book_id
 LEFT JOIN bindingtype
 ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
@@ -111,7 +111,7 @@ book_result.each do |book_row|
     rod: book_row['category_rodun']
   )
 
-  if book_row['eannr'] == 'ISBN/EAN13 nr' || book_row['eannr'].empty?
+  if book_row['eannr'] == 'ISBN/EAN13 nr' || book_row['eannr'].blank?
     book = Book.find_by(source_id: book_row['book_id'])
   else
     book = Book.joins(:book_binding_types).find_by(book_binding_types: { barcode: book_row['eannr'] })
