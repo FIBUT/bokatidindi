@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'pages/privacy_policy'
 
   get 'baekur/', to: 'books#index'
+  get 'baekur/sida/:page', to: 'books#index'
 
   get 'baekur/flokkur/:category', to: 'books#index', as: 'category'
   get 'baekur/flokkur/:category/sida/:page', to: 'books#index'
