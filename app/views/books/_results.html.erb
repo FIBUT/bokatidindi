@@ -33,8 +33,6 @@
         </a>
 
         <%= render 'books/authors_brief', book: book %>
-        
-        <% unless book.description.empty? %>
 
           <p
             aria-label="Lýsing"
@@ -42,8 +40,6 @@
           >
             <%= sanitize book.short_description, tags: ['em'] %>
           </p>
-
-        <% end %>
 
         <%= render 'books/meta', book: book %>
 

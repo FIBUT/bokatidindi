@@ -70,16 +70,12 @@
 
       <%= render 'books/authors', book: @book %>
 
-      <% unless @book.description.empty? %>
-
       <div
         aria-label="Lýsing"
         class="book-description mb-5 bt-5 overflow-hidden"
       >
         <%= simple_format @book.show_description, tags: ['em'] %>
       </div>
-
-      <% end %>
 
       <%= render 'books/ecommerce', book: @book %>
 
