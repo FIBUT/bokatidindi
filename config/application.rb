@@ -21,9 +21,5 @@ module Bokatidindi
 
     config.i18n.available_locales = [:is]
     config.i18n.default_locale = :is
-
-    # Disabling the session store, as we are only using the site as a front-end
-    # and we will not require the use of cookies as of now.
-    config.session_store :disabled
   end
 end

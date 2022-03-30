@@ -13,3 +13,4 @@ else
   seed_file = File.join(File.dirname(__FILE__), '/seeds/development.sql')
   sh "psql #{database} < #{seed_file}"
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

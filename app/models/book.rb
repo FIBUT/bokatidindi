@@ -19,13 +19,19 @@ class Book < ApplicationRecord
       publisher: :name
     }
 
-  has_many :book_authors
+  has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
-  has_many :book_categories
-  has_many :categories, through: :book_categories
   has_many :author_types, through: :book_authors
-  has_many :book_binding_types
+  accepts_nested_attributes_for :book_authors, allow_destroy: true
+
+  has_many :book_categories, dependent: :destroy
+  has_many :categories, through: :book_categories
+  accepts_nested_attributes_for :book_categories, allow_destroy: true
+
+  has_many :book_binding_types, dependent: :destroy
   has_many :binding_types, through: :book_binding_types
+  accepts_nested_attributes_for :book_binding_types, allow_destroy: true
+
   belongs_to :publisher
 
   has_one_attached :cover_image, dependent: :destroy
@@ -33,6 +39,10 @@ class Book < ApplicationRecord
   paginates_per 18
 
   before_create :set_title_noshy, :set_slug
+
+  def publisher_name
+    publisher.name
+  end
 
   def binding_types_string
     binding_type_names = []
@@ -165,6 +175,10 @@ class Book < ApplicationRecord
     end
 
     groups
+  end
+
+  def full_title_noshy
+    [pre_title, title_noshy, post_title].reject(&:blank?).flatten.compact.join(' ')
   end
 
   def full_title

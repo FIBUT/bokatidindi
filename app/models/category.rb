@@ -15,6 +15,8 @@ class Category < ApplicationRecord
     { source_id: 23, name: 'Ungmennabækur', group: 'barnabaekur', group_h: 'Barnabækur' }
   ].freeze
 
+  default_scope { order(rod: :asc) }
+
   has_many :books, through: :book_categories
 
   before_create :set_slug

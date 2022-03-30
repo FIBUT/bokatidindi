@@ -5,6 +5,8 @@ class AuthorType < ApplicationRecord
     'Ritstjóri': 'Ritstjórar'
   }.freeze
 
+  default_scope { order(rod: :asc) }
+
   def plural_name
     return name unless AuthorType::PLURALS.key?(name.to_sym)
 
