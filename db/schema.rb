@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_112823) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_05_01_202915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -32,8 +31,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -48,8 +47,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "name", collation: "is_IS"
     t.string "slug"
     t.integer "rod"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_author_types_on_slug", unique: true
     t.index ["source_id"], name: "index_author_types_on_source_id", unique: true
   end
@@ -59,8 +58,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "firstname", collation: "is_IS"
     t.string "lastname", collation: "is_IS"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_authors_on_slug", unique: true
     t.index ["source_id"], name: "index_authors_on_source_id", unique: true
   end
@@ -71,8 +70,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "slug", collation: "is_IS"
     t.integer "rod"
     t.boolean "open"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_binding_types_on_name", unique: true
     t.index ["slug"], name: "index_binding_types_on_slug", unique: true
     t.index ["source_id"], name: "index_binding_types_on_source_id", unique: true
@@ -83,8 +82,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.bigint "book_id"
     t.bigint "author_id"
     t.bigint "author_type_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_book_authors_on_author_id"
     t.index ["author_type_id"], name: "index_book_authors_on_author_type_id"
     t.index ["book_id"], name: "index_book_authors_on_book_id"
@@ -95,8 +94,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "barcode"
     t.bigint "book_id"
     t.bigint "binding_type_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["barcode"], name: "index_book_binding_types_on_barcode"
     t.index ["binding_type_id"], name: "index_book_binding_types_on_binding_type_id"
     t.index ["book_id"], name: "index_book_binding_types_on_book_id"
@@ -105,10 +104,19 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
   create_table "book_categories", force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_book_categories_on_book_id"
     t.index ["category_id"], name: "index_book_categories_on_category_id"
+  end
+
+  create_table "book_editions", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "edition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_editions_on_book_id"
+    t.index ["edition_id"], name: "index_book_editions_on_edition_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -126,8 +134,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "audio_url"
     t.bigint "publisher_id"
     t.bigint "book_author_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "uri_to_buy"
     t.string "uri_to_sample"
     t.string "uri_to_audiobook"
@@ -143,18 +151,26 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "origin_name", collation: "is_IS"
     t.string "slug"
     t.integer "rod"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
     t.index ["source_id"], name: "index_categories_on_source_id", unique: true
+  end
+
+  create_table "editions", force: :cascade do |t|
+    t.string "title"
+    t.string "original_title_id_string"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
     t.string "searchable_type"
     t.bigint "searchable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
@@ -163,8 +179,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_112823) do
     t.string "name", collation: "is_IS"
     t.string "slug"
     t.string "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_publishers_on_slug", unique: true
     t.index ["source_id"], name: "index_publishers_on_source_id", unique: true
   end

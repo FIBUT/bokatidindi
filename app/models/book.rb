@@ -26,6 +26,8 @@ class Book < ApplicationRecord
   has_many :author_types, through: :book_authors
   has_many :book_binding_types
   has_many :binding_types, through: :book_binding_types
+  has_many :book_editions
+  has_many :editions, through: :book_editions
   belongs_to :publisher
 
   has_one_attached :cover_image, dependent: :destroy
@@ -193,6 +195,16 @@ class Book < ApplicationRecord
     book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
   end
 
+  def set_title_noshy
+    self.title_noshy = title.gsub('&shy;', '')
+  end
+
+  def set_slug
+    parameterized_title = title_noshy.parameterize(locale: :is).first(64)
+    parameterized_title = parameterized_title.chop if parameterized_title.end_with?('-')
+    self.slug = "#{parameterized_title}-#{source_id}"
+  end
+
   private
 
   def attach_cover_image_from_string(string)
@@ -218,10 +230,6 @@ class Book < ApplicationRecord
     cover_image.variant(quality: IMAGE_QUALITY, format: format).process
   end
 
-  def set_title_noshy
-    self.title_noshy = title.gsub('&shy;', '')
-  end
-
   def author_group_name_plural(count, singular, plural)
     return singular if count == 1
 
@@ -243,11 +251,5 @@ class Book < ApplicationRecord
         end
       ).to_sentence
     }
-  end
-
-  def set_slug
-    parameterized_title = title_noshy.parameterize(locale: :is).first(64)
-    parameterized_title = parameterized_title.chop if parameterized_title.end_with?('-')
-    self.slug = "#{parameterized_title}-#{source_id}"
   end
 end
