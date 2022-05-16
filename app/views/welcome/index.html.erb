@@ -71,19 +71,6 @@
           </ul>
         </div>
       </div>
-    
-      <div class="col-lg-6 col-xl-3 my-3">
-        <div class="welcome-content p-4 my-2">
-          <h2 class="py-2 mb-3">Ævisögur</h2>
-          <ul class="list-unstyled">
-            <% Category.where(source_id: category_groups[:aevisogur] ).order('rod').each do |c| %>
-            <li class="my-2">
-              <%= link_to c.name, category_path(c.slug) %>
-            </li>
-            <% end %>
-          </div>
-        </div>
-      </div>
 
     <div class="row mx-md-5 mb-5">
       <div class="col-12">
