@@ -33,9 +33,9 @@
 
     <div class="row mx-md-5" aria-label="Vöruflokkar">
 
-      <div class="col-lg-6 col-xl-3 my-3">
-        <div class="welcome-content p-4 my-2">
-          <h2 class="py-2 mb-3">Barnabækur</h2>
+      <div class="col-md-4">
+        <div class="">
+          <h2 class="">Barnabækur</h2>
           <ul class="list-unstyled">
             <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
             <li class="my-2">
@@ -46,9 +46,9 @@
         </div>
       </div> 
 
-      <div class="col-lg-6 col-xl-3 my-3">
-        <div class="welcome-content p-4 my-2">
-          <h2 class="py-2 mb-3">Skáldverk</h2>
+      <div class="col-md-4">
+        <div class="">
+          <h2 class="">Skáldverk</h2>
           <ul class="list-unstyled">
             <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
             <li class="my-2">
@@ -59,9 +59,9 @@
         </div>
       </div>
       
-      <div class="col-lg-6 col-xl-3 my-3">
-        <div class="welcome-content p-4 my-2">
-          <h2 class="py-2 mb-3">Fræðibækur</h2>
+      <div class="col-md-4">
+        <div class="">
+          <h2 class="">Fræðibækur</h2>
           <ul class="list-unstyled">
             <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
             <li class="my-2">
@@ -72,19 +72,21 @@
         </div>
       </div>
 
-    <div class="row mx-md-5 mb-5">
-      <div class="col-12">
-        <div class="welcome-content p-4 pt-5 mt-2" aria-label="Um bókatíðindi">
-          <p>
+      <div class="row">
+        <div class="col-12">
+          <div class="welcome-content p-4 pt-5 mt-2" aria-label="Um bókatíðindi">
+            <p>
             Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við
             flesta titla sem vísa inn á sölusíður útgefanda. Hér má einnig finna
             brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar.
             Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt
             úrval íslenskra bóka:
-          </p>
-          <%= render 'shared/ecommerce_links' %>
+            </p>
+            <%= render 'shared/ecommerce_links' %>
+          </div>
         </div>
       </div>
+
     </div>
-  </div>
+
 </main>
