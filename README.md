@@ -1,6 +1,6 @@
 # Bókatíðindi
 
-- Ruby 2.7.4
+- Ruby 3.1.2
 - Rails 6
 - Postgres
 - MySQL (for database dumps from FÍBÚT)
@@ -33,8 +33,8 @@ $ exit
 ### Setting the environment up using RVM
 
 ```
-$ rvm install 2.7.4
-$ rvm use 2.7.4
+$ rvm install 3.1.2
+$ rvm use 3.1.2
 $ bundle install
 $ rake yarn:install
 $ rake db:create

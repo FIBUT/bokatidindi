@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Bokatidindi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -22,8 +22,5 @@ module Bokatidindi
     config.i18n.available_locales = [:is]
     config.i18n.default_locale = :is
 
-    # Disabling the session store, as we are only using the site as a front-end
-    # and we will not require the use of cookies as of now.
-    config.session_store :disabled
   end
 end
