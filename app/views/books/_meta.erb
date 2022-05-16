@@ -68,6 +68,6 @@
   <% end %>
 
   <li class="book-meta-hours d-block pb-1">
-    <%= local_assigns[:book].binding_types_string %>
+    <%= local_assigns[:book].binding_types.map(&:corrected_name).uniq.to_sentence.downcase.capitalize %>
   </li>
 </ul>

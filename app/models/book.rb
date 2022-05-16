@@ -36,14 +36,6 @@ class Book < ApplicationRecord
 
   before_create :set_title_noshy, :set_slug
 
-  def binding_types_string
-    binding_type_names = []
-    binding_types.each do |b|
-      binding_type_names << b.corrected_name
-    end
-    binding_type_names.uniq.to_sentence.downcase.capitalize
-  end
-
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
     uri.host.delete_prefix('www.')
