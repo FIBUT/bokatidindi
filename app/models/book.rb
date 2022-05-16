@@ -51,11 +51,12 @@ class Book < ApplicationRecord
     uri.host.delete_prefix('www.')
   end
 
-  def cover_image_url(format = 'webp')
+  def cover_image_url(image_format = 'webp')
     return original_cover_bucket_url unless cover_image.attached?
 
     cover_variant = cover_image.variant(
-      quality: IMAGE_QUALITY, format: format
+      format: image_format,
+      saver: { quality: IMAGE_QUALITY }
     )
 
     if ActiveStorage::Blob.service.name.to_s == 'local'
@@ -75,9 +76,11 @@ class Book < ApplicationRecord
     true
   end
 
-  def cover_image_variant_url(width, format = 'webp')
+  def cover_image_variant_url(width, image_format = 'webp')
     cover_variant = cover_image.variant(
-      resize: width, quality: IMAGE_QUALITY, format: format
+      resize_to_limit: [width, width],
+      format: image_format,
+      saver: { quality: IMAGE_QUALITY }
     )
 
     if ActiveStorage::Blob.service.name.to_s == 'local'
@@ -213,13 +216,18 @@ class Book < ApplicationRecord
     end
   end
 
-  def attach_cover_image_variant(format, width = nil)
+  def attach_cover_image_variant(image_format, width = nil)
     if width
       return cover_image.variant(
-        resize: width, quality: IMAGE_QUALITY, format: format
+        resize_to_limit: [width, width],
+        format: image_format,
+        saver: { quality: IMAGE_QUALITY }
       ).process
     end
-    cover_image.variant(quality: IMAGE_QUALITY, format: format).process
+    cover_image.variant(
+      format: image_format,
+      saver: { quality: IMAGE_QUALITY }
+    ).process
   end
 
   def author_group_name_plural(count, singular, plural)
