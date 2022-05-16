@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY         = 80
-  IMAGE_FILE_SUFFIX     = '_89735.jpg'.freeze
+  IMAGE_FILE_SUFFIX     = '.jpg'.freeze
 
   SEARCH_COLUMNS            = %i[source_id pre_title title post_title description long_description].freeze
   AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
@@ -238,10 +238,11 @@ class Book < ApplicationRecord
 
   def author_group_hash(author_type, authors)
     {
+      authors:,
       name: author_group_name_plural(
         authors.count, author_type.name, author_type.plural_name
       ),
-      authors: authors, author_links: (
+      author_links: (
         authors.map do |a|
           link_to(
             a.name,

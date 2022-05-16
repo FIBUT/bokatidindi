@@ -5,20 +5,22 @@ class BooksController < ApplicationController
     if params[:search]
       @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
       @books = Book.search(params[:search])
-      @search_terms_sample = ['Reykjavík', 'barnabækur', 'kort', 'ljóð', 'ungmennabaekur', 'skáldsaga', 'glæpasaga']
-      if params[:search].split.size == 1
-        @plural_query_label = 'leitarorðinu'
-      else
-        @plural_query_label = 'leitaorðunum'
-      end
-      if @books.length == 1
-        return redirect_to book_path(@books.first.slug)
-      end
+
+      return redirect_to book_path(@books.first.slug) if @books.length == 1
     else
       @title_tag = 'Bókatíðindi'
       @books = Book.order(:title).eager_load(
-        :book_authors, :authors, :publisher, :book_categories, :book_binding_types
-      ).includes(cover_image_attachment: [:blob])
+        :book_authors, :authors, :publisher, :book_categories,
+        :book_binding_types, :book_editions
+      ).includes(
+        :publisher,
+        book_categories: [:category],
+        book_authors: [:author_type, :author],
+        book_binding_types: [:binding_type],
+        cover_image_attachment: [:blob]
+      ).where(
+        book_editions: { 'edition_id': Edition.find_by(active: true) }
+      )
 
       if params[:category]
         @category = Category.find_by(slug: params[:category])
@@ -55,6 +57,11 @@ class BooksController < ApplicationController
 
         @books = @books.where(authors: { slug: params[:author] })
       end
+
+      unless @books
+        return render file: 'public/404.html', status: 404, layout: false
+      end
+
       @books = @books.page params[:page]
     end
   end
@@ -62,7 +69,13 @@ class BooksController < ApplicationController
   def show
     @image_format = image_format
 
-    @book = Book.find_by(slug: params[:slug])
+    @book = Book.joins(
+      :publisher,
+      book_editions: [:edition],
+      book_binding_types: [:binding_type],
+      book_authors: [:author, :author_type],
+      book_categories: [:category],
+    ).find_by(slug: params[:slug])
 
     unless @book
       render file: 'public/404.html', status: 404, layout: false
