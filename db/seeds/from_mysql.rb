@@ -255,4 +255,8 @@ book_result.each do |book_row|
   puts "#{['📗', '📘', '📙'].sample} Book: #{inserted_book.id} - #{inserted_book.slug} - #{inserted_book.full_title} - #{category.name}"
 end
 
+e = Edition.last
+e.active = true
+e.save
+
 puts "#{['😎', '😊', '🎉', '🥂'].sample} #{Book.all.count} books imported!"
