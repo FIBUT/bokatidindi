@@ -66,6 +66,17 @@
 
       <div class="col-lg-4 col-md-8 col-sm-12 offset-lg-1">
 
+      <% if @book.current_edition? == false %>
+        <p class="book-meta-old-edition">
+        <strong>
+          Athugið að þessi bók er úr eldri útgáfu Bókatíðinda og birt hér með
+          fyrirvara um mögulega sé ekki um að ræða nýjust upplýsingar.
+          Hafið samband við útgefanda til að fá nánari upplýsingar um hvort
+          bókin sé fáanleg.
+        </strong>
+        </p>
+      <% end %>
+
       <%= render 'books/hgroup', book: @book %>
 
       <%= render 'books/authors', book: @book %>

@@ -200,6 +200,10 @@ class Book < ApplicationRecord
     self.slug = "#{parameterized_title}-#{source_id}"
   end
 
+  def current_edition?
+    editions.pluck(:id).include?(Edition.find_by(active: true).id)
+  end
+
   private
 
   def attach_cover_image_from_string(string)
