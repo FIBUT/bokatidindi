@@ -12,16 +12,16 @@
       <div class="col-sm-8 offset-sm-2 offset-md-0 col-md-12 col-xl-6 mt-2 px-5 px-xl-2" aria-hidden="true">
         <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
           <figure class="figure mt-4">
+            <% if book.cover_image.attached? %>
             <img
               src="<%= book.cover_image_url %>"
-              <% if book.cover_image.attached? %>
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
               srcset="<%= book.cover_img_srcset(@image_format) %>"
-              <% end %>
               class="img-fluid"
               loading="lazy"
             >
+            <% end %>
           </figure>
         </a>
       </div>

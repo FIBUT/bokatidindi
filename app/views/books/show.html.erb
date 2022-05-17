@@ -51,15 +51,15 @@
       <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 text-right" aria-hidden="true">
 
         <figure class="figure mt-4">
+          <% if @book.cover_image.attached? %>
           <img
             src="<%= @book.cover_image_url %>"
-            <% if @book.cover_image.attached? %>
             height="<%= @book.cover_image.metadata[:height] %>"
             width="<%= @book.cover_image.metadata[:width] %>"
             srcset="<%= @book.cover_img_srcset(@image_format) %>"
-            <% end %>
             class="img-fluid"
           >
+          <% end %>
         </figure>
 
       </div>
