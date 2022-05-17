@@ -63,7 +63,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.processed.service_url
+    cover_variant.processed.url
   end
 
   def attach_cover_image
@@ -87,7 +87,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.processed.service_url
+    cover_variant.processed.url
   end
 
   def cover_img_srcset(format = 'webp')
