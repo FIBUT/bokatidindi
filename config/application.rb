@@ -22,5 +22,7 @@ module Bokatidindi
     config.i18n.available_locales = [:is]
     config.i18n.default_locale = :is
 
+    config.active_storage.variant_processor = :mini_magick
+
   end
 end
