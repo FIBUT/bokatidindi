@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
     if params[:search]
       @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
-      @books = Book.search(params[:search])
+      @books = Book.search(params[:search]).reverse
 
       return redirect_to book_path(@books.first.slug) if @books.length == 1
     else
