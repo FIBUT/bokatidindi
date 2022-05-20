@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 
     redirect_to(
       "#{request.protocol}www.bokatidindi.is#{request.fullpath}",
-      status: 301
+      status: 301,
+      allow_other_host: true
     )
   end
 end
