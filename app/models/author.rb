@@ -12,7 +12,11 @@ class Author < ApplicationRecord
 
   def set_slug
     parameterized_name = name.parameterize(locale: :is).first(64)
-    parameterized_name = parameterized_name.chop if parameterized_name.end_with?('-')
+
+    # Prevent the slug from ending with a dash
+    if parameterized_name.end_with?('-')
+      parameterized_name = parameterized_name.chop
+    end
     self.slug = "#{parameterized_name}-#{source_id}"
   end
 end

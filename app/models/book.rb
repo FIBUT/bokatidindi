@@ -3,14 +3,18 @@ class Book < ApplicationRecord
   IMAGE_QUALITY         = 80
   IMAGE_FILE_SUFFIX     = '.jpg'.freeze
 
-  SEARCH_COLUMNS            = %i[source_id pre_title title post_title description long_description].freeze
+  SEARCH_COLUMNS = %i[
+    source_id pre_title title post_title description long_description
+  ].freeze
   AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
   CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
 
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
 
-  multisearchable against: [:pre_title, :title_noshy, :post_title, :description, :long_description]
+  multisearchable against: [
+    :pre_title, :title_noshy, :post_title, :description, :long_description
+  ]
 
   pg_search_scope :search,
     against: SEARCH_COLUMNS, associated_against: {
@@ -72,7 +76,9 @@ class Book < ApplicationRecord
 
     return false unless response.is_a?(Net::HTTPSuccess)
 
-    attach_cover_image_from_string(response.body) if response.is_a?(Net::HTTPSuccess)
+    if response.is_a?(Net::HTTPSuccess)
+      attach_cover_image_from_string(response.body)
+    end
     true
   end
 
@@ -102,7 +108,8 @@ class Book < ApplicationRecord
   end
 
   def original_cover_bucket_url
-    "https://storage.googleapis.com/bokatidindi-covers-original/#{source_id}#{IMAGE_FILE_SUFFIX}"
+    bucket_url = 'https://storage.googleapis.com/bokatidindi-covers-original/'
+    "#{bucket_url}#{source_id}#{IMAGE_FILE_SUFFIX}"
   end
 
   def show_title
@@ -152,8 +159,9 @@ class Book < ApplicationRecord
   def author_groups
     groups = []
 
-    book_authors_with_type = book_authors.includes(:author_type)
-    book_authors_in_order  = book_authors_with_type.order('author_types.rod ASC')
+    book_authors_in_order = book_authors.includes(:author_type).order(
+      'author_types.rod': :asc
+    )
 
     group_records = book_authors_in_order.group_by(&:author_type)
     group_records.each do |author_type, book_authors|
@@ -176,7 +184,10 @@ class Book < ApplicationRecord
 
   def author_names_string
     author_names = []
-    selected_book_authors = book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
+
+    selected_book_authors = book_authors.joins(:author_type).where(
+      author_type: { name: 'Höfundur' }
+    )
     return nil if selected_book_authors.empty?
 
     selected_book_authors.each do |a|
@@ -196,7 +207,12 @@ class Book < ApplicationRecord
 
   def set_slug
     parameterized_title = title_noshy.parameterize(locale: :is).first(64)
-    parameterized_title = parameterized_title.chop if parameterized_title.end_with?('-')
+
+    # Prevent the slug from ending with a dash
+    if parameterized_title.end_with?('-')
+      parameterized_title = parameterized_title.chop
+    end
+
     self.slug = "#{parameterized_title}-#{source_id}"
   end
 
@@ -208,7 +224,8 @@ class Book < ApplicationRecord
 
   def attach_cover_image_from_string(string)
     cover_image.attach(io: StringIO.new(string), filename: "#{id}.jpg")
-    attach_cover_image_variants unless ActiveStorage::Blob.service.name.to_s == 'local'
+    storage_service = ActiveStorage::Blob.service.name
+    attach_cover_image_variants unless storage_service == :local
   end
 
   def attach_cover_image_variants
