@@ -13,6 +13,24 @@ http_password = Rails.application.credentials.dig(
   :bokatidindi_legacy, :password
 )
 
+def binding_barcode_empty?(barcode)
+  return false unless barcode == 'ISBN/EAN13 nr' || barcode.empty?
+
+  true
+end
+
+def clean_binding_type(binding_type)
+  if binding_type.strip == 'Harðspjalda bók 0-2 ára'
+    return 'Harðspjaldabók'
+  end
+
+  binding_type.strip
+end
+
+def italicize(description)
+  description.gsub('>>>', '<em>').gsub('<<<', '</em>')
+end
+
 def secure_and_validate_uri_string(uri_string)
   return nil if uri_string.to_s.empty?
 
@@ -60,11 +78,7 @@ binding_type_query = "SELECT bindingtype_id as source_id, name, rodun as rod,
 binding_type_result = client.query binding_type_query
 
 binding_type_result.each do |binding_type_row|
-  binding_type_name = if binding_type_row['name'].strip == 'Harðspjalda bók 0-2 ára'
-                        'Harðspjaldabók'
-                      else
-                        binding_type_row['name'].strip
-                      end
+  binding_type_name = clean_binding_type(binding_type_row['name'])
 
   BindingType.create_with(
     name: binding_type_name,
@@ -99,7 +113,8 @@ LEFT JOIN bindingtype
 ON bindingtype.bindingtype_id = bookid_bindingtype_eannr.bindingtype_id
 LEFT JOIN editions
 ON book.editionid = editions.editionid
-WHERE ( `book`.`editionid` = 'BT2021' OR `book`.`editionid` = 'BT2022' ) AND `book`.`isgroup` = '0'
+WHERE ( `book`.`editionid` = 'BT2021' OR `book`.`editionid` = 'BT2022' )
+AND `book`.`isgroup` = '0'
 ORDER BY book_id"
 
 book_result = client.query book_query
@@ -112,17 +127,23 @@ book_result.each do |book_row|
     original_title_id_string: book_row['editionid']
   )
 
-  publisher = Publisher.create_with(source_id: book_row['publisher_id']).find_or_create_by(
+  publisher = Publisher.create_with(
+    source_id: book_row['publisher_id']
+  ).find_or_create_by(
     name: book_row['publisher_name'].strip,
     url: book_row['publisher_url']
   )
 
-  category = Category.create_with(source_id: book_row['category_id']).find_or_create_by(
+  category = Category.create_with(
+    source_id: book_row['category_id']
+  ).find_or_create_by(
     origin_name: book_row['category_name'].strip,
     rod: book_row['category_rodun']
   )
 
-  book_group_query = "SELECT * FROM `book` WHERE `book_id` = #{book_row['part_of_group']}"
+  book_group_query = "SELECT * FROM `book`
+  WHERE `book_id` = #{book_row['part_of_group']}"
+
   book_group_result = client.query book_group_query
 
   if book_row['part_of_group'].positive? && book_group_result.first
@@ -145,7 +166,9 @@ book_result.each do |book_row|
 
   title_noshy         = book_row['title'].gsub('&shy;', '')
   parameterized_title = title_noshy.parameterize(locale: :is).first(64)
-  parameterized_title = parameterized_title.chop if parameterized_title.end_with?('-')
+  if parameterized_title.end_with?('-')
+    parameterized_title = parameterized_title.chop
+  end
   slug = "#{parameterized_title}-#{book_row['book_id']}"
 
   book_upsert = Book.upsert(
@@ -154,15 +177,15 @@ book_result.each do |book_row|
       pre_title: pre_title.strip,
       title: book_row['title'].strip,
       post_title: book_row['posttitle'].strip,
-      description: description.gsub('>>>', '<em>').gsub('<<<', '</em>'),
-      long_description: long_description.gsub('>>>', '<em>').gsub('<<<', '</em>'),
+      description: italicize(description).gsub(/&#[0-9]+;/, ''),
+      long_description: italicize(long_description).gsub(/&#[0-9]+;/, ''),
       page_count: book_row['nr_of_pages'],
       publisher_id: publisher['id'],
       uri_to_buy: secure_and_validate_uri_string(book_row['Link2Store']),
       uri_to_sample: secure_and_validate_uri_string(book_row['Link2Sample']),
       uri_to_audiobook: secure_and_validate_uri_string(book_row['Link2Listen']),
-      title_noshy: title_noshy,
-      slug: slug
+      title_noshy:,
+      slug:
     },
     unique_by: :source_id,
     record_timestamps: true
@@ -173,9 +196,9 @@ book_result.each do |book_row|
   # This assumes that the books only belong to a single edition.
   # This will be expanded in the future.
   BookEdition.create_with(
-    edition: edition
+    edition:
   ).find_or_create_by(
-    book_id: book_id
+    book_id:
   )
 
   # This assumes that the books only belong to a single category.
@@ -183,7 +206,7 @@ book_result.each do |book_row|
   BookCategory.create_with(
     category_id: category.id
   ).find_or_create_by(
-    book_id: book_id
+    book_id:
   )
 
   book_binding_type_query = "SELECT bookid_bindingtype_eannr.bindingtype_id,
@@ -196,16 +219,16 @@ book_result.each do |book_row|
   book_binding_type_result = client.query book_binding_type_query
 
   book_binding_type_result.each do |book_binding_type_row|
-    barcode = if book_binding_type_row['barcode'] == 'ISBN/EAN13 nr' || book_binding_type_row['barcode'].empty?
+    barcode = if binding_barcode_empty?(book_binding_type_row['barcode'])
                 nil
               else
                 book_binding_type_row['barcode']
               end
 
     BookBindingType.create_with(
-      barcode: barcode
+      barcode:
     ).find_or_create_by(
-      book_id: book_id,
+      book_id:,
       binding_type: BindingType.find_by(
         source_id: book_binding_type_row['bindingtype_id']
       )
@@ -244,7 +267,7 @@ book_result.each do |book_row|
     )
 
     BookAuthor.find_or_create_by(
-      book_id: book_id,
+      book_id:,
       author_id: author['id'],
       author_type_id: author_type['id']
     )
@@ -252,7 +275,8 @@ book_result.each do |book_row|
 
   inserted_book = Book.find(book_id)
 
-  puts "#{['📗', '📘', '📙'].sample} Book: #{inserted_book.id} - #{inserted_book.slug} - #{inserted_book.full_title} - #{category.name}"
+  print "#{['📗', '📘', '📙'].sample} Book: #{inserted_book.id} - "
+  print "#{inserted_book.slug} - #{inserted_book.full_title}\n"
 end
 
 e = Edition.last
