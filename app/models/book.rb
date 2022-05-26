@@ -160,7 +160,7 @@ class Book < ApplicationRecord
     groups = []
 
     book_authors_in_order = book_authors.includes(:author_type).order(
-      'author_types.rod': :asc
+      'author_types.rod': :asc, id: :desc
     )
 
     group_records = book_authors_in_order.group_by(&:author_type)
