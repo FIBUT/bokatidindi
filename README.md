@@ -1,8 +1,28 @@
 # Bókatíðindi
 
+This codebase provides facilities for the following:
+
+- The online edition of the Bokatidindi book journal
+- Data entry for the online and print versions of the journal
+- XML services for the print edition
+
+## Licence
+
+The source code published in this repository is published under the European
+Union Public Licence (EUPL) version 1.2. You can view the full license text in
+the [LICENCE](./LICENCE) file or at
+https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12.
+
+The licence does not cover any published information on bokatidindi.is, logos
+etc, which are the intellectual property of FÍBÚT, its members or 3rd parties.
+
+## Minimum Requirements
+
+Bókatíðindi requires the following to work:
+
 - Ruby 3.1.2
-- Rails 6
-- Postgres
+- Rails 7
+- Postgres SQL
 - MySQL (for database dumps from FÍBÚT)
 
 ## The development environment.
@@ -40,13 +60,14 @@ $ rake yarn:install
 $ rake db:create
 $ rake db:schema:load # or rake db:migrate
 $ rake db:seed
-$ rake bokatidindi:attach_cover_image
+$ rake bt:attach_covers
 ```
 
 ## The production environment
 
 We are currently hosting at Heroku. Our staging instance can be reached at
-https://bokatidindi-staging.herokuapp.com/.
+https://bokatidindi-staging.herokuapp.com/. Google Cloud Services is used for
+static content and related services.
 
 ### Deployment
 
@@ -62,52 +83,6 @@ $ heroku run rake db:schema:load
 $ heroku run rake db:seed
 $ heroku run:detached --size standard-2x rake bt:attach_covers
 ```
-
-### Seeds
-
-#### Seeding from a nightly dump
-
-We are currently loading the data from a nighyly MySQL dump, into our own MySQL
-instance and into Postgres for development and production, the following is the
-way we create seeds for the production environment.
-
-We expect this to be a stop-gap measure until we can ingress the data from
-FÍBÚT's database, but let's not get our hopes up.
-
-The following reads the data from FÍBÚT's database and into our
-development database:
-
-```
-$ SEED_FROM=mysql rake db:seed
-```
-
-Note that you may need to set the following environment variables to do this
-successfully:
-
-* `BOKATIDINDI_EDITION` (defaults to `BT2021`)
-* `MYSQL_HOST` (defaults to `localhost`),
-* `MYSQL_DATABASE` (defaults to `bokatidindi-source`)
-* `MYSQL_USERNAME` (defaults to `root`)
-* `MYSQL_PASSWORD` (defaults to `root`)
-* `SKIP_DUMP` (If set, the rake task will skip downloading the nightly dump and go straight into seeding Postgres)
-
-#### Seeding from a local Postgres dump
-
-This generates a seed file based on the ingressed data:
-
-```
-pg_dump -T active_storage* -T schema_migrations -T ar_internal_metadata -a bokatidindi_development > db/seeds/development.sql
-```
-
-To deploy the seeded data into the production database, commit the changes to
-'main':
-
-```
-$ git commit db/seeds/development.sql -m "Updating seeds"
-$ git push heroku main
-```
-
-Then follow the instructions under "Resetting the production database".
 
 ## Rake Tasks
 
