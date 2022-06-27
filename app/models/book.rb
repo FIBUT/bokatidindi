@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Book < ApplicationRecord
   COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY         = 80
-  IMAGE_FILE_SUFFIX     = '.jpg'.freeze
+  IMAGE_FILE_SUFFIX     = '.jpg'
 
   SEARCH_COLUMNS = %i[
     source_id pre_title title post_title description long_description
@@ -12,25 +14,25 @@ class Book < ApplicationRecord
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
 
-  multisearchable against: [
-    :pre_title, :title_noshy, :post_title, :description, :long_description
+  multisearchable against: %i[
+    pre_title title_noshy post_title description long_description
   ]
 
   pg_search_scope :search,
-    against: SEARCH_COLUMNS, associated_against: {
-      authors: AUTHORS_SEARCH_COLUMMNS,
-      categories: CATEGORIES_SEARCH_COLUMNS,
-      publisher: :name
-    }
+                  against: SEARCH_COLUMNS, associated_against: {
+                    authors: AUTHORS_SEARCH_COLUMMNS,
+                    categories: CATEGORIES_SEARCH_COLUMNS,
+                    publisher: :name
+                  }
 
-  has_many :book_authors
+  has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
-  has_many :book_categories
+  has_many :book_categories, dependent: :destroy
   has_many :categories, through: :book_categories
   has_many :author_types, through: :book_authors
-  has_many :book_binding_types
+  has_many :book_binding_types, dependent: :destroy
   has_many :binding_types, through: :book_binding_types
-  has_many :book_editions
+  has_many :book_editions, dependent: :restrict_with_error
   has_many :editions, through: :book_editions
   belongs_to :publisher
 
@@ -99,12 +101,11 @@ class Book < ApplicationRecord
   def cover_img_srcset(format = 'webp')
     return '' unless cover_image.attached?
 
-    srcset = ''
+    srcset = []
     COVER_IMAGE_VARIANTS.each do |v|
-      srcset << cover_image_variant_url(v, format)
-      srcset << " #{v}w, "
+      srcset << cover_image_variant_url(v, format) + " #{v}w"
     end
-    srcset.delete_suffix(', ')
+    srcset.join(', ')
   end
 
   def original_cover_bucket_url
@@ -118,17 +119,13 @@ class Book < ApplicationRecord
   end
 
   def show_description
-    if long_description.empty?
-      return description.html_safe
-    end
+    return description.html_safe if long_description.empty?
 
     long_description.html_safe
   end
 
   def short_description
-    if description.empty?
-      return long_description.truncate(256).html_safe
-    end
+    return long_description.truncate(256).html_safe if description.empty?
 
     description.truncate(383).html_safe
   end

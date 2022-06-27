@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :bt do
   desc 'Attach images of each cover to the books'
   task attach_covers: :environment do
@@ -8,16 +10,15 @@ namespace :bt do
     )
 
     books.each do |b|
-      unless b.cover_image.attached?
-        url = b.original_cover_bucket_url
-        if b.attach_cover_image
-          puts "✅ #{b.slug}: Image found and attached from #{url}"
-        else
-          puts "❌ #{b.slug}: Image not found at #{url}"
-        end
-        GC.start
+      next if b.cover_image.attached?
+
+      url = b.original_cover_bucket_url
+      if b.attach_cover_image
+        puts "✅ #{b.slug}: Image found and attached from #{url}"
+      else
+        puts "❌ #{b.slug}: Image not found at #{url}"
       end
+      GC.start
     end
   end
-
 end

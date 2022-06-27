@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BindingType < ApplicationRecord
   AUDIO_BOOK_SOURCES = [3, 14, 15].freeze
 

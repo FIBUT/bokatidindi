@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBooks < ActiveRecord::Migration[6.1]
   def change
     create_table :publishers do |t|
@@ -40,7 +42,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
 
       t.belongs_to :publisher, index: true
       t.belongs_to :book_author, index: true
-  
+
       t.timestamps
     end
 
@@ -53,7 +55,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
 
     create_table :binding_types do |t|
       t.integer :source_id, index: { unique: true }
-  
+
       t.string :name, collation: 'is_IS', index: { unique: true }
       t.string :slug, collation: 'is_IS', index: { unique: true }
       t.integer :rod
@@ -95,7 +97,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
 
       t.belongs_to :book
 
-      t.belongs_to :author, index: true,  foreign_key: true
+      t.belongs_to :author, index: true, foreign_key: true
       t.belongs_to :author_type, index: true, foreign_key: true
 
       t.timestamps

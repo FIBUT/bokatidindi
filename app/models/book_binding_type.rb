@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 class BookBindingType < ApplicationRecord
   belongs_to :book
   belongs_to :binding_type
 
-  def name
-    binding_type.name
-  end
+  delegate :name, to: :binding_type
 end
