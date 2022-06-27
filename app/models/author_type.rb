@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorType < ApplicationRecord
   PLURALS = {
     'Höfundur': 'Höfundar',

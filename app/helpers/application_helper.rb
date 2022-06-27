@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def category_groups
     groups = {
-      skaldverk: [], fraedibaekur: [], aevisögur: [], barnabaekur: [], aevisogur: []
+      skaldverk: [], fraedibaekur: [], aevisögur: [], barnabaekur: [],
+      aevisogur: []
     }
 
     Category::NAME_MAPPINGS.each do |c|

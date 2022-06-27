@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
   def index
     @image_format = image_format
@@ -8,14 +10,13 @@ class BooksController < ApplicationController
 
       return redirect_to book_path(@books.first.slug) if @books.length == 1
     else
-      @title_tag = 'Bókatíðindi'
       @books = Book.order(:title).eager_load(
         :book_authors, :authors, :publisher, :book_categories,
         :book_binding_types, :book_editions
       ).includes(
         :publisher,
         book_categories: [:category],
-        book_authors: [:author_type, :author],
+        book_authors: %i[author_type author],
         book_binding_types: [:binding_type],
         cover_image_attachment: [:blob]
       ).where(
@@ -25,10 +26,11 @@ class BooksController < ApplicationController
       if params[:category]
         @category = Category.find_by(slug: params[:category])
         unless @category
-          return render file: 'public/404.html', status: 404, layout: false
+          return render file: 'public/404.html', status: :not_found,
+                        layout: false
         end
 
-        @title_tag << " - Flokkur - #{@category.name_with_group}"
+        @title_tag = "Bókatíðindi - Flokkur - #{@category.name_with_group}"
         @meta_description = "Bækur í vöruflokknum #{@category.name_with_group}"
 
         @books = @books.joins(:categories).where(
@@ -38,10 +40,11 @@ class BooksController < ApplicationController
       if params[:publisher]
         @publisher = Publisher.find_by(slug: params[:publisher])
         unless @publisher
-          return render file: 'public/404.html', status: 404, layout: false
+          return render file: 'public/404.html', status: :not_found,
+                        layout: false
         end
 
-        @title_tag << " - Útgefandi - #{@publisher.name}"
+        @title_tag = "Bókatíðindi - Útgefandi - #{@publisher.name}"
         @meta_description = "Bækur frá útgefandanum #{@publisher.name}"
 
         @books = @books.where(publishers: { slug: params[:publisher] })
@@ -49,17 +52,18 @@ class BooksController < ApplicationController
       if params[:author]
         @author = Author.find_by(slug: params[:author])
         unless @author
-          return render file: 'public/404.html', status: 404, layout: false
+          return render file: 'public/404.html', status: :not_found,
+                        layout: false
         end
 
-        @title_tag << " - Höfundur - #{@author.name}"
+        @title_tag = "Bókatíðindi - Höfundur - #{@author.name}"
         @meta_description = "Bækur eftir höfundinn #{@author.name}"
 
         @books = @books.where(authors: { slug: params[:author] })
       end
 
       unless @books
-        return render file: 'public/404.html', status: 404, layout: false
+        return render file: 'public/404.html', status: :not_found, layout: false
       end
 
       @books = @books.page params[:page]
@@ -73,13 +77,16 @@ class BooksController < ApplicationController
       :publisher,
       book_editions: [:edition],
       book_binding_types: [:binding_type],
-      book_authors: [:author, :author_type],
-      book_categories: [:category],
+      book_authors: %i[author author_type],
+      book_categories: [:category]
     ).find_by(slug: params[:slug])
 
     unless @book
-      render file: 'public/404.html', status: 404, layout: false
+      render file: 'public/404.html', status: :not_found,
+             layout: false
     end
+
+    true
   end
 
   private

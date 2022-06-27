@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class Author < ApplicationRecord
-  has_many :book_authors
+  has_many :book_authors, dependent: :restrict_with_error
   has_many :books, through: :book_authors
 
   before_create :set_slug
 
   def name
-    firstname + ' ' + lastname
+    "#{firstname} #{lastname}"
   end
 
   private

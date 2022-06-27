@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_storage/service/gcs_service'
 require 'uri'
 

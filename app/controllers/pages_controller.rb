@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 class PagesController < ApplicationController
   def um_bokatidindi
     @image_format = image_format
   end
 
-  def privacy_policy
-  end
+  def privacy_policy; end
 
   private
 

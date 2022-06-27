@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEditions < ActiveRecord::Migration[6.1]
   def change
     create_table :editions do |t|
@@ -14,5 +16,4 @@ class CreateEditions < ActiveRecord::Migration[6.1]
       t.timestamps
     end
   end
-  
 end

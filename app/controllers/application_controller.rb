@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   REDIRECT_FROM = ['bokatidindi.is', 'bokatidindi-staging.herokuapp.com'].freeze
 
@@ -10,7 +12,7 @@ class ApplicationController < ActionController::Base
 
     redirect_to(
       "#{request.protocol}www.bokatidindi.is#{request.fullpath}",
-      status: 301,
+      status: :moved_permanently,
       allow_other_host: true
     )
   end

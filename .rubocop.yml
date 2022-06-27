@@ -1,1 +1,85 @@
-inherit_from: .rubocop_todo.yml
+require: rubocop-rails
+
+# Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
+Metrics/AbcSize:
+  Max: 65
+
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
+# IgnoredMethods: refine
+Metrics/BlockLength:
+  Max: 150
+
+# Configuration parameters: CountComments, CountAsOne.
+Metrics/ClassLength:
+  Max: 250
+
+# Configuration parameters: IgnoredMethods.
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# Configuration parameters: IgnoredMethods.
+Metrics/PerceivedComplexity:
+  Max: 12
+
+# Configuration parameters: AllowedConstants.
+Style/Documentation:
+  Enabled: false
+
+# Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
+Style/GuardClause:
+  Exclude:
+    - 'db/migrate/20220501202913_add_service_name_to_active_storage_blobs.active_storage.rb'
+
+# This cop supports safe auto-correction (--auto-correct).
+# Configuration parameters: RequireEnglish.
+# SupportedStyles: use_perl_names, use_english_names, use_builtin_english_names
+Style/SpecialGlobalVars:
+  EnforcedStyle: use_perl_names
+
+# This cop supports safe auto-correction (--auto-correct).
+# Configuration parameters: MinSize, WordRegex.
+# SupportedStyles: percent, brackets
+Style/WordArray:
+  EnforcedStyle: brackets
+
+# This cop supports safe auto-correction (--auto-correct).
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns, IgnoredPatterns.
+# URISchemes: http, https
+Layout/LineLength:
+  Max: 80
+  AllowURI: true
+  Exclude:
+    - 'db/*.rb'
+    - 'db/**/*.rb'
+    - 'config/**/*.rb'
+
+Metrics/MethodLength:
+  Max: 60
+  Exclude:
+    - 'db/migrate/*'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/OutputSafety:
+  Exclude:
+   - 'app/models/book.rb'
+
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/20211102201546_add_urls_to_books.rb'
+
+AllCops:
+  NewCops: disable
+  Exclude:
+    - 'config.ru'
+    - 'Rakefile'
+    - 'Gemfile'
+    - 'bin/**'
+    - 'test/**'
+    - 'config/**'
+    - 'db/schema.rb'
+    - 'db/seeds/from_mysql.rb'

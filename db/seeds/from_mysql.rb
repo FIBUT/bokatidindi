@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The variables we use for MySQL authentication
 mysql_host     = ENV['MYSQL_HOST'] || 'localhost'
 mysql_database = ENV['MYSQL_DATABASE'] || 'bokatidindi-source'
