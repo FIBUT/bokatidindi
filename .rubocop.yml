@@ -76,6 +76,7 @@ Rails/BulkChangeTable:
 AllCops:
   NewCops: disable
   Exclude:
+    - 'vendor/**/*'
     - 'config.ru'
     - 'Rakefile'
     - 'Gemfile'
