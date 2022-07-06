@@ -52,6 +52,7 @@ Layout/LineLength:
     - 'db/*.rb'
     - 'db/**/*.rb'
     - 'config/**/*.rb'
+    - 'spec/*_helper.rb'
 
 Metrics/MethodLength:
   Max: 60

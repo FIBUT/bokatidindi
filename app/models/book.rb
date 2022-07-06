@@ -41,6 +41,7 @@ class Book < ApplicationRecord
   paginates_per 18
 
   before_create :set_title_noshy, :set_slug
+  before_update :set_title_noshy
 
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
