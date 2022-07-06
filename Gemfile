@@ -33,6 +33,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'mysql2', '>= 0.5.3'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
+gem 'rubocop-rspec', require: false
 gem 'kaminari', '>=1.2.0'
 
 gem 'open-uri'
@@ -50,6 +51,14 @@ gem 'barnes'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'database_cleaner-active_record'
+
+  gem 'rails-controller-testing'
+
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'ffaker'
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
