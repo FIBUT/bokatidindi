@@ -53,6 +53,9 @@ group :development, :test do
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
+
+  # Rspec 6 RC1 is in use here. Must be updated on final replease of 6.0.
+  gem 'rspec-rails', '>= 6.0.0.rc1'
 end
 
 group :development do
