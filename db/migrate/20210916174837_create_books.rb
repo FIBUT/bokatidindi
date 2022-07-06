@@ -5,7 +5,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :publishers do |t|
       t.integer :source_id, index: { unique: true }
 
-      t.string :name, collation: 'is_IS'
+      t.string :name
       t.string :slug, index: { unique: true }
       t.string :url
 
@@ -15,7 +15,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :categories do |t|
       t.integer :source_id, index: { unique: true }
 
-      t.string :name, collation: 'is_IS'
+      t.string :name
       t.string :slug, index: { unique: true }
       t.integer :rod
 
@@ -25,9 +25,9 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :books do |t|
       t.integer :source_id, index: { unique: true }
 
-      t.string :pre_title, collation: 'is_IS'
-      t.string :title, collation: 'is_IS'
-      t.string :post_title, collation: 'is_IS'
+      t.string :pre_title
+      t.string :title
+      t.string :post_title
       t.string :slug, index: { unique: true }
 
       t.string :description
@@ -56,8 +56,8 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :binding_types do |t|
       t.integer :source_id, index: { unique: true }
 
-      t.string :name, collation: 'is_IS', index: { unique: true }
-      t.string :slug, collation: 'is_IS', index: { unique: true }
+      t.string :name, index: { unique: true }
+      t.string :slug, index: { unique: true }
       t.integer :rod
       t.boolean :open
 
@@ -75,8 +75,8 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :authors do |t|
       t.integer :source_id, index: { unique: true }
 
-      t.string :firstname, collation: 'is_IS'
-      t.string :lastname, collation: 'is_IS'
+      t.string :firstname
+      t.string :lastname
       t.string :slug, index: { unique: true }
 
       t.timestamps
@@ -85,7 +85,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
     create_table :author_types do |t|
       t.integer :source_id, index: { unique: true }
 
-      t.string :name, collation: 'is_IS'
+      t.string :name
       t.string :slug, index: { unique: true }
       t.integer :rod
 

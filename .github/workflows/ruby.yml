@@ -1,0 +1,51 @@
+name: Ruby Workflow
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: bokatidindi_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Install Ruby version specified in `.ruby-version`
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Install required apt packages
+      run: sudo apt-get -y install libpq-dev
+    - name: Run bundle install
+      run: bundle install && yarn install
+    - name: Load the database schema
+      run: bundle exec rake db:schema:load
+      env:
+        RAILS_ENV: test
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_PORT: 5432
+    - name: JS/CSS Build
+      run: rake webpacker:compile
+    - name: Rspec
+      run: bundle exec rspec
+      env:
+        RAILS_ENV: test
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_PORT: 5432
+    - name: Rubocop
+      run: bundle exec rubocop -c .rubocop.yml

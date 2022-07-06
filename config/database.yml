@@ -23,6 +23,9 @@ test:
   database: bokatidindi_test
   encoding: unicode
   template: template0
+  host: <%= ENV['POSTGRES_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
   host: <%= ENV['DATABASE_URL'] %>
