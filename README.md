@@ -56,7 +56,8 @@ $ exit
 $ rvm install 3.1.2
 $ rvm use 3.1.2
 $ bundle install
-$ rake yarn:install
+$ yarn install
+$ yarn build 
 $ rake db:create
 $ rake db:schema:load # or rake db:migrate
 $ rake db:seed
