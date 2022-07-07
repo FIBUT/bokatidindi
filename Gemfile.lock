@@ -194,7 +194,6 @@ GEM
     minitest (5.15.0)
     msgpack (1.5.1)
     multi_json (1.15.0)
-    mysql2 (0.5.4)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -397,7 +396,6 @@ DEPENDENCIES
   jsbundling-rails
   kaminari (>= 1.2.0)
   listen (~> 3.3)
-  mysql2 (>= 0.5.3)
   open-uri
   pg
   pg_search
