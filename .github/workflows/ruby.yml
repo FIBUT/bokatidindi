@@ -38,7 +38,7 @@ jobs:
         POSTGRES_PASSWORD: postgres
         POSTGRES_PORT: 5432
     - name: JS/CSS Build
-      run: rake webpacker:compile
+      run: yarn build
     - name: Rspec
       run: bundle exec rspec
       env:
