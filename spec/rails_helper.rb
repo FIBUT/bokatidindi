@@ -69,7 +69,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.before(:suite) do
+  config.before(:all) do
     ['Innbundin', 'Gormabók', 'Harðspjaldabók'].each_with_index do |b, i|
       BindingType.create(
         source_id: i,
@@ -147,7 +147,7 @@ RSpec.configure do |config|
     )
   end
 
-  config.after(:suite) do
+  config.after(:all) do
     DatabaseCleaner.clean
   end
 end
