@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY         = 80
   IMAGE_FILE_SUFFIX     = '.jpg'
+  IMAGE_FILE_TYPE       = 'image/jpeg'
 
   SEARCH_COLUMNS = %i[
     source_id pre_title title post_title description long_description
@@ -74,10 +75,11 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image
-    image_uri  = URI.parse(original_cover_bucket_url)
-    response   = Net::HTTP.get_response(image_uri)
+    image_uri = URI.parse(original_cover_bucket_url)
+    response  = Net::HTTP.get_response(image_uri)
 
     return false unless response.is_a?(Net::HTTPSuccess)
+    return false unless response['content-type'] == IMAGE_FILE_TYPE
 
     if response.is_a?(Net::HTTPSuccess)
       attach_cover_image_from_string(response.body)
@@ -218,13 +220,19 @@ class Book < ApplicationRecord
     editions.pluck(:id).include?(Edition.find_by(active: true).id)
   end
 
-  private
-
   def attach_cover_image_from_string(string)
-    cover_image.attach(io: StringIO.new(string), filename: "#{id}.jpg")
-    storage_service = ActiveStorage::Blob.service.name
-    attach_cover_image_variants unless storage_service == :local
+    success = cover_image.attach(
+      io: StringIO.new(string),
+      filename: "#{SecureRandom.uuid}.jpg"
+    )
+
+    return false unless success
+
+    attach_cover_image_variants
+    true
   end
+
+  private
 
   def attach_cover_image_variants
     attach_cover_image_variant('webp')

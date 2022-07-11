@@ -3,6 +3,42 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
+  context 'cover images' do
+    it 'are successfully uploaded, processed and presented' do
+      book = create(:book)
+      image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
+      image_contents = File.read(
+        Rails.root.join("spec/assets/#{image_file_name}")
+      )
+
+      expect(book.cover_image_url).to eq(book.original_cover_bucket_url)
+      expect(book.cover_image.attached?).not_to be_truthy
+
+      book.attach_cover_image_from_string(image_contents)
+
+      expect(book.cover_image.attached?).to be_truthy
+      expect(book.cover_image_url).not_to eq(book.original_cover_bucket_url)
+
+      # srcsets are valid
+      srcset_array = book.cover_img_srcset.split(', ')
+      variants = Book::COVER_IMAGE_VARIANTS
+
+      expect(srcset_array.length).to eq(variants.length)
+
+      srcset_array.each_with_index do |src, i|
+        src_components = src.split(' ')
+
+        # Variant URLs should be valid
+        image_uri = URI.parse(src_components[0])
+        expect(image_uri).to be_a(URI::HTTP)
+
+        # Variant sizes are numeric, based on the Book::COVER_IMAGE_VARIANTS
+        # constant and end with "w".
+        expect(src_components[1]).to eq("#{variants[i]}w")
+      end
+    end
+  end
+
   context 'title_noshy' do
     it 'displays a version of the title without a shy symbol' do
       book = create(:book, title: 'Holta&shy;vörðu&shy;heiði')
@@ -12,10 +48,10 @@ RSpec.describe Book, type: :model do
 
     it 'updates with the title' do
       book = create(:book, title: 'Holta&shy;vörðu&shy;heiði')
-      book.title = 'Vegavinnu&shy;verka&shy;manna&shy;ksúrs&shy;lykla&shy;kippa'
+      book.title = 'Vegavinnu&shy;verka&shy;manna&shy;skúrs&shy;lykla&shy;kippa'
       book.save
 
-      expect(book.title_noshy).to eq('Vegavinnuverkamannaksúrslyklakippa')
+      expect(book.title_noshy).to eq('Vegavinnuverkamannaskúrslyklakippa')
     end
   end
 
