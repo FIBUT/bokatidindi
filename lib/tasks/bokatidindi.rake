@@ -21,4 +21,11 @@ namespace :bt do
       GC.start
     end
   end
+  desc 'Update the hypenation processing of book titles'
+  task update_hypenation: :environment do
+    Book.all.each do |b|
+      b.set_title_noshy
+      puts "#{b.slug} - #{b.title_noshy} (#{b.title})"
+    end
+  end
 end
