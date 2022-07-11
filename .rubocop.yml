@@ -81,7 +81,6 @@ AllCops:
     - 'Rakefile'
     - 'Gemfile'
     - 'bin/**'
-    - 'test/**'
     - 'config/**'
     - 'db/schema.rb'
     - 'db/seeds/from_mysql.rb'
