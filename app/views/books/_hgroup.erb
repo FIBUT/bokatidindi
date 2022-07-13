@@ -1,13 +1,13 @@
 <hgroup id="book-<%= local_assigns[:book].id %>-hgroup" class="py-2 inline-block">
   <% unless local_assigns[:book].pre_title.empty? %>
     <h2 class="h3 pre-title"><%= local_assigns[:book].pre_title %></h2>
-    <h3 class="h2 title"><%= raw local_assigns[:book].title %></h3>
+    <h3 class="h2 title"><%= raw local_assigns[:book].title_hypenated %></h3>
     <% unless local_assigns[:book].post_title.empty? %>
       <h4 class="h3 post-title"><%= local_assigns[:book].post_title %></h4>
     <% end %>
 
   <% else %>
-    <h2 class="h2 title"><%= local_assigns[:book].show_title %></h2>
+    <h2 class="h2 title"><%= local_assigns[:book].title_hypenated %></h2>
     <% unless local_assigns[:book].post_title.empty? %>
       <h3 class="h3 post-title"><%= raw local_assigns[:book].post_title %></h3>
     <% end %>

@@ -39,19 +39,16 @@ RSpec.describe Book, type: :model do
     end
   end
 
-  context 'title_noshy' do
-    it 'displays a version of the title without a shy symbol' do
-      book = create(:book, title: 'Holta&shy;vörðu&shy;heiði')
+  context 'set_title_hypenation' do
+    it 'processes different title hypenation types needed' do
+      book = create(:book, title: 'Holta|vörðu|heiði')
+      book.set_title_hypenation
 
+      shy = Book::HYPENATION_SYMBOL
+
+      expect(book.title).to eq('Holta|vörðu|heiði')
       expect(book.title_noshy).to eq('Holtavörðuheiði')
-    end
-
-    it 'updates with the title' do
-      book = create(:book, title: 'Holta&shy;vörðu&shy;heiði')
-      book.title = 'Vegavinnu&shy;verka&shy;manna&shy;skúrs&shy;lykla&shy;kippa'
-      book.save
-
-      expect(book.title_noshy).to eq('Vegavinnuverkamannaskúrslyklakippa')
+      expect(book.title_hypenated).to eq("Holta#{shy}vörðu#{shy}heiði")
     end
   end
 
