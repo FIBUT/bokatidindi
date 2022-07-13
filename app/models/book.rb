@@ -174,7 +174,9 @@ class Book < ApplicationRecord
   end
 
   def full_title
-    [pre_title, title_noshy, post_title].reject(&:blank?).flatten.compact.join(' ')
+    [
+      pre_title, title_noshy, post_title
+    ].reject(&:blank?).flatten.compact.join(' ')
   end
 
   def full_title_with_author
