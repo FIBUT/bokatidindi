@@ -8,7 +8,6 @@ class Book < ApplicationRecord
 
   HYPENATION_SEPARATOR    = '|'
   HYPENATION_SYMBOL       = "\u00AD"
-  HYPENATION_HTML         = '&shy;'
   HYPENATION_ALTERNATIVES = [
     '|', '&shy;', "\u00AD", '&#xAD;', '&#173;', '&shy;'
   ].freeze
@@ -123,11 +122,6 @@ class Book < ApplicationRecord
     "#{bucket_url}#{source_id}#{IMAGE_FILE_SUFFIX}"
   end
 
-  def show_title
-    coder = HTMLEntities.new
-    coder.decode(title)
-  end
-
   def show_description
     return description.html_safe if long_description.empty?
 
@@ -180,7 +174,7 @@ class Book < ApplicationRecord
   end
 
   def full_title
-    [pre_title, title, post_title].reject(&:blank?).flatten.compact.join(' ')
+    [pre_title, title_noshy, post_title].reject(&:blank?).flatten.compact.join(' ')
   end
 
   def full_title_with_author
@@ -214,9 +208,6 @@ class Book < ApplicationRecord
     end
     self.title_noshy = title.gsub(HYPENATION_SEPARATOR, '')
     self.title_hypenated = title.gsub(HYPENATION_SEPARATOR, HYPENATION_SYMBOL)
-    self.title_hypenated_html = title.gsub(
-      HYPENATION_SEPARATOR, HYPENATION_HTML
-    )
   end
 
   def set_slug

@@ -45,12 +45,10 @@ RSpec.describe Book, type: :model do
       book.set_title_hypenation
 
       shy   = Book::HYPENATION_SYMBOL
-      shy_h = Book::HYPENATION_HTML
 
       expect(book.title).to eq('Holta|vörðu|heiði')
       expect(book.title_noshy).to eq('Holtavörðuheiði')
       expect(book.title_hypenated).to eq("Holta#{shy}vörðu#{shy}heiði")
-      expect(book.title_hypenated_html).to eq("Holta#{shy_h}vörðu#{shy_h}heiði")
     end
   end
 
