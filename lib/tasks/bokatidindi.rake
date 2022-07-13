@@ -24,8 +24,9 @@ namespace :bt do
   desc 'Update the hypenation processing of book titles'
   task update_hypenation: :environment do
     Book.all.each do |b|
-      b.set_title_noshy
-      puts "#{b.slug} - #{b.title_noshy} (#{b.title})"
+      b.set_title_hypenation
+      b.save
+      puts "#{b.slug} - #{b.title_hypenated_html} (#{b.title})"
     end
   end
 end
