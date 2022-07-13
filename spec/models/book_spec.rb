@@ -44,7 +44,7 @@ RSpec.describe Book, type: :model do
       book = create(:book, title: 'Holta|vörðu|heiði')
       book.set_title_hypenation
 
-      shy   = Book::HYPENATION_SYMBOL
+      shy = Book::HYPENATION_SYMBOL
 
       expect(book.title).to eq('Holta|vörðu|heiði')
       expect(book.title_noshy).to eq('Holtavörðuheiði')
