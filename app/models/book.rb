@@ -6,6 +6,13 @@ class Book < ApplicationRecord
   IMAGE_FILE_SUFFIX     = '.jpg'
   IMAGE_FILE_TYPE       = 'image/jpeg'
 
+  HYPENATION_SEPARATOR    = '|'
+  HYPENATION_SYMBOL       = "\u00AD"
+  HYPENATION_HTML         = '&shy;'
+  HYPENATION_ALTERNATIVES = [
+    '|', '&shy;', "\u00AD", '&#xAD;', '&#173;', '&shy;'
+  ].freeze
+
   SEARCH_COLUMNS = %i[
     source_id pre_title title post_title description long_description
   ].freeze
@@ -41,8 +48,8 @@ class Book < ApplicationRecord
 
   paginates_per 18
 
-  before_create :set_title_noshy, :set_slug
-  before_update :set_title_noshy
+  before_create :set_title_hypenation, :set_slug
+  before_update :set_title_hypenation
 
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
@@ -201,8 +208,15 @@ class Book < ApplicationRecord
     book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
   end
 
-  def set_title_noshy
-    self.title_noshy = title.gsub('&shy;', '')
+  def set_title_hypenation
+    HYPENATION_ALTERNATIVES.each do |a|
+      self.title = title.gsub(a, HYPENATION_SEPARATOR)
+    end
+    self.title_noshy = title.gsub(HYPENATION_SEPARATOR, '')
+    self.title_hypenated = title.gsub(HYPENATION_SEPARATOR, HYPENATION_SYMBOL)
+    self.title_hypenated_html = title.gsub(
+      HYPENATION_SEPARATOR, HYPENATION_HTML
+    )
   end
 
   def set_slug
