@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :admin_user do
+    name                  { FFaker::Name.name }
+    email                 { FFaker::Internet.email }
+    role                  { AdminUser.roles[:admin] }
+    password              { 'password123456' }
+    password_confirmation { 'password123456' }
+
+    factory :publisher_user do
+      role      { AdminUser.roles[:publisher] }
+      publisher { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
+    end
+  end
+
   factory :book do
     source_id        { FFaker::Random.rand(1..999_999_999) }
     pre_title        { '' }
