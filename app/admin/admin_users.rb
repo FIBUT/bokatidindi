@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register AdminUser do
   permit_params :name, :publisher_id, :role, :email,
                 :password, :password_confirmation
@@ -60,7 +62,6 @@ ActiveAdmin.register AdminUser do
       link_to 'Aflæsa notanda', "#{admin_admin_user_url}/unlock"
     end
   end
-
 
   index do
     selectable_column
