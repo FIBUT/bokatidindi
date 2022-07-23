@@ -5,6 +5,8 @@ class Publisher < ApplicationRecord
 
   before_create :set_slug
 
+  default_scope { order(:name) }
+
   private
 
   def set_slug

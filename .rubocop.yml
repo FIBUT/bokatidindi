@@ -29,6 +29,11 @@ Style/Documentation:
 Style/GuardClause:
   Exclude:
     - 'db/migrate/20220501202913_add_service_name_to_active_storage_blobs.active_storage.rb'
+    - 'app/models/ability.rb'
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'app/models/ability.rb'
 
 # This cop supports safe auto-correction (--auto-correct).
 # Configuration parameters: RequireEnglish.

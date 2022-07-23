@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :redirect_root_domain
 
+  def access_denied(_exception)
+    render status: :unauthorized, layout: false, plain: ''
+  end
+
   private
 
   def redirect_root_domain
