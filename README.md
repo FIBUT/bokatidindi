@@ -60,7 +60,6 @@ $ yarn install
 $ yarn build 
 $ rake db:create
 $ rake db:schema:load # or rake db:migrate
-$ rake db:seed
 $ rake bt:attach_covers
 ```
 
@@ -81,7 +80,6 @@ $ git push heroku main
 ```
 $ heroku pg:reset DATABASE --confirm bokatidindi-staging
 $ heroku run rake db:schema:load
-$ heroku run rake db:seed
 $ heroku run:detached --size standard-2x rake bt:attach_covers
 ```
 
