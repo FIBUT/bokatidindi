@@ -15,7 +15,6 @@ FactoryBot.define do
   end
 
   factory :book do
-    source_id        { FFaker::Random.rand(1..999_999_999) }
     pre_title        { '' }
     title            { FFaker::Lorem.phrase.chop }
     post_title       { '' }
