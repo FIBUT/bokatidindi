@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Book do
   permit_params do
     permitted = [
       :pre_title, :title, :post_title, :description, :long_description,
       :cover_image_file,
-      book_binding_types_attributes: [:barcode, :binding_type_id, :_destroy],
-      book_authors_attributes: [:author_type_id, :author_id, :_destroy],
-      book_categories_attributes: [:category_id, :_destroy]
+      { book_binding_types_attributes: %i[barcode binding_type_id _destroy],
+        book_authors_attributes: %i[author_type_id author_id _destroy],
+        book_categories_attributes: %i[category_id _destroy] }
     ]
     if current_admin_user.admin?
       permitted << :source_id
