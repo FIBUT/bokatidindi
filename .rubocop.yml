@@ -8,6 +8,8 @@ Metrics/AbcSize:
 # IgnoredMethods: refine
 Metrics/BlockLength:
   Max: 150
+  Exclude:
+    - 'admin/*'
 
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:

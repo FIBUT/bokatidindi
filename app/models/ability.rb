@@ -30,6 +30,7 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
 
     if user.publisher?
+      can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
       can :manage, Book, publisher: user.publisher
       can :read, AdminUser, publisher: user.publisher
     end
