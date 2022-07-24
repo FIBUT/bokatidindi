@@ -225,9 +225,6 @@ GEM
     matrix (0.4.2)
     memoist (0.16.2)
     method_source (1.0.0)
-    mimemagic (0.4.3)
-      nokogiri (~> 1)
-      rake
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
@@ -451,7 +448,6 @@ DEPENDENCIES
   jsbundling-rails
   kaminari (>= 1.2.0)
   listen (~> 3.3)
-  mimemagic
   mysql2 (>= 0.5.3)
   open-uri
   pg
