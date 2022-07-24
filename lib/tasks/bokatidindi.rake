@@ -7,7 +7,7 @@ namespace :bt do
 
     books = Book.joins(:editions).where(
       'editions.id': active_edition_id
-    )
+    ).where.not(source_id: nil)
 
     books.each do |b|
       next if b.cover_image.attached?

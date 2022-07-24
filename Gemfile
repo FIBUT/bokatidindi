@@ -7,6 +7,8 @@ gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
 
+gem 'isbn_validation'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7'
 # Use Puma as the app server

@@ -43,12 +43,19 @@ class Book < ApplicationRecord
   has_many :editions, through: :book_editions
   belongs_to :publisher
 
+  accepts_nested_attributes_for :book_authors, allow_destroy: true
+  accepts_nested_attributes_for :book_categories, allow_destroy: true, limit: 3
+  accepts_nested_attributes_for :book_binding_types, allow_destroy: true
+
   has_one_attached :cover_image, dependent: :destroy
 
   paginates_per 18
 
-  before_create :set_title_hypenation, :set_slug
+  before_create :set_title_hypenation
+  after_create :set_slug
   before_update :set_title_hypenation
+
+  validates :title, :description
 
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
@@ -157,6 +164,12 @@ class Book < ApplicationRecord
     links.to_sentence
   end
 
+  def full_title_noshy
+    [
+      pre_title, title_noshy, post_title
+    ].reject(&:blank?).flatten.compact.join(' ')
+  end
+
   def author_groups
     groups = []
 
@@ -220,7 +233,7 @@ class Book < ApplicationRecord
       parameterized_title = parameterized_title.chop
     end
 
-    self.slug = "#{parameterized_title}-#{source_id}"
+    self.slug = "#{parameterized_title}-#{id}"
   end
 
   def current_edition?
@@ -228,12 +241,12 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image_from_string(string)
-    success = cover_image.attach(
+    cover_image.attach(
       io: StringIO.new(string),
       filename: "#{SecureRandom.uuid}.jpg"
     )
 
-    return false unless success
+    return false if cover_image.attached?
 
     attach_cover_image_variants
     true
