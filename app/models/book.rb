@@ -55,8 +55,6 @@ class Book < ApplicationRecord
   after_create :set_slug
   before_update :set_title_hypenation
 
-  validates :title, :description
-
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
     uri.host.delete_prefix('www.')
