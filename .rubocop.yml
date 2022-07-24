@@ -9,7 +9,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Max: 150
   Exclude:
-    - 'admin/*'
+    - 'app/admin/*'
 
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
