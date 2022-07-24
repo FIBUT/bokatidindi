@@ -51,8 +51,7 @@ class Book < ApplicationRecord
 
   paginates_per 18
 
-  before_create :set_title_hypenation
-  after_create :set_slug
+  before_create :set_title_hypenation, :set_slug
   before_update :set_title_hypenation
 
   def domain_to_buy
@@ -225,13 +224,14 @@ class Book < ApplicationRecord
 
   def set_slug
     parameterized_title = title_noshy.parameterize(locale: :is).first(64)
+    random_string       = rand(1000..9999)
 
     # Prevent the slug from ending with a dash
     if parameterized_title.end_with?('-')
       parameterized_title = parameterized_title.chop
     end
 
-    self.slug = "#{parameterized_title}-#{id}"
+    self.slug = "#{parameterized_title}-#{random_string}"
   end
 
   def current_edition?

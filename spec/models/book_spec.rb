@@ -59,7 +59,6 @@ RSpec.describe Book, type: :model do
       expect(book.slug).to start_with(
         book.title_noshy.parameterize(locale: :is).first(64)
       )
-      expect(book.slug).to end_with(book.source_id.to_s)
     end
 
     it 'will not change its value when the title is edited' do
