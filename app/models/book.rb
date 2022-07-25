@@ -39,7 +39,7 @@ class Book < ApplicationRecord
   has_many :author_types, through: :book_authors
   has_many :book_binding_types, dependent: :destroy
   has_many :binding_types, through: :book_binding_types
-  has_many :book_editions, dependent: :restrict_with_error
+  has_many :book_editions, dependent: :destroy
   has_many :editions, through: :book_editions
   belongs_to :publisher
 
