@@ -16,4 +16,5 @@
 //
 //   .status_tag { background: #6090DB; }
 
-#edit_book .cover-image { margin-left: calc(10px + 20%); }
+form.formtastic .cover-image { margin-left: calc(10px + 20%); }
+form.formtastic .has_many_add { margin-bottom: 2em; }

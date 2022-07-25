@@ -4,7 +4,7 @@ ActiveAdmin.register Book do
   permit_params do
     permitted = [
       :pre_title, :title, :post_title, :description, :long_description,
-      :cover_image_file,
+      :cover_image_file, :uri_to_buy, :uri_to_audiobook,
       { book_binding_types_attributes: %i[barcode binding_type_id _destroy],
         book_authors_attributes: %i[author_type_id author_id _destroy],
         book_categories_attributes: %i[category_id _destroy] }
@@ -17,6 +17,16 @@ ActiveAdmin.register Book do
   end
 
   controller do
+    def build_new_resource
+      super.tap do |r|
+        r.assign_attributes(
+          book_authors: [BookAuthor.new],
+          book_binding_types: [BookBindingType.new],
+          book_categories: [BookCategory.new]
+        )
+      end
+    end
+
     def update
       @resource = Book.find(permitted_params[:id])
 
@@ -66,7 +76,6 @@ ActiveAdmin.register Book do
   filter :publisher
   filter :authors
   filter :id_equals
-  filter :source_id_equals
 
   index do
     selectable_column
@@ -122,6 +131,12 @@ ActiveAdmin.register Book do
                     'letri.'
     end
 
+    f.has_many :book_authors, heading: 'Höfundar', allow_destroy: true do |ba|
+      ba.input :author_type,
+               input_html: { autocomplete: 'off' }
+      ba.input :author, input_html: { autocomplete: 'off' }
+    end
+
     f.inputs 'Lýsing' do
       f.input :description,
               as: :text,
@@ -137,17 +152,21 @@ ActiveAdmin.register Book do
                     'lýsingin í staðinn.'
     end
 
+    f.inputs 'Vefslóðir' do
+      f.input :uri_to_audiobook, input_html: { autocomplete: 'off' }
+      f.input :uri_to_buy, input_html: { autocomplete: 'off' }
+    end
+
+    f.inputs 'Tölulegar upplýsingar' do
+      f.input :page_count
+      f.input :minutes
+    end
+
     f.inputs 'Mynd af forsíðu' do
       if resource.cover_image.attached?
         f.img src: resource.cover_image_variant_url(266), class: 'cover-image'
       end
       f.input :cover_image_file, as: :file
-    end
-
-    f.has_many :book_authors, heading: 'Höfundar', allow_destroy: true do |ba|
-      ba.input :author_type,
-               input_html: { autocomplete: 'off' }
-      ba.input :author, input_html: { autocomplete: 'off' }
     end
 
     f.has_many(
@@ -165,7 +184,7 @@ ActiveAdmin.register Book do
     end
 
     if current_admin_user.admin?
-      f.inputs do
+      f.inputs 'Ítarupplýsingar (eingöngu fyrir FÍBÚT)' do
         f.input :source_id,
                 input_html: { autocomplete: 'off' },
                 hint: 'Upprunalegt raðnúmer bókar úr eldra kerfi FÍBÚT.'
