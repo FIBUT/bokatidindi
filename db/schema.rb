@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_27_142851) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_27_180034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -180,6 +180,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_142851) do
     t.string "title_noshy"
     t.string "title_hypenated"
     t.string "country_of_origin"
+    t.string "original_title"
     t.index ["book_author_id"], name: "index_books_on_book_author_id"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true

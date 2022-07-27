@@ -87,6 +87,8 @@ is:
         uri_to_buy: 'Vefslóð á vefverslun'
         page_count: 'Blaðsíðufjöldi'
         minutes: 'Mínútufjöldi'
+        original_title: 'Upprunalegur titill'
+        country_of_origin: 'Upprunaland'
       book_category:
         category: 'Flokkur'
       book_binding_type:
