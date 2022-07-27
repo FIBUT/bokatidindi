@@ -160,6 +160,12 @@ ActiveAdmin.register Book do
     f.inputs 'Tölulegar upplýsingar' do
       f.input :page_count
       f.input :minutes
+      f.input(
+        :country_of_origin,
+        as: :country, include_blank: true,
+        priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
+        input_html: { autocomplete: 'off' }
+      )
     end
 
     f.inputs 'Mynd af forsíðu' do
