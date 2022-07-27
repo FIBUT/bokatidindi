@@ -1,0 +1,9 @@
+<p>Hæ <%= @resource.name.split(' ').first %>,</p>
+
+<p>Aðgangi þínum að umsjónarkerfi Bókatíðinda hefur verið læst.</p>
+
+<p>Þú getur heimsótt eftirfarandi vefslóð til að <%= link_to 'taka aðganginn úr lás', unlock_url(@resource, unlock_token: @token) %>:</p>
+
+<p><a href="<%= unlock_url(@resource, unlock_token: @token) %>"><%= unlock_url(@resource, unlock_token: @token) %></a></p>
+
+<%= render "devise/shared/footer" %>

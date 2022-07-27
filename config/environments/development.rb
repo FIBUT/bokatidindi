@@ -79,4 +79,12 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   routes.default_url_options[:host] = 'localhost:3000'
+
+  config.action_mailer.smtp_settings = {
+    address: 'smtp-relay.sendinblue.com',
+    port: 587,
+    user_name: Rails.application.credentials.dig(:sendinblue, :username),
+    password: Rails.application.credentials.dig(:sendinblue, :password),
+    authentication: :plain
+  }
 end
