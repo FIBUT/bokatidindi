@@ -5,6 +5,7 @@ ActiveAdmin.register Book do
     permitted = [
       :pre_title, :title, :post_title, :description, :long_description,
       :cover_image_file, :uri_to_buy, :uri_to_audiobook,
+      :page_count, :minutes, :original_title, :country_of_origin,
       { book_binding_types_attributes: %i[barcode binding_type_id _destroy],
         book_authors_attributes: %i[author_type_id author_id _destroy],
         book_categories_attributes: %i[category_id _destroy] }
@@ -73,7 +74,7 @@ ActiveAdmin.register Book do
 
   filter :title_contains
   filter :description_contains
-  filter :publisher
+  filter :publishercheck
   filter :authors
   filter :id_equals
 
