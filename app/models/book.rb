@@ -6,6 +6,11 @@ class Book < ApplicationRecord
   IMAGE_FILE_SUFFIX     = '.jpg'
   IMAGE_FILE_TYPE       = 'image/jpeg'
 
+  PRIORITY_COUNTRIES_OF_ORIGIN = [
+    'IS', 'US', 'GB', 'SE', 'NO', 'DK', 'FI', 'FO', 'GL', 'FR', 'DE', 'RU',
+    'UA', 'JP'
+  ].freeze
+
   HYPENATION_SEPARATOR    = '|'
   HYPENATION_SYMBOL       = "\u00AD"
   HYPENATION_ALTERNATIVES = [
