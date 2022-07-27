@@ -123,7 +123,7 @@ ActiveAdmin.register Book do
               input_html: { autocomplete: 'off' },
               hint: 'Aðaltitill bókarinnar; birtist sem aðalfyrirsögn. Hægt '\
                     'er að nota táknið | til að stilla af línuskiptingar '\
-                    'fyrir löng orð.'
+                    'fyrir löng orð á minni skjám.'
       f.input :post_title,
               required: false,
               input_html: { autocomplete: 'off' },
