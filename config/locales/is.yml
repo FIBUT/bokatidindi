@@ -60,6 +60,9 @@ is:
       author:
         one: 'höfundur'
         other: 'höfundar'
+      binding_type:
+        one: 'gerð bindingar'
+        other: 'gerðir bindingar'
       comment:
         one: "athugasemd"
         other: "athugasemdir"
@@ -76,17 +79,29 @@ is:
         post_title: 'Undirtitill'
         description: 'Stutt lýsing'
         long_description: 'Löng lýsing'
-        cover_image: 'Forsíðumynd'
+        cover_image_file: 'Skrá fyrir forsíðumynd'
+        show_description: 'Lýsing'
+        categories: 'Flokkar'
+        authors: 'Höfundar'
+        uri_to_audiobook: 'Vefslóð á hljóðbók'
+        uri_to_buy: 'Vefslóð á vefverslun'
+        page_count: 'Blaðsíðufjöldi'
+        minutes: 'Mínútufjöldi'
+      book_category:
+        category: 'Flokkur'
+      book_binding_type:
+        binding_type: 'Gerð bindingar'
+        barcode: 'Strikamerki'
       book_author:
         author_type: 'Hlutverk'
         author: 'Höfundur'
       active_admin/comment:
         author_type: "Author type"
         body: "Body"
-        created_at: "Created"
-        namespace: "Namespace"
+        created_at: "Skráð"
+        namespace: "Nafnrými"
         resource_type: "Resource type"
-        updated_at: "Updated"
+        updated_at: "Uppfært"
   active_admin:
     dashboard: "Dashboard"
     dashboard_welcome:
@@ -97,9 +112,9 @@ is:
     delete: "Eyða"
     delete_confirmation: "Are you sure you want to delete this?"
     create_another: "Create another %{model}"
-    new_model: "New %{model}"
-    edit_model: "Edit %{model}"
-    delete_model: "Delete %{model}"
+    new_model: "Skrá %{model}"
+    edit_model: "Breyta %{model}"
+    delete_model: "Eyða %{model}"
     details: "%{model} Details"
     cancel: "Cancel"
     empty: "Tómt"
@@ -115,18 +130,18 @@ is:
         filter: "Sía"
         clear: "Núllstilla síun"
       predicates:
-        contains: "Contains"
+        contains: "inniheldur"
         equals: "jafngildir"
-        starts_with: "Starts with"
-        ends_with: "Ends with"
+        starts_with: "byrjar á"
+        ends_with: "endar á"
         greater_than: "Greater than"
         less_than: "Less than"
         gteq_datetime: "Greater or equal to"
         lteq_datetime: "Lesser or equal to"
-        from: "From"
-        to: "To"
+        from: "frá"
+        to: "til"
     scopes:
-      all: "All"
+      all: "Allt"
     search_status:
       headline: "Search status:"
       current_scope: "Scope:"
@@ -138,7 +153,7 @@ is:
       "unset": "No"
     main_content: "Please implement %{model}#main_content to display content."
     logout: "Logout"
-    powered_by: "Powered by %{active_admin} %{version}"
+    powered_by: "Keyrir á %{active_admin} %{version}"
     sidebars:
       filters: "Síur"
       search_status: "Search Status"
@@ -157,9 +172,9 @@ is:
       content: "There are no %{resource_name} yet."
       link: "Create one"
     dropdown_actions:
-      button_label: "Actions"
+      button_label: "Aðgerðir"
     batch_actions:
-      button_label: "Batch Actions"
+      button_label: "Aðgerðir fyrir bunka"
       default_confirmation: "Are you sure you want to do this?"
       delete_confirmation: "Are you sure you want to delete these %{plural_model}?"
       succesfully_destroyed:
@@ -199,9 +214,9 @@ is:
         title: "Sign up"
         submit: "Sign up"
       login:
-        title: "Login"
-        remember_me: "Remember me"
-        submit: "Login"
+        title: "Innskráning"
+        remember_me: "Mundu mig"
+        submit: "Skrá inn"
       reset_password:
         title: "Forgot your password?"
         submit: "Reset My Password"

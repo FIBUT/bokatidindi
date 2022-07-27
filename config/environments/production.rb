@@ -130,4 +130,12 @@ Rails.application.configure do
   routes.default_url_options[:protocol] = 'https'
 
   config.active_storage.service = :google
+
+  config.action_mailer.smtp_settings = {
+    address: 'smtp-relay.sendinblue.com',
+    port: 587,
+    user_name: Rails.application.credentials.dig(:sendinblue, :username),
+    password: Rails.application.credentials.dig(:sendinblue, :password),
+    authentication: :plain
+  }
 end

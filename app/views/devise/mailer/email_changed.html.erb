@@ -1,0 +1,9 @@
+<p>Hæ <%= @resource.name.split(' ').first %>,</p>
+
+<% if @resource.try(:unconfirmed_email?) %>
+  <p>Þessi tölvupóstur staðfestir að tölvupóstfangi þínu hefur verið breytt í <%= @resource.unconfirmed_email %>, í umsjónarkerfi Bókatíðinda.</p>
+<% else %>
+  <p>Þessi tölvupóstur staðfestir að tölvupóstfangi þínu hefur verið breytt í <%= @resource.email %>, í umsjónarkerfi Bókatíðinda.</p>
+<% end %>
+
+<%= render "shared/footer" %>
