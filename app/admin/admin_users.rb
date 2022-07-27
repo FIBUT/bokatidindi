@@ -82,12 +82,12 @@ ActiveAdmin.register AdminUser do
   form do |f|
     f.semantic_errors
     inputs 'Grunnupplýsingar' do
-      input :name
-      input :email
+      input :name, input_html: { autocomplete: 'off' }
+      input :email, input_html: { autocomplete: 'off' }
     end
     inputs 'Hlutverk' do
-      input :publisher
-      input :role
+      input :publisher, input_html: { autocomplete: 'off' }
+      input :role, input_html: { autocomplete: 'off' }
     end
     inputs 'Lykilorð' do
       input :password, required: false
