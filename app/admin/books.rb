@@ -157,14 +157,16 @@ ActiveAdmin.register Book do
       f.input :uri_to_buy, input_html: { autocomplete: 'off' }
     end
 
-    f.inputs 'Tölulegar upplýsingar' do
+    f.inputs 'Nánari upplýsingar' do
       f.input :page_count
       f.input :minutes
+      f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
       f.input(
         :country_of_origin,
         as: :country, include_blank: true,
         priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
-        input_html: { autocomplete: 'off' }
+        input_html: { autocomplete: 'off' },
+        hint: 'Upprunaland bókar.'
       )
     end
 
