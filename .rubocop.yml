@@ -78,7 +78,7 @@ Rails/OutputSafety:
 
 Rails/BulkChangeTable:
   Exclude:
-    - 'db/migrate/20211102201546_add_urls_to_books.rb'
+    - 'db/migrate/*'
 
 AllCops:
   NewCops: disable

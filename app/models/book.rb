@@ -240,7 +240,7 @@ class Book < ApplicationRecord
   end
 
   def current_edition?
-    editions.pluck(:id).include?(Edition.find_by(active: true).id)
+    editions.pluck(:id).include?(Edition.current.first.id)
   end
 
   def attach_cover_image_from_string(string)

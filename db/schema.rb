@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_27_180034) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_28_213152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -201,9 +201,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_180034) do
   create_table "editions", force: :cascade do |t|
     t.string "title"
     t.string "original_title_id_string"
-    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "print_date"
+    t.datetime "closing_date"
+    t.datetime "opening_date"
+    t.datetime "online_date"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|

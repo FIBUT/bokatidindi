@@ -11,6 +11,8 @@ gem 'isbn_validation'
 
 gem 'country_select'
 
+gem 'cocoon'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7'
 # Use Puma as the app server

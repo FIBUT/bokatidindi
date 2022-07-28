@@ -18,3 +18,5 @@
 
 form.formtastic .cover-image { margin-left: calc(10px + 20%); }
 form.formtastic .has_many_add { margin-bottom: 2em; }
+
+form.formtastic.book #book_title_input input { font-weight: bold; font-size: 1.4rem; }
