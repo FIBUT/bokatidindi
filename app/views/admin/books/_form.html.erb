@@ -1,0 +1,120 @@
+<%= semantic_form_for [:admin, @book] do |f| %>
+
+<%= f.semantic_errors %>
+
+<%= f.inputs name: 'Titill' do %>
+  <%= f.input :pre_title,
+              required: false,
+              input_html: { autocomplete: 'off' },
+              hint: 'Yfirfyrirsögn; t.d. nafn seríu; birtist fyrir ofan '\
+                    'aðaltitil í mina letri.'
+  %>
+  <%= f.input :title,
+              required: true,
+              input_html: { autocomplete: 'off' },
+              hint: 'Aðaltitill bókarinnar; birtist sem aðalfyrirsögn. Hægt '\
+                    'er að nota táknið | til að stilla af línuskiptingar '\
+                    'fyrir löng orð á minni skjám.'%>
+  <%= f.input :post_title,
+              required: false,
+              input_html: { autocomplete: 'off' },
+              hint: 'Undirfyrirsögn; biritist fyrir neðan aðaltitil í minna '\
+                    'letri.'
+  %>
+<% end %>
+
+<div id="book_authors">
+  <%= f.semantic_fields_for :book_authors do |book_author| %>
+    <%= render 'book_author_fields', f: book_author %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association 'Bæta höfundi við', f, :book_authors %>
+  </div>
+</div>
+
+<%= f.inputs name: 'Lýsing' do %>
+  <%= f.input :description,
+              as: :string,
+              required: true,
+              input_html: { rows: 2, autocomplete: 'off' },
+              hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
+                    'prentútgáfu Bókatíðinda. Hámark 380 slög.'
+  %>
+  <%= f.input :long_description,
+              as: :text,
+              input_html: { rows: 5, autocomplete: 'off' },
+              hint: 'Lengri lýsing sem birtist á upplýsingasíðu hverrar bókar '\
+                    'í vefútgáfu. Ef þessi reitur er tómur birtist styttri '\
+                    'lýsingin í staðinn.'
+  %>
+<% end %>
+
+<%= f.inputs 'Vefslóðir' do %>
+  <%= f.input :uri_to_audiobook, input_html: { autocomplete: 'off' } %>
+  <%= f.input :uri_to_buy, input_html: { autocomplete: 'off' } %>
+<% end %>
+
+<%= f.inputs 'Nánari upplýsingar' do %>
+  <%= f.input :page_count %>
+  <%= f.input :minutes %>
+  <%= f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.' %>
+  <%= f.input(
+        :country_of_origin,
+        as: :country, include_blank: true,
+        priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
+        input_html: { autocomplete: 'off' },
+        hint: 'Upprunaland bókar.'
+      )
+  %>
+<% end %>
+
+<%= f.inputs 'Mynd af forsíðu' do %>
+  <% if @book.cover_image.attached? %>
+    <img src="<%= resource.cover_image_variant_url(266) %>" class="cover-image" />
+  <% end %>
+  <%= f.input :cover_image_file, as: :file %>
+<% end %>
+
+<div id="book_binding_types">
+  <%= f.semantic_fields_for :book_binding_types do |book_binding_type| %>
+    <%= render 'book_binding_type_fields', f: book_binding_type %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association 'Bæta bindingu við', f, :book_binding_types %>
+  </div>
+</div>
+
+<div id="book_categories">
+  <%= f.semantic_fields_for :book_categories do |book_category| %>
+    <%= render 'book_category_fields', f: book_category %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association 'Bæta flokki við', f, :book_categories %>
+  </div>
+</div>
+
+<% if Edition.active.count > 0 %>
+  <div>
+    <%= f.inputs do %>
+      <%=
+      f.input :editions,
+        as: :check_boxes,
+        collection: Edition.active
+      %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_admin_user.admin? %>
+  <%= f.inputs 'Ítarupplýsingar (eingöngu fyrir FÍBÚT)' do %>
+    <%=
+    f.input :source_id, input_html: { autocomplete: 'off' },
+                hint: 'Upprunalegt raðnúmer bókar úr eldra kerfi FÍBÚT.'
+    %>
+    <%= f.input :publisher, input_html: { autocomplete: 'off' } %>
+  <% end %>
+<% end %>
+
+<%= f.actions %>
+
+<% end %>

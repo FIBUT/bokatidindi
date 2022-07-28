@@ -60,8 +60,10 @@ FactoryBot.define do
   end
 
   factory :edition do
-    title { FFaker::Lorem.phrase.chop }
-    original_title_id_string { FFaker::Lorem.characters(7) }
-    active { false }
+    title        { FFaker::Lorem.phrase.chop }
+    opening_date { DateTime.now - 2.months }
+    online_date { DateTime.now - 1.month }
+    closing_date { DateTime.now + 3.months }
+    print_date { DateTime.now + 3.months }
   end
 end

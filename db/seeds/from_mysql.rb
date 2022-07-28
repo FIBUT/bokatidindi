@@ -281,8 +281,4 @@ book_result.each do |book_row|
   print "#{inserted_book.slug} - #{inserted_book.full_title}\n"
 end
 
-e = Edition.last
-e.active = true
-e.save
-
 puts "#{['😎', '😊', '🎉', '🥂'].sample} #{Book.all.count} books imported!"

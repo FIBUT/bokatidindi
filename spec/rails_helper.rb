@@ -78,11 +78,7 @@ RSpec.configure do |config|
       )
     end
 
-    FactoryBot.create(
-      :edition,
-      title: 'Bókatíðindi 2022', original_title_id_string: 'BT2022',
-      active: true
-    )
+    FactoryBot.create(:edition)
 
     FactoryBot.create_list :publisher, 200
     FactoryBot.create_list :author, 2000

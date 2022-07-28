@@ -20,7 +20,7 @@ class BooksController < ApplicationController
         book_binding_types: [:binding_type],
         cover_image_attachment: [:blob]
       ).where(
-        book_editions: { 'edition_id': Edition.find_by(active: true) }
+        book_editions: { 'edition_id': Edition.current.first.id }
       )
 
       if params[:category]
