@@ -26,7 +26,7 @@ namespace :bt do
     Book.all.each do |b|
       b.set_title_hypenation
       b.save
-      puts "#{b.slug} - #{b.title_hypenated_html} (#{b.title})"
+      puts "#{b.slug} - #{b.title_hypenated} (#{b.title})"
     end
   end
 end
