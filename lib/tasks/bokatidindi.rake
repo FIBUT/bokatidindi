@@ -3,7 +3,7 @@
 namespace :bt do
   desc 'Attach images of each cover to the books'
   task attach_covers: :environment do
-    active_edition_id = Edition.find_by(active: true).id
+    active_edition_id = Edition.current.first
 
     books = Book.joins(:editions).where(
       'editions.id': active_edition_id
