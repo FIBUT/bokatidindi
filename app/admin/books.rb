@@ -38,10 +38,8 @@ ActiveAdmin.register Book do
 
       unless @resource.update(permitted_params[:book])
         return redirect_to(
-          edit_admin_book_path(
-            @resource.id,
-            notice: 'Ekki var hægt að vista bókina.'
-          )
+          edit_admin_book_path(@resource.id),
+          alert: 'Ekki var hægt að vista bókina.'
         )
       end
 
@@ -58,10 +56,8 @@ ActiveAdmin.register Book do
       end
 
       redirect_to(
-        admin_book_path(
-          @resource.id,
-          notice: "Bókin #{@resource.title} hefur verið uppfærð."
-        )
+        admin_books_path,
+        notice: "Bókin #{@resource.title} hefur verið uppfærð."
       )
     end
 
@@ -157,7 +153,7 @@ ActiveAdmin.register Book do
 
     f.inputs 'Lýsing' do
       f.input :description,
-              as: :text,
+              as: :string,
               required: true,
               input_html: { rows: 2, autocomplete: 'off' },
               hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
