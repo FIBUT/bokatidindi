@@ -89,7 +89,6 @@ ActiveAdmin.register AdminUser do
 
   filter :name
   filter :email
-  filter :role, as: :select
   filter :publishers, as: :select
 
   form do |f|
