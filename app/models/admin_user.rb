@@ -6,7 +6,10 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable, :trackable,
          :recoverable, :rememberable, :validatable, :lockable
 
-  belongs_to :publisher, optional: true
+  has_many :admin_user_publishers, dependent: :destroy
+  has_many :publishers, through: :admin_user_publishers
+
+  accepts_nested_attributes_for :admin_user_publishers
 
   enum :role, %i[guest publisher admin]
 
@@ -16,7 +19,7 @@ class AdminUser < ApplicationRecord
 
   validates :role, presence: true
 
-  validates :publisher, presence: true, if: :publisher?
-  validates :publisher, absence: true, if: :admin?
-  validates :publisher, absence: true, if: :guest?
+  validates :admin_user_publishers, length: { minimum: 1 }, if: :publisher?
+  validates :admin_user_publishers, length: { is: 0 }, if: :admin?
+  validates :admin_user_publishers, length: { is: 0 }, if: :guest?
 end

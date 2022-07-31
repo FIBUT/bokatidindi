@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :admin_user_publisher do
+    admin_user_id { 1 }
+    publisher_id { 1 }
+  end
+
   factory :admin_user do
     name                  { FFaker::Name.name }
     email                 { FFaker::Internet.email }
@@ -9,8 +14,7 @@ FactoryBot.define do
     password_confirmation { 'password123456' }
 
     factory :publisher_user do
-      role      { AdminUser.roles[:publisher] }
-      publisher { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
+      role { AdminUser.roles[:publisher] }
     end
   end
 
