@@ -157,7 +157,7 @@ ActiveAdmin.register Book do
               required: true,
               input_html: { rows: 2, autocomplete: 'off' },
               hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
-                    'prentútgáfu Bókatíðinda. Hámark 400 slög.'
+                    'prentútgáfu Bókatíðinda. Hámark 300 slög.'
       f.input :long_description,
               as: :text,
               input_html: { rows: 5, autocomplete: 'off' },
@@ -194,7 +194,7 @@ ActiveAdmin.register Book do
     f.has_many(
       :book_binding_types, heading: 'Bindingar og útgáfur', allow_destroy: true
     ) do |bb|
-      bb.input :binding_type
+      bb.input :binding_type, collection: BindingType.open
       bb.input :barcode, input_html: { autocomplete: 'off' }
     end
 
