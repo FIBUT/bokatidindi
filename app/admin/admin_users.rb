@@ -2,9 +2,21 @@
 
 ActiveAdmin.register AdminUser do
   permit_params :name, :publisher_id, :role, :email,
-                :password, :password_confirmation
+                :password, :password_confirmation,
+                {
+                  admin_user_publishers_attributes: %i[id publisher_id _destroy]
+                }
 
   controller do
+    def build_new_resource
+      super.tap do |r|
+        r.assign_attributes(
+          role: :publisher,
+          admin_user_publishers: [AdminUserPublisher.new]
+        )
+      end
+    end
+
     def update
       @resource = AdminUser.find(permitted_params[:id])
 
@@ -71,23 +83,24 @@ ActiveAdmin.register AdminUser do
     column :sign_in_count
     column :created_at
     column :locked_at
+    column :publishers
     actions
   end
 
   filter :name
   filter :email
   filter :role, as: :select
-  filter :publisher, as: :select
+  filter :publishers, as: :select
 
   form do |f|
     f.semantic_errors
     inputs 'Grunnupplýsingar' do
       input :name, input_html: { autocomplete: 'off' }
       input :email, input_html: { autocomplete: 'off' }
-    end
-    inputs 'Hlutverk' do
-      input :publisher, input_html: { autocomplete: 'off' }
       input :role, input_html: { autocomplete: 'off' }
+    end
+    f.has_many :admin_user_publishers, allow_destroy: true do |up|
+      up.input :publisher
     end
     inputs 'Lykilorð' do
       input :password, required: false

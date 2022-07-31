@@ -72,6 +72,9 @@ is:
       edition:
         one: 'útgáfa Bókatíðinda'
         other: 'útgáfur Bókatíðinda'
+      admin_user:
+        one: 'notandi'
+        other: 'notendur'
     attributes:
       book:
         id: 'númer'
@@ -107,6 +110,14 @@ is:
         namespace: "Nafnrými"
         resource_type: "Resource type"
         updated_at: "Uppfært"
+      admin_user:
+        name: "Nafn"
+        email: "Tölvupóstfang"
+        remember_created_at: "Innskráning vistuð"
+        current_sign_in_at: "Núverandi innskráning"
+        last_sign_in_at: "Síðasta innskráning"
+        current_sign_in_ip: "IP-tala núverandi innskráningar"
+        last_sign_in_ip: "IP-tala síðustu innskráningar"
   active_admin:
     dashboard: "Dashboard"
     dashboard_welcome:
@@ -174,8 +185,8 @@ is:
         other: "entries"
     any: "Any"
     blank_slate:
-      content: "There are no %{resource_name} yet."
-      link: "Create one"
+      content: "Ekkert skráð ennþá."
+      link: "Búa til skráningu."
     dropdown_actions:
       button_label: "Aðgerðir"
     batch_actions:
