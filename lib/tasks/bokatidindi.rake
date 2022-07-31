@@ -29,4 +29,10 @@ namespace :bt do
       puts "#{b.slug} - #{b.title_hypenated} (#{b.title})"
     end
   end
+  desc 'Delete closed binding types with no books associated'
+  task delete_empty_binding_types: :environment do
+    BindingType.where(open: false).each do |b|
+      b.destroy if b.book_count.zero?
+    end
+  end
 end
