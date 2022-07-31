@@ -62,8 +62,8 @@ FactoryBot.define do
   factory :edition do
     title        { FFaker::Lorem.phrase.chop }
     opening_date { DateTime.now - 2.months }
-    online_date { DateTime.now - 1.month }
+    online_date  { DateTime.now - 1.month }
     closing_date { DateTime.now + 3.months }
-    print_date { DateTime.now + 3.months }
+    print_date   { DateTime.now + 3.months }
   end
 end
