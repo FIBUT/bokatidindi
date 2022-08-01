@@ -19,6 +19,8 @@ ActiveAdmin.register BindingType do
   config.filters = false
   config.sort_order = 'rod_asc'
 
+  permit_params :name, :rod, :open
+
   controller do
     def build_new_resource
       super.tap do |r|
