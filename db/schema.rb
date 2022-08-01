@@ -104,6 +104,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_31_212429) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_icelandic"
+    t.string "order_by_name"
+    t.integer "gender"
+    t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
+    t.index ["order_by_name"], name: "index_authors_on_order_by_name"
     t.index ["slug"], name: "index_authors_on_slug", unique: true
     t.index ["source_id"], name: "index_authors_on_source_id", unique: true
   end

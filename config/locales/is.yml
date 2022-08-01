@@ -62,7 +62,7 @@ is:
         other: 'höfundar'
       binding_type:
         one: 'gerð bindingar'
-        other: 'gerðir bindingar'
+        other: 'gerðir bindinga'
       comment:
         one: "athugasemd"
         other: "athugasemdir"
@@ -118,6 +118,22 @@ is:
         last_sign_in_at: "Síðasta innskráning"
         current_sign_in_ip: "IP-tala núverandi innskráningar"
         last_sign_in_ip: "IP-tala síðustu innskráningar"
+      author:
+        name: "Nafn"
+        book_count: "Fjöldi bóka"
+        firstname: "Fornafn"
+        lastname: "Eftirnafn"
+        is_icelandic: "Er íslenskur"
+        gender: "Kyn"
+        genders:
+          undefined: "Ótilgreint"
+          male: "Karlkyns"
+          female: "Kvenkyns"
+          non_binary: "Kynsegin"
+      publisher:
+        name: "Nafn"
+        url: "Vefslóð"
+        book_count: "Fjöldi bóka"
   active_admin:
     dashboard: "Dashboard"
     dashboard_welcome:
