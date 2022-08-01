@@ -7,6 +7,10 @@ class Publisher < ApplicationRecord
 
   default_scope { order(:name) }
 
+  def book_count
+    books.count
+  end
+
   private
 
   def set_slug
