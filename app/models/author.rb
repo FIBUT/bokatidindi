@@ -4,13 +4,29 @@ class Author < ApplicationRecord
   has_many :book_authors, dependent: :restrict_with_error
   has_many :books, through: :book_authors
 
-  before_create :set_slug
+  enum :gender, %i[undefined male female non_binary]
+
+  before_create :set_slug, :set_order_by_name
+
+  before_update :set_order_by_name
+
+  def book_count
+    books.count
+  end
 
   def name
     "#{firstname} #{lastname}"
   end
 
   private
+
+  def set_order_by_name
+    if is_icelandic == true
+      return self.order_by_name = "#{firstname} #{lastname}"
+    end
+
+    self.order_by_name = "#{lastname}, #{firstname}"
+  end
 
   def set_slug
     parameterized_name = name.parameterize(locale: :is).first(64)

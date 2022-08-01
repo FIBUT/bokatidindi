@@ -88,7 +88,7 @@ ActiveAdmin.register Book do
   filter :title_contains
   filter :description_contains
   filter :publishercheck
-  filter :authors
+  filter :authors, collection: Author.order(order_by_name: :desc)
   filter :id_equals
 
   index do
@@ -97,7 +97,7 @@ ActiveAdmin.register Book do
       link_to book.full_title_noshy, admin_book_path(book)
     end
     column :publisher
-    column :authors, &:authors_brief
+    column :authors
     column :description, &:short_description
     actions
   end

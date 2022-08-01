@@ -261,6 +261,9 @@ book_result.each do |book_row|
       source_id: book_author_row['author_id']
     )
 
+    author.is_icelandic = !book_author_row['icelandic'].zero?
+    author.save
+
     author_type = AuthorType.create_with(
       name: book_author_row['type_name'],
       rod: book_author_row['order']
