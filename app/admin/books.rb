@@ -87,8 +87,7 @@ ActiveAdmin.register Book do
 
   filter :title_contains
   filter :description_contains
-  filter :publishercheck
-  filter :authors, collection: Author.order(order_by_name: :desc)
+  filter :publisher
   filter :id_equals
 
   index do
