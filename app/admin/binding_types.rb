@@ -17,6 +17,15 @@ ActiveAdmin.register BindingType do
   # end
 
   config.filters = false
+  config.sort_order = 'rod_asc'
+
+  controller do
+    def build_new_resource
+      super.tap do |r|
+        r.assign_attributes(rod: 1, open: true)
+      end
+    end
+  end
 
   index do
     selectable_column
