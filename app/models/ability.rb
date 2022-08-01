@@ -34,6 +34,7 @@ class Ability
       can :create, Book
       can :manage, Book, publisher_id: user.publisher_ids
       can :read, AdminUser, id: user.id
+      can %i[read edit], Publisher, publisher_id: user.publisher_ids
     end
 
     if user.admin?
