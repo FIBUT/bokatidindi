@@ -35,9 +35,14 @@ ActiveAdmin.register Author do
   form do |f|
     f.semantic_errors
 
-    f.inputs 'Upplýsingar um höfund' do
+    f.inputs 'Nafn' do
       f.input :firstname
       f.input :lastname
+      f.input(
+        :is_icelandic,
+        label: 'Höfundur er íslenskur',
+        hint: 'Íslenskum höfundum er raðað eftir fornafni, en ekki erlendum.'
+      )
       f.input :gender, include_blank: false
     end
 
