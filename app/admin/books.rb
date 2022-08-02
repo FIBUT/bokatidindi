@@ -98,6 +98,8 @@ ActiveAdmin.register Book do
     column :publisher
     column :authors
     column :description, &:short_description
+    column :created_at
+    column :updated_at
     actions
   end
 

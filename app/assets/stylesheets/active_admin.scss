@@ -16,7 +16,15 @@
 //
 //   .status_tag { background: #6090DB; }
 
-form.formtastic .cover-image { margin-left: calc(10px + 20%); }
-form.formtastic .has_many_add { margin-bottom: 2em; }
+form.formtastic {
+  .cover-image { margin-left: calc(10px + 20%); }
+  .has_many_add { margin-bottom: 2em; }
+  #book_title_input input { font-weight: bold; font-size: 1.4rem; }
+}
 
-form.formtastic.book #book_title_input input { font-weight: bold; font-size: 1.4rem; }
+.index_as_table {
+  .col.col-name, .col.col-title { font-weight: bold; }
+  .status_tag { text-transform: lowercase; border-radius: 2px; }
+  .status_tag.yes { background: #393; }
+  .status_tag.no { background: #933; }
+}
