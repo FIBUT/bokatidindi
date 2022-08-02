@@ -8,7 +8,7 @@
         href="#"
         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
       >
-        <%= category_group[0] %>
+        <%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %>
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarBarnabaekurLink">
         <%
@@ -35,7 +35,7 @@
   <ul class="nav-list list-unstyled mx-5">
     <% Category.groups.each do |category_group| %>
     <li>
-      <strong><%= category_group[0] %></strong>
+      <strong><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></strong>
       <ul class="sub-nav-list list-unstyled mb-5">
         <%
         Category.where(group: category_group[1]).order('rod').each do |c|

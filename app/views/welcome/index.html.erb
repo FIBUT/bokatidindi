@@ -36,7 +36,7 @@
       <% Category.groups.each do |category_group| %>
       <div class="col-md-4">
         <div class="">
-          <h2 class=""><%= category_group[0] %></h2>
+          <h2 class=""><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></h2>
           <ul class="list-unstyled">
             <%
             Category.where(group: category_group[1]).order('rod').each do |c|
