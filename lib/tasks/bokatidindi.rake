@@ -35,4 +35,29 @@ namespace :bt do
       b.destroy if b.book_count.zero?
     end
   end
+  desc 'Rename categories to their display name'
+  task rename_categories: :environment do
+    category_mappings = [
+      { id: 3, name: 'Íslensk skáldverk', g: 1 },
+      { id: 4, name: 'Þýdd skáldverk', g: 1 },
+      { id: 5, name: 'Ljóð og leikrit', g: 1 },
+      { id: 6, name: 'Listir og ljósmyndir', g: 2 },
+      { id: 7, name: 'Fræðibækur', g: 2 },
+      { id: 8, name: 'Saga, ættfræði og héraðslýsingar', g: 2 },
+      { id: 9, name: 'Ævisögur', g: 2 },
+      { id: 11, name: 'Matur', g: 2 },
+      { id: 14, name: 'Hannyrðir, íþróttir og útivist', g: 2 },
+      { id: 20, name: 'Myndskreyttar 0-6 ára', g: 0 },
+      { id: 21, name: 'Skáldverk', g: 0 },
+      { id: 22, name: 'Fræðibækur og handbækur', g: 0 },
+      { id: 23, name: 'Ungmennabækur', g: 0 }
+    ].freeze
+
+    category_mappings.each do |m|
+      category = Category.find_by(source_id: m[:id])
+      category[:name]  = m[:name]
+      category[:group] = m[:g]
+      category.save
+    end
+  end
 end

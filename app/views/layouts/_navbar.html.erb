@@ -1,5 +1,6 @@
 <nav aria-label="Aðalvalmynd" class="navbar order-4 d-none d-sm-block col-12 navbar-expand-md mt-3">
   <ul class="navbar-nav">
+    <% Category.groups.each do |category_group| %>
     <li class="nav-item dropdown">
       <a
         id="navbarBarnabaekurLink"
@@ -7,52 +8,20 @@
         href="#"
         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
       >
-        Barnabækur
+        <%= category_group[0] %>
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarBarnabaekurLink">
-        <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
+        <%
+        Category.where(group: category_group[1]).order('rod').each do |c|
+        next if c.book_count.zero?
+        %>
         <li class="nav-item">
           <%= link_to c.name, category_path(c.slug), class: 'nav-link pl-3' %>
         </li>
         <% end %>
       </ul>
     </li>
-
-    <li class="nav-item dropdown">
-      <a
-        id="navbarSkaldverkLink"
-        class="nav-link dropdown-toggle"
-        href="#"
-        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-      >
-        Skáldverk
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="navbarSkaldverkLink">
-        <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
-        <li class="nav-item">
-          <%= link_to c.name, category_path(c.slug), class: 'nav-link pl-3' %>
-        </li>
-        <% end %>
-      </ul>
-    </li>
-
-    <li class="nav-item dropdown">
-      <a
-        id="navbarFraedikLink"
-        class="nav-link dropdown-toggle"
-        href="#"
-        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-      >
-        Fræðibækur
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="navbarFraedikLink">
-        <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
-        <li class="nav-item">
-          <%= link_to c.name, category_path(c.slug), class: 'nav-link pl-3' %>
-        </li>
-        <% end %>
-      </ul>
-    </li>
+    <% end %>
   </ul>
 </nav>
 
@@ -64,35 +33,20 @@
     </svg>
   </button>
   <ul class="nav-list list-unstyled mx-5">
+    <% Category.groups.each do |category_group| %>
     <li>
-      <strong>Barnabækur</strong>
+      <strong><%= category_group[0] %></strong>
       <ul class="sub-nav-list list-unstyled mb-5">
-        <% Category.where(source_id: category_groups[:barnabaekur] ).order('rod').each do |c| %>
+        <%
+        Category.where(group: category_group[1]).order('rod').each do |c|
+        next if c.book_count.zero?
+        %>
         <li class="my-3">
           <%= link_to c.name, category_path(c.slug) %>
         </li>
         <% end %>
       </ul>
     </li>
-    <li>
-      <strong>Skáldverk</strong>
-      <ul class="sub-nav-list list-unstyled mb-5">
-        <% Category.where(source_id: category_groups[:skaldverk] ).order('rod').each do |c| %>
-        <li class="my-3">
-          <%= link_to c.name, category_path(c.slug) %>
-        </li>
-        <% end %>
-      </ul>
-    </li>
-    <li>
-      <strong>Fræðibækur</strong>
-      <ul class="sub-nav-list list-unstyled mb-5">
-        <% Category.where(source_id: category_groups[:fraedibaekur] ).order('rod').each do |c| %>
-        <li class="my-3">
-          <%= link_to c.name, category_path(c.slug) %>
-        </li>
-        <% end %>
-      </ul>
-    </li>
+    <% end %>
   </ul>
 </nav>

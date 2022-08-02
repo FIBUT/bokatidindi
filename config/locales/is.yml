@@ -75,6 +75,9 @@ is:
       admin_user:
         one: 'notandi'
         other: 'notendur'
+      category:
+        one: 'flokkur'
+        other: 'flokkar'
     attributes:
       book:
         id: 'númer'
@@ -134,6 +137,14 @@ is:
         name: "Nafn"
         url: "Vefslóð"
         book_count: "Fjöldi bóka"
+      category:
+        name: "Nafn"
+        group: "Yfirflokkur"
+        book_count: "Fjöldi bóka"
+        groups:
+          childrens_books: "Barnabækur"
+          fiction: "Skáldverk"
+          non_fiction: "Fræðibækur"
   active_admin:
     dashboard: "Dashboard"
     dashboard_welcome:
