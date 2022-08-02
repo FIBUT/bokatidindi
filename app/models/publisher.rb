@@ -8,7 +8,12 @@ class Publisher < ApplicationRecord
   default_scope { order(:name) }
 
   def book_count
-    books.count
+    Book.includes(
+      :book_editions
+    ).where(
+      publisher_id: id,
+      book_editions: { 'edition_id': Edition.current.first.id }
+    ).count
   end
 
   private
