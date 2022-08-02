@@ -9,6 +9,9 @@
 
   <body>
     <div class="container-fluid">
+      <% if ENV.include?('STAGING_MODE') %>
+      <div><strong>Þetta er staging-umhverfið!</strong></div>
+      <% end %>
       <%= render 'layouts/header' %>
     </div>
 
