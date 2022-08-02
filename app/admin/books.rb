@@ -149,7 +149,11 @@ ActiveAdmin.register Book do
     f.has_many :book_authors, heading: 'Höfundar', allow_destroy: true do |ba|
       ba.input :author_type,
                input_html: { autocomplete: 'off' }
-      ba.input :author, input_html: { autocomplete: 'off' }
+      ba.input(
+        :author,
+        collection: Author.order(order_by_name: :desc),
+        input_html: { autocomplete: 'off' }
+      )
     end
 
     f.inputs 'Lýsing' do
