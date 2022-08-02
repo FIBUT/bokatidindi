@@ -31,7 +31,7 @@ ActiveAdmin.register AuthorType do
 
   show do
     panel 'Upplýsingar um hlutverk' do
-      attributes_table_for author do
+      attributes_table_for author_type do
         row :name
         row :rod
       end
