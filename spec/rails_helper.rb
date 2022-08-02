@@ -88,58 +88,57 @@ RSpec.configure do |config|
     FactoryBot.create(:author_type, name: 'Myndhöfundur')
 
     Category.create(
-      source_id: 21, origin_name: 'Barnabækur - Skáldverk',
-      rod: 2
+      source_id: 21, name: 'Skáldverk', group: :childrens_books, rod: 2
     )
 
     Category.create(
-      source_id: 7, origin_name: 'Fræði og bækur almenns efnis',
-      rod: 9
+      source_id: 7, name: 'Fræði og bækur almenns efnis',
+      group: :non_fiction, rod: 9
     )
 
     Category.create(
-      source_id: 22, origin_name: 'Barnabækur - Fræðibækur / Handbækur',
-      rod: 3
+      source_id: 22, name: 'Fræðibækur',
+      group: :childrens_books, rod: 3
     )
 
     Category.create(
-      source_id: 23, origin_name: 'Ungmennabækur',
-      rod: 4
+      source_id: 23, name: 'Ungmennabækur',
+      group: :childrens_books, rod: 4
     )
 
     Category.create(
-      source_id: 5, origin_name: 'Ljóð og leikrit',
-      rod: 7
+      source_id: 5, name: 'Ljóð og leikrit',
+      group: :fiction, rod: 7
     )
 
     Category.create(
-      source_id: 20, origin_name: 'Barnabækur - Myndskreyttar 0 - 6 ára',
-      rod: 1
+      source_id: 20, name: 'Myndskreyttar 0 - 6 ára',
+      group: :childrens_books, rod: 1
     )
 
     Category.create(
-      source_id: 4, origin_name: 'Skáldverk / þýdd',
-      rod: 6
+      source_id: 4, name: 'Þýdd skáldverk',
+      group: :fiction, rod: 6
     )
 
     Category.create(
-      source_id: 3, origin_name: 'Skáldverk / Íslensk',
-      rod: 5
+      source_id: 3, name: 'Íslensk skáldverk',
+      group: :fiction, rod: 5
     )
 
     Category.create(
-      source_id: 9, origin_name: 'Ævisögur og endurminningar',
-      rod: 11
+      source_id: 9, name: 'Ævisögur og endurminningar',
+      group: :non_fiction, rod: 11
     )
 
     Category.create(
-      source_id: 8, origin_name: 'Saga, ættfræði og héraðslýsingar',
-      rod: 10
+      source_id: 8, name: 'Saga, ættfræði og héraðslýsingar',
+      group: :non_fiction, rod: 10
     )
 
     Category.create(
-      source_id: 6, origin_name: 'Listir og ljósmyndir',
-      rod: 8
+      source_id: 6, name: 'Listir og ljósmyndir',
+      group: :non_fiction, rod: 8
     )
   end
 
