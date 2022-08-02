@@ -24,4 +24,12 @@ class Edition < ApplicationRecord
   }
 
   has_many :book_editions, dependent: :destroy
+
+  def book_count
+    Book.includes(
+      :book_editions
+    ).where(
+      book_editions: { 'edition_id': id }
+    ).count
+  end
 end

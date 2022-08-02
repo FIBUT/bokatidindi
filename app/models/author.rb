@@ -11,7 +11,12 @@ class Author < ApplicationRecord
   before_update :set_order_by_name
 
   def book_count
-    books.count
+    Book.includes(
+      :book_editions, :book_authors, :authors
+    ).where(
+      book_authors: { authors: { id: } },
+      book_editions: { 'edition_id': Edition.current.first.id }
+    ).count
   end
 
   def name

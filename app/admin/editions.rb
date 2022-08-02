@@ -29,6 +29,7 @@ ActiveAdmin.register Edition do
     column :online_date
     column :closing_date
     column :print_date
+    column :book_count, &:book_count
     actions
   end
 
