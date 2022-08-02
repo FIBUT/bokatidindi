@@ -6,7 +6,7 @@ class BindingType < ApplicationRecord
   default_scope { order('rod ASC, name ASC') }
   scope :open, -> { order('rod ASC, name ASC').where(open: true) }
 
-  has_many :book_binding_types, dependent: :nullify
+  has_many :book_binding_types, dependent: :destroy
   has_many :books, through: :book_binding_types
 
   before_create :set_slug
