@@ -8,13 +8,17 @@ ActiveAdmin.register AdminUser do
                 }
 
   controller do
-    def build_new_resource
-      super.tap do |r|
-        r.assign_attributes(
-          role: :publisher,
-          admin_user_publishers: [AdminUserPublisher.new]
-        )
+    def create
+      @resource = AdminUser.create(permitted_params[:admin_user])
+      unless @resource.valid?
+        flash[:warn] = 'Ekki var hægt að búa notandann til.'
+        return render :edit
       end
+
+      redirect_to(
+        admin_admin_users_url,
+        notice: "Notandinn #{@resource.email} var skráður."
+      )
     end
 
     def update
@@ -30,10 +34,13 @@ ActiveAdmin.register AdminUser do
       end
 
       if @resource.errors.blank?
-        redirect_to admin_admin_user_path, notice: 'Notandinn var uppfærður.'
-      else
-        render :edit
+        return redirect_to(
+          admin_admin_user_path,
+          notice: 'Notandinn var uppfærður.'
+        )
       end
+      flash[:warn] = 'Ekki var hægt að uppfæra notandann'
+      render :edit
     end
   end
 
@@ -101,8 +108,10 @@ ActiveAdmin.register AdminUser do
       input :email, input_html: { autocomplete: 'off' }
       input :role, input_html: { autocomplete: 'off' }
     end
-    f.has_many :admin_user_publishers, allow_destroy: true do |up|
-      up.input :publisher
+    f.has_many(
+      :admin_user_publishers, heading: 'Útgefendur', allow_destroy: true
+    ) do |up|
+      up.input :publisher, required: false
     end
     inputs 'Lykilorð' do
       input :password, required: false
