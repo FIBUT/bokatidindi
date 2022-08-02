@@ -13,7 +13,11 @@ ActiveAdmin.register Author do
     column :name do |author|
       link_to author.name, admin_author_path(author)
     end
-    column :gender
+    column :gender do |author|
+      unless author.gender.nil?
+        I18n.t("activerecord.attributes.author.genders.#{author.gender}")
+      end
+    end
     column :is_icelandic
     column :book_count, &:book_count
     actions

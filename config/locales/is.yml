@@ -121,6 +121,9 @@ is:
         last_sign_in_at: "Síðasta innskráning"
         current_sign_in_ip: "IP-tala núverandi innskráningar"
         last_sign_in_ip: "IP-tala síðustu innskráningar"
+        created_at: "Skráður"
+        locked_at: "Læstur"
+        publishers: "Útgefendur"
       author:
         name: "Nafn"
         book_count: "Fjöldi bóka"
@@ -133,6 +136,10 @@ is:
           male: "Karlkyns"
           female: "Kvenkyns"
           non_binary: "Kynsegin"
+      binding_type:
+        name: "Nafn"
+        open: "Opin"
+        book_count: "Fjöldi bóka"
       publisher:
         name: "Nafn"
         url: "Vefslóð"
@@ -191,9 +198,9 @@ is:
       current_filters: "Current filters:"
       no_current_filters: "None"
     status_tag:
-      "yes": "Yes"
-      "no": "No"
-      "unset": "No"
+      "yes": "Já"
+      "no": "Nei"
+      "unset": "Nei"
     main_content: "Please implement %{model}#main_content to display content."
     logout: "Logout"
     powered_by: "Keyrir á %{active_admin} %{version}"
