@@ -41,7 +41,7 @@
 
   <% if action_name == 'show' %>
 
-  <% if local_assigns[:book].page_count > 0 %>
+  <% if local_assigns[:book].page_count %>
   <li
     class="book-meta-page-count d-block pb-1"
     aria-label="Blaðsíðutal"
@@ -50,7 +50,7 @@
   </li>
   <% end %>
 
-  <% unless local_assigns[:book].hours.nil? %>
+  <% if local_assigns[:book].hours %>
   <li
     class="book-meta-hours d-block pb-1"
     aria-labelledby="book-meta-hours-label<%= local_assigns[:book].id %>"

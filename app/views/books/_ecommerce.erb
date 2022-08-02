@@ -14,17 +14,6 @@
     </a>
   </li>
   <% end %>
-  <% if local_assigns[:book].uri_to_sample %>
-  <li class="my-2">
-    <a 
-      class="btn btn-darkgrey"
-      href="<%= local_assigns[:book].uri_to_sample %>"
-      target="_blank"
-    >
-      Skoða sýnishorn á <%= local_assigns[:book].domain_to_sample %>
-    </a>
-  </li>
-  <% end %>
   <% if local_assigns[:book].uri_to_audiobook %>
   <li class="my-2">
     <a 
