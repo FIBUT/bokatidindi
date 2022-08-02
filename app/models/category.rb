@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
-  has_many :book_categories, dependent: :destroy
+  has_many :book_categories, dependent: :restrict_with_error
   has_many :books, through: :book_categories
 
   enum :group, %i[childrens_books fiction non_fiction]
