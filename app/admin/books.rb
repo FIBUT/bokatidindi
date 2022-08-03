@@ -151,7 +151,7 @@ ActiveAdmin.register Book do
                input_html: { autocomplete: 'off' }
       ba.input(
         :author,
-        collection: Author.order(order_by_name: :desc),
+        collection: Author.order(order_by_name: :asc),
         input_html: { autocomplete: 'off' }
       )
     end
