@@ -197,10 +197,14 @@ ActiveAdmin.register Book do
     end
 
     f.has_many(
-      :book_binding_types, heading: 'Bindingar og útgáfur', allow_destroy: true
+      :book_binding_types, heading: 'Útgáfuform', allow_destroy: true
     ) do |bb|
       bb.input :binding_type, collection: BindingType.open
       bb.input :barcode, input_html: { autocomplete: 'off' }
+      bb.input :language, input_html: { autocomplete: 'off' }
+      bb.input :page_count, input_html: { autocomplete: 'off', min: 1 }
+      bb.input :minutes, input_html: { autocomplete: 'off', min: 1 }
+      bb.input :url, input_html: { autocomplete: 'off' }
     end
 
     f.has_many :book_categories, heading: 'Flokkar', allow_destroy: true do |bc|
