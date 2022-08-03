@@ -3,7 +3,7 @@
   class="book-binding-list list-unstyled"
   aria-label="Vefverslun "
 >
-  <% if local_assigns[:book].uri_to_buy %>
+  <% if local_assigns[:book][:uri_to_buy] && !local_assigns[:book][:uri_to_buy].empty? %>
   <li class="my-2">
     <a 
       class="btn btn-lg btn-darkgrey"
@@ -14,7 +14,7 @@
     </a>
   </li>
   <% end %>
-  <% if local_assigns[:book].uri_to_audiobook %>
+  <% if local_assigns[:book][:uri_to_audiobook] && !local_assigns[:book][:uri_to_audiobook].empty? %>
   <li class="my-2">
     <a 
       class="btn btn-darkgrey"
