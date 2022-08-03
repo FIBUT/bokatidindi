@@ -62,6 +62,31 @@ class Book < ApplicationRecord
   before_create :set_title_hypenation, :set_slug
   before_update :set_title_hypenation
 
+  def page_count
+    binding_types = book_binding_types.where.not(page_count: [nil, ''])
+    return binding_types.first[:page_count] unless binding_types.empty?
+
+    nil
+  end
+
+  def minutes
+    binding_types = book_binding_types.where.not(page_count: [nil, ''])
+    return binding_types.first[:minutes] unless binding_types.empty?
+
+    nil
+  end
+
+  def store_url
+    binding_types = book_binding_types.where.not(url: [nil, ''])
+    return binding_types.first[:url] unless binding_types.empty?
+
+    nil
+  end
+
+  def audio_url
+    store_url
+  end
+
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
     uri.host.delete_prefix('www.')

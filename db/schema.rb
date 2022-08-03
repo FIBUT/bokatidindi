@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_03_141443) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -180,13 +180,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_141443) do
     t.string "slug"
     t.string "description"
     t.string "long_description"
-    t.integer "page_count"
-    t.integer "minutes"
-    t.string "store_url"
-    t.string "sample_url"
-    t.string "audio_url"
     t.bigint "publisher_id"
-    t.bigint "book_author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "uri_to_buy"
@@ -196,7 +190,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_141443) do
     t.string "title_hypenated"
     t.string "country_of_origin"
     t.string "original_title"
-    t.index ["book_author_id"], name: "index_books_on_book_author_id"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
     t.index ["source_id"], name: "index_books_on_source_id", unique: true
