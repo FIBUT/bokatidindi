@@ -21,6 +21,7 @@ namespace :bt do
       GC.start
     end
   end
+
   desc 'Update the hypenation processing of book titles'
   task update_hypenation: :environment do
     Book.all.each do |b|
@@ -29,12 +30,14 @@ namespace :bt do
       puts "#{b.slug} - #{b.title_hypenated} (#{b.title})"
     end
   end
+
   desc 'Delete closed binding types with no books associated'
   task delete_empty_binding_types: :environment do
     BindingType.where(open: false).each do |b|
       b.destroy if b.book_count.zero?
     end
   end
+
   desc 'Rename categories to their display name'
   task rename_categories: :environment do
     category_mappings = [
@@ -60,6 +63,7 @@ namespace :bt do
       category.save
     end
   end
+
   desc 'Automatically gender Icelandic authors based on son/dóttir'
   task autogender_authors: :environment do
     count = 0
@@ -70,5 +74,67 @@ namespace :bt do
       count += 1 if a.save
     end
     puts "Gender assumed for #{count} authors."
+  end
+
+  desc 'Remove zero-page counts'
+  task clean_zero_pages: :environment do
+    count = 0
+    Book.where(page_count: 0).each do |b|
+      count += 1 if b.update(page_count: nil)
+    end
+    puts "#{count} zero-page counts replaced with nil."
+  end
+
+  desc 'Assign a book url to the appropriate book binding type url'
+  task assign_book_binding_type_url: :environment do
+    bound_book_slugs = ['innbundin', 'sveigjanleg-kapa', 'kilja-vasabrot',
+                        'gormabok', 'hardspjaldabok', 'endurutgafa']
+    audio_book_slugs = ['hljodbok-sami-utg', 'hljodbok-fra-hljodbok-is',
+                        'hljodbok-fra-storytel']
+
+    Book.all.each do |book|
+      total_skus = BookBindingType.where(book_id: book.id)
+
+      if total_skus.empty?
+        puts "#{book.id} - #{book.slug}: Er ekki með nein útgáfuform skráð."
+        next
+      end
+
+      bound_skus = BookBindingType.joins(
+        :binding_type
+      ).where(book_id: book.id, binding_type: { slug: bound_book_slugs })
+
+      if bound_skus.empty?
+        if book.uri_to_buy
+          ebook_skus = BookBindingType.joins(
+            :binding_type
+          ).where(book_id: book.id, binding_type: { slug: 'rafbok' })
+          if ebook_skus.count.zero?
+            puts "#{book.id} - #{book.slug}"\
+                 ': Þarf að skoða m.t.t. áþreifanlegra útgáfuforma'
+          else
+            ebook_skus.first.update(url: book.uri_to_buy)
+          end
+        end
+      else
+        bound_skus.first.update(url: book.uri_to_buy) if book.uri_to_buy
+        bound_skus.first.update(page_count: book.page_count) if book.page_count
+      end
+
+      audio_skus = BookBindingType.joins(
+        :binding_type
+      ).where(book_id: book.id, binding_type: { slug: audio_book_slugs })
+
+      if audio_skus.empty?
+        if book.uri_to_audiobook
+          puts "#{book.id} - #{book.slug}: Þarf að skoða m.t.t. hljóðbóka"
+        end
+      else
+        if book.uri_to_audiobook
+          audio_skus.first.update(url: book.uri_to_audiobook)
+        end
+        audio_skus.first.update(minutes: book.minutes) if book.minutes
+      end
+    end
   end
 end
