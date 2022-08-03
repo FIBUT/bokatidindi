@@ -3,7 +3,7 @@
 ActiveAdmin.register Author do
   config.sort_order = 'order_by_name_asc'
 
-  permit_params :firstname, :lastname, :gender
+  permit_params :firstname, :lastname, :gender, :is_icelandic
 
   filter :firstname_contains
   filter :lastname_contains
