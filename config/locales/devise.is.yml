@@ -3,19 +3,19 @@
 is:
   devise:
     confirmations:
-      confirmed: "Your email address has been successfully confirmed."
-      send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      confirmed: "Tölvupóstfangið þitt hefur verið staðfest."
+      send_instructions: "Þú munt fá tölvupót með upplýsingum um hvernig á að staðfesta aðganginn eftir stutta stund."
+      send_paranoid_instructions: "Ef tölvupóstfangið þitt er á skrá færðu upplýsingar um hvernig á að staðfesta aðganginn þinn eftir smá stund."
     failure:
-      already_authenticated: "You are already signed in."
-      inactive: "Your account is not activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
-      locked: "Your account is locked."
-      last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
-      timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
-      unconfirmed: "You have to confirm your email address before continuing."
+      already_authenticated: "Þú hefur þegar skráð þig inn."
+      inactive: "Aðgangurinn þinn hefur verið afvirkjaður."
+      invalid: "Ógilt lykilorð eða %{authentication_keys}."
+      locked: "Þessum aðgangi hefur verið læst."
+      last_attempt: "Þetta er síðasta tilraunin áður en aðganginum er læst."
+      not_found_in_database: "Ógilt lykilorð eða notandinn er ekki til staðar."
+      timeout: "Innskráningin þín rann út. Skráðu þig inn aftur til að halda áfram."
+      unauthenticated: "Þú þarft að skrá þig inn áður en haldið er áfram."
+      unconfirmed: "Þú þarft að staðfesta tölvupóstfagið þitt áður en þú heldur áfram."
     mailer:
       confirmation_instructions:
         subject: "Staðfesting aðgangs að umsjónarkerfi Bókatíðinda"
@@ -28,15 +28,15 @@ is:
       password_change:
         subject: "Lykilorði aðgangs að umsjónarkerfi Bókatíðinda breytt"
     omniauth_callbacks:
-      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Successfully authenticated from %{kind} account."
+      failure: "Gat ekki auðkennt í gegn um %{kind} út af \"%{reason}\"."
+      success: "Auðkenning tókst í gegn um %{kind}."
     passwords:
       admin_user:
-        no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+        no_token: "Þú getur ekki nálgast þessa síðu nema með réttri slóð sem var send í tölvupósti. Ef svo er, skaltu nota alla vefslóðina."
         send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
         send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-        updated: "Your password has been changed successfully. You are now signed in."
-        updated_not_active: "Your password has been changed successfully."
+        updated: "Lykilorðinu þínu hefur verið breytt og innskráningin er nú virk."
+        updated_not_active: "Lykilorðinu þínu hefur verið breytt."
     registrations:
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -47,20 +47,20 @@ is:
       updated: "Your account has been updated successfully."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
     sessions:
-      signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
-      already_signed_out: "Signed out successfully."
+      signed_in: "Tókst að skrá inn."
+      signed_out: "Tókst að skrá út."
+      already_signed_out: "Tókst að skrá út."
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "not found"
-      not_locked: "was not locked"
+      already_confirmed: "hefur þegar verið staðfestur, prófaðu að skrá þig inn"
+      confirmation_period_expired: "þarf staðfestingu innan %{period}"
+      expired: "rann út"
+      not_found: "fannst ekki"
+      not_locked: "var ekki læst"
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
