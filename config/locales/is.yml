@@ -60,9 +60,8 @@ is:
       author:
         one: 'höfundur'
         other: 'höfundar'
-      binding_type:
-        one: 'gerð bindingar'
-        other: 'gerðir bindinga'
+      author_type: 'hlutverk höfunda'
+      binding_type: 'útgáfuform'
       comment:
         one: "athugasemd"
         other: "athugasemdir"
@@ -101,8 +100,12 @@ is:
       book_category:
         category: 'Flokkur'
       book_binding_type:
-        binding_type: 'Gerð bindingar'
+        binding_type: 'Útgáfuform'
         barcode: 'Strikamerki'
+        language: 'Tungumál'
+        page_count: 'Blaðsíðutal'
+        minutes: 'Mínútufjöldi'
+        url: 'Vefslóð'
       book_author:
         author_type: 'Hlutverk'
         author: 'Höfundur'
@@ -115,7 +118,7 @@ is:
         updated_at: "Uppfært"
       admin_user:
         name: "Nafn"
-        email: "Tölvupóstfang"
+        email: "Tölvupóstur"
         remember_created_at: "Innskráning vistuð"
         current_sign_in_at: "Núverandi innskráning"
         last_sign_in_at: "Síðasta innskráning"
@@ -136,9 +139,12 @@ is:
           male: "Karlkyns"
           female: "Kvenkyns"
           non_binary: "Kynsegin"
+      author_type:
+        name: "Nafn"
+        rod: "Röðun"
       binding_type:
         name: "Nafn"
-        open: "Opin"
+        open: "Opið"
         book_count: "Fjöldi bóka"
       publisher:
         name: "Nafn"
@@ -153,28 +159,28 @@ is:
           fiction: "Skáldverk"
           non_fiction: "Fræðibækur"
   active_admin:
-    dashboard: "Dashboard"
+    dashboard: "Mælaborð"
     dashboard_welcome:
-      welcome: "Welcome to Active Admin. This is the default dashboard page."
-      call_to_action: "To add dashboard sections, checkout 'app/admin/dashboard.rb'"
+      welcome: "Velkomin í umsjónarkerfi Bókatíðinda. Afsakið hvað þetta er mikill samtíningur."
+      call_to_action: "Forritarinn okkar á eftir að gera eitthvað fínt hérna inni, en þú gætir fundið þér eitthvað að gera í valmyndinni þarna uppi."
     view: "Skoða"
     edit: "Breyta"
     delete: "Eyða"
-    delete_confirmation: "Are you sure you want to delete this?"
+    delete_confirmation: "Ertu alveg viss um að þú ætlir að eyða þessu?"
     create_another: "Create another %{model}"
     new_model: "Skrá %{model}"
     edit_model: "Breyta %{model}"
     delete_model: "Eyða %{model}"
     details: "%{model} Details"
-    cancel: "Cancel"
+    cancel: "Hætta við"
     empty: "Tómt"
-    previous: "Previous"
-    next: "Next"
-    download: "Download:"
+    previous: "Fyrra"
+    next: "Næsta"
+    download: "Hlaða niður:"
     has_many_new: "bæta við"
     has_many_delete: "eyða"
     has_many_remove: "fjarlægja"
-    move: "Move"
+    move: "Færa"
     filters:
       buttons:
         filter: "Sía"
@@ -184,19 +190,19 @@ is:
         equals: "jafngildir"
         starts_with: "byrjar á"
         ends_with: "endar á"
-        greater_than: "Greater than"
-        less_than: "Less than"
-        gteq_datetime: "Greater or equal to"
-        lteq_datetime: "Lesser or equal to"
+        greater_than: "meira en"
+        less_than: "minna en"
+        gteq_datetime: "meira eða jafnt og"
+        lteq_datetime: "minna eða jafnt og"
         from: "frá"
         to: "til"
     scopes:
       all: "Allt"
     search_status:
-      headline: "Search status:"
-      current_scope: "Scope:"
-      current_filters: "Current filters:"
-      no_current_filters: "None"
+      headline: "Staða leitar:"
+      current_scope: "Upfang:"
+      current_filters: "Núverandi síur:"
+      no_current_filters: "Engar"
     status_tag:
       "yes": "Já"
       "no": "Nei"
@@ -208,16 +214,16 @@ is:
       filters: "Síur"
       search_status: "Search Status"
     pagination:
-      empty: "No %{model} found"
-      one: "Displaying <b>1</b> %{model}"
-      one_page: "Displaying <b>all %{n}</b> %{model}"
-      multiple: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b> in total"
-      multiple_without_total: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
-      per_page: "Per page: "
+      empty: "Ekkert fannst"
+      one: "Sýni <b>1</b> %{model}"
+      one_page: "Sýni <b>allt í %{n}</b> %{model}"
+      multiple: "Sýni %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b> in total"
+      multiple_without_total: "Sýni %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
+      per_page: "á síðu: "
       entry:
-        one: "entry"
-        other: "entries"
-    any: "Any"
+        one: "færsla"
+        other: "færslur"
+    any: "Allt"
     blank_slate:
       content: "Ekkert skráð ennþá."
       link: "Búa til skráningu."
@@ -225,75 +231,75 @@ is:
       button_label: "Aðgerðir"
     batch_actions:
       button_label: "Aðgerðir fyrir bunka"
-      default_confirmation: "Are you sure you want to do this?"
-      delete_confirmation: "Are you sure you want to delete these %{plural_model}?"
+      default_confirmation: "Ertu alveg viss um að þú ætlir að gera þetta?"
+      delete_confirmation: "Ertu alveg viss um að þú ætli að eyða þessum færslum?"
       succesfully_destroyed:
         one: "Successfully deleted 1 %{model}"
         other: "Successfully deleted %{count} %{plural_model}"
       selection_toggle_explanation: "(Toggle Selection)"
       action_label: "%{title} Selected"
       labels:
-        destroy: "Delete"
+        destroy: "Eyða"
     comments:
-      created_at: "Created"
+      created_at: "Búið til"
       resource_type: "Resource Type"
       author_type: "Author Type"
-      body: "Body"
-      author: "Author"
-      add: "Add Comment"
-      delete: "Delete Comment"
-      delete_confirmation: "Are you sure you want to delete these comments?"
-      resource: "Resource"
-      no_comments_yet: "No comments yet."
-      author_missing: "Anonymous"
-      title_content: "Comments (%{count})"
+      body: "Meginmál"
+      author: "Höfundur"
+      add: "Bæta við athugasemd"
+      delete: "Eyða athugasemd"
+      delete_confirmation: "Ertu viss um að þú viljr eyða þessum athugasemdum?"
+      resource: "Viðfang"
+      no_comments_yet: "Engar athugasemdir."
+      author_missing: "Nafnlaust"
+      title_content: "Athugasemdir (%{count})"
       errors:
-        empty_text: "Comment wasn't saved, text was empty."
+        empty_text: "Athugasemdin var ekki vistuð því textareiturinn var tómur"
     devise:
       username:
-        title: "Username"
+        title: "Notandanafn"
       email:
-        title: "Email"
+        title: "Tölvupóstur"
       subdomain:
-        title: "Subdomain"
+        title: "Undirlén"
       password:
-        title: "Password"
+        title: "Lykilorð"
       password_confirmation:
-        title: "Confirm Password"
+        title: "Staðfesta lykilorð"
       sign_up:
-        title: "Sign up"
-        submit: "Sign up"
+        title: "Skráning á nýjum notanda"
+        submit: "Skrá nýjan notanda"
       login:
         title: "Innskráning"
         remember_me: "Mundu mig"
         submit: "Skrá inn"
       reset_password:
-        title: "Forgot your password?"
-        submit: "Reset My Password"
+        title: "Gleymtirðu lykilorðinu þínu?"
+        submit: "Endurskrá lykilorð"
       change_password:
-        title: "Change your password"
-        submit: "Change my password"
+        title: "Breyting á lykilorði"
+        submit: "Breyta lykilorðinu mínu"
       unlock:
-        title: "Resend unlock instructions"
-        submit: "Resend unlock instructions"
+        title: "Endursending á upplýsingum til að taka úr lás"
+        submit: "Endursenda upplýsingar til að taka úr lás"
       resend_confirmation_instructions:
-        title: "Resend confirmation instructions"
-        submit: "Resend confirmation instructions"
+        title: "Endursending á upplýsingum til staðfestingar"
+        submit: "Endursenda upplýsingar til staðfestingar"
       links:
-        sign_up: "Sign up"
-        sign_in: "Sign in"
-        forgot_your_password: "Forgot your password?"
-        sign_in_with_omniauth_provider: "Sign in with %{provider}"
-        resend_unlock_instructions: "Resend unlock instructions"
-        resend_confirmation_instructions: "Resend confirmation instructions"
+        sign_up: "Skrá nýjan notanda"
+        sign_in: "Skrá inn"
+        forgot_your_password: "Gleymdirðu lykilorðinu?"
+        sign_in_with_omniauth_provider: "Skrá inn með %{provider}"
+        resend_unlock_instructions: "Endursenda upplýsingar til að taka úr lás"
+        resend_confirmation_instructions: "Senda aftur upplýsingar til staðfestingar"
     unsupported_browser:
       headline: "Please note that ActiveAdmin no longer supports Internet Explorer versions 8 or less."
       recommendation: "We recommend that you <a href=\"http://browsehappy.com/\">upgrade your browser</a> to improve your experience."
       turn_off_compatibility_view: "If you are using IE 9 or later, make sure you <a href=\"https://support.microsoft.com/en-us/help/17471\">turn off \"Compatibility View\"</a>."
     access_denied:
-      message: "You are not authorized to perform this action."
+      message: "Þú hefur ekki aðgang að þessari aðgerð."
     index_list:
-      table: "Table"
-      block: "List"
-      grid: "Grid"
-      blog: "Blog"
+      table: "Tafla"
+      block: "Listi"
+      grid: "Flísar"
+      blog: "Blogg"
