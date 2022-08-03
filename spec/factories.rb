@@ -24,7 +24,6 @@ FactoryBot.define do
     post_title       { '' }
     description      { FFaker::Lorem.paragraph }
     long_description { FFaker::Lorem.paragraphs(4).join("\n\n") }
-    page_count       { FFaker::Random.rand(20..200) }
     publisher        { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
   end
 
