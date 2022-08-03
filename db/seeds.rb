@@ -7,11 +7,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-if ENV['SEED_FROM'] == 'mysql'
-  require_relative './seeds/from_mysql'
-else
-  database  = ENV['DATABASE_URL'] || ActiveRecord::Base.connection.raw_connection.conninfo_hash[:dbname]
-  seed_file = File.join(File.dirname(__FILE__), '/seeds/development.sql')
-  sh "psql #{database} < #{seed_file}"
-end
