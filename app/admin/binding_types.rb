@@ -34,7 +34,13 @@ ActiveAdmin.register BindingType do
     column :name do |binding_type|
       link_to binding_type.name, admin_binding_type_path(binding_type)
     end
-    column :group
+    column :group do |binding_type|
+      unless binding_type.group.nil?
+        I18n.t(
+          "activerecord.attributes.binding_type.groups.#{binding_type.group}"
+        )
+      end
+    end
     column :open
     column :book_count, &:book_count
     actions
