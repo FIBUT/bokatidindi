@@ -137,4 +137,17 @@ namespace :bt do
       end
     end
   end
+
+  desc 'Find and destroy orphaned has_many records'
+  task destroy_bastards: :environment do
+    BookAuthor.all.each do |ba|
+      ba.destroy if ba.book.nil? || ba.author.nil?
+    end
+    BookCategory.all.each do |bc|
+      bc.destroy if bc.book.nil? || bc.category.nil?
+    end
+    BookBindingType.all.each do |bb|
+      bb.destroy if bb.book.nil? || bb.binding_type.nil?
+    end
+  end
 end
