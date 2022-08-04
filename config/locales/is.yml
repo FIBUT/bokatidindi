@@ -146,6 +146,11 @@ is:
         name: "Nafn"
         open: "Opið"
         book_count: "Fjöldi bóka"
+        group: "Yfirflokkur"
+        groups:
+          printed_books: "Prentaðar bækur"
+          ebooks: "Rafbækur"
+          audiobooks: "Hljóðbækur"
       publisher:
         name: "Nafn"
         url: "Vefslóð"
