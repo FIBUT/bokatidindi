@@ -6,6 +6,8 @@ class Author < ApplicationRecord
 
   enum :gender, %i[undefined male female non_binary]
 
+  before_validation :set_name
+
   before_create :set_slug, :set_order_by_name
 
   before_update :set_order_by_name
@@ -19,18 +21,16 @@ class Author < ApplicationRecord
     ).count
   end
 
-  def name
-    "#{firstname} #{lastname}"
-  end
-
-  private
-
   def set_order_by_name
     if is_icelandic == true
       return self.order_by_name = "#{firstname} #{lastname}"
     end
 
     self.order_by_name = "#{lastname}, #{firstname}"
+  end
+
+  def set_name
+    self[:name] = "#{firstname} #{lastname}"
   end
 
   def set_slug
