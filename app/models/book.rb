@@ -77,23 +77,25 @@ class Book < ApplicationRecord
   end
 
   def store_url
-    binding_types = book_binding_types.where.not(url: [nil, ''])
+    binding_types = book_binding_types.joins(:binding_type).where(
+      binding_type: { group: :printed_books }
+    )
     return binding_types.first[:url] unless binding_types.empty?
 
     nil
   end
 
   def audio_url
-    store_url
+    binding_types = book_binding_types.joins(:binding_type).where(
+      binding_type: { group: :audiobooks }
+    )
+    return binding_types.first[:url] unless binding_types.empty?
+
+    nil
   end
 
   def domain_to_buy
     uri = URI.parse(uri_to_buy)
-    uri.host.delete_prefix('www.')
-  end
-
-  def domain_to_sample
-    uri = URI.parse(uri_to_sample)
     uri.host.delete_prefix('www.')
   end
 
