@@ -10,6 +10,7 @@ gem 'cancancan'
 gem 'isbn_validation'
 
 gem 'country_select'
+gem 'iso-639'
 
 gem 'cocoon'
 
