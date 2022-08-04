@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 class BookBindingType < ApplicationRecord
-  AVAILABLE_LANGUAGES = [
-    ['Íslenska', 'is'], ['Enska', 'en'], ['Danska', 'da'], ['Norska', 'no'],
-    ['Finnska', 'fi'], ['Þýska', 'de'], ['Franska', 'fr'],
-    ['Spænska', 'sp'], ['Ítalska', 'it'], ['Japanska', 'ja'],
-    ['Kínverska', 'zh']
-  ].freeze
+  AVAILABLE_LANGUAGES = ISO_639::ISO_639_2.pluck(
+    2, 3
+  ).delete_if { |l| l[0] == '' }
 
   belongs_to :book
   belongs_to :binding_type
