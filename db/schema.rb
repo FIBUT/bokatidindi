@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_000915) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_192454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,6 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_000915) do
     t.boolean "is_icelandic"
     t.string "order_by_name"
     t.integer "gender"
+    t.string "name"
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
     t.index ["slug"], name: "index_authors_on_slug", unique: true

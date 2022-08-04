@@ -151,8 +151,7 @@ ActiveAdmin.register Book do
                input_html: { autocomplete: 'off' }
       ba.input(
         :author,
-        collection: Author.order(order_by_name: :asc),
-        input_html: { autocomplete: 'off' }
+        collection: Author.order(:name)
       )
     end
 
@@ -171,24 +170,6 @@ ActiveAdmin.register Book do
                     'lýsingin í staðinn.'
     end
 
-    f.inputs 'Vefslóðir' do
-      f.input :uri_to_audiobook, input_html: { autocomplete: 'off' }
-      f.input :uri_to_buy, input_html: { autocomplete: 'off' }
-    end
-
-    f.inputs 'Nánari upplýsingar' do
-      f.input :page_count
-      f.input :minutes
-      f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
-      f.input(
-        :country_of_origin,
-        as: :country, include_blank: true,
-        priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
-        input_html: { autocomplete: 'off' },
-        hint: 'Upprunaland bókar, ef erlend.'
-      )
-    end
-
     f.inputs 'Mynd af forsíðu' do
       if resource.cover_image.attached?
         f.img src: resource.cover_image_variant_url(266), class: 'cover-image'
@@ -199,12 +180,31 @@ ActiveAdmin.register Book do
     f.has_many(
       :book_binding_types, heading: 'Útgáfuform', allow_destroy: true
     ) do |bb|
-      bb.input :binding_type, collection: BindingType.open
-      bb.input :barcode, input_html: { autocomplete: 'off' }
-      bb.input :language, input_html: { autocomplete: 'off' }
-      bb.input :page_count, input_html: { autocomplete: 'off', min: 1 }
-      bb.input :minutes, input_html: { autocomplete: 'off', min: 1 }
-      bb.input :url, input_html: { autocomplete: 'off' }
+      bb.input(
+        :binding_type,
+        collection: BindingType.open, input_html: { class: 'binding-type' }
+      )
+      bb.input(
+        :barcode,
+        input_html: { autocomplete: 'off', class: 'barcode' }
+      )
+      bb.input(
+        :language,
+        collection: BookBindingType::AVAILABLE_LANGUAGES,
+        input_html: { autocomplete: 'off', class: 'language' }
+      )
+      bb.input(
+        :page_count,
+        input_html: { autocomplete: 'off', min: 1, class: 'page-count' }
+      )
+      bb.input(
+        :minutes,
+        input_html: { autocomplete: 'off', min: 1, class: 'minutes' }
+      )
+      bb.input(
+        :url,
+        input_html: { autocomplete: 'off', class: 'url' }
+      )
     end
 
     f.has_many :book_categories, heading: 'Flokkar', allow_destroy: true do |bc|
@@ -218,6 +218,17 @@ ActiveAdmin.register Book do
       f.inputs do
         f.input :editions, as: :check_boxes, collection: Edition.active
       end
+    end
+
+    f.inputs 'Nánari upplýsingar' do
+      f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
+      f.input(
+        :country_of_origin,
+        as: :country, include_blank: true,
+        priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
+        input_html: { autocomplete: 'off' },
+        hint: 'Upprunaland bókar, ef erlend.'
+      )
     end
 
     if current_admin_user.admin?

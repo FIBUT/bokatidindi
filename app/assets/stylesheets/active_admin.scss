@@ -20,6 +20,10 @@ form.formtastic {
   .cover-image { margin-left: calc(10px + 20%); }
   .has_many_add { margin-bottom: 2em; }
   #book_title_input input { font-weight: bold; font-size: 1.4rem; }
+  input.barcode { width: 16em; }
+  input.page-count { width: 8em; }
+  input.minutes { width: 8em; }
+  input.language { width: 16em; }
 }
 
 .index_as_table {

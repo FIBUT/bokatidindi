@@ -150,4 +150,11 @@ namespace :bt do
       bb.destroy if bb.book.nil? || bb.binding_type.nil?
     end
   end
+
+  desc 'Update the full name of every author'
+  task set_author_names: :environment do
+    Author.all.each do |a|
+      a.update(name: "#{a.firstname} #{a.lastname}")
+    end
+  end
 end
