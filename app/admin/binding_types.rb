@@ -19,7 +19,7 @@ ActiveAdmin.register BindingType do
   config.filters = false
   config.sort_order = 'rod_asc'
 
-  permit_params :name, :rod, :open
+  permit_params :name, :rod, :open, :group
 
   controller do
     def build_new_resource
@@ -34,6 +34,7 @@ ActiveAdmin.register BindingType do
     column :name do |binding_type|
       link_to binding_type.name, admin_binding_type_path(binding_type)
     end
+    column :group
     column :open
     column :book_count, &:book_count
     actions
@@ -43,6 +44,7 @@ ActiveAdmin.register BindingType do
     f.semantic_errors
     f.inputs do
       f.input :name
+      f.input :group
       f.input :rod
       f.input :open
     end
