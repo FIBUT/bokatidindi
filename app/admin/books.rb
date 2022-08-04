@@ -190,7 +190,9 @@ ActiveAdmin.register Book do
       )
       bb.input(
         :language,
-        collection: BookBindingType::AVAILABLE_LANGUAGES,
+        collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
+          ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
+        end,
         input_html: { autocomplete: 'off', class: 'language' }
       )
       bb.input(
