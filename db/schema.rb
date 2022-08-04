@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_000915) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -88,7 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
 
   create_table "author_types", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
+    t.string "name", collation: "is_IS"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", null: false
@@ -99,13 +100,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
 
   create_table "authors", force: :cascade do |t|
     t.integer "source_id"
-    t.string "firstname"
-    t.string "lastname"
+    t.string "firstname", collation: "is_IS"
+    t.string "lastname", collation: "is_IS"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_icelandic"
-    t.string "order_by_name"
+    t.string "order_by_name", collation: "is_IS"
     t.integer "gender"
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
@@ -115,12 +116,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
 
   create_table "binding_types", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
-    t.string "slug"
+    t.string "name", collation: "is_IS"
+    t.string "slug", collation: "is_IS"
     t.integer "rod"
     t.boolean "open"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "group", default: 0, null: false
     t.index ["name"], name: "index_binding_types_on_name", unique: true
     t.index ["slug"], name: "index_binding_types_on_slug", unique: true
     t.index ["source_id"], name: "index_binding_types_on_source_id", unique: true
@@ -174,9 +176,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
 
   create_table "books", force: :cascade do |t|
     t.integer "source_id"
-    t.string "pre_title"
-    t.string "title"
-    t.string "post_title"
+    t.string "pre_title", collation: "is_IS"
+    t.string "title", collation: "is_IS"
+    t.string "post_title", collation: "is_IS"
     t.string "slug"
     t.string "description"
     t.string "long_description"
@@ -197,7 +199,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "source_id"
-    t.string "origin_name"
+    t.string "origin_name", collation: "is_IS"
     t.string "slug"
     t.integer "rod"
     t.datetime "created_at", null: false
@@ -230,7 +232,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_232703) do
 
   create_table "publishers", force: :cascade do |t|
     t.integer "source_id"
-    t.string "name"
+    t.string "name", collation: "is_IS"
     t.string "slug"
     t.string "url"
     t.datetime "created_at", null: false
