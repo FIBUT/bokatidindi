@@ -157,4 +157,24 @@ namespace :bt do
       a.update(name: "#{a.firstname} #{a.lastname}")
     end
   end
+
+  desc 'Maintain the Icelandic database collation'
+  task maintain_collation: :environment do
+    ActiveRecord::Base.connection.execute(
+      'ALTER TABLE authors ALTER COLUMN order_by_name '\
+      'SET DATA TYPE character varying COLLATE "is_IS"'
+    )
+    ActiveRecord::Base.connection.execute(
+      'ALTER TABLE authors ALTER COLUMN name '\
+      'SET DATA TYPE character varying COLLATE "is_IS"'
+    )
+    ActiveRecord::Base.connection.execute(
+      'ALTER TABLE authors ALTER COLUMN firstname '\
+      'SET DATA TYPE character varying COLLATE "is_IS"'
+    )
+    ActiveRecord::Base.connection.execute(
+      'ALTER TABLE authors ALTER COLUMN lastname '\
+      'SET DATA TYPE character varying COLLATE "is_IS"'
+    )
+  end
 end

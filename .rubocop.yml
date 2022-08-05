@@ -10,6 +10,7 @@ Metrics/BlockLength:
   Max: 150
   Exclude:
     - 'app/admin/*'
+    - 'lib/tasks/bokatidindi.rake'
 
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
