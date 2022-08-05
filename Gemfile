@@ -15,7 +15,8 @@ gem 'iso-639'
 gem 'cocoon'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 7'
+gem 'rails', '~> 7.0.3'
+gem 'actionpack', '~>7.0.3'
 # Use Puma as the app server
 gem 'puma', '~> 5.6.4'
 # Use SCSS for stylesheets
