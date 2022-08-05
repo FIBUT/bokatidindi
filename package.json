@@ -22,6 +22,7 @@
     "prop-types": "^15.8.1",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
+    "serialize-javascript": "6.0.0",
     "style-loader": "^3.3.1",
     "uglify-js": "^3.16.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
