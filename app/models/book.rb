@@ -60,6 +60,12 @@ class Book < ApplicationRecord
   before_create :set_title_hypenation, :set_slug
   before_update :set_title_hypenation
 
+  attribute :cover_image_file
+
+  def cover_image_file(action_dispatch = nil)
+    action_dispatch
+  end
+
   def page_count
     binding_types = book_binding_types.where.not(page_count: [nil, ''])
     return binding_types.first[:page_count] unless binding_types.empty?
