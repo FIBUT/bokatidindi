@@ -5,8 +5,9 @@ ActiveAdmin.register Book do
     permitted = [
       :id, :pre_title, :title, :post_title, :description, :long_description,
       :cover_image_file, :uri_to_buy, :uri_to_audiobook,
-      :page_count, :minutes, :original_title, :country_of_origin,
-      { book_binding_types_attributes: %i[id barcode binding_type_id _destroy],
+      :country_of_origin, :cover_image_file,
+      { book_binding_types_attributes: %i[id barcode binding_type_id language
+                                          page_count minutes url _destroy],
         book_authors_attributes: %i[id author_type_id author_id _destroy],
         book_categories_attributes: %i[id category_id _destroy],
         edition_ids: [] }
