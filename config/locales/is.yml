@@ -97,6 +97,7 @@ is:
         minutes: 'Mínútufjöldi'
         original_title: 'Upprunalegur titill'
         country_of_origin: 'Upprunaland'
+        editions: 'Útgáfur Bókatíðinda'
       book_category:
         category: 'Flokkur'
       book_binding_type:
