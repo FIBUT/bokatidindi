@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
-  COVER_IMAGE_VARIANTS  = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
-  IMAGE_QUALITY         = 80
-  IMAGE_FILE_SUFFIX     = '.jpg'
-  IMAGE_FILE_TYPE       = 'image/jpeg'
+  PERMITTED_IMAGE_FORMATS = [
+    'image/jpeg', 'image/png', 'image/webp', 'image/tiff',
+    'image/jp2', 'image/jxl'
+  ].freeze
+
+  COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
+  IMAGE_QUALITY        = 80
+  IMAGE_FILE_SUFFIX    = '.jpg'
+  IMAGE_FILE_TYPE      = 'image/jpeg'
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
                                   'NO', 'ES', 'SE', 'DE'].freeze
@@ -62,9 +67,7 @@ class Book < ApplicationRecord
 
   attribute :cover_image_file
 
-  def cover_image_file(action_dispatch = nil)
-    action_dispatch
-  end
+  def cover_image_file(_action_dispatch = nil); end
 
   def page_count
     binding_types = book_binding_types.where.not(page_count: [nil, ''])

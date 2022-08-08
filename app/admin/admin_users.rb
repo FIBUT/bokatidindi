@@ -93,7 +93,6 @@ ActiveAdmin.register AdminUser do
     column :sign_in_count
     column :created_at
     column :locked_at
-    column :publishers
     actions
   end
 
