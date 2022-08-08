@@ -31,10 +31,8 @@ class Ability
 
     if user.publisher?
       can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
-      can :create, Book
-      can :manage, Book, publisher_id: user.publisher_ids
-      can :read, AdminUser, id: user.id
-      can %i[read edit], Publisher, publisher_id: user.publisher_ids
+      can %i[manage], Book, publisher_id: user.publisher_ids
+      can %i[read update], Publisher, id: user.publisher_ids
       can %i[read create], Author
     end
 

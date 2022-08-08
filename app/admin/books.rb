@@ -1,27 +1,30 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Book do
-  permit_params do
-    permitted = [
-      :id, :pre_title, :title, :post_title, :description, :long_description,
-      :cover_image_file, :uri_to_buy, :uri_to_audiobook,
-      :country_of_origin, :cover_image_file,
-      { book_binding_types_attributes: %i[id barcode binding_type_id language
-                                          page_count minutes url _destroy],
-        book_authors_attributes: %i[id author_type_id author_id _destroy],
-        book_categories_attributes: %i[id category_id _destroy],
-        edition_ids: [] }
-    ]
-    if current_admin_user.admin?
-      permitted << :source_id
-      permitted << :publisher_id
-    end
-    permitted
-  end
+  permit_params :id, :pre_title, :title, :post_title,
+                :description, :long_description,
+                :country_of_origin, :original_title,
+                :cover_image_file,
+                :publisher_id,
+                {
+                  book_binding_types_attributes: %i[
+                    id barcode binding_type_id language page_count
+                    minutes url _destroy
+                  ],
+                  book_authors_attributes: %i[
+                    id author_type_id author_id _destroy
+                  ],
+                  edition_ids: [], category_ids: []
+                }
 
   controller do
     def build_new_resource
       super.tap do |r|
+        if current_admin_user.publisher?
+          r.assign_attributes(
+            publisher_id: current_admin_user.publisher_ids.first
+          )
+        end
         r.assign_attributes(
           book_authors: [BookAuthor.new],
           book_binding_types: [BookBindingType.new],
@@ -34,10 +37,28 @@ ActiveAdmin.register Book do
     def update
       @resource = Book.find(permitted_params[:id])
 
+      # Check if the current can update the book resource, as is.
+      authorize! :update, @resource
+
+      # Update the book resource with the form data.
+      @resource.assign_attributes(permitted_params[:book])
+
+      # If the publisher_id attribute is not specified in the form, we should
+      # assign it to the current user's first (and presumabily only publisher).
+      if !permitted_params[:book][:publisher_id] &&
+         current_admin_user.publisher?
+        return bad_request if current_admin_user.publisher_ids.count.zero?
+
+        @resource[:publisher_id] = current_admin_user.publisher_ids.first
+      end
+
+      # Do a second access check on the book, in case something changed
+      authorize! :update, @resource
+
       # Get the IDs of the current inactive editions for preservation.
       inactive_edition_ids = @resource.editions.inactive.pluck(:id)
 
-      unless @resource.update(permitted_params[:book])
+      unless @resource.save
         return redirect_to(
           edit_admin_book_path(@resource.id),
           alert: 'Ekki var hægt að vista bókina.'
@@ -51,11 +72,17 @@ ActiveAdmin.register Book do
         BookEdition.create(book_id: @resource.id, edition_id:)
       end
 
+      # Upload the attached image file, if any.
       if permitted_params[:book][:cover_image_file]
+        content_type = permitted_params[:book][:cover_image_file].content_type
+
+        if Book::PERMITTED_IMAGE_FORMATS.include?(content_type)
         cover_image_contents = permitted_params[:book][:cover_image_file].read
         @resource.attach_cover_image_from_string cover_image_contents
+        end
       end
 
+      # Confirm success.
       redirect_to(
         admin_books_path,
         notice: "Bókin #{@resource.title} hefur verið uppfærð."
@@ -65,17 +92,19 @@ ActiveAdmin.register Book do
     def create
       @resource = Book.new(permitted_params[:book].except(:cover_image_file))
 
-      if current_admin_user.publisher?
-        @resource.publisher_id = current_admin_user.publisher_id
-        @resource.source_id = nil
-      end
+      authorize! :create, @resource
 
-      return nil unless @resource.save
+      unless @resource.save
+        redirect_to(
+          new_admin_book_path,
+          alert: 'Ekki var hægt að skrá bókina.'
+        )
+      end
 
       @resource.reload
 
       if permitted_params[:book][:cover_image_file]
-        cover_image_contents  = permitted_params[:book][:cover_image_file].read
+        cover_image_contents = permitted_params[:book][:cover_image_file].read
         @resource.attach_cover_image_from_string cover_image_contents
       end
 
@@ -128,6 +157,18 @@ ActiveAdmin.register Book do
   form do |f|
     f.semantic_errors
 
+    publishers = Publisher.all if current_admin_user.admin?
+    publishers = current_admin_user.publishers if current_admin_user.publisher?
+
+    if publishers.count > 1
+      f.inputs 'Útefandi' do
+        f.input :publisher,
+                collection: publishers,
+                include_blank: false,
+                input_html: { autocomplete: 'off' }
+      end
+    end
+
     f.inputs 'Titill' do
       f.input :pre_title,
               required: false,
@@ -175,7 +216,13 @@ ActiveAdmin.register Book do
       if resource.cover_image.attached?
         f.img src: resource.cover_image_variant_url(266), class: 'cover-image'
       end
-      f.input :cover_image_file, as: :file
+      f.input(
+        :cover_image_file,
+        as: :file,
+        hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, TIFF, '\
+              'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
+              'viðeigandi snið fyrir vef og prent við skráningu.'
+      )
     end
 
     f.has_many(
@@ -232,16 +279,6 @@ ActiveAdmin.register Book do
         input_html: { autocomplete: 'off' },
         hint: 'Upprunaland bókar, ef erlend.'
       )
-    end
-
-    if current_admin_user.admin?
-      f.inputs 'Ítarupplýsingar (eingöngu fyrir FÍBÚT)' do
-        f.input :source_id,
-                input_html: { autocomplete: 'off' },
-                hint: 'Upprunalegt raðnúmer bókar úr eldra kerfi FÍBÚT.'
-        f.input :publisher,
-                input_html: { autocomplete: 'off' }
-      end
     end
 
     f.actions

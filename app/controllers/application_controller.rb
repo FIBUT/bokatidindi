@@ -6,7 +6,17 @@ class ApplicationController < ActionController::Base
   before_action :redirect_root_domain
 
   def access_denied(_exception)
-    render status: :unauthorized, layout: false, plain: ''
+    render(
+      status: :unauthorized, layout: false,
+      plain: 'HTTP-villa 403: Aðgangur óheimilli'
+    )
+  end
+
+  def bad_request(_exception)
+    render(
+      status: :unauthorized, layout: false,
+      plain: 'HTTP-villa 400: Villa í fyrirspurn'
+    )
   end
 
   private
