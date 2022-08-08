@@ -281,7 +281,7 @@ class Book < ApplicationRecord
   def attach_cover_image_from_string(string)
     cover_image.attach(
       io: StringIO.new(string),
-      filename: "#{SecureRandom.uuid}.jpg"
+      filename: SecureRandom.uuid
     )
 
     return false if cover_image.attached?
