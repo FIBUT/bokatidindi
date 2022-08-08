@@ -77,8 +77,8 @@ ActiveAdmin.register Book do
         content_type = permitted_params[:book][:cover_image_file].content_type
 
         if Book::PERMITTED_IMAGE_FORMATS.include?(content_type)
-        cover_image_contents = permitted_params[:book][:cover_image_file].read
-        @resource.attach_cover_image_from_string cover_image_contents
+          cover_image_contents = permitted_params[:book][:cover_image_file].read
+          @resource.attach_cover_image_from_string cover_image_contents
         end
       end
 
@@ -257,11 +257,13 @@ ActiveAdmin.register Book do
       )
     end
 
-    f.has_many :book_categories, heading: 'Flokkar', allow_destroy: true do |bc|
-      bc.input :category,
-               include_blank: true,
-               member_label: :name_with_group,
-               input_html: { autocomplete: 'off' }
+    f.inputs do
+      f.input(
+        :categories,
+        as: :check_boxes,
+        collection: Category.all,
+        member_label: :name_with_group
+      )
     end
 
     if Edition.active.count.positive?
