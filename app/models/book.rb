@@ -7,8 +7,6 @@ class Book < ApplicationRecord
 
   COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY        = 80
-  IMAGE_FILE_SUFFIX    = '.jpg'
-  IMAGE_FILE_TYPE      = 'image/jpeg'
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
                                   'NO', 'ES', 'SE', 'DE'].freeze
@@ -24,6 +22,8 @@ class Book < ApplicationRecord
   ].freeze
   AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
   CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
+
+  DESCRIPTION_MAX_LENGTH = 380
 
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
@@ -111,7 +111,7 @@ class Book < ApplicationRecord
   end
 
   def cover_image_url(image_format = 'webp')
-    return original_cover_bucket_url unless cover_image.attached?
+    return nil unless cover_image.attached?
 
     cover_variant = cover_image.variant(
       format: image_format,
@@ -123,19 +123,6 @@ class Book < ApplicationRecord
     end
 
     cover_variant.processed.url
-  end
-
-  def attach_cover_image
-    image_uri = URI.parse(original_cover_bucket_url)
-    response  = Net::HTTP.get_response(image_uri)
-
-    return false unless response.is_a?(Net::HTTPSuccess)
-    return false unless response['content-type'] == IMAGE_FILE_TYPE
-
-    if response.is_a?(Net::HTTPSuccess)
-      attach_cover_image_from_string(response.body)
-    end
-    true
   end
 
   def cover_image_variant_url(width, image_format = 'webp')
@@ -162,19 +149,8 @@ class Book < ApplicationRecord
     srcset.join(', ')
   end
 
-  def original_cover_bucket_url
-    bucket_url = 'https://storage.googleapis.com/bokatidindi-covers-original/'
-    "#{bucket_url}#{source_id}#{IMAGE_FILE_SUFFIX}"
-  end
-
-  def show_description
-    return description.html_safe if long_description.empty?
-
-    long_description.html_safe
-  end
-
   def short_description
-    description.truncate(380).html_safe
+    description.truncate(DESCRIPTION_MAX_LENGTH).html_safe
   end
 
   def hours

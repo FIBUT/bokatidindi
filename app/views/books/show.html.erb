@@ -7,7 +7,7 @@
 
   <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
 
-  <%= tag 'meta', name: 'description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
+  <%= tag 'meta', name: 'description', content: html_escape_once(strip_tags(@book.description).squish) %>
   <%= tag 'link', rel: 'canonical', href: url_for(controller: 'books', action: 'show', only_path: false) %>
 
   <%= tag 'meta', property: 'og:type', content: 'book' %>
@@ -21,14 +21,14 @@
   <% end %>
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
   <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title) %>
-  <%= tag 'meta', property: 'og:description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
+  <%= tag 'meta', property: 'og:description', content: html_escape_once(strip_tags(@book.description).squish) %>
   <%= tag 'meta', property: 'og:url', content: url_for(controller: 'books', action: 'show', only_path: false) %>
   <%= tag 'meta', property: 'og:locale', content: 'is_IS' %>
   <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
 
   <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
   <%= tag 'meta', name: 'twitter:title', content: html_escape_once(@book.full_title_with_author) %>
-  <%= tag 'meta', name: 'twitter:description', content: html_escape_once(strip_tags(@book.show_description).squish) %>
+  <%= tag 'meta', name: 'twitter:description', content: html_escape_once(strip_tags(@book.description).squish) %>
   <% if @book.cover_image.attached? %>
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, 'jpg') %>
   <% end %>
@@ -81,12 +81,18 @@
 
       <%= render 'books/authors', book: @book %>
 
-      <div
+      <article
         aria-label="Lýsing"
         class="book-description mb-5 bt-5 overflow-hidden"
       >
-        <%= simple_format @book.show_description, tags: ['em'] %>
-      </div>
+        <section>
+          <%= simple_format @book.description, tags: ['em'] %>
+        </section>
+
+        <section>
+          <%= simple_format @book.long_description, tags: ['em'] %>
+        </section>
+      </article>
 
       <%= render 'books/ecommerce', book: @book %>
 

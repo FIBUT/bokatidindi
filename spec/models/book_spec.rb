@@ -11,13 +11,11 @@ RSpec.describe Book, type: :model do
         Rails.root.join("spec/assets/#{image_file_name}")
       )
 
-      expect(book.cover_image_url).to eq(book.original_cover_bucket_url)
       expect(book.cover_image.attached?).not_to be_truthy
 
       book.attach_cover_image_from_string(image_contents)
 
       expect(book.cover_image.attached?).to be_truthy
-      expect(book.cover_image_url).not_to eq(book.original_cover_bucket_url)
 
       # srcsets are valid
       srcset_array = book.cover_img_srcset.split(', ')
