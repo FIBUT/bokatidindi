@@ -2,8 +2,7 @@
 
 class Book < ApplicationRecord
   PERMITTED_IMAGE_FORMATS = [
-    'image/jpeg', 'image/png', 'image/webp', 'image/tiff',
-    'image/jp2', 'image/jxl'
+    'image/jpeg', 'image/png', 'image/webp', 'image/jp2', 'image/jxl'
   ].freeze
 
   COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
