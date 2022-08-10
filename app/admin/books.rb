@@ -219,7 +219,7 @@ ActiveAdmin.register Book do
       f.input(
         :cover_image_file,
         as: :file,
-        hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, TIFF, '\
+        hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, '\
               'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
               'viðeigandi snið fyrir vef og prent við skráningu.'
       )
