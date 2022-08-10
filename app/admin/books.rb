@@ -79,6 +79,12 @@ ActiveAdmin.register Book do
         if Book::PERMITTED_IMAGE_FORMATS.include?(content_type)
           cover_image_contents = permitted_params[:book][:cover_image_file].read
           @resource.attach_cover_image_from_string cover_image_contents
+        else
+          return redirect_to(
+            edit_admin_book_path(@resource.id),
+            warn: 'Upplýsingar um bókina voru vistaðar en forsíðumyndin er '\
+                  'ekki af réttu sniði og var því ekki vistuð.'
+          )
         end
       end
 
@@ -104,8 +110,18 @@ ActiveAdmin.register Book do
       @resource.reload
 
       if permitted_params[:book][:cover_image_file]
-        cover_image_contents = permitted_params[:book][:cover_image_file].read
-        @resource.attach_cover_image_from_string cover_image_contents
+        content_type = permitted_params[:book][:cover_image_file].content_type
+
+        if Book::PERMITTED_IMAGE_FORMATS.include?(content_type)
+          cover_image_contents = permitted_params[:book][:cover_image_file].read
+          @resource.attach_cover_image_from_string cover_image_contents
+        else
+          return redirect_to(
+            edit_admin_book_path(@resource.id),
+            warn: 'Upplýsingar um bókina voru vistaðar en forsíðumyndin er '\
+                  'ekki af réttu sniði og var því ekki vistuð.'
+          )
+        end
       end
 
       redirect_to(
