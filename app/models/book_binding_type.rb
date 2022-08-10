@@ -5,6 +5,10 @@ class BookBindingType < ApplicationRecord
     2, 3
   ).delete_if { |l| l[0] == '' }
 
+  AVAILABILITIES = %i[unknown pending available sold_out reprint_pending].freeze
+
+  enum :availability, AVAILABILITIES
+
   belongs_to :book
   belongs_to :binding_type
 

@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_192454) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_10_200332) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -151,6 +152,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_192454) do
     t.string "url"
     t.integer "page_count"
     t.integer "minutes"
+    t.integer "availability", default: 0, null: false
+    t.datetime "publication_date"
     t.index ["barcode"], name: "index_book_binding_types_on_barcode"
     t.index ["binding_type_id"], name: "index_book_binding_types_on_binding_type_id"
     t.index ["book_id"], name: "index_book_binding_types_on_book_id"
