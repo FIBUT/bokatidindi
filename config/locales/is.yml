@@ -107,6 +107,14 @@ is:
         page_count: 'Blaðsíðutal'
         minutes: 'Mínútufjöldi'
         url: 'Vefslóð'
+        availability: 'Fáanleiki'
+        availabilities:
+          unknown: 'Óþekkt'
+          pending: 'Væntanleg'
+          available: 'Fáanleg'
+          sold_out: 'Uppseld'
+          reprint_pending: 'Endurprentun væntanleg'
+        publication_date: 'Útgáfudagur'
       book_author:
         author_type: 'Hlutverk'
         author: 'Höfundur'

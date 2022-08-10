@@ -24,6 +24,7 @@ class Edition < ApplicationRecord
   }
 
   has_many :book_editions, dependent: :destroy
+  has_many :books, through: :book_editions
 
   def book_count
     Book.includes(

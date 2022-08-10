@@ -9,7 +9,7 @@ ActiveAdmin.register Book do
                 {
                   book_binding_types_attributes: %i[
                     id barcode binding_type_id language page_count
-                    minutes url _destroy
+                    minutes url availability publication_date _destroy
                   ],
                   book_authors_attributes: %i[
                     id author_type_id author_id _destroy
@@ -271,6 +271,25 @@ ActiveAdmin.register Book do
         :url,
         input_html: { autocomplete: 'off', class: 'url' }
       )
+      bb.input(
+        :availability,
+        collection: BookBindingType::AVAILABILITIES.map do |s|
+          [
+            I18n.t(
+              "activerecord.attributes.book_binding_type.availabilities.#{s}"
+            ),
+            s
+          ]
+        end,
+        include_blank: false
+      )
+      bb.input(
+        :publication_date,
+        as: :datepicker,
+        class: 'publication-date',
+        hint: 'Ef bók er skráð sem væntanleg er hún sjálfkrafa skráð sem '\
+              'fáanleg á útgáfudegi.'
+      )
     end
 
     f.inputs do
@@ -284,7 +303,12 @@ ActiveAdmin.register Book do
 
     if Edition.active.count.positive?
       f.inputs do
-        f.input :editions, as: :check_boxes, collection: Edition.active
+        f.input(
+          :editions,
+          as: :check_boxes,
+          collection: Edition.active,
+          input_html: { autocomplete: 'off' }
+        )
       end
     end
 

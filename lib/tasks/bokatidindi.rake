@@ -123,4 +123,16 @@ namespace :bt do
       'SET DATA TYPE character varying COLLATE "is_IS"'
     )
   end
+
+  desc 'Mark pending book binding types as available on publication day'
+  task label_available_on_publication_date: :environment do
+    Edition.current.first.books.each do |b|
+      b.book_binding_types.each do |bbt|
+        if bbt.publication_date > DateTime.now
+          bbt.availability = :available
+          bbt.save
+        end
+      end
+    end
+  end
 end
