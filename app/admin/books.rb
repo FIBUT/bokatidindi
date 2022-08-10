@@ -155,10 +155,9 @@ ActiveAdmin.register Book do
         row 'Titill', &:title_noshy
         row :authors, &:authors_brief
         row :publisher
-        row :categories do |book|
-          book.categories.map(&:name_with_group)
-        end
-        row :show_description
+        row :categories
+        row :description
+        row :long_description
         row :source_id
       end
     end
@@ -219,7 +218,8 @@ ActiveAdmin.register Book do
               required: true,
               input_html: { rows: 2, autocomplete: 'off' },
               hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
-                    'prentútgáfu Bókatíðinda. Hámark 300 slög.'
+                    'prentútgáfu Bókatíðinda. '\
+                    "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög."
       f.input :long_description,
               as: :text,
               input_html: { rows: 5, autocomplete: 'off' },

@@ -88,7 +88,7 @@ is:
         description: 'Stutt lýsing'
         long_description: 'Löng lýsing'
         cover_image_file: 'Skrá fyrir forsíðumynd'
-        show_description: 'Lýsing'
+        description: 'Lýsing'
         categories: 'Flokkar'
         authors: 'Höfundar'
         uri_to_audiobook: 'Vefslóð á hljóðbók'
