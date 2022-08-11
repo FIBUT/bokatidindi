@@ -135,4 +135,26 @@ namespace :bt do
       end
     end
   end
+
+  desc 'Reverse order of book athors'
+  task reverse_book_authors: :environment do
+    Book.all.each do |b|
+      book_authors_array = []
+      b.book_authors.each do |ba|
+        book_authors_array << {
+          book_id: b.id,
+          author_id: ba.author_id,
+          author_type_id: ba.author_type_id
+        }
+      end
+      b.book_authors.delete_all
+      book_authors_array.reverse.each do |nba|
+        BookAuthor.create(
+          book_id: b.id,
+          author_id: nba[:author_id],
+          author_type_id: nba[:author_type_id]
+        )
+      end
+    end
+  end
 end
