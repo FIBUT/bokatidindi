@@ -109,10 +109,10 @@ is:
         url: 'Vefslóð'
         availability: 'Fáanleiki'
         availabilities:
-          unknown: 'Óþekkt'
+          unknown: 'Óþekkt/Annað'
           pending: 'Væntanleg'
           available: 'Fáanleg'
-          sold_out: 'Uppseld'
+          sold_out: 'Uppseld hjá útgefanda'
           reprint_pending: 'Endurprentun væntanleg'
         publication_date: 'Útgáfudagur'
       book_author:
