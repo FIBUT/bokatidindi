@@ -111,7 +111,7 @@ class Book < ApplicationRecord
   end
 
   def cover_image_url(image_format = 'webp')
-    return nil unless cover_image.attached?
+    return '' unless cover_image.attached?
 
     cover_variant = cover_image.variant(
       format: image_format,
@@ -186,7 +186,7 @@ class Book < ApplicationRecord
     groups = []
 
     book_authors_in_order = book_authors.includes(:author_type).order(
-      'author_types.rod': :asc, id: :desc
+      id: :asc
     )
 
     group_records = book_authors_in_order.group_by(&:author_type)
