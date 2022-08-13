@@ -23,7 +23,8 @@ class Book < ApplicationRecord
   AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
   CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
 
-  DESCRIPTION_MAX_LENGTH = 380
+  DESCRIPTION_MAX_LENGTH      = 380
+  LONG_DESCRIPTION_MAX_LENGTH = 3000
 
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
@@ -39,12 +40,12 @@ class Book < ApplicationRecord
                     publisher: :name
                   }
 
-  has_many :book_authors, dependent: :destroy
+  has_many :book_authors, dependent: :destroy, inverse_of: :book
   has_many :authors, through: :book_authors
-  has_many :book_categories, dependent: :destroy
+  has_many :book_categories, dependent: :destroy, inverse_of: :book
   has_many :categories, through: :book_categories
   has_many :author_types, through: :book_authors
-  has_many :book_binding_types, dependent: :destroy
+  has_many :book_binding_types, dependent: :destroy, inverse_of: :book
   has_many :binding_types, through: :book_binding_types
 
   # This prevents the deletion of books that have been assigned bo editions.
@@ -65,6 +66,8 @@ class Book < ApplicationRecord
   before_update :set_title_hypenation
 
   attribute :cover_image_file
+
+  validates :publisher, :title, :description, presence: true
 
   def cover_image_file(_action_dispatch = nil); end
 
@@ -304,11 +307,15 @@ class Book < ApplicationRecord
       ),
       author_links: (
         authors.map do |a|
-          link_to(
-            a.name,
-            "/baekur/hofundur/#{a.author.slug}",
-            class: 'author-link'
-          )
+          if a.author.book_count.positive?
+            link_to(
+              a.name,
+              "/baekur/hofundur/#{a.author.slug}",
+              class: 'author-link'
+            )
+          else
+            a.name
+          end
         end
       ).to_sentence
     }

@@ -6,67 +6,78 @@ class BooksController < ApplicationController
 
     if params[:search]
       @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
-      @books = Book.search(params[:search]).reverse
+      book_results = Book.joins(:book_editions).search(params[:search])
 
-      return redirect_to book_path(@books.first.slug) if @books.length == 1
+      @books                   = []
+      @books_from_old_editions = []
+
+      book_results.each do |b|
+        if b.current_edition?
+          @books << b
+        else
+          @books_from_old_editions << b
+        end
+      end
+
+      return redirect_to book_path(@books.first[:slug]) if @books.length == 1
     else
-      @books = Book.order(:title).eager_load(
-        :book_authors, :authors, :publisher, :book_categories,
-        :book_binding_types, :book_editions
-      ).includes(
-        :publisher,
-        book_categories: [:category],
-        book_authors: %i[author_type author],
-        book_binding_types: [:binding_type],
-        cover_image_attachment: [:blob]
-      ).where(
-        book_editions: { 'edition_id': Edition.current.first.id }
-      )
-
       if params[:category]
         @category = Category.find_by(slug: params[:category])
-        unless @category
-          return render file: 'public/404.html', status: :not_found,
-                        layout: false
-        end
 
-        @title_tag = "Bókatíðindi - Flokkur - #{@category.name_with_group}"
-        @meta_description = "Bækur í vöruflokknum #{@category.name_with_group}"
+        @title_tag = "Bókatíðindi - Flokkur - #{@category[:name_with_group]}"
+        @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
+                            "#{@category[:name_with_group]}"
 
-        @books = @books.joins(:categories).where(
-          book_categories: { categories: { slug: params[:category] } }
-        )
+        @books = Book.joins(
+          book_editions: :book_edition_categories
+        ).where(
+          book_editions: { edition_id: Edition.active.first },
+          book_edition_categories: {
+            category_id: @category[:id], for_web: true
+          }
+        ).order(:title).group('books.id')
       end
       if params[:publisher]
         @publisher = Publisher.find_by(slug: params[:publisher])
-        unless @publisher
-          return render file: 'public/404.html', status: :not_found,
-                        layout: false
-        end
 
-        @title_tag = "Bókatíðindi - Útgefandi - #{@publisher.name}"
-        @meta_description = "Bækur frá útgefandanum #{@publisher.name}"
+        @title_tag = "Bókatíðindi - Útgefandi - #{@publisher[:name]}"
+        @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
 
-        @books = @books.where(publishers: { slug: params[:publisher] })
+        @books = Book.joins(
+          book_editions: :book_edition_categories
+        ).where(
+          publisher_id: @publisher[:id],
+          book_editions: { edition_id: Edition.active.first },
+          book_edition_categories: { for_web: true }
+        ).order(:title).group('books.id')
       end
       if params[:author]
         @author = Author.find_by(slug: params[:author])
-        unless @author
-          return render file: 'public/404.html', status: :not_found,
-                        layout: false
-        end
 
-        @title_tag = "Bókatíðindi - Höfundur - #{@author.name}"
-        @meta_description = "Bækur eftir höfundinn #{@author.name}"
+        @title_tag = "Bókatíðindi - Höfundur - #{@author[:name]}"
+        @meta_description = "Bækur eftir höfundinn #{@author[:name]}"
 
-        @books = @books.where(authors: { slug: params[:author] })
+        @books = Book.left_joins(
+          :book_authors
+        ).left_joins(
+          book_editions: [:book_edition_categories]
+        ).where(
+          book_authors: { author_id: @author[:id] },
+          book_editions: { edition_id: Edition.active.first },
+          book_edition_categories: { for_web: true }
+        ).order(:title).group('books.id')
       end
 
-      unless @books
-        return render file: 'public/404.html', status: :not_found, layout: false
+      unless @books.nil?
+        return @books = @books.order(:title).page(params[:page])
       end
 
-      @books = @books.page params[:page]
+      @books = Book.left_joins(
+        book_editions: [:book_edition_categories]
+      ).where(
+        book_editions: { edition_id: Edition.active.first },
+        book_edition_categories: { for_web: true }
+      ).order(:title).group('books.id').page(params[:page])
     end
   end
 

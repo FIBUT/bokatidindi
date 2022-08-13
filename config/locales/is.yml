@@ -100,6 +100,8 @@ is:
         editions: 'Útgáfur Bókatíðinda'
       book_category:
         category: 'Flokkur'
+        for_print: 'Birtist í prentútgáfu'
+        for_web: 'Birtist í vefútgáfu'
       book_binding_type:
         binding_type: 'Útgáfuform'
         barcode: 'Strikamerki'
@@ -168,6 +170,8 @@ is:
         name: "Nafn"
         group: "Yfirflokkur"
         book_count: "Fjöldi bóka"
+        book_count_web: "Fjöldi bóka á vef"
+        book_count_print: "Fjöldi bóka í prentútgáfu"
         groups:
           childrens_books: "Barnabækur"
           fiction: "Skáldverk"

@@ -44,6 +44,11 @@ FactoryBot.define do
     book
   end
 
+  factory :book_edition do
+    book
+    edition { Edition.first }
+  end
+
   factory :publisher do
     source_id { FFaker::Random.rand(1..999_999_999) }
     name      { FFaker::Company.unique.name }

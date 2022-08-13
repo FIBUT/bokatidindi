@@ -95,6 +95,9 @@ namespace :bt do
     BookBindingType.all.each do |bb|
       bb.destroy if bb.book.nil? || bb.binding_type.nil?
     end
+    BookEdition.all.each do |be|
+      be.destroy if be.book.nil? || be.edition.nil?
+    end
   end
 
   desc 'Update the full name of every author'
@@ -162,6 +165,14 @@ namespace :bt do
           author_type_id: nba[:author_type_id]
         )
       end
+    end
+  end
+
+  desc 'Create BookEditionCategory records from BookCategory records'
+  task assign_categories_to_book_editions: :environment do
+    BookEdition.all.each do |book_edition|
+      pp book_edition
+      book_edition.reset_book_edition_categories
     end
   end
 end
