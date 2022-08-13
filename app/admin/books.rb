@@ -216,16 +216,24 @@ ActiveAdmin.register Book do
       f.input :description,
               as: :string,
               required: true,
-              input_html: { rows: 2, autocomplete: 'off' },
+              input_html: {
+                rows: 2,
+                autocomplete: 'off',
+                maxlength: Book::DESCRIPTION_MAX_LENGTH
+              },
               hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
                     'prentútgáfu Bókatíðinda. '\
                     "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög."
       f.input :long_description,
               as: :text,
-              input_html: { rows: 5, autocomplete: 'off' },
-              hint: 'Lengri lýsing sem birtist á upplýsingasíðu hverrar bókar '\
-                    'í vefútgáfu. Ef þessi reitur er tómur birtist styttri '\
-                    'lýsingin í staðinn.'
+              input_html: {
+                rows: 10,
+                autocomplete: 'off',
+                maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
+              },
+              hint: 'Lengri lýsing sem birtist neðan við stuttu lýsinguna á '\
+                    'upplýsingasíðu hverrar bókar í vefútgáfu. Tvöfalt '\
+                    'línubil jafngildir málsgreinabili.'
     end
 
     f.inputs 'Mynd af forsíðu' do
@@ -235,6 +243,9 @@ ActiveAdmin.register Book do
       f.input(
         :cover_image_file,
         as: :file,
+        input_html: {
+          accept: Book::PERMITTED_IMAGE_FORMATS.join(', ')
+        },
         hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, '\
               'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
               'viðeigandi snið fyrir vef og prent við skráningu.'
@@ -261,11 +272,11 @@ ActiveAdmin.register Book do
       )
       bb.input(
         :page_count,
-        input_html: { autocomplete: 'off', min: 1, class: 'page-count' }
+        input_html: { autocomplete: 'off', min: 0, class: 'page-count' }
       )
       bb.input(
         :minutes,
-        input_html: { autocomplete: 'off', min: 1, class: 'minutes' }
+        input_html: { autocomplete: 'off', min: 0, class: 'minutes' }
       )
       bb.input(
         :url,
@@ -292,13 +303,14 @@ ActiveAdmin.register Book do
       )
     end
 
-    f.inputs do
-      f.input(
-        :categories,
-        as: :check_boxes,
+    f.has_many(:book_categories, allow_destroy: true) do |bc|
+      bc.input(
+        :category,
         collection: Category.all,
         member_label: :name_with_group
       )
+      bc.input :for_print
+      bc.input :for_web
     end
 
     if Edition.active.count.positive?
