@@ -14,8 +14,17 @@ ActiveAdmin.register Book do
                   book_authors_attributes: %i[
                     id author_type_id author_id _destroy
                   ],
-                  edition_ids: [], category_ids: []
+                  book_categories_attributes: %i[
+                    id category_id for_print for_web
+                  ],
+                  edition_ids: []
                 }
+
+  member_action :reset_categories do
+    book_edition = resource.book_edition.where(edition_id: Edition.current.last)
+    book_edition.reset_book_edition_categories
+    redirect_to resource_path, notice: 'Birtir flokkar hafa verið endurstilltir'
+  end
 
   controller do
     def build_new_resource
@@ -41,7 +50,9 @@ ActiveAdmin.register Book do
       authorize! :update, @resource
 
       # Update the book resource with the form data.
-      @resource.assign_attributes(permitted_params[:book])
+      @resource.assign_attributes(
+        permitted_params[:book].except(:edition_ids, :cover_image_file)
+      )
 
       # If the publisher_id attribute is not specified in the form, we should
       # assign it to the current user's first (and presumabily only publisher).
@@ -55,22 +66,25 @@ ActiveAdmin.register Book do
       # Do a second access check on the book, in case something changed
       authorize! :update, @resource
 
-      # Get the IDs of the current inactive editions for preservation.
-      inactive_edition_ids = @resource.editions.inactive.pluck(:id)
+      # Rebuild the relationship between the book and editions that are open for
+      # submissions. This resets the BookEditionCategory records associated with
+      # the book.
+      @resource.book_editions.active.destroy_all
+
+      Edition.active.where(
+        id: permitted_params[:book][:edition_ids]
+      ).each do |edition|
+        BookEdition.create(book_id: @resource[:id], edition_id: edition[:id])
+      end
 
       unless @resource.save
         return redirect_to(
-          edit_admin_book_path(@resource.id),
+          edit_admin_book_path(@resource[:id]),
           alert: 'Ekki var hægt að vista bókina.'
         )
       end
 
       @resource.reload
-
-      # We want to retain the relationship to inactive editions.
-      inactive_edition_ids.each do |edition_id|
-        BookEdition.create(book_id: @resource.id, edition_id:)
-      end
 
       # Upload the attached image file, if any.
       if permitted_params[:book][:cover_image_file]
@@ -96,18 +110,28 @@ ActiveAdmin.register Book do
     end
 
     def create
-      @resource = Book.new(permitted_params[:book].except(:cover_image_file))
+      @resource = Book.new(
+        permitted_params[:book].except(
+          :edition_ids, :cover_image_file
+        )
+      )
 
       authorize! :create, @resource
 
       unless @resource.save
-        redirect_to(
+        return redirect_to(
           new_admin_book_path,
           alert: 'Ekki var hægt að skrá bókina.'
         )
       end
 
       @resource.reload
+
+      Edition.active.where(
+        id: permitted_params[:book][:edition_ids]
+      ).each do |edition|
+        BookEdition.create(book_id: @resource[:id], edition_id: edition[:id])
+      end
 
       if permitted_params[:book][:cover_image_file]
         content_type = permitted_params[:book][:cover_image_file].content_type
@@ -216,16 +240,24 @@ ActiveAdmin.register Book do
       f.input :description,
               as: :string,
               required: true,
-              input_html: { rows: 2, autocomplete: 'off' },
+              input_html: {
+                rows: 2,
+                autocomplete: 'off',
+                maxlength: Book::DESCRIPTION_MAX_LENGTH
+              },
               hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
                     'prentútgáfu Bókatíðinda. '\
                     "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög."
       f.input :long_description,
               as: :text,
-              input_html: { rows: 5, autocomplete: 'off' },
-              hint: 'Lengri lýsing sem birtist á upplýsingasíðu hverrar bókar '\
-                    'í vefútgáfu. Ef þessi reitur er tómur birtist styttri '\
-                    'lýsingin í staðinn.'
+              input_html: {
+                rows: 10,
+                autocomplete: 'off',
+                maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
+              },
+              hint: 'Lengri lýsing sem birtist neðan við stuttu lýsinguna á '\
+                    'upplýsingasíðu hverrar bókar í vefútgáfu. Tvöfalt '\
+                    'línubil jafngildir málsgreinabili.'
     end
 
     f.inputs 'Mynd af forsíðu' do
@@ -235,6 +267,9 @@ ActiveAdmin.register Book do
       f.input(
         :cover_image_file,
         as: :file,
+        input_html: {
+          accept: Book::PERMITTED_IMAGE_FORMATS.join(', ')
+        },
         hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, '\
               'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
               'viðeigandi snið fyrir vef og prent við skráningu.'
@@ -261,11 +296,11 @@ ActiveAdmin.register Book do
       )
       bb.input(
         :page_count,
-        input_html: { autocomplete: 'off', min: 1, class: 'page-count' }
+        input_html: { autocomplete: 'off', min: 0, class: 'page-count' }
       )
       bb.input(
         :minutes,
-        input_html: { autocomplete: 'off', min: 1, class: 'minutes' }
+        input_html: { autocomplete: 'off', min: 0, class: 'minutes' }
       )
       bb.input(
         :url,
@@ -292,13 +327,14 @@ ActiveAdmin.register Book do
       )
     end
 
-    f.inputs do
-      f.input(
-        :categories,
-        as: :check_boxes,
+    f.has_many(:book_categories, allow_destroy: true) do |bc|
+      bc.input(
+        :category,
         collection: Category.all,
         member_label: :name_with_group
       )
+      bc.input :for_print
+      bc.input :for_web
     end
 
     if Edition.active.count.positive?

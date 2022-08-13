@@ -11,17 +11,11 @@
 
   <div class="container-fluid">
 
-    <% if @books.length.positive? %>
-
     <%= render 'books/results_heading' %>
 
     <%= render 'books/results' %>
 
-    <% else %>
-
-    <%= render 'books/no_results' %>
-
-    <% end %>
+    <%= render 'books/older_results' %>
 
   </div>
 

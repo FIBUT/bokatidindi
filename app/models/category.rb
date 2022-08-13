@@ -18,15 +18,28 @@ class Category < ApplicationRecord
   end
 
   def book_count
-    Book.includes(
-      :book_editions, :categories
-    ).where(
-      categories: { id: },
-      book_editions: { 'edition_id': Edition.current.first.id }
-    ).count
+    book_count_collection.count
+  end
+
+  def book_count_print
+    book_count_collection.where(for_print: true).count
+  end
+
+  def book_count_web
+    book_count_collection.where(for_print: true).count
   end
 
   private
+
+  def book_count_collection
+    BookEditionCategory.joins(
+      :book_edition,
+      :category
+    ).where(
+      category_id: id,
+      book_edition: { edition_id: Edition.current.last.id }
+    )
+  end
 
   def set_slug
     self.slug = name.parameterize(locale: :is)

@@ -12,11 +12,15 @@
     <strong
       id="book-meta-publisher-label<%= local_assigns[:book].id %>"
     >Útgefandi</strong>
-    <%=
-      link_to local_assigns[:book].publisher.name,
-      publisher_path(local_assigns[:book].publisher.slug),
-      title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
-    %>
+    <% if local_assigns[:book].publisher.book_count.positive? %>
+      <%=
+        link_to local_assigns[:book].publisher.name,
+        publisher_path(local_assigns[:book].publisher.slug),
+        title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
+      %>
+    <% else %>
+      <%= local_assigns[:book].publisher.name %>
+    <% end %>
   </li>
   <% else %>
     <li

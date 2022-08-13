@@ -32,6 +32,8 @@ ActiveAdmin.register Category do
       end
     end
     column :book_count, &:book_count
+    column :book_count_web, &:book_count_web
+    column :book_count_print, &:book_count_print
     actions
   end
 
