@@ -175,4 +175,10 @@ namespace :bt do
       book_edition.reset_book_edition_categories
     end
   end
+
+  task nullify_barcodes: :environment do
+    BookBindingType.where(barcode: '').each do |bbt|
+      bbt[:barcode] = nil
+    end
+  end
 end
