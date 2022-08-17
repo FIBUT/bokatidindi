@@ -325,8 +325,9 @@ ActiveAdmin.register Book do
       bc.input(
         :category,
         collection: grouped_options_for_select(
-          Category.grouped_options
+          Category.grouped_options, bc.object.category_id
         ),
+        selected: 3,
         member_label: :name_with_group
       )
       bc.input :for_print
