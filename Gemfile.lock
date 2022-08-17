@@ -194,6 +194,7 @@ GEM
       has_scope (~> 0.6)
       railties (>= 5.2, < 7.1)
       responders (>= 2, < 4)
+    isbn-calculator (1.0.0)
     isbn_validation (1.2.2)
       activerecord (>= 3)
     iso-639 (0.3.5)
@@ -231,6 +232,9 @@ GEM
     matrix (0.4.2)
     memoist (0.16.2)
     method_source (1.0.0)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
@@ -413,6 +417,9 @@ GEM
     uber (0.1.0)
     unicode-display_width (2.2.0)
     uri (0.11.0)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -455,12 +462,14 @@ DEPENDENCIES
   google-cloud-storage (~> 1.11)
   htmlentities
   image_processing (~> 1.12)
+  isbn-calculator
   isbn_validation
   iso-639
   jbuilder (~> 2.7)
   jsbundling-rails
   kaminari (>= 1.2.0)
   listen (~> 3.3)
+  mimemagic
   mysql2 (>= 0.5.3)
   nokogiri (~> 1.13.8)
   open-uri
@@ -482,6 +491,7 @@ DEPENDENCIES
   thwait
   turbolinks (~> 5)
   tzinfo-data
+  validate_url
   web-console (>= 4.1.0)
   webdrivers
 
