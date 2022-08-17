@@ -1,12 +1,24 @@
 # frozen_string_literal: true
 
 class Category < ApplicationRecord
+  GROUPS = %i[childrens_books fiction non_fiction].freeze
+
   has_many :book_categories, dependent: :restrict_with_error
   has_many :books, through: :book_categories
 
-  enum :group, %i[childrens_books fiction non_fiction]
+  enum :group, GROUPS
 
   before_create :set_slug
+
+  def self.grouped_options
+    optgroups = {}
+    GROUPS.each do |group|
+      group_name = I18n.t("activerecord.attributes.category.groups.#{group}")
+      optgroups[group_name] =
+        Category.where(group:).order(rod: :asc).pluck(:name, :id)
+    end
+    optgroups
+  end
 
   def name_with_group
     translated_group_name = I18n.t(

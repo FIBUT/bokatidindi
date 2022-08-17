@@ -15,7 +15,7 @@ ActiveAdmin.register Book do
                     id author_type_id author_id _destroy
                   ],
                   book_categories_attributes: %i[
-                    id category_id for_print for_web
+                    id category_id for_print for_web _destroy
                   ],
                   edition_ids: []
                 }
@@ -38,7 +38,8 @@ ActiveAdmin.register Book do
           book_authors: [BookAuthor.new],
           book_binding_types: [BookBindingType.new],
           book_categories: [BookCategory.new],
-          editions: Edition.active
+          editions: Edition.active,
+          country_of_origin: 'IS'
         )
       end
     end
@@ -66,47 +67,41 @@ ActiveAdmin.register Book do
       # Do a second access check on the book, in case something changed
       authorize! :update, @resource
 
-      # Rebuild the relationship between the book and editions that are open for
-      # submissions. This resets the BookEditionCategory records associated with
-      # the book.
-      @resource.book_editions.active.destroy_all
-
-      Edition.active.where(
-        id: permitted_params[:book][:edition_ids]
-      ).each do |edition|
-        BookEdition.create(book_id: @resource[:id], edition_id: edition[:id])
-      end
-
-      unless @resource.save
-        return redirect_to(
-          edit_admin_book_path(@resource[:id]),
-          alert: 'Ekki var hægt að vista bókina.'
-        )
-      end
-
-      @resource.reload
-
-      # Upload the attached image file, if any.
       if permitted_params[:book][:cover_image_file]
-        content_type = permitted_params[:book][:cover_image_file].content_type
+        cover_image_contents = permitted_params[:book][:cover_image_file].read
 
-        if Book::PERMITTED_IMAGE_FORMATS.include?(content_type)
-          cover_image_contents = permitted_params[:book][:cover_image_file].read
-          @resource.attach_cover_image_from_string cover_image_contents
+        cover_image_content_type = MimeMagic.by_magic(cover_image_contents).type
+
+        if Book::PERMITTED_IMAGE_FORMATS.include?(cover_image_content_type)
+          cover_image_file_valid = true
         else
-          return redirect_to(
-            edit_admin_book_path(@resource.id),
-            warn: 'Upplýsingar um bókina voru vistaðar en forsíðumyndin er '\
-                  'ekki af réttu sniði og var því ekki vistuð.'
-          )
+          @resource.errors.add(:cover_image_file, :invalid)
         end
       end
 
-      # Confirm success.
-      redirect_to(
-        admin_books_path,
-        notice: "Bókin #{@resource.title} hefur verið uppfærð."
-      )
+      if @resource.errors.none? && @resource.save
+        # Rebuild the relationship between the book and editions that are open
+        # for submissions. This resets the BookEditionCategory records
+        # associated with the book.
+        @resource.book_editions.active.destroy_all
+
+        Edition.active.where(
+          id: permitted_params[:book][:edition_ids]
+        ).each do |edition|
+          BookEdition.create(book_id: @resource[:id], edition_id: edition[:id])
+        end
+
+        if cover_image_file_valid
+          @resource.attach_cover_image_from_string(cover_image_contents)
+        end
+
+        return redirect_to(
+          admin_books_path,
+          notice: "Bókin #{@resource.title} hefur verið uppfærð."
+        )
+      end
+
+      render(:edit, alert: 'Ekki var hægt að vista bókina.')
     end
 
     def create
@@ -116,42 +111,40 @@ ActiveAdmin.register Book do
         )
       )
 
-      authorize! :create, @resource
-
-      unless @resource.save
-        return redirect_to(
-          new_admin_book_path,
-          alert: 'Ekki var hægt að skrá bókina.'
-        )
-      end
-
-      @resource.reload
-
-      Edition.active.where(
-        id: permitted_params[:book][:edition_ids]
-      ).each do |edition|
-        BookEdition.create(book_id: @resource[:id], edition_id: edition[:id])
-      end
-
       if permitted_params[:book][:cover_image_file]
-        content_type = permitted_params[:book][:cover_image_file].content_type
+        cover_image_contents = permitted_params[:book][:cover_image_file].read
 
-        if Book::PERMITTED_IMAGE_FORMATS.include?(content_type)
-          cover_image_contents = permitted_params[:book][:cover_image_file].read
-          @resource.attach_cover_image_from_string cover_image_contents
+        cover_image_content_type = MimeMagic.by_magic(cover_image_contents).type
+
+        if Book::PERMITTED_IMAGE_FORMATS.include?(cover_image_content_type)
+          cover_image_file_valid = true
         else
-          return redirect_to(
-            edit_admin_book_path(@resource.id),
-            warn: 'Upplýsingar um bókina voru vistaðar en forsíðumyndin er '\
-                  'ekki af réttu sniði og var því ekki vistuð.'
-          )
+          @resource.errors.add(:cover_image_file, :invalid)
         end
       end
 
-      redirect_to(
-        new_admin_book_path,
-        notice: "Bókin #{@resource.title} hefur verið skráð."
-      )
+      authorize! :create, @resource
+
+      if @resource.errors.none? && @resource.save
+        Edition.active.where(
+          id: permitted_params[:book][:edition_ids]
+        ).each do |edition|
+          BookEdition.create(
+            book_id: @resource[:id], edition_id: edition[:id]
+          )
+        end
+
+        if cover_image_file_valid
+          @resource.attach_cover_image_from_string(cover_image_contents)
+        end
+
+        return redirect_to(
+          new_admin_book_path,
+          notice: "Bókin #{@resource.title} hefur verið skráð."
+        )
+      end
+
+      render(:new)
     end
   end
 
@@ -289,6 +282,7 @@ ActiveAdmin.register Book do
       )
       bb.input(
         :language,
+        include_blank: false,
         collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
           ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
         end,
@@ -330,7 +324,9 @@ ActiveAdmin.register Book do
     f.has_many(:book_categories, allow_destroy: true) do |bc|
       bc.input(
         :category,
-        collection: Category.all,
+        collection: grouped_options_for_select(
+          Category.grouped_options
+        ),
         member_label: :name_with_group
       )
       bc.input :for_print
@@ -352,10 +348,11 @@ ActiveAdmin.register Book do
       f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
       f.input(
         :country_of_origin,
-        as: :country, include_blank: true,
+        as: :country,
+        include_blank: false,
         priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
         input_html: { autocomplete: 'off' },
-        hint: 'Upprunaland bókar, ef erlend.'
+        hint: 'Upprunaland bókar.'
       )
     end
 
