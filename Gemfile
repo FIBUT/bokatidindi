@@ -7,10 +7,14 @@ gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
 
+gem 'isbn-calculator'
 gem 'isbn_validation'
+gem 'validate_url'
 
 gem 'country_select'
 gem 'iso-639'
+
+gem 'mimemagic'
 
 gem 'cocoon'
 
