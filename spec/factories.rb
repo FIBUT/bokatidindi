@@ -19,12 +19,14 @@ FactoryBot.define do
   end
 
   factory :book do
-    pre_title        { '' }
-    title            { FFaker::Lorem.phrase.chop }
-    post_title       { '' }
-    description      { FFaker::Lorem.paragraph }
-    long_description { FFaker::Lorem.paragraphs(4).join("\n\n") }
-    publisher        { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
+    pre_title         { '' }
+    title             { FFaker::Book.title }
+    post_title        { '' }
+    description       { FFaker::Lorem.paragraph }
+    long_description  { FFaker::Lorem.paragraphs(4).join("\n\n") }
+    publisher         { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
+    original_title    { FFaker::Book.title }
+    country_of_origin { ['IS', 'US', 'JP', 'DE', 'FO', 'GL', 'FI'].sample }
   end
 
   factory :book_category do
@@ -39,8 +41,9 @@ FactoryBot.define do
   end
 
   factory :book_binding_type do
-    barcode      { Faker::Code.ean }
+    barcode      { BookBindingType.random_isbn }
     binding_type { BindingType.first }
+    page_count   { FFaker::Number.number }
     book
   end
 

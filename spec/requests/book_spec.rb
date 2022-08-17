@@ -25,11 +25,13 @@ RSpec.describe 'Books', type: :request do
     it 'renders the show template' do
       book = create(
         :book,
-        book_authors: [create(:book_author)],
-        book_binding_types: [create(:book_binding_type)],
-        book_categories: [create(:book_category)],
-        editions: [Edition.first]
+        book_authors: [build(:book_author)],
+        book_categories: [build(:book_category)]
       )
+      create(:book_author, book_id: book[:id])
+      create(:book_binding_type, book_id: book[:id])
+      create(:book_edition, book_id: book[:id])
+
       get "/bok/#{book.slug}"
       expect(response.status).to eq(200)
       expect(response).to render_template('show')

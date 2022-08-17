@@ -14,6 +14,13 @@ class BookBindingType < ApplicationRecord
 
   delegate :name, to: :binding_type
 
+  def self.random_isbn
+    isbn10            = FFaker::Book.isbn
+    isbn13_sans_check = "978#{isbn10[0...-1]}"
+    check_digit       = ISBN::Calculator.calculate(isbn13_sans_check)
+    "#{isbn13_sans_check}#{check_digit}"
+  end
+
   def language_name
     language_a[0]
   end
