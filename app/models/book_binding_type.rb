@@ -45,8 +45,8 @@ class BookBindingType < ApplicationRecord
   validates :url, url: true, allow_blank: true
 
   def self.random_isbn
-    isbn10            = FFaker::Book.isbn
-    isbn13_sans_check = "978#{isbn10[0...-1]}"
+    isbn10            = rand(11_111_111..999_999_999).to_s
+    isbn13_sans_check = "978#{isbn10}"
     check_digit       = ISBN::Calculator.calculate(isbn13_sans_check)
     "#{isbn13_sans_check}#{check_digit}"
   end
