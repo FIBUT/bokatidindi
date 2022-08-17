@@ -81,6 +81,9 @@ Rails/BulkChangeTable:
   Exclude:
     - 'db/migrate/*'
 
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
 AllCops:
   NewCops: disable
   Exclude:
