@@ -50,6 +50,44 @@ is:
       short: "%d.%m.%Y %k:%M"
       long: "%-d. %B %Y, %k:%M"
   activerecord:
+    errors:
+      models:
+        book_category:
+          attributes:
+            category:
+              required: 'þarf að vera skilgreindur'
+        book_binding_type:
+          attributes:
+            binding_type:
+              required: 'þarf að vera skilgreint'
+              blank: 'er tómt'
+            barcode:
+              blank: 'er tómt'
+              taken: 'er þegar í notkun'
+            page_count:
+              not_a_number: 'þarf að vera skilgreint fyrir prentaðar bækur'
+            minutes:
+              not_a_number: 'þarf að vera skilgreindur fyrir hljóðbækur'
+            url:
+              url: 'þarf að vera gild vefslóð'
+        book_author:
+          attributes:
+            author_type:
+              required: 'þarf að vera skilgreint'
+              inclusion: 'þarf að vera skráð í gagnagrunn'
+            author:
+              required: 'þarf að vera skilgreindur'
+              inclusion: 'þarf að vera skráður í gagnagrunn'
+        book:
+          attributes:
+            title:
+              blank: 'er tómur'
+            description:
+              blank: 'er tóm'
+            cover_image_file:
+              invalid: 'er ógild'
+            original_title:
+              blank: 'þarf að vera skilgreindur ef bókin er erlend'
     models:
       book:
         one: 'bók'
