@@ -55,6 +55,12 @@ ActiveAdmin.register Book do
         permitted_params[:book].except(:edition_ids, :cover_image_file)
       )
 
+      inactive_edition_ids = @resource.editions.inactive.pluck(:id)
+      active_session_ids   = permitted_params[:book][:edition_ids]
+      @resource.editions   = Edition.where(
+        id: (inactive_edition_ids + active_session_ids)
+      )
+
       # If the publisher_id attribute is not specified in the form, we should
       # assign it to the current user's first (and presumabily only publisher).
       if !permitted_params[:book][:publisher_id] &&
@@ -66,6 +72,12 @@ ActiveAdmin.register Book do
 
       # Do a second access check on the book, in case something changed
       authorize! :update, @resource
+
+      @resource.validate
+
+      if permitted_params[:book][:book_categories_attributes].values.count > 3
+        @resource.errors.add(:book_categories, :too_many)
+      end
 
       if permitted_params[:book][:cover_image_file]
         cover_image_contents = permitted_params[:book][:cover_image_file].read
@@ -80,17 +92,6 @@ ActiveAdmin.register Book do
       end
 
       if @resource.errors.none? && @resource.save
-        # Rebuild the relationship between the book and editions that are open
-        # for submissions. This resets the BookEditionCategory records
-        # associated with the book.
-        @resource.book_editions.active.destroy_all
-
-        Edition.active.where(
-          id: permitted_params[:book][:edition_ids]
-        ).each do |edition|
-          BookEdition.create(book_id: @resource[:id], edition_id: edition[:id])
-        end
-
         if cover_image_file_valid
           @resource.attach_cover_image_from_string(cover_image_contents)
         end
@@ -109,6 +110,12 @@ ActiveAdmin.register Book do
         permitted_params[:book].except(
           :edition_ids, :cover_image_file
         )
+      )
+
+      inactive_edition_ids = @resource.editions.inactive.pluck(:id)
+      active_session_ids   = permitted_params[:book][:edition_ids]
+      @resource.editions   = Edition.where(
+        id: (inactive_edition_ids + active_session_ids)
       )
 
       if permitted_params[:book][:cover_image_file]
