@@ -176,8 +176,8 @@ ActiveAdmin.register Book do
     column :publisher, sortable: 'publisher.name'
     column :authors
     column :description, &:short_description
-    column :created_at
-    column :updated_at
+    column :record_valid, &:valid?
+    column :cover_image, &:cover_image?
     actions
   end
 

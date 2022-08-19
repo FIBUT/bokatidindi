@@ -76,6 +76,10 @@ class Book < ApplicationRecord
 
   def cover_image_file(_action_dispatch = nil); end
 
+  def cover_image?
+    cover_image.attached?
+  end
+
   def sanitize_title
     self.title      = title&.upcase_first
     self.pre_title  = pre_title&.upcase_first

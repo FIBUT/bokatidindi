@@ -153,6 +153,8 @@ is:
         country_of_origin: 'Upprunaland'
         editions: 'Útgáfur Bókatíðinda'
         book_categories: 'Flokkar bókarinnar'
+        record_valid: 'Rétt skráð'
+        cover_image: 'Forsíðumynd'
       book_category:
         category: 'Flokkur'
         for_print: 'Birtist í prentútgáfu'
