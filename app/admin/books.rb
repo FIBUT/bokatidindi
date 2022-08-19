@@ -256,7 +256,9 @@ ActiveAdmin.register Book do
                input_html: { autocomplete: 'off' }
       ba.input(
         :author,
-        collection: Author.order(:name)
+        collection: Author.order(:name),
+        hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. þarf að '\
+              'skrá í sitt hvoru lagi.'
       )
     end
 

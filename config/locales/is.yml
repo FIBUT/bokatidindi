@@ -58,12 +58,18 @@ is:
   activerecord:
     errors:
       models:
+        author:
+          attributes:
+            firstname:
+              blank: 'þarf að vera skilgreint'
+            lastname:
+              blank: 'þarf að vera skilgreint'
         publisher:
           attributes:
             email_address:
-              invalid: 'Tölvupóstfangið er ógilt og þarf að vera á sniðinu „nafn@example.is“'
+              invalid: 'er ógilt og þarf að vera á sniðinu „nafn@example.is“'
             url:
-              invalid: 'Þarf að vera gild vefslóð og þarf þ.a.l. að byrja á https://'
+              invalid: 'að vera gild vefslóð og þarf þ.a.l. að byrja á https://'
         book_category:
           attributes:
             category:
