@@ -90,6 +90,9 @@ is:
               invalid: 'er ógild'
             original_title:
               blank: 'þarf að vera skilgreindur ef bókin er erlend'
+            description:
+              too_long: 'er of löng'
+            
     models:
       book:
         one: 'bók'
