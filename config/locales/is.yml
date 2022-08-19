@@ -80,6 +80,8 @@ is:
               inclusion: 'þarf að vera skráður í gagnagrunn'
         book:
           attributes:
+            book_categories:
+              too_many: 'eru of margir'
             title:
               blank: 'er tómur'
             description:
@@ -136,10 +138,13 @@ is:
         original_title: 'Upprunalegur titill'
         country_of_origin: 'Upprunaland'
         editions: 'Útgáfur Bókatíðinda'
+        book_categories: 'Flokkar bókarinnar'
       book_category:
         category: 'Flokkur'
         for_print: 'Birtist í prentútgáfu'
         for_web: 'Birtist í vefútgáfu'
+      book_categories:
+        category: 'Flokkur'
       book_binding_type:
         binding_type: 'Útgáfuform'
         barcode: 'Strikamerki'
