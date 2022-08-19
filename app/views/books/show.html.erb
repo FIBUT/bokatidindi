@@ -90,7 +90,16 @@
         </section>
 
         <section>
-          <%= simple_format @book.long_description, tags: ['em'] %>
+          <%=
+          simple_format(
+            @book.long_description.gsub(
+              /\r\n\r\n/, "\r\n"
+            ).gsub(
+              /\r\n/, "\r\n\r\n"
+            ),
+            tags: ['em']
+          )
+          %>
         </section>
       </article>
 
