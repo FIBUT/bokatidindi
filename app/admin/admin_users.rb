@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AdminUser do
-  permit_params :name, :publisher_id, :role, :email,
-                :password, :password_confirmation,
-                {
-                  admin_user_publishers_attributes: %i[id publisher_id _destroy]
-                }
+  permit_params do
+    params = %i[email password password_confirmation]
+    if current_admin_user.admin?
+      params << %i[name publisher_id role]
+      params << {
+        admin_user_publishers_attributes: %i[id publisher_id _destroy]
+      }
+    end
+  end
 
   controller do
     def create
@@ -33,6 +37,14 @@ ActiveAdmin.register AdminUser do
         @resource.update(permitted_params[:admin_user])
       end
 
+      permitted_params[:admin_user][
+          :admin_user_publishers_attributes
+        ]&.each do |aup|
+          if aup[1]['_destroy'].to_i == 1
+            AdminUserPublisher.find(aup[1]['id']).destroy
+          end
+        end
+
       if @resource.errors.blank?
         return redirect_to(
           admin_admin_user_path,
@@ -45,6 +57,8 @@ ActiveAdmin.register AdminUser do
   end
 
   member_action :lock do
+    return false unless current_admin_user.admin?
+
     if resource.lock_access!
       return redirect_to(
         resource_path,
@@ -58,6 +72,8 @@ ActiveAdmin.register AdminUser do
   end
 
   member_action :unlock do
+    return false unless current_admin_user.admin?
+
     if resource.unlock_access!
       return redirect_to(
         resource_path,
@@ -103,14 +119,20 @@ ActiveAdmin.register AdminUser do
   form do |f|
     f.semantic_errors
     inputs 'Grunnupplýsingar' do
-      input :name, input_html: { autocomplete: 'off' }
+      if current_admin_user.admin?
+        input :name, input_html: { autocomplete: 'off' }
+      end
       input :email, input_html: { autocomplete: 'off' }
-      input :role, input_html: { autocomplete: 'off' }
+      if current_admin_user.admin?
+        input :role, input_html: { autocomplete: 'off' }
+      end
     end
-    f.has_many(
-      :admin_user_publishers, heading: 'Útgefendur', allow_destroy: true
-    ) do |up|
-      up.input :publisher, required: false
+    if current_admin_user.admin?
+      f.has_many(
+        :admin_user_publishers, heading: 'Útgefendur', allow_destroy: true
+      ) do |up|
+        up.input :publisher, required: false
+      end
     end
     inputs 'Lykilorð' do
       input :password, required: false
