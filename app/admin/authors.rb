@@ -40,8 +40,7 @@ ActiveAdmin.register Author do
       f.input :lastname
       f.input(
         :is_icelandic,
-        label: 'Höfundur er íslenskur',
-        hint: 'Íslenskum höfundum er raðað eftir fornafni, en ekki erlendum.'
+        label: 'Höfundur er íslenskur'
       )
       f.input :gender, include_blank: false
     end
