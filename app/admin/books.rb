@@ -65,9 +65,9 @@ ActiveAdmin.register Book do
       # assign it to the current user's first (and presumabily only publisher).
       if !permitted_params[:book][:publisher_id] &&
          current_admin_user.publisher?
-        return bad_request if current_admin_user.publisher_ids.count.zero?
+        return bad_request if current_admin_user.publishers.count.zero?
 
-        @resource[:publisher_id] = current_admin_user.publisher_ids.first
+        @resource[:publisher_id] = current_admin_user.publishers.first[:id]
       end
 
       # Do a second access check on the book, in case something changed
@@ -112,6 +112,13 @@ ActiveAdmin.register Book do
         )
       )
 
+      if !permitted_params[:book][:publisher_id] &&
+         current_admin_user.publisher?
+        return bad_request if current_admin_user.publishers.count.zero?
+
+        @resource[:publisher_id] = current_admin_user.publishers.first[:id]
+      end
+
       inactive_edition_ids = @resource.editions.inactive.pluck(:id)
       active_session_ids   = permitted_params[:book][:edition_ids]
       @resource.editions   = Edition.where(
@@ -132,15 +139,13 @@ ActiveAdmin.register Book do
 
       authorize! :create, @resource
 
-      if @resource.errors.none? && @resource.save
-        Edition.active.where(
-          id: permitted_params[:book][:edition_ids]
-        ).each do |edition|
-          BookEdition.create(
-            book_id: @resource[:id], edition_id: edition[:id]
-          )
-        end
+      @resource.validate
 
+      if permitted_params[:book][:book_categories_attributes].values.count > 3
+        @resource.errors.add(:book_categories, :too_many)
+      end
+
+      if @resource.errors.none? && @resource.save
         if cover_image_file_valid
           @resource.attach_cover_image_from_string(cover_image_contents)
         end
@@ -151,7 +156,8 @@ ActiveAdmin.register Book do
         )
       end
 
-      render(:new)
+      flash[:warn] = 'Ekki var hægt að skrá bókina.'
+      render :new
     end
   end
 
@@ -160,12 +166,14 @@ ActiveAdmin.register Book do
   filter :publisher
   filter :id_equals
 
+  includes :publisher, :authors
+
   index do
     selectable_column
     column :title do |book|
       link_to book.full_title_noshy, admin_book_path(book)
     end
-    column :publisher
+    column :publisher, sortable: 'publisher.name'
     column :authors
     column :description, &:short_description
     column :created_at
@@ -194,7 +202,7 @@ ActiveAdmin.register Book do
   end
 
   form do |f|
-    f.semantic_errors
+    f.semantic_errors(*f.object.errors.attribute_names)
 
     publishers = Publisher.all if current_admin_user.admin?
     publishers = current_admin_user.publishers if current_admin_user.publisher?
@@ -211,20 +219,28 @@ ActiveAdmin.register Book do
     f.inputs 'Titill' do
       f.input :pre_title,
               required: false,
-              input_html: { autocomplete: 'off' },
-              hint: 'Yfirfyrirsögn; t.d. nafn seríu; birtist fyrir ofan '\
-                    'aðaltitil í mina letri.'
+              input_html: {
+                autocomplete: 'off',
+                maxlength: Book::TITLE_MAX_LENGTH
+              },
+              hint: 'Nafn ritraðar eða bókaflokks, t.d. „Lærdómsrit '\
+                    'Bókmenntafélagsins“, „Risasyrpa“, „Dagbók Kidda '\
+                    'Klaufa 15“ eða „Goðheimar 2“.'
       f.input :title,
               required: true,
-              input_html: { autocomplete: 'off' },
-              hint: 'Aðaltitill bókarinnar; birtist sem aðalfyrirsögn. Hægt '\
-                    'er að nota táknið | til að stilla af línuskiptingar '\
-                    'fyrir löng orð á minni skjám.'
+              input_html: {
+                autocomplete: 'off',
+                maxlength: Book::TITLE_MAX_LENGTH
+              },
+              hint: 'Titill bókar. Hér má nota táknið | til að skipta '\
+                    'orðum upp í orðhluta vegna birtingar á minni skjátækjum '\
+                    'og fyrir prentvinnslu. Dæmi: „Brekku|kots|ann|áll“.'
       f.input :post_title,
               required: false,
-              input_html: { autocomplete: 'off' },
-              hint: 'Undirfyrirsögn; biritist fyrir neðan aðaltitil í minna '\
-                    'letri.'
+              input_html: {
+                autocomplete: 'off',
+                maxlength: Book::TITLE_MAX_LENGTH
+              }
     end
 
     f.has_many :book_authors, heading: 'Höfundar', allow_destroy: true do |ba|
@@ -285,7 +301,13 @@ ActiveAdmin.register Book do
       )
       bb.input(
         :barcode,
-        input_html: { autocomplete: 'off', class: 'barcode' }
+        input_html: {
+          inputmode: 'numeric',
+          pattern: '[0-9]*',
+          maxlength: 13,
+          autocomplete: 'off',
+          class: 'barcode'
+        }
       )
       bb.input(
         :language,
@@ -328,7 +350,9 @@ ActiveAdmin.register Book do
       )
     end
 
-    f.has_many(:book_categories, allow_destroy: true) do |bc|
+    f.has_many(
+      :book_categories, heading: 'Flokkar (hámark 3)', allow_destroy: true
+    ) do |bc|
       bc.input(
         :category,
         collection: grouped_options_for_select(
