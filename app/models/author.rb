@@ -7,10 +7,10 @@ class Author < ApplicationRecord
   enum :gender, %i[undefined male female non_binary]
 
   before_validation :set_name
-
   before_create :set_slug, :set_order_by_name
-
   before_update :set_order_by_name
+
+  validates :firstname, :lastname, presence: true
 
   def book_count
     Book.includes(

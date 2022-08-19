@@ -37,7 +37,10 @@ ActiveAdmin.register Author do
 
     f.inputs 'Nafn' do
       f.input :firstname
-      f.input :lastname
+      f.input(
+        :lastname, hint: 'Ef ætlunin er að skrá fleiri en einn höfund eru '\
+                         'þeir skráðir sitt hvoru lagi og með fullu nafni.'
+      )
       f.input(
         :is_icelandic,
         label: 'Höfundur er íslenskur'
