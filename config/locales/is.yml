@@ -49,6 +49,12 @@ is:
     formats:
       short: "%d.%m.%Y %k:%M"
       long: "%-d. %B %Y, %k:%M"
+  formtastic:
+    :yes: 'Já'
+    :no: 'Nei'
+    :create: 'Ganga frá skráningu'
+    :update: 'Uppfæra'
+    :required: 'þarf að fylla út'
   activerecord:
     errors:
       models:
@@ -217,6 +223,7 @@ is:
       publisher:
         name: "Nafn"
         url: "Vefslóð"
+        email_address: "Tölvupóstfang"
         book_count: "Fjöldi bóka"
       category:
         name: "Nafn"
@@ -237,11 +244,11 @@ is:
     edit: "Breyta"
     delete: "Eyða"
     delete_confirmation: "Ertu alveg viss um að þú ætlir að eyða þessu?"
-    create_another: "Create another %{model}"
-    new_model: "Skrá %{model}"
-    edit_model: "Breyta %{model}"
-    delete_model: "Eyða %{model}"
-    details: "%{model} Details"
+    create_another: "Búa til annað"
+    new_model: "Skrá"
+    edit_model: "Breyta"
+    delete_model: "Eyða"
+    details: "Nánar"
     cancel: "Hætta við"
     empty: "Tómt"
     previous: "Fyrra"
