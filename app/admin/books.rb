@@ -171,14 +171,21 @@ ActiveAdmin.register Book do
   index do
     selectable_column
     column :title do |book|
-      link_to book.full_title_noshy, admin_book_path(book)
+      link_to book.full_title_noshy, edit_admin_book_path(book)
     end
     column :publisher, sortable: 'publisher.name'
     column :authors
     column :description, &:short_description
     column :record_valid, &:valid?
     column :cover_image, &:cover_image?
-    actions
+    actions defaults: false do |book|
+      unless book.editions.any?
+        item 'Eyða', admin_book_path(book), method: 'delete',
+                                            class: 'member_link'
+      end
+      item 'Skoða á vef', book_path(book[:slug]), target: '_blank',
+                                                  class: 'member_link'
+    end
   end
 
   show title: :full_title_noshy do
