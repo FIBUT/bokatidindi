@@ -69,7 +69,7 @@ is:
             minutes:
               not_a_number: 'þarf að vera skilgreindur fyrir hljóðbækur'
             url:
-              url: 'þarf að vera gild vefslóð'
+              url: 'þarf að vera gild, full vefslóð sem byrjar á https://'
         book_author:
           attributes:
             author_type:
@@ -92,7 +92,6 @@ is:
               blank: 'þarf að vera skilgreindur ef bókin er erlend'
             description:
               too_long: 'er of löng'
-            
     models:
       book:
         one: 'bók'
