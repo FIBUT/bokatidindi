@@ -11,7 +11,7 @@ ActiveAdmin.register Author do
   index do
     selectable_column
     column :name do |author|
-      link_to author.name, admin_author_path(author)
+      link_to author.name, edit_admin_author_path(author)
     end
     column :gender do |author|
       unless author.gender.nil?
@@ -20,7 +20,14 @@ ActiveAdmin.register Author do
     end
     column :is_icelandic
     column :book_count, &:book_count
-    actions
+    actions defaults: false do |author|
+      if current_admin_user.admin? && author.books.none?
+        item 'Eyða', admin_author_path(author), method: 'delete',
+                                                class: 'member_link'
+      end
+      item 'Skoða á vef', author_path(author[:slug]), target: '_blank',
+                                                      class: 'member_link'
+    end
   end
 
   show do
