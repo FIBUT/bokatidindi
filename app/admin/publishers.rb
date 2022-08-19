@@ -17,15 +17,26 @@ ActiveAdmin.register Publisher do
   # end
   config.sort_order = 'name_asc'
 
-  permit_params :name, :url
+  permit_params :name, :email_address, :url
 
   filter :name_contains
+
+  controller do
+    def build_new_resource
+      super.tap do |r|
+        r.assign_attributes(
+          url: 'https://'
+        )
+      end
+    end
+  end
 
   index do
     selectable_column
     column :name do |publisher|
       link_to publisher.name, admin_publisher_path(publisher)
     end
+    column :email_address
     column :url
     column :book_count, &:book_count
     actions
@@ -35,6 +46,7 @@ ActiveAdmin.register Publisher do
     panel 'Upplýsingar um útgefanda' do
       attributes_table_for publisher do
         row :name
+        row :email_address
         row :url
       end
     end
@@ -45,6 +57,7 @@ ActiveAdmin.register Publisher do
 
     f.inputs 'Upplýsingar um útgefanda' do
       f.input :name
+      f.input :email_address
       f.input :url
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_13_134955) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_19_125556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -251,6 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_134955) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email_address"
     t.index ["slug"], name: "index_publishers_on_slug", unique: true
     t.index ["source_id"], name: "index_publishers_on_source_id", unique: true
   end
