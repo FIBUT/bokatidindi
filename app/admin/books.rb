@@ -176,6 +176,7 @@ ActiveAdmin.register Book do
     column :publisher, sortable: 'publisher.name'
     column :authors
     column :description, &:short_description
+    column :current_edition, &:current_edition?
     column :record_valid, &:valid?
     column :cover_image, &:cover_image?
     actions defaults: false do |book|
@@ -388,7 +389,7 @@ ActiveAdmin.register Book do
       f.input(
         :country_of_origin,
         as: :country,
-        include_blank: false,
+        include_blank: true,
         priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
         input_html: { autocomplete: 'off' },
         hint: 'Upprunaland bókar.'
