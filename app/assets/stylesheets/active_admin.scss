@@ -30,6 +30,7 @@ form.formtastic {
 
 .index_as_table {
   .col.col-name, .col.col-title { font-weight: bold; }
+  .col-record_valid { width: 8em; }
   .status_tag { text-transform: lowercase; border-radius: 2px; }
   .status_tag.yes { background: #393; }
   .status_tag.no { background: #933; }
