@@ -23,6 +23,7 @@ class Book < ApplicationRecord
   AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
   CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
 
+  TITLE_MAX_LENGTH            = 110
   DESCRIPTION_MAX_LENGTH      = 380
   LONG_DESCRIPTION_MAX_LENGTH = 3000
 
@@ -55,13 +56,14 @@ class Book < ApplicationRecord
   belongs_to :publisher
 
   accepts_nested_attributes_for :book_authors, allow_destroy: true
-  accepts_nested_attributes_for :book_categories, allow_destroy: true, limit: 3
+  accepts_nested_attributes_for :book_categories, allow_destroy: true
   accepts_nested_attributes_for :book_binding_types, allow_destroy: true
 
   has_one_attached :cover_image, dependent: :destroy
 
   paginates_per 18
 
+  before_validation :sanitize_title
   before_create :set_title_hypenation, :set_slug
   before_update :set_title_hypenation
 
@@ -69,7 +71,20 @@ class Book < ApplicationRecord
 
   validates :publisher, :title, :description, presence: true
 
+  validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
+  validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
+
   def cover_image_file(_action_dispatch = nil); end
+
+  def sanitize_title
+    self.title      = title&.upcase_first
+    self.pre_title  = pre_title&.upcase_first
+    self.post_title = post_title&.upcase_first
+
+    self.title      = title&.chop if title.last == '.'
+    self.pre_title  = title&.chop if pre_title.last == '.'
+    nil
+  end
 
   def page_count
     binding_types = book_binding_types.where.not(page_count: [nil, ''])

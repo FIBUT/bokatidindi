@@ -154,14 +154,20 @@ is:
         url: 'Vefslóð'
         availability: 'Fáanleiki'
         availabilities:
-          unknown: 'Óþekkt/Annað'
+          unknown: 'Óskilgreint/Annað'
           pending: 'Væntanleg'
           available: 'Fáanleg'
           sold_out: 'Uppseld hjá útgefanda'
           reprint_pending: 'Endurprentun væntanleg'
         publication_date: 'Útgáfudagur'
+      book_binding_types:
+        binding_type: 'Útgáfuform'
+        barcode: 'Strikamerki'
       book_author:
         author_type: 'Hlutverk'
+        author: 'Höfundur'
+      book_authors:
+        author_type: 'Hlutverk höfundar'
         author: 'Höfundur'
       active_admin/comment:
         author_type: "Author type"

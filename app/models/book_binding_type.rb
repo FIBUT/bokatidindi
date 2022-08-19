@@ -37,12 +37,10 @@ class BookBindingType < ApplicationRecord
     numericality: true,
     if: proc { |bbt| bbt.binding_type&.printed_books? }
   )
-  validates(
-    :minutes, numericality: true,
-              if: proc { |bbt| bbt.binding_type&.audiobooks? }
-  )
 
   validates :url, url: true, allow_blank: true
+
+  before_validation :sanitize_isbn
 
   def self.random_isbn
     isbn10            = rand(11_111_111..999_999_999).to_s
@@ -56,6 +54,10 @@ class BookBindingType < ApplicationRecord
   end
 
   private
+
+  def sanitize_isbn
+    barcode.delete('^0-9')
+  end
 
   def language_a
     AVAILABLE_LANGUAGES.find { |l| l[1] == language }
