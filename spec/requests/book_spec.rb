@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Books', type: :request do
   describe 'controller' do
     it 'renders the index template' do
-      100.times do
+      30.times do
         book = create(:book)
         create(:book_edition, book:)
 
@@ -35,6 +35,19 @@ RSpec.describe 'Books', type: :request do
       get "/bok/#{book.slug}"
       expect(response.status).to eq(200)
       expect(response).to render_template('show')
+    end
+
+    it 'renders 404 errors when book resources are not found' do
+      get '/bok/for-whom-the-bell-tolls-1234567'
+      expect(response.status).to eq(404)
+    end
+    it 'renders 404 errors when author resources are not found' do
+      get '/baekur/hofundur/ernest-hemmingway-9999'
+      expect(response.status).to eq(404)
+    end
+    it 'renders 404 errors when publisher resources are not found' do
+      get '/baekur/hofundur/penugin-classics-454545'
+      expect(response.status).to eq(404)
     end
   end
 end
