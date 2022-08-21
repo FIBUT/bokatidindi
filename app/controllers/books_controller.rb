@@ -5,79 +5,15 @@ class BooksController < ApplicationController
     @image_format = image_format
 
     if params[:search]
-      @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
-      book_results = Book.joins(:book_editions).search(params[:search])
-
-      @books                   = []
-      @books_from_old_editions = []
-
-      book_results.each do |b|
-        if b.current_edition?
-          @books << b
-        else
-          @books_from_old_editions << b
-        end
-      end
-
+      render_search
       return redirect_to book_path(@books.first[:slug]) if @books.length == 1
     else
-      if params[:category]
-        @category = Category.find_by(slug: params[:category])
+      render_category if params[:category]
+      render_publisher if params[:publisher]
+      render_author if params[:author]
 
-        @title_tag = "Bókatíðindi - Flokkur - #{@category[:name_with_group]}"
-        @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
-                            "#{@category[:name_with_group]}"
-
-        @books = Book.joins(
-          book_editions: :book_edition_categories
-        ).where(
-          book_editions: { edition_id: Edition.active.first },
-          book_edition_categories: {
-            category_id: @category[:id], for_web: true
-          }
-        ).order(:title).group('books.id')
-      end
-      if params[:publisher]
-        @publisher = Publisher.find_by(slug: params[:publisher])
-
-        @title_tag = "Bókatíðindi - Útgefandi - #{@publisher[:name]}"
-        @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
-
-        @books = Book.joins(
-          book_editions: :book_edition_categories
-        ).where(
-          publisher_id: @publisher[:id],
-          book_editions: { edition_id: Edition.active.first },
-          book_edition_categories: { for_web: true }
-        ).order(:title).group('books.id')
-      end
-      if params[:author]
-        @author = Author.find_by(slug: params[:author])
-
-        @title_tag = "Bókatíðindi - Höfundur - #{@author[:name]}"
-        @meta_description = "Bækur eftir höfundinn #{@author[:name]}"
-
-        @books = Book.left_joins(
-          :book_authors
-        ).left_joins(
-          book_editions: [:book_edition_categories]
-        ).where(
-          book_authors: { author_id: @author[:id] },
-          book_editions: { edition_id: Edition.active.first },
-          book_edition_categories: { for_web: true }
-        ).order(:title).group('books.id')
-      end
-
-      unless @books.nil?
-        return @books = @books.order(:title).page(params[:page])
-      end
-
-      @books = Book.left_joins(
-        book_editions: [:book_edition_categories]
-      ).where(
-        book_editions: { edition_id: Edition.active.first },
-        book_edition_categories: { for_web: true }
-      ).order(:title).group('books.id').page(params[:page])
+      @books = Book.current if @books.nil?
+      @books = @books.order(:title).page(params[:page])
     end
   end
 
@@ -101,6 +37,53 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def render_search
+    @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
+    book_results = Book.joins(:book_editions).search(params[:search])
+
+    @books                   = []
+    @books_from_old_editions = []
+
+    book_results.each do |b|
+      if b.current_edition?
+        @books << b
+      else
+        @books_from_old_editions << b
+      end
+    end
+  end
+
+  def render_author
+    @author = Author.find_by(slug: params[:author])
+    return not_found if @author.nil?
+
+    @title_tag = "Bókatíðindi - Höfundur - #{@author[:name]}"
+    @meta_description = "Bækur eftir höfundinn #{@author[:name]}"
+
+    @books = Book.current_by_author(@author.id)
+  end
+
+  def render_publisher
+    @publisher = Publisher.find_by(slug: params[:publisher])
+    return not_found if @publisher.nil?
+
+    @title_tag = "Bókatíðindi - Útgefandi - #{@publisher[:name]}"
+    @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
+
+    @books = Book.current_by_publisher(@publisher.id)
+  end
+
+  def render_category
+    @category = Category.find_by(slug: params[:category])
+    return not_found if @category.nil?
+
+    @title_tag = "Bókatíðindi - Flokkur - #{@category[:name_with_group]}"
+    @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
+                        "#{@category[:name_with_group]}"
+
+    @books = Book.current_by_category(@category.id)
+  end
 
   def image_format
     return 'jpg' if browser.ie?

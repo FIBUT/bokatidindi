@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   before_action :redirect_root_domain
 
+  def not_found
+    render(
+      file: Rails.root.join('public/404.html'), layout: false,
+      status: :not_found
+    )
+  end
+
   def access_denied(_exception)
     render(
       status: :unauthorized, layout: false,
