@@ -74,6 +74,48 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
   validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
 
+  scope :current, lambda {
+    left_joins(
+      book_editions: [:book_edition_categories]
+    ).where(
+      book_editions: { edition_id: Edition.active.first },
+      book_edition_categories: { for_web: true }
+    ).order(:title).group('books.id')
+  }
+
+  scope :current_by_category, lambda { |category_id|
+    joins(
+      book_editions: :book_edition_categories
+    ).where(
+      book_editions: { edition_id: Edition.active.first },
+      book_edition_categories: {
+        category_id:, for_web: true
+      }
+    ).order(:title).group('books.id')
+  }
+
+  scope :current_by_publisher, lambda { |publisher_id|
+    joins(
+      book_editions: :book_edition_categories
+    ).where(
+      publisher_id:,
+      book_editions: { edition_id: Edition.active.first },
+      book_edition_categories: { for_web: true }
+    ).order(:title).group('books.id')
+  }
+
+  scope :current_by_author, lambda { |author_id|
+    left_joins(
+      :book_authors
+    ).left_joins(
+      book_editions: [:book_edition_categories]
+    ).where(
+      book_authors: { author_id: },
+      book_editions: { edition_id: Edition.active.first },
+      book_edition_categories: { for_web: true }
+    ).order(:title).group('books.id')
+  }
+
   def cover_image_file(_action_dispatch = nil); end
 
   def cover_image?
