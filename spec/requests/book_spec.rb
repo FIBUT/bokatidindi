@@ -9,6 +9,9 @@ RSpec.describe 'Books', type: :request do
 
       expect(response.status).to eq(200)
       expect(response).to render_template('index')
+
+      html_doc = Nokogiri::HTML5::Document.parse(response.body)
+      expect(html_doc.errors).to be_empty
     end
 
     it 'renders the show template' do
@@ -24,6 +27,9 @@ RSpec.describe 'Books', type: :request do
       get "/bok/#{book.slug}"
       expect(response.status).to eq(200)
       expect(response).to render_template('show')
+
+      html_doc = Nokogiri::HTML5::Document.parse(response.body)
+      expect(html_doc.errors).to be_empty
     end
 
     it 'renders 404 errors when book resources are not found' do
