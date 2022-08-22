@@ -70,6 +70,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.before(:suite) do
+    DatabaseCleaner.clean
+
     ['Innbundin', 'Gormabók', 'Harðspjaldabók'].each_with_index do |b, i|
       BindingType.create(
         source_id: i,
