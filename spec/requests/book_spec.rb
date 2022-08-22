@@ -35,7 +35,11 @@ RSpec.describe 'Books', type: :request do
       expect(response.status).to eq(404)
     end
     it 'renders 404 errors when publisher resources are not found' do
-      get '/baekur/hofundur/penugin-classics-454545'
+      get '/baekur/utgefandi/penugin-classics-454545'
+      expect(response.status).to eq(404)
+    end
+    it 'renders 404 errors when category resources are not found' do
+      get '/baekur/flokkur/brandarabaekur'
       expect(response.status).to eq(404)
     end
   end
