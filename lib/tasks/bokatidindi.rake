@@ -181,4 +181,11 @@ namespace :bt do
       bbt[:barcode] = nil
     end
   end
+
+  task identify_long_descriptions: :environment do
+    puts ['Útgefandi', 'Raðnúmer', 'Titill'].to_csv
+    Book.current.where('LENGTH(description) > 380').each do |b|
+      puts [b.publisher.name, b.id, b.title].to_csv
+    end
+  end
 end
