@@ -43,8 +43,10 @@ class BookBindingType < ApplicationRecord
   before_validation :sanitize_isbn
 
   def self.random_isbn
-    isbn10            = rand(11_111_111..999_999_999).to_s
-    isbn13_sans_check = "978#{isbn10}"
+    isbn10            = rand(11_111..99_999).to_s
+    prefix            = 978
+    country_prefix    = 9935
+    isbn13_sans_check = "#{prefix}#{country_prefix}#{isbn10}"
     check_digit       = ISBN::Calculator.calculate(isbn13_sans_check)
     "#{isbn13_sans_check}#{check_digit}"
   end
