@@ -19,9 +19,9 @@ FactoryBot.define do
   end
 
   factory :book do
-    pre_title         { '' }
+    pre_title         { ['', '', '', FFaker::Book.title].sample }
     title             { FFaker::Book.title }
-    post_title        { '' }
+    post_title        { ['', '', '', FFaker::Book.title].sample }
     description       { FFaker::Lorem.paragraph }
     long_description  { FFaker::Lorem.paragraphs(4).join("\n\n") }
     publisher         { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
