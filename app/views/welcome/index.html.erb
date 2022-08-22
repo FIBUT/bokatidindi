@@ -31,10 +31,10 @@
 
   <div class="container-fluid">
 
-    <div class="row mx-md-5" aria-label="Vöruflokkar">
+    <div class="row mx-2" aria-label="Vöruflokkar">
 
       <% Category.groups.each do |category_group| %>
-      <div class="col-md-4">
+      <div class="col-md-4 mb-4">
         <div class="">
           <h2 class=""><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></h2>
           <ul class="list-unstyled">
@@ -51,21 +51,23 @@
       </div>
       <% end %>
 
-      <div class="row">
-        <div class="col-12">
-          <div class="welcome-content p-4 pt-5 mt-2" aria-label="Um bókatíðindi">
-            <p>
-            Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við
-            flesta titla sem vísa inn á sölusíður útgefanda. Hér má einnig finna
-            brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar.
-            Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt
-            úrval íslenskra bóka:
-            </p>
-            <%= render 'shared/ecommerce_links' %>
-          </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="welcome-content p-4 pt-5 mt-2" aria-label="Um bókatíðindi">
+          <p>
+          Bókatíðindavefurinn er upplýsingasíða þar sem finna má hlekki við
+          flesta titla sem vísa inn á sölusíður útgefanda. Hér má einnig finna
+          brot úr bókum til lesturs eða hlustunar og ýmsar aðrar upplýsingar.
+          Við bendum einnig á eftirfarandi vefverslanir sem selja fjölbreytt
+          úrval íslenskra bóka:
+          </p>
+          <%= render 'shared/ecommerce_links' %>
         </div>
       </div>
-
     </div>
+
+  </div>
 
 </main>
