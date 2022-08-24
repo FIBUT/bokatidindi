@@ -28,12 +28,6 @@
 
       <div class="content-column col-xl-6 pt-xl-3">
 
-        <% if book.current_edition? == false %>
-        <p class="book-meta-old-edition d-block pb-1">
-          Úr eldri útgáfu Bókatíðinda.
-        </p>
-        <% end %>
-
         <a href="<%= book_path(book.slug) %>">
         <%= render 'books/hgroup', book: book %>
         </a>
