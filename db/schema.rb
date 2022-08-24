@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_19_125556) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_190455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -220,6 +220,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_125556) do
     t.datetime "updated_at", null: false
     t.integer "group"
     t.string "name"
+    t.integer "book_count"
+    t.integer "book_count_web"
+    t.integer "book_count_print"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
     t.index ["source_id"], name: "index_categories_on_source_id", unique: true
   end
