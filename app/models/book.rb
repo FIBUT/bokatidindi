@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
-  PERMITTED_IMAGE_FORMATS = [
-    'image/jpeg', 'image/png', 'image/webp', 'image/jp2', 'image/jxl'
-  ].freeze
+  PERMITTED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/webp',
+                             'image/jp2', 'image/jxl', ' image/avif'].freeze
 
   COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY        = 80
@@ -30,9 +29,8 @@ class Book < ApplicationRecord
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
 
-  multisearchable against: %i[
-    pre_title title_noshy post_title description long_description
-  ]
+  multisearchable against: %i[pre_title title_noshy post_title description
+                              long_description]
 
   pg_search_scope :search,
                   against: SEARCH_COLUMNS, associated_against: {
@@ -70,52 +68,52 @@ class Book < ApplicationRecord
   attribute :cover_image_file
 
   validates :publisher, :title, :description, presence: true
-
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
   validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
 
   scope :current, lambda {
-    left_joins(
-      book_editions: [:book_edition_categories]
-    ).where(
-      book_editions: { edition_id: Edition.active.first },
-      book_edition_categories: { for_web: true }
-    ).order(:title).group('books.id')
+    includes(:publisher, :editions, :categories, :book_binding_types,
+             :binding_types, :book_authors, :authors,
+             book_editions: %i[edition book_edition_categories],
+             cover_image_attachment: :blob)
+      .where(book_editions: { edition_id: Edition.active.first },
+             book_edition_categories: { for_web: true })
+      .order(:title)
   }
 
   scope :current_by_category, lambda { |category_id|
-    joins(
-      book_editions: :book_edition_categories
-    ).where(
-      book_editions: { edition_id: Edition.active.first },
-      book_edition_categories: {
-        category_id:, for_web: true
-      }
-    ).order(:title).group('books.id')
+    includes(:publisher, :editions, :categories, :book_binding_types,
+             :binding_types, :book_authors, :authors,
+             book_editions: %i[edition book_edition_categories],
+             cover_image_attachment: :blob)
+      .where(book_editions: { edition_id: Edition.active.first },
+             book_edition_categories: { category_id:, for_web: true })
+      .order(:title)
   }
 
   scope :current_by_publisher, lambda { |publisher_id|
-    joins(
-      book_editions: :book_edition_categories
-    ).where(
-      publisher_id:,
-      book_editions: { edition_id: Edition.active.first },
-      book_edition_categories: { for_web: true }
-    ).order(:title).group('books.id')
+    includes(:publisher, :editions, :categories, :book_binding_types,
+             :binding_types, :book_authors, :authors,
+             book_editions: %i[edition book_edition_categories],
+             cover_image_attachment: :blob)
+      .where(publisher_id:, book_editions: { edition_id: Edition.active.first },
+             book_edition_categories: { for_web: true })
+      .order(:title)
   }
 
   scope :current_by_author, lambda { |author_id|
-    left_joins(
-      :book_authors
-    ).left_joins(
-      book_editions: [:book_edition_categories]
-    ).where(
-      book_authors: { author_id: },
-      book_editions: { edition_id: Edition.active.first },
-      book_edition_categories: { for_web: true }
-    ).order(:title).group('books.id')
+    includes(:publisher, :editions, :categories, :book_binding_types,
+             :binding_types, :book_authors, :authors,
+             book_editions: %i[edition book_edition_categories],
+             cover_image_attachment: :blob)
+      .where(book_authors: { author_id: },
+             book_editions: { edition_id: Edition.active.first },
+             book_edition_categories: { for_web: true })
+      .order(:title)
   }
 
+  # This is a dummy attribute that is intended to make ActiveAdmin accept
+  # rendering and accepting a file input
   def cover_image_file(_action_dispatch = nil); end
 
   def cover_image?
@@ -177,10 +175,8 @@ class Book < ApplicationRecord
   def cover_image_url(image_format = 'webp')
     return '' unless cover_image.attached?
 
-    cover_variant = cover_image.variant(
-      format: image_format,
-      saver: { quality: IMAGE_QUALITY }
-    )
+    cover_variant = cover_image.variant(format: image_format,
+                                        saver: { quality: IMAGE_QUALITY })
 
     if ActiveStorage::Blob.service.name.to_s == 'local'
       return Rails.application.routes.url_helpers.url_for(cover_variant)
@@ -190,11 +186,9 @@ class Book < ApplicationRecord
   end
 
   def cover_image_variant_url(width, image_format = 'webp')
-    cover_variant = cover_image.variant(
-      resize_to_limit: [width, width],
-      format: image_format,
-      saver: { quality: IMAGE_QUALITY }
-    )
+    cover_variant = cover_image.variant(resize_to_limit: [width, width],
+                                        format: image_format,
+                                        saver: { quality: IMAGE_QUALITY })
 
     if ActiveStorage::Blob.service.name.to_s == 'local'
       return Rails.application.routes.url_helpers.url_for(cover_variant)
@@ -318,10 +312,8 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image_from_string(string)
-    cover_image.attach(
-      io: StringIO.new(string),
-      filename: SecureRandom.uuid
-    )
+    cover_image.attach(io: StringIO.new(string),
+                       filename: SecureRandom.uuid)
 
     return false if cover_image.attached?
 
@@ -342,16 +334,12 @@ class Book < ApplicationRecord
 
   def attach_cover_image_variant(image_format, width = nil)
     if width
-      return cover_image.variant(
-        resize_to_limit: [width, width],
-        format: image_format,
-        saver: { quality: IMAGE_QUALITY }
-      ).process
+      return cover_image.variant(resize_to_limit: [width, width],
+                                 format: image_format,
+                                 saver: { quality: IMAGE_QUALITY }).process
     end
-    cover_image.variant(
-      format: image_format,
-      saver: { quality: IMAGE_QUALITY }
-    ).process
+    cover_image.variant(format: image_format,
+                        saver: { quality: IMAGE_QUALITY }).process
   end
 
   def author_group_name_plural(count, singular, plural)
@@ -361,24 +349,19 @@ class Book < ApplicationRecord
   end
 
   def author_group_hash(author_type, authors)
-    {
-      authors:,
+    { authors:,
       name: author_group_name_plural(
         authors.count, author_type.name, author_type.plural_name
       ),
       author_links: (
         authors.map do |a|
           if a.author.book_count.positive?
-            link_to(
-              a.name,
-              "/baekur/hofundur/#{a.author.slug}",
-              class: 'author-link'
-            )
+            link_to(a.name, "/baekur/hofundur/#{a.author.slug}",
+                    class: 'author-link')
           else
             a.name
           end
         end
-      ).to_sentence
-    }
+      ).to_sentence }
   end
 end

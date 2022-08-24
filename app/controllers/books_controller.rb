@@ -20,13 +20,7 @@ class BooksController < ApplicationController
   def show
     @image_format = image_format
 
-    @book = Book.joins(
-      :publisher,
-      book_editions: [:edition],
-      book_binding_types: [:binding_type],
-      book_authors: %i[author author_type],
-      book_categories: [:category]
-    ).find_by(slug: params[:slug])
+    @book = Book.find_by(slug: params[:slug])
 
     unless @book
       render file: 'public/404.html', status: :not_found,
