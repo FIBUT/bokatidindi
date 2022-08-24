@@ -29,16 +29,10 @@ class Category < ApplicationRecord
     name
   end
 
-  def book_count
-    book_count_collection.count
-  end
-
-  def book_count_print
-    book_count_collection.where(for_print: true).count
-  end
-
-  def book_count_web
-    book_count_collection.where(for_print: true).count
+  def update_counts
+    self.book_count       = book_count_collection.count
+    self.book_count_web   = book_count_collection.where(for_web: true).count
+    self.book_count_print = book_count_collection.where(for_print: true).count
   end
 
   private

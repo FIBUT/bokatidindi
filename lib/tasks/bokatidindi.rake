@@ -188,4 +188,12 @@ namespace :bt do
       puts [b.publisher.name, b.id, b.title].to_csv
     end
   end
+
+  desc 'Update book counts per category'
+  task update_category_counters: :environment do
+    Category.all.each do |c|
+      c.update_counts
+      c.save
+    end
+  end
 end

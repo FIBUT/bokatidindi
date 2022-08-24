@@ -156,6 +156,12 @@ RSpec.configure do |config|
       )
       book.attach_cover_image_from_string(image_contents)
     end
+
+    # This emulates the bt:update_category_counters rake task.
+    Category.all.each do |c|
+      c.update_counts
+      c.save
+    end
   end
 
   config.after(:suite) do
