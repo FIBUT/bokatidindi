@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   get 'baekur/leit/:search', to: 'books#index'
 
   get 'bok/:slug', to: 'books#show', as: 'book'
+
+  get 'xml_feeds/editions_for_print/:id', to: 'xml_feeds#edition_for_print'
+  get 'xml_feeds/editions_for_print/current', to: 'xml_feeds#edition_for_print'
 end

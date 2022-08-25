@@ -71,6 +71,16 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
   validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
 
+  scope :by_edition_and_category, lambda { |edition_id, category_id|
+    includes(:publisher, :editions, :categories, :book_binding_types,
+             :binding_types, :book_authors, :authors,
+             book_editions: %i[edition book_edition_categories],
+             cover_image_attachment: :blob)
+      .where(book_editions: { edition_id: },
+             book_edition_categories: { category_id:, for_print: true })
+      .order(:title)
+  }
+
   scope :current, lambda {
     includes(:publisher, :editions, :categories, :book_binding_types,
              :binding_types, :book_authors, :authors,
