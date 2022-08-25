@@ -145,7 +145,7 @@ class Book < ApplicationRecord
   end
 
   def store_url
-    binding_types = book_binding_types.joins(:binding_type).where(
+    binding_types = book_binding_types.includes(:binding_type).where(
       binding_type: { group: :printed_books }
     )
     return binding_types.first[:url] unless binding_types.empty?
@@ -154,7 +154,7 @@ class Book < ApplicationRecord
   end
 
   def audio_url
-    binding_types = book_binding_types.joins(:binding_type).where(
+    binding_types = book_binding_types.includes(:binding_type).where(
       binding_type: { group: :audiobooks }
     )
     return binding_types.first[:url] unless binding_types.empty?
@@ -217,12 +217,6 @@ class Book < ApplicationRecord
     minutes / 60
   end
 
-  def categories_label
-    return 'Vöruflokkar' if categories.count > 1
-
-    'Vöruflokkur'
-  end
-
   def category_links
     links = []
     categories.each do |c|
@@ -271,7 +265,7 @@ class Book < ApplicationRecord
   def author_names_string
     author_names = []
 
-    selected_book_authors = book_authors.joins(:author_type).where(
+    selected_book_authors = book_authors.includes(:author_type).where(
       author_type: { name: 'Höfundur' }
     )
     return nil if selected_book_authors.empty?
@@ -284,7 +278,7 @@ class Book < ApplicationRecord
   end
 
   def authors_brief
-    book_authors.joins(:author_type).where(author_type: { name: 'Höfundur' })
+    book_authors.includes(:author_type).where(author_type: { name: 'Höfundur' })
   end
 
   def set_title_hypenation
