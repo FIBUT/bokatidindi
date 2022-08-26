@@ -23,7 +23,7 @@ class BindingType < ApplicationRecord
   end
 
   def corrected_name
-    return 'hljóðbók' if group == :audiobooks
+    return 'hljóðbók' if group == 'audiobooks'
 
     name
   end

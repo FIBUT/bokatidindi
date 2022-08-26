@@ -1,0 +1,35 @@
+<!ELEMENT edition (edition_id, edition_title, categories)>
+<!ELEMENT edition_id (#PCDATA)>
+<!ELEMENT edition_title (#PCDATA)>
+
+<!ELEMENT categories (category)+>
+<!ELEMENT category (category_group, category_name, books)>
+<!ELEMENT category_group (#PCDATA)>
+<!ELEMENT category_name (#PCDATA)>
+
+<!ELEMENT books (book)+>
+<!ELEMENT book (book_id, slug, pre_title?, title, post_title?, description, publisher, cover_image, authors, binding_types)>
+<!ELEMENT book_id (#PCDATA)>
+<!ELEMENT slug (#PCDATA)>
+<!ELEMENT pre_title (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT post_title (#PCDATA)>
+<!ELEMENT description (#PCDATA | em)*>
+
+<!ELEMENT cover_image (url, image)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT image (#PCDATA)>
+<!ATTLIST image href CDATA #REQUIRED>
+
+<!ELEMENT authors (author)*>
+<!ELEMENT author (author_id, author_type, author_name)>
+<!ELEMENT author_id (#PCDATA)>
+<!ELEMENT author_type (#PCDATA)>
+<!ELEMENT author_name (#PCDATA)>
+
+<!ELEMENT binding_types (binding_type)*>
+<!ELEMENT binding_type (#PCDATA)>
+
+<!ELEMENT publisher (publisher_id, publisher_name)>
+<!ELEMENT publisher_id (#PCDATA)>
+<!ELEMENT publisher_name (#PCDATA)>
