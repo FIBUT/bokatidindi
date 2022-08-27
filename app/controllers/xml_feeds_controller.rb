@@ -55,7 +55,7 @@ class XmlFeedsController < ApplicationController
         # retreiving each image from the CDN and the expected path it will be
         # located at for Adobe InDesign to use.
         xml.cover_image do
-          xml.url book.cover_image_url('jpeg')
+          xml.url book.print_image_variant_url
           xml.image href: "File:///cover_images/#{book[:slug]}.jpg"
         end
       end
