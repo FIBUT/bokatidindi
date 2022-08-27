@@ -8,13 +8,14 @@
 <!ELEMENT category_name (#PCDATA)>
 
 <!ELEMENT books (book)+>
-<!ELEMENT book (book_id, slug, pre_title?, title, post_title?, description, publisher, cover_image, authors, binding_types)>
+<!ELEMENT book (book_id, slug, pre_title?, title, post_title?, description, cover_image?, publisher, authors, binding_types)>
 <!ELEMENT book_id (#PCDATA)>
 <!ELEMENT slug (#PCDATA)>
 <!ELEMENT pre_title (#PCDATA)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT post_title (#PCDATA)>
 <!ELEMENT description (#PCDATA | em)*>
+<!ELEMENT em (#PCDATA)>
 
 <!ELEMENT cover_image (url, image)>
 <!ELEMENT url (#PCDATA)>

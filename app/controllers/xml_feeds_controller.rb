@@ -14,8 +14,7 @@ class XmlFeedsController < ApplicationController
     categories = print_books_by_category(edition[:id])
 
     builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
-      xml.doc.create_internal_subset('edition', 'SYSTEM',
-                                     asset_url('edition.dtd'))
+      xml.doc.create_internal_subset('edition', nil, asset_url('edition.dtd'))
 
       xml.edition do
         xml.edition_id edition[:id]
