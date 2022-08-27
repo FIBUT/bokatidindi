@@ -316,8 +316,7 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image_from_string(string)
-    cover_image.attach(io: StringIO.new(string),
-                       filename: SecureRandom.uuid)
+    cover_image.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
 
     return false if cover_image.attached?
 
@@ -326,12 +325,13 @@ class Book < ApplicationRecord
   end
 
   def attach_print_image_variant
-    cover_image.variant(resize_to_limit: [300, nil],
+    cover_image.variant(resize_to_limit: [300, nil], units: 'PixelsPerInch',
                         density: 330, format: 'tiff').process
   end
 
   def print_image_variant_url
     cover_variant = cover_image.variant(resize_to_limit: [300, nil],
+                                        units: 'PixelsPerInch',
                                         density: 330, format: 'tiff')
 
     if ActiveStorage::Blob.service.name.to_s == 'local'
