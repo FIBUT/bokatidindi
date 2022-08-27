@@ -325,6 +325,22 @@ class Book < ApplicationRecord
     true
   end
 
+  def attach_print_image_variant
+    cover_image.variant(resize_to_limit: [480, 480],
+                        density: 330, format: 'tiff').process
+  end
+
+  def print_image_variant_url
+    cover_variant = cover_image.variant(resize_to_limit: [480, 480],
+                                        density: 330, format: 'tiff')
+
+    if ActiveStorage::Blob.service.name.to_s == 'local'
+      return Rails.application.routes.url_helpers.url_for(cover_variant)
+    end
+
+    cover_variant.processed.url
+  end
+
   private
 
   def attach_cover_image_variants
@@ -334,6 +350,7 @@ class Book < ApplicationRecord
       attach_cover_image_variant('webp', v)
       attach_cover_image_variant('jpg', v)
     end
+    attach_print_image_variant
   end
 
   def attach_cover_image_variant(image_format, width = nil)

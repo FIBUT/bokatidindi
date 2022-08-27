@@ -196,4 +196,13 @@ namespace :bt do
       c.save
     end
   end
+
+  desc 'Generate the print image variant'
+  task attach_print_image_variants: :environment do
+    Book.all.each do |b|
+      next unless b.cover_image?
+
+      puts "✅ #{b.slug}" if b.attach_print_image_variant
+    end
+  end
 end
