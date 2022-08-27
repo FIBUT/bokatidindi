@@ -56,7 +56,7 @@ class XmlFeedsController < ApplicationController
         # located at for Adobe InDesign to use.
         xml.cover_image do
           xml.url book.print_image_variant_url
-          xml.image href: "File:///cover_images/#{book[:slug]}.jpg"
+          xml.image href: "file:///cover_images/#{book[:slug]}.jpg"
         end
       end
       xml.publisher do
