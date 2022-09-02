@@ -86,7 +86,7 @@ class Book < ApplicationRecord
              :binding_types, :book_authors, :authors,
              book_editions: %i[edition book_edition_categories],
              cover_image_attachment: :blob)
-      .where(book_editions: { edition_id: Edition.active.first },
+      .where(book_editions: { edition_id: Edition.current_edition[:id] },
              book_edition_categories: { for_web: true })
       .order(:title)
   }
@@ -96,7 +96,7 @@ class Book < ApplicationRecord
              :binding_types, :book_authors, :authors,
              book_editions: %i[edition book_edition_categories],
              cover_image_attachment: :blob)
-      .where(book_editions: { edition_id: Edition.active.first },
+      .where(book_editions: { edition_id: Edition.current_edition[:id] },
              book_edition_categories: { category_id:, for_web: true })
       .order(:title)
   }
@@ -106,7 +106,8 @@ class Book < ApplicationRecord
              :binding_types, :book_authors, :authors,
              book_editions: %i[edition book_edition_categories],
              cover_image_attachment: :blob)
-      .where(publisher_id:, book_editions: { edition_id: Edition.active.first },
+      .where(publisher_id:,
+             book_editions: { edition_id: Edition.current_edition[:id] },
              book_edition_categories: { for_web: true })
       .order(:title)
   }
@@ -117,7 +118,7 @@ class Book < ApplicationRecord
              book_editions: %i[edition book_edition_categories],
              cover_image_attachment: :blob)
       .where(book_authors: { author_id: },
-             book_editions: { edition_id: Edition.active.first },
+             book_editions: { edition_id: Edition.current_edition[:id] },
              book_edition_categories: { for_web: true })
       .order(:title)
   }
@@ -312,7 +313,7 @@ class Book < ApplicationRecord
   end
 
   def current_edition?
-    editions.pluck(:id).include?(Edition.current.first.id)
+    editions.pluck(:id).include?(Edition.current_edition[:id])
   end
 
   def attach_cover_image_from_string(string)

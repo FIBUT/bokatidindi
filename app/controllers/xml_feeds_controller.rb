@@ -81,7 +81,7 @@ class XmlFeedsController < ApplicationController
   end
 
   def print_books_by_category(edition_id = nil)
-    edition_id = Edition.current[:id] if edition_id.nil?
+    edition_id = Edition.current_edition[:id] if edition_id.nil?
     categories = []
     Category.order(rod: :asc).each do |c|
       books = Book.by_edition_and_category(

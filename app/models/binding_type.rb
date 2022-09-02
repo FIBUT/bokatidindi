@@ -18,7 +18,7 @@ class BindingType < ApplicationRecord
       :book_editions, :book_binding_types, :binding_types
     ).where(
       book_binding_types: { binding_types: { id: } },
-      book_editions: { 'edition_id': Edition.current.first.id }
+      book_editions: { 'edition_id': Edition.current_edition[:id] }
     ).count
   end
 
