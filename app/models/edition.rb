@@ -19,12 +19,18 @@ class Edition < ApplicationRecord
   # Editions that are currently visible online
   scope :current, lambda {
     where(
-      "online_date < '#{DateTime.now.to_fs(:db)}' "\
+      "online_date < '#{DateTime.now.to_fs(:db)}'"
     ).order(id: :desc).limit(1)
   }
 
   has_many :book_editions, dependent: :destroy
   has_many :books, through: :book_editions
+
+  def self.current_edition
+    Edition.where(
+      "online_date < '#{DateTime.now.to_fs(:db)}'"
+    ).order(id: :desc).limit(1).first
+  end
 
   def book_count
     Book.includes(

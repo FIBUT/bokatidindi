@@ -17,7 +17,7 @@ class Author < ApplicationRecord
       :book_editions, :book_authors, :authors
     ).where(
       book_authors: { authors: { id: } },
-      book_editions: { 'edition_id': Edition.current.first.id }
+      book_editions: { 'edition_id': Edition.current_edition[:id] }
     ).count
   end
 

@@ -21,7 +21,9 @@ ActiveAdmin.register Book do
                 }
 
   member_action :reset_categories do
-    book_edition = resource.book_edition.where(edition_id: Edition.current.last)
+    book_edition = resource.book_edition.where(
+      edition_id: Edition.current_edition[:id]
+    )
     book_edition.reset_book_edition_categories
     redirect_to resource_path, notice: 'Birtir flokkar hafa verið endurstilltir'
   end
