@@ -26,6 +26,7 @@ form.formtastic {
   input.language { width: 16em; }
   input.datepicker { width: 8em; }
   a.has_many_remove { margin-left: 20%; margin-top: 1em; }
+  textarea#book_description, textarea#book_long_description { max-width: 80em; }
 }
 
 .index_as_table {

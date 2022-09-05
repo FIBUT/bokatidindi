@@ -3,6 +3,7 @@
 class XmlFeedsController < ApplicationController
   include ActionView::Helpers::AssetUrlHelper
   include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::TextHelper
 
   def edition_for_print
     edition = if params[:id] == 'current'
@@ -48,7 +49,7 @@ class XmlFeedsController < ApplicationController
       xml.title book[:title_hypenated]
       xml.post_title book[:post_title] unless book[:post_title].empty?
       xml.description do
-        xml << sanitize(book.short_description.squish, tags: ['em'])
+        xml << book.description_for_print
       end
       if book.cover_image?
         # Two paths for the front cover are provided. The full URL for

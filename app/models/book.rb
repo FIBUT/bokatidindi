@@ -23,7 +23,7 @@ class Book < ApplicationRecord
   CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
 
   TITLE_MAX_LENGTH            = 110
-  DESCRIPTION_MAX_LENGTH      = 380
+  DESCRIPTION_MAX_LENGTH      = 350
   LONG_DESCRIPTION_MAX_LENGTH = 3000
 
   include ActionView::Helpers::UrlHelper
@@ -61,7 +61,7 @@ class Book < ApplicationRecord
 
   paginates_per 18
 
-  before_validation :sanitize_title
+  before_validation :sanitize_title, :sanitize_description
   before_create :set_title_hypenation, :set_slug
   before_update :set_title_hypenation
 
@@ -129,6 +129,18 @@ class Book < ApplicationRecord
 
   def cover_image?
     cover_image.attached?
+  end
+
+  def description_for_print
+    description.gsub(/\r\n\r\n/, "\r\n")
+  end
+
+  def sanitize_description
+    self.description = description.gsub(/[\r\n]+/, "\r\n\r\n")
+                                  .strip&.upcase_first
+
+    self.long_description = long_description.gsub(/[\r\n]+/, "\r\n\r\n")
+                                            .strip&.upcase_first
   end
 
   def sanitize_title

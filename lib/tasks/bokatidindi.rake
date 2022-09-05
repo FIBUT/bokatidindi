@@ -205,4 +205,12 @@ namespace :bt do
       puts "✅ #{b.slug}" if b.attach_print_image_variant
     end
   end
+
+  desc 'Run .sanitize_description on all books'
+  task sanitize_book_descriptions: :environment do
+    Book.all.each do |b|
+      b.sanitize_description
+      b.save
+    end
+  end
 end

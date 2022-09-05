@@ -85,21 +85,12 @@
         aria-label="Lýsing"
         class="book-description mb-5 bt-5 overflow-hidden"
       >
-        <section>
+        <section id="book_description">
           <%= simple_format @book.description, tags: ['em'] %>
         </section>
 
-        <section>
-          <%=
-          simple_format(
-            @book.long_description.gsub(
-              /\r\n\r\n/, "\r\n"
-            ).gsub(
-              /\r\n/, "\r\n\r\n"
-            ),
-            tags: ['em']
-          )
-          %>
+        <section id="book_long_description">
+          <%=  simple_format @book.long_description, tags: ['em'] %>
         </section>
       </article>
 

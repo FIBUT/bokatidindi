@@ -68,4 +68,20 @@ RSpec.describe Book, type: :model do
       expect(book.slug).to eq(original_slug)
     end
   end
+
+  context 'sanitation for description' do
+    it 'is applied on creation' do
+      description = "Lorem ipsum.\r\nDolor sit amet.\r\n\r\n\r\nEt dor im dium."
+      long_description = "#{description}\r\n\r\n\r\n" * 6
+
+      book = create(:book, description:, long_description:)
+
+      expect(book.description).to eq(
+        "Lorem ipsum.\r\n\r\nDolor sit amet.\r\n\r\nEt dor im dium."
+      )
+      expect(book.description_for_print).to eq(
+        "Lorem ipsum.\r\nDolor sit amet.\r\nEt dor im dium."
+      )
+    end
+  end
 end
