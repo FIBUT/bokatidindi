@@ -23,10 +23,10 @@
 <!ATTLIST image href CDATA #REQUIRED>
 
 <!ELEMENT authors (author)*>
-<!ELEMENT author (author_id, author_type, author_name)>
-<!ELEMENT author_id (#PCDATA)>
+<!ELEMENT author (author_type, author_names)>
 <!ELEMENT author_type (#PCDATA)>
-<!ELEMENT author_name (#PCDATA)>
+<!ELEMENT author_names (#PCDATA | a)*>
+<!ELEMENT a (#PCDATA)>
 
 <!ELEMENT binding_types (binding_type)*>
 <!ELEMENT binding_type (#PCDATA)>

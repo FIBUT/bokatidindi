@@ -64,11 +64,10 @@ class XmlFeedsController < ApplicationController
         xml.publisher_name book.publisher[:name]
       end
       xml.authors do
-        book.book_authors.order(id: :asc).each do |book_author|
-          xml.author do
-            xml.author_id book_author.author[:id]
-            xml.author_type book_author.author_type[:name]
-            xml.author_name book_author.author[:name]
+        book.author_groups.each do |author_group|
+          xml.author_group do
+            xml.author_type author_group[:name]
+            xml.author_names strip_tags(author_group[:author_links])
           end
         end
       end
