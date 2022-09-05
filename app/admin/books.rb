@@ -266,10 +266,10 @@ ActiveAdmin.register Book do
 
     f.inputs 'Lýsing' do
       f.input :description,
-              as: :string,
+              as: :text,
               required: true,
               input_html: {
-                rows: 2,
+                rows: 5,
                 autocomplete: 'off',
                 maxlength: Book::DESCRIPTION_MAX_LENGTH
               },
@@ -279,7 +279,7 @@ ActiveAdmin.register Book do
       f.input :long_description,
               as: :text,
               input_html: {
-                rows: 10,
+                rows: 30,
                 autocomplete: 'off',
                 maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
               },
