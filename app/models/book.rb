@@ -132,7 +132,7 @@ class Book < ApplicationRecord
   end
 
   def description_for_print
-    description.gsub(/\r\n\r\n/, "\r\n")
+    description.gsub(/\r\n\r\n/, "\r\n")[0, 380]
   end
 
   def sanitize_description
