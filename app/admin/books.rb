@@ -163,6 +163,9 @@ ActiveAdmin.register Book do
     end
   end
 
+  scope 'Allar', :all
+  scope 'Í núverandi tbl.', :current
+
   filter :title_contains
   filter :description_contains
   filter :publisher
@@ -235,7 +238,7 @@ ActiveAdmin.register Book do
               },
               hint: 'Nafn ritraðar eða bókaflokks, t.d. „Lærdómsrit '\
                     'Bókmenntafélagsins“, „Risasyrpa“, „Dagbók Kidda '\
-                    'Klaufa 15“ eða „Goðheimar 2“.'
+                    'Klaufa 15“ eða „Goðheimar 2“. Autt ef ekki á við.'
       f.input :title,
               required: true,
               input_html: {
@@ -250,21 +253,29 @@ ActiveAdmin.register Book do
               input_html: {
                 autocomplete: 'off',
                 maxlength: Book::TITLE_MAX_LENGTH
-              }
+              },
+              hint: 'Autt ef ekki á við.'
     end
 
     f.has_many :book_authors, heading: 'Höfundar', allow_destroy: true do |ba|
       ba.input :author_type,
+               collection: AuthorType.order(rod: :asc),
                input_html: { autocomplete: 'off' }
       ba.input(
         :author,
         collection: Author.order(:name),
         hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. þarf að '\
-              'skrá í sitt hvoru lagi.'
+              'skrá í sitt hvoru lagi. f höfundur finnst ekki í fellilista '\
+              'þarf að skrá hann með því að smella á „höfundar“ hér efst á '\
+              'síðunni og svo „skrá höfund“.'
       )
     end
 
     f.inputs 'Lýsing' do
+      li(
+        'Athugið að skráning alls texta og yfirlestur er á ábyrgð útgefanda.',
+        class: 'tip'
+      )
       f.input :description,
               as: :text,
               required: true,
@@ -273,9 +284,14 @@ ActiveAdmin.register Book do
                 autocomplete: 'off',
                 maxlength: Book::DESCRIPTION_MAX_LENGTH
               },
-              hint: 'Stutt lýsing á bók, sem birtist á yfirlittsíðu og í '\
-                    'prentútgáfu Bókatíðinda. '\
-                    "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög."
+              hint: 'Stuttur kynningartexti sem birtist á yfirlitssíðu '\
+                    'vefsins og í prentútgáfu Bókatíðinda. '\
+                    "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög með bilum. "\
+                    'Aðeins skal skrifa hástafi í upphafi setninga og '\
+                    'í sérnöfnum. '\
+                    'Línubil jafngildir málsgreinabili. ' \
+                    'Nota má HTML-kóðann <em> og </em> til að merkja '\
+                    'skáletraðan texta.'
       f.input :long_description,
               as: :text,
               input_html: {
@@ -284,8 +300,10 @@ ActiveAdmin.register Book do
                 maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
               },
               hint: 'Lengri lýsing sem birtist neðan við stuttu lýsinguna á '\
-                    'upplýsingasíðu hverrar bókar í vefútgáfu. Tvöfalt '\
-                    'línubil jafngildir málsgreinabili.'
+                    'ítarsíðu hverrar bókar í vefútgáfu. '\
+                    'Langa lýsingin birtist ekki í prentútgáfu. '\
+                    'Sömu ritreglur og í styttri lýsingu. ' \
+                    'Autt ef ekki á við.'
     end
 
     f.inputs 'Mynd af forsíðu' do
@@ -300,7 +318,8 @@ ActiveAdmin.register Book do
         },
         hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, '\
               'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
-              'viðeigandi snið fyrir vef og prent við skráningu.'
+              'viðeigandi snið fyrir vef og prent við skráningu '\
+              'og þurfa að vera að lágmarki 1600 px breiðar.'
       )
     end
 
@@ -309,7 +328,8 @@ ActiveAdmin.register Book do
     ) do |bb|
       bb.input(
         :binding_type,
-        collection: BindingType.open, input_html: { class: 'binding-type' }
+        collection: BindingType.order(rod: :asc),
+        input_html: { class: 'binding-type' }
       )
       bb.input(
         :barcode,
@@ -319,7 +339,8 @@ ActiveAdmin.register Book do
           maxlength: 13,
           autocomplete: 'off',
           class: 'barcode'
-        }
+        },
+        hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer.'
       )
       bb.input(
         :language,
@@ -339,7 +360,8 @@ ActiveAdmin.register Book do
       )
       bb.input(
         :url,
-        input_html: { autocomplete: 'off', class: 'url' }
+        input_html: { autocomplete: 'off', class: 'url' },
+        hint: 'Vefslóð beint á viðkomandi bók á vef útgefanda eða söluaðila.'
       )
       bb.input(
         :availability,
@@ -368,7 +390,7 @@ ActiveAdmin.register Book do
       bc.input(
         :category,
         collection: grouped_options_for_select(
-          Category.grouped_options, bc.object.category_id
+          Category.order(rod: :asc).grouped_options, bc.object.category_id
         ),
         selected: 3,
         member_label: :name_with_group
@@ -383,7 +405,9 @@ ActiveAdmin.register Book do
           :editions,
           as: :check_boxes,
           collection: Edition.active,
-          input_html: { autocomplete: 'off' }
+          input_html: { autocomplete: 'off' },
+          hint: 'Þegar hakað hefur viðeigandi reit birtist bókin á '\
+                'vefsíðu Bókatíðinda.'
         )
       end
     end

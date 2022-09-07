@@ -153,7 +153,7 @@ is:
         uri_to_buy: 'Vefslóð á vefverslun'
         page_count: 'Blaðsíðufjöldi'
         minutes: 'Mínútufjöldi'
-        original_title: 'Upprunalegur titill'
+        original_title: 'Titill á frummmáli'
         country_of_origin: 'Upprunaland'
         editions: 'Útgáfur Bókatíðinda'
         book_categories: 'Flokkar bókarinnar'
@@ -175,7 +175,7 @@ is:
         url: 'Vefslóð'
         availability: 'Fáanleiki'
         availabilities:
-          unknown: 'Óskilgreint/Annað'
+          unknown: '(Kemur ekki fram)'
           pending: 'Væntanleg'
           available: 'Fáanleg hjá útgefanda'
           sold_out: 'Uppseld hjá útgefanda'

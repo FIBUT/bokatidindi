@@ -17,12 +17,16 @@ class Book < ApplicationRecord
   ].freeze
 
   SEARCH_COLUMNS = %i[
-    source_id pre_title title post_title description long_description
+    source_id pre_title title_noshy post_title description long_description
+    original_title
   ].freeze
-  AUTHORS_SEARCH_COLUMMNS   = %i[firstname lastname].freeze
-  CATEGORIES_SEARCH_COLUMNS = %i[origin_name slug].freeze
+  AUTHORS_SEARCH_COLUMMNS          = %i[firstname lastname].freeze
+  CATEGORIES_SEARCH_COLUMNS        = %i[origin_name slug].freeze
+  BOOK_BINDING_TYPE_SEARCH_COLUMNS = %i[barcode].freeze
 
-  TITLE_MAX_LENGTH            = 110
+  PRE_TITLE_MAX_LENGTH        = 60
+  TITLE_MAX_LENGTH            = 120
+  POST_TITLE_MAX_LENGTH       = 60
   DESCRIPTION_MAX_LENGTH      = 350
   LONG_DESCRIPTION_MAX_LENGTH = 3000
 
@@ -36,6 +40,7 @@ class Book < ApplicationRecord
                   against: SEARCH_COLUMNS, associated_against: {
                     authors: AUTHORS_SEARCH_COLUMMNS,
                     categories: CATEGORIES_SEARCH_COLUMNS,
+                    book_binding_types: BOOK_BINDING_TYPE_SEARCH_COLUMNS,
                     publisher: :name
                   }
 
@@ -149,10 +154,17 @@ class Book < ApplicationRecord
 
   def sanitize_description
     self.description = description.gsub(/[\r\n]+/, "\r\n\r\n")
+                                  .gsub('.  ', '. ')
+                                  .gsub('`', '\'')
+                                  .gsub('´', '\'')
                                   .strip&.upcase_first
 
     self.long_description = long_description.gsub(/[\r\n]+/, "\r\n\r\n")
+                                            .gsub('.  ', '. ')
+                                            .gsub('`', '\'')
+                                            .gsub('´', '\'')
                                             .strip&.upcase_first
+    nil
   end
 
   def sanitize_title
