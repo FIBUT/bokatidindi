@@ -188,6 +188,14 @@ main {
     margin-top: 3rem;
   }
 
+  #book_audio_sample {
+    h3 {
+      font-family: $montserrat;
+      font-weight: $font-weight-bold;
+    }
+    audio { width: 100%; }
+  }
+
   #book-binding-types {
     a {
       font-weight: $font-weight-bold;
