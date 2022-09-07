@@ -65,7 +65,9 @@
           <% end %>
         </figure>
 
-        <%= render 'books/meta', book: @book %>
+        <div class="d-none d-md-block">
+          <%= render 'books/meta', book: @book %>
+        </div>
 
       </div>
 
@@ -98,6 +100,10 @@
           <%=  simple_format @book.long_description, tags: ['em'] %>
         </section>
       </article>
+
+      <div class="d-block d-md-none mb-4">
+        <%= render 'books/meta', book: @book %>
+      </div>
 
       <%= render 'books/binding_types', book: @book %>
 
