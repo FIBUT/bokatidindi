@@ -32,12 +32,6 @@ class BookBindingType < ApplicationRecord
     in: BookBindingType::AVAILABLE_LANGUAGES.pluck(0)
   }
 
-  validates(
-    :page_count,
-    numericality: true,
-    if: proc { |bbt| bbt.binding_type&.printed_books? }
-  )
-
   validates :url, url: true, allow_blank: true
 
   before_validation :sanitize_isbn

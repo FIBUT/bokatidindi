@@ -31,6 +31,7 @@ ActiveAdmin.register Category do
         I18n.t("activerecord.attributes.category.groups.#{category.group}")
       end
     end
+    column :rod
     column :book_count, &:book_count
     column :book_count_web, &:book_count_web
     column :book_count_print, &:book_count_print
@@ -42,6 +43,7 @@ ActiveAdmin.register Category do
     f.inputs do
       f.input :name
       f.input :group
+      f.input :rod
     end
     f.actions
   end

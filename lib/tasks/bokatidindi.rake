@@ -213,4 +213,11 @@ namespace :bt do
       b.save
     end
   end
+
+  desc 'Remove BookBindingType records for \'republished\' books'
+  task remove_republished: :environment do
+    BookBindingType.includes(:binding_type)
+                   .where(binding_type: { name: 'Endurútgáfa' })
+                   .destroy_all
+  end
 end

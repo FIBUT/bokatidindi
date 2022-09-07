@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_22_190455) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -153,7 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_190455) do
     t.integer "page_count"
     t.integer "minutes"
     t.integer "availability", default: 0, null: false
-    t.datetime "publication_date"
+    t.date "publication_date"
     t.index ["barcode"], name: "index_book_binding_types_on_barcode"
     t.index ["binding_type_id"], name: "index_book_binding_types_on_binding_type_id"
     t.index ["book_id"], name: "index_book_binding_types_on_book_id"

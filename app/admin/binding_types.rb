@@ -41,6 +41,7 @@ ActiveAdmin.register BindingType do
         )
       end
     end
+    column :rod
     column :open
     column :book_count, &:book_count
     actions
