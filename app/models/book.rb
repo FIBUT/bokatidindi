@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   PERMITTED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/webp',
                              'image/jp2', 'image/jxl', ' image/avif'].freeze
 
+  PERMITTED_AUDIO_FORMATS = ['audio/aac', 'audio/mpeg', 'audio/ogg'].freeze
+
   COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
   IMAGE_QUALITY        = 80
 
@@ -63,6 +65,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :book_binding_types, allow_destroy: true
 
   has_one_attached :cover_image, dependent: :destroy
+  has_one_attached :audio_sample, dependent: :destroy
 
   paginates_per 18
 
@@ -71,6 +74,7 @@ class Book < ApplicationRecord
   before_update :set_title_hypenation
 
   attribute :cover_image_file
+  attribute :audio_sample_file
 
   validates :publisher, :title, :description, presence: true
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
@@ -144,8 +148,14 @@ class Book < ApplicationRecord
   # rendering and accepting a file input
   def cover_image_file(_action_dispatch = nil); end
 
+  def audio_sample_file(_action_dispatch = nil); end
+
   def cover_image?
     cover_image.attached?
+  end
+
+  def audio_sample?
+    audio_sample.attached?
   end
 
   def description_for_print
@@ -230,6 +240,14 @@ class Book < ApplicationRecord
     end
 
     cover_variant.processed.url
+  end
+
+  def audio_sample_url
+    if ActiveStorage::Blob.service.name.to_s == 'local'
+      return Rails.application.routes.url_helpers.url_for(audio_sample)
+    end
+
+    audio_sample.processed.url
   end
 
   def cover_image_variant_url(width, image_format = 'webp')
@@ -353,12 +371,18 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image_from_string(string)
-    cover_image.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
-
     return false if cover_image.attached?
+
+    cover_image.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
 
     attach_cover_image_variants
     true
+  end
+
+  def attach_audio_sample_from_string(string)
+    return false if audio_sample.attached?
+
+    audio_sample.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
   end
 
   def attach_print_image_variant

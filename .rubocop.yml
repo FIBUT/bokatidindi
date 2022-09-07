@@ -19,10 +19,14 @@ Metrics/ClassLength:
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:
   Max: 10
+  Exclude:
+    - 'app/admin/books.rb'
 
 # Configuration parameters: IgnoredMethods.
 Metrics/PerceivedComplexity:
   Max: 12
+  Exclude:
+    - 'app/admin/books.rb'
 
 # Configuration parameters: AllowedConstants.
 Style/Documentation:

@@ -31,7 +31,7 @@
     <%= local_assigns[:book].language_names %>
   </li>
   <% end %>
-  <% unless local_assigns[:book].original_title.nil? %>
+  <% unless local_assigns[:book].original_title.empty? %>
   <li
     class="book-meta-original-title d-block font-weight-bold pb-3"
     aria-labelledby="book-meta-original-title-label"

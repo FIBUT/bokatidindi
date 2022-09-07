@@ -5,6 +5,7 @@ ActiveAdmin.register Book do
                 :description, :long_description,
                 :country_of_origin, :original_title,
                 :cover_image_file,
+                :audio_sample_file,
                 :publisher_id,
                 {
                   book_binding_types_attributes: %i[
@@ -93,9 +94,26 @@ ActiveAdmin.register Book do
         end
       end
 
+      if permitted_params[:book][:audio_sample_file]
+        audio_sample_contents = permitted_params[:book][:audio_sample_file].read
+
+        audio_sample_content_type = MimeMagic.by_magic(audio_sample_contents)
+                                             .type
+
+        if Book::PERMITTED_AUDIO_FORMATS.include?(audio_sample_content_type)
+          audio_sample_file_valid = true
+        else
+          @resource.errors.add(:audio_sample_file, :invalid)
+        end
+      end
+
       if @resource.errors.none? && @resource.save
         if cover_image_file_valid
           @resource.attach_cover_image_from_string(cover_image_contents)
+        end
+
+        if audio_sample_file_valid
+          @resource.attach_audio_sample_from_string(audio_sample_contents)
         end
 
         return redirect_to(
@@ -139,6 +157,19 @@ ActiveAdmin.register Book do
         end
       end
 
+      if permitted_params[:book][:audio_sample_file]
+        audio_sample_contents = permitted_params[:book][:audio_sample_file].read
+
+        audio_sample_content_type = MimeMagic.by_magic(audio_sample_contents)
+                                             .type
+
+        if Book::PERMITTED_AUDIO_FORMATS.include?(audio_sample_content_type)
+          audio_sample_file_valid = true
+        else
+          @resource.errors.add(:audio_sample_file, :invalid)
+        end
+      end
+
       authorize! :create, @resource
 
       @resource.validate
@@ -150,6 +181,10 @@ ActiveAdmin.register Book do
       if @resource.errors.none? && @resource.save
         if cover_image_file_valid
           @resource.attach_cover_image_from_string(cover_image_contents)
+        end
+
+        if audio_sample_file_valid
+          @resource.attach_audio_sample_from_string(audio_sample_contents)
         end
 
         return redirect_to(
@@ -320,6 +355,18 @@ ActiveAdmin.register Book do
               'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
               'viðeigandi snið fyrir vef og prent við skráningu '\
               'og þurfa að vera að lágmarki 1600 px breiðar.'
+      )
+    end
+
+    f.inputs 'Hljóðbrot' do
+      if resource.audio_sample.attached?
+        audio src: resource.audio_sample_url, controls: true
+      end
+      f.input(
+        :audio_sample_file,
+        as: :file,
+        hint: 'Tekið er við hljóðskrám á sniðunum AAC, MP3, og OGG. '\
+              'Hljóðskrárnar eru ekki unnar sjálfkrafa yfir í mismunandi snið.'
       )
     end
 

@@ -105,6 +105,13 @@
         <%= render 'books/meta', book: @book %>
       </div>
 
+      <% if @book.audio_sample? %>
+      <div id="book_audio_sample" class="mb-4 pb-4">
+        <h3>Hljóðbrot</h3>
+        <%= audio_tag @book.audio_sample_url, controls: true %>
+      </div>
+      <% end %>
+
       <%= render 'books/binding_types', book: @book %>
 
       </div>
