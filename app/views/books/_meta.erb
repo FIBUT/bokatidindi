@@ -25,16 +25,18 @@
   <% unless local_assigns[:book].language_codes.count.zero? %>
   <li
     class="book-meta-languages d-block font-weight-bold pb-3"
+    aria-labelledby="book-meta-languages-label"
   >
-    <strong>Tungumál</strong>
+    <strong id="book-meta-languages-label">Tungumál</strong>
     <%= local_assigns[:book].language_names %>
   </li>
   <% end %>
   <% unless local_assigns[:book].original_title.nil? %>
   <li
     class="book-meta-original-title d-block font-weight-bold pb-3"
+    aria-labelledby="book-meta-original-title-label"
   >
-    <strong>Upprunalegur titill</strong>
+    <strong id="book-meta-original-title-label">Upprunalegur titill</strong>
     <%= local_assigns[:book].original_title %>
   </li>
   <% end %>
