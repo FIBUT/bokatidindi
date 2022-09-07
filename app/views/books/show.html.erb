@@ -21,6 +21,9 @@
   <% end %>
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
   <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title) %>
+  <% @book.book_binding_types.each do |book_binding_type| %>
+  <%= tag('meta', property: 'og:isbn', content: book_binding_type.barcode) if book_binding_type.barcode %>
+  <% end %>
   <%= tag 'meta', property: 'og:description', content: html_escape_once(strip_tags(@book.description).squish) %>
   <%= tag 'meta', property: 'og:url', content: url_for(controller: 'books', action: 'show', only_path: false) %>
   <%= tag 'meta', property: 'og:locale', content: 'is_IS' %>
@@ -48,9 +51,9 @@
 
     <div class="row book-column-container m-2 p-2 py-md-5">
 
-      <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 text-right" aria-hidden="true">
+      <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1" aria-hidden="true">
 
-        <figure class="figure mt-4">
+        <figure class="figure">
           <% if @book.cover_image.attached? %>
           <img
             src="<%= @book.cover_image_url %>"
@@ -61,6 +64,8 @@
           >
           <% end %>
         </figure>
+
+        <%= render 'books/meta', book: @book %>
 
       </div>
 
@@ -94,11 +99,9 @@
         </section>
       </article>
 
-      <%= render 'books/ecommerce', book: @book %>
+      <%= render 'books/binding_types', book: @book %>
 
-      <%= render 'books/meta', book: @book %>
-
-      </div>  
+      </div>
 
     </div>
     <div class="col-12">
