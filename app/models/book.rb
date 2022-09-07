@@ -123,6 +123,18 @@ class Book < ApplicationRecord
       .order(:title)
   }
 
+  def language_codes
+    book_binding_types.where.not(language: 'is').map(&:language)
+  end
+
+  def language_names
+    languages = []
+    language_codes.each do |l|
+      languages << I18n.t("languages.#{l}")
+    end
+    languages.to_sentence
+  end
+
   # This is a dummy attribute that is intended to make ActiveAdmin accept
   # rendering and accepting a file input
   def cover_image_file(_action_dispatch = nil); end

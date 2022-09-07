@@ -104,12 +104,11 @@ is:
               blank: 'er tómur'
             description:
               blank: 'er tóm'
+              too_long: 'er of löng'
             cover_image_file:
               invalid: 'er ógild'
             original_title:
               blank: 'þarf að vera skilgreindur ef bókin er erlend'
-            description:
-              too_long: 'er of löng'
     models:
       book:
         one: 'bók'
@@ -148,7 +147,6 @@ is:
         description: 'Stutt lýsing'
         long_description: 'Löng lýsing'
         cover_image_file: 'Skrá fyrir forsíðumynd'
-        description: 'Lýsing'
         categories: 'Flokkar'
         authors: 'Höfundar'
         uri_to_audiobook: 'Vefslóð á hljóðbók'
@@ -179,7 +177,7 @@ is:
         availabilities:
           unknown: 'Óskilgreint/Annað'
           pending: 'Væntanleg'
-          available: 'Fáanleg'
+          available: 'Fáanleg hjá útgefanda'
           sold_out: 'Uppseld hjá útgefanda'
           reprint_pending: 'Endurprentun væntanleg'
         publication_date: 'Útgáfudagur'

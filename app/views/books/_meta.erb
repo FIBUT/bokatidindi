@@ -6,7 +6,7 @@
 
   <% if action_name == 'show' %>
   <li
-    class="book-meta-publisher d-block font-weight-bold pb-1"
+    class="book-meta-publisher d-block font-weight-bold pb-3"
     aria-labelledby="book-meta-publisher-label<%= local_assigns[:book].id %>"
   >
     <strong
@@ -22,9 +22,25 @@
       <%= local_assigns[:book].publisher.name %>
     <% end %>
   </li>
+  <% unless local_assigns[:book].language_codes.count.zero? %>
+  <li
+    class="book-meta-languages d-block font-weight-bold pb-3"
+  >
+    <strong>Tungumál</strong>
+    <%= local_assigns[:book].language_names %>
+  </li>
+  <% end %>
+  <% unless local_assigns[:book].original_title.nil? %>
+  <li
+    class="book-meta-original-title d-block font-weight-bold pb-3"
+  >
+    <strong>Upprunalegur titill</strong>
+    <%= local_assigns[:book].original_title %>
+  </li>
+  <% end %>
   <% else %>
     <li
-    class="book-meta-publisher d-block font-weight-bold pb-1"
+    class="book-meta-publisher d-block font-weight-bold pb-3"
     aria-label="Útgefandi"
   >
     <%=
@@ -36,42 +52,11 @@
   <% end %>
 
   <li
-    class="book-meta-category d-block pb-1"
+    class="book-meta-category d-block pb-3"
     aria-labelledby="book-meta-category-label<%= local_assigns[:book].id %>"
     aria-label="Vöruflokkar"
   >
     <%= raw local_assigns[:book].category_links %>
   </li>
 
-  <% if action_name == 'show' %>
-
-  <% if local_assigns[:book].page_count %>
-  <li
-    class="book-meta-page-count d-block pb-1"
-    aria-label="Blaðsíðutal"
-  >
-    <%= pluralize(local_assigns[:book].page_count, 'blaðsíða', plural: 'blaðsíður') %>
-  </li>
-  <% end %>
-
-  <% if local_assigns[:book].hours %>
-  <li
-    class="book-meta-hours d-block pb-1"
-    aria-labelledby="book-meta-hours-label<%= local_assigns[:book].id %>"
-  >
-    <strong
-    id="book-meta-hours-label<%= local_assigns[:book].id %>"
-    class="book-meta-hours-label"
-    >
-    Upplestrartími
-    </strong>
-    <%= local_assigns[:book].hours %>
-    <abbr title="klukkustundir">klst.</abbr>
-  </li>
-  <% end %>
-  <% end %>
-
-  <li class="book-meta-hours d-block pb-1">
-    <%= local_assigns[:book].binding_types.map(&:corrected_name).uniq.to_sentence.downcase.capitalize %>
-  </li>
 </ul>
