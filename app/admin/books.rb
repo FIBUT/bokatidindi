@@ -7,6 +7,7 @@ ActiveAdmin.register Book do
                 :cover_image_file,
                 :audio_sample_file,
                 :delete_sample_pages,
+                :delete_audio_sample,
                 :publisher_id,
                 {
                   book_binding_types_attributes: %i[
@@ -134,6 +135,11 @@ ActiveAdmin.register Book do
         if permitted_params[:book][:delete_sample_pages].to_i == 1
           @resource.sample_pages.purge
         end
+
+        if permitted_params[:book][:delete_audio_sample].to_i == 1
+          @resource.audio_sample.purge
+        end
+
         if audio_sample_file_valid
           @resource.attach_audio_sample_from_string(audio_sample_contents)
         end
@@ -407,6 +413,9 @@ ActiveAdmin.register Book do
         hint: 'Tekið er við hljóðskrám á sniðunum AAC, MP3, og OGG. '\
               'Hljóðskrárnar eru ekki unnar sjálfkrafa yfir í mismunandi snið.'
       )
+      if resource.audio_sample.attached?
+        f.input(:delete_audio_sample, as: :boolean)
+      end
     end
 
     f.inputs 'Sýnishorn innan úr bók' do

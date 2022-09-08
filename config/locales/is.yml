@@ -148,6 +148,7 @@ is:
         long_description: 'Löng lýsing'
         cover_image_file: 'Skrá fyrir forsíðumynd'
         audio_sample_file: 'Skrá fyrir hljóðbrot'
+        delete_audio_sample: 'Eyða hljóðbroti'
         sample_pages_files: 'Skrár fyrir sýnishorn innan úr bók'
         delete_sample_pages: 'Eyða sýnishornum'
         categories: 'Flokkar'
