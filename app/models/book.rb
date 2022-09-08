@@ -200,17 +200,27 @@ class Book < ApplicationRecord
   end
 
   def page_count
-    binding_types = book_binding_types.where.not(page_count: [nil, ''])
-    return binding_types.first[:page_count] unless binding_types.empty?
+    book_binding_types.each do |b|
+      return b[:page_count] if b[:page_count]
+    end
 
     nil
   end
 
   def minutes
-    binding_types = book_binding_types.where.not(page_count: [nil, ''])
-    return binding_types.first[:minutes] unless binding_types.empty?
+    book_binding_types.each do |b|
+      return b[:minutes] if b[:minutes]
+    end
 
     nil
+  end
+
+  def hours
+    return nil unless minutes
+
+    book_binding_types.each do |b|
+      return b.hours if b[:minutes]
+    end
   end
 
   def store_url
@@ -286,12 +296,6 @@ class Book < ApplicationRecord
 
   def short_description
     description.truncate(DESCRIPTION_MAX_LENGTH).html_safe
-  end
-
-  def hours
-    return nil if minutes.nil? || minutes <= 1
-
-    minutes / 60
   end
 
   def category_links

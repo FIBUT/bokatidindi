@@ -49,6 +49,12 @@ class BookBindingType < ApplicationRecord
     language_a[0]
   end
 
+  def hours
+    return nil unless minutes
+
+    Time.at(60 * minutes).utc.strftime('%H:%M')
+  end
+
   private
 
   def sanitize_isbn
