@@ -6,6 +6,7 @@ ActiveAdmin.register Book do
                 :country_of_origin, :original_title,
                 :cover_image_file,
                 :audio_sample_file,
+                :delete_sample_pages,
                 :publisher_id,
                 {
                   book_binding_types_attributes: %i[
@@ -18,7 +19,8 @@ ActiveAdmin.register Book do
                   book_categories_attributes: %i[
                     id category_id for_print for_web _destroy
                   ],
-                  edition_ids: []
+                  edition_ids: [],
+                  sample_pages_files: []
                 }
 
   member_action :reset_categories do
@@ -107,11 +109,31 @@ ActiveAdmin.register Book do
         end
       end
 
+      sample_pages_files = []
+      permitted_params[:book][:sample_pages_files].each do |c|
+        next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
+
+        contents = c.read
+        mime_type = MimeMagic.by_magic(contents).type
+        sample_pages_files << { contents:, mime_type: }
+
+        unless Book::PERMITTED_IMAGE_FORMATS.include?(mime_type)
+          @resource.errors.add(:sample_pages_files, :invalid)
+        end
+      end
+
       if @resource.errors.none? && @resource.save
+        sample_pages_files.each do |spf|
+          @resource.attach_sample_page_from_string(spf[:contents])
+        end
+
         if cover_image_file_valid
           @resource.attach_cover_image_from_string(cover_image_contents)
         end
 
+        if permitted_params[:book][:delete_sample_pages].to_i == 1
+          @resource.sample_pages.purge
+        end
         if audio_sample_file_valid
           @resource.attach_audio_sample_from_string(audio_sample_contents)
         end
@@ -170,6 +192,19 @@ ActiveAdmin.register Book do
         end
       end
 
+      sample_pages_files = []
+      permitted_params[:book][:sample_pages_files].each do |c|
+        next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
+
+        contents = c.read
+        mime_type = MimeMagic.by_magic(contents).type
+        sample_pages_files << { contents:, mime_type: }
+
+        unless Book::PERMITTED_IMAGE_FORMATS.include?(mime_type)
+          @resource.errors.add(:sample_pages_files, :invalid)
+        end
+      end
+
       authorize! :create, @resource
 
       @resource.validate
@@ -185,6 +220,10 @@ ActiveAdmin.register Book do
 
         if audio_sample_file_valid
           @resource.attach_audio_sample_from_string(audio_sample_contents)
+        end
+
+        sample_pages_files.each do |spf|
+          @resource.attach_sample_page_from_string(spf[:contents])
         end
 
         return redirect_to(
@@ -300,7 +339,7 @@ ActiveAdmin.register Book do
         :author,
         collection: Author.order(:name),
         hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. þarf að '\
-              'skrá í sitt hvoru lagi. f höfundur finnst ekki í fellilista '\
+              'skrá í sitt hvoru lagi. Ef höfundur finnst ekki í fellilista '\
               'þarf að skrá hann með því að smella á „höfundar“ hér efst á '\
               'síðunni og svo „skrá höfund“.'
       )
@@ -368,6 +407,28 @@ ActiveAdmin.register Book do
         hint: 'Tekið er við hljóðskrám á sniðunum AAC, MP3, og OGG. '\
               'Hljóðskrárnar eru ekki unnar sjálfkrafa yfir í mismunandi snið.'
       )
+    end
+
+    f.inputs 'Sýnishorn innan úr bók' do
+      li class: 'sample-pages' do
+        resource.sample_pages.each_with_index do |_sample_page, i|
+          img(src: resource.sample_page_variant_url(i, 150, 'jpeg'), width: 75)
+        end
+      end
+      f.input(
+        :sample_pages_files,
+        as: :file,
+        input_html: {
+          accept: Book::PERMITTED_IMAGE_FORMATS.join(', '),
+          multiple: true
+        },
+        hint: 'Sýnishorn af stökum síðum innan úr prentútgáfu bókar. '\
+              'Hægt er að velja fleiri en eina skrá. '\
+              'Sömu reglur um skráasnið gilda og um forsíðumyndir.'
+      )
+      unless resource.sample_pages.count.zero?
+        f.input(:delete_sample_pages, as: :boolean)
+      end
     end
 
     f.has_many(

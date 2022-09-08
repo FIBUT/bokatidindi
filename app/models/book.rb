@@ -7,6 +7,7 @@ class Book < ApplicationRecord
   PERMITTED_AUDIO_FORMATS = ['audio/aac', 'audio/mpeg', 'audio/ogg'].freeze
 
   COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
+  SAMPLE_PAGE_VARIANTS = [75, 150, 550, 1600].freeze
   IMAGE_QUALITY        = 80
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
@@ -67,6 +68,8 @@ class Book < ApplicationRecord
   has_one_attached :cover_image, dependent: :destroy
   has_one_attached :audio_sample, dependent: :destroy
 
+  has_many_attached :sample_pages, dependent: :destroy
+
   paginates_per 18
 
   before_validation :sanitize_title, :sanitize_description
@@ -75,6 +78,8 @@ class Book < ApplicationRecord
 
   attribute :cover_image_file
   attribute :audio_sample_file
+  attribute :sample_pages_files
+  attribute :delete_sample_pages
 
   validates :publisher, :title, :description, presence: true
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
@@ -149,6 +154,10 @@ class Book < ApplicationRecord
   def cover_image_file(_action_dispatch = nil); end
 
   def audio_sample_file(_action_dispatch = nil); end
+
+  def sample_pages_files(_action_dispatch = nil); end
+
+  def delete_sample_pages; end
 
   def cover_image?
     cover_image.attached?
@@ -383,6 +392,29 @@ class Book < ApplicationRecord
     return false if audio_sample.attached?
 
     audio_sample.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
+  end
+
+  def attach_sample_page_from_string(string)
+    sample_pages.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
+
+    SAMPLE_PAGE_VARIANTS.each do |v|
+      sample_pages.each do |s|
+        s.variant(resize_to_limit: [v, nil], format: 'webp')
+        s.variant(resize_to_limit: [v, nil], format: 'jpeg')
+      end
+    end
+  end
+
+  def sample_page_variant_url(index, width, format)
+    sample_page_variant = sample_pages[index].variant(
+      resize_to_limit: [width, nil], format:
+    )
+
+    if ActiveStorage::Blob.service.name.to_s == 'local'
+      return Rails.application.routes.url_helpers.url_for(sample_page_variant)
+    end
+
+    sample_page_variant.processed.url
   end
 
   def attach_print_image_variant
