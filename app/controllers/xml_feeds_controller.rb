@@ -77,6 +77,8 @@ class XmlFeedsController < ApplicationController
           xml.binding_type binding_type.corrected_name
         end
       end
+      xml.page_count book.page_count if book.page_count
+      xml.hours book.hours if book.hours
     end
   end
 

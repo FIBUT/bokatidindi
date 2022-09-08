@@ -8,7 +8,7 @@
 <!ELEMENT category_name (#PCDATA)>
 
 <!ELEMENT books (book)+>
-<!ELEMENT book (book_id, slug, pre_title?, title, post_title?, description, cover_image?, publisher, authors, binding_types)>
+<!ELEMENT book (book_id, slug, pre_title?, title, post_title?, description, cover_image?, publisher, authors, binding_types, page_count?, hours?)>
 <!ELEMENT book_id (#PCDATA)>
 <!ELEMENT slug (#PCDATA)>
 <!ELEMENT pre_title (#PCDATA)>
@@ -34,3 +34,6 @@
 <!ELEMENT publisher (publisher_id, publisher_name)>
 <!ELEMENT publisher_id (#PCDATA)>
 <!ELEMENT publisher_name (#PCDATA)>
+
+<!ELEMENT page_count (#PCDATA)>
+<!ELEMENT hours (#PCDATA)>
