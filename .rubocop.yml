@@ -3,6 +3,8 @@ require: rubocop-rails
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
   Max: 80
+  Exclude:
+    - 'app/admin/books.rb'
 
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
@@ -14,7 +16,7 @@ Metrics/BlockLength:
 
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
-  Max: 350
+  Max: 400
 
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:
