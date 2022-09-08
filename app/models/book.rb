@@ -78,6 +78,7 @@ class Book < ApplicationRecord
 
   attribute :cover_image_file
   attribute :audio_sample_file
+  attribute :delete_audio_sample
   attribute :sample_pages_files
   attribute :delete_sample_pages
 
@@ -154,6 +155,8 @@ class Book < ApplicationRecord
   def cover_image_file(_action_dispatch = nil); end
 
   def audio_sample_file(_action_dispatch = nil); end
+
+  def delete_audio_sample; end
 
   def sample_pages_files(_action_dispatch = nil); end
 
