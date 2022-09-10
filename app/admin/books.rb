@@ -129,6 +129,7 @@ ActiveAdmin.register Book do
         end
 
         if cover_image_file_valid
+          @resource.cover_image.purge if @resource.cover_image.attached?
           @resource.attach_cover_image_from_string(cover_image_contents)
         end
 
