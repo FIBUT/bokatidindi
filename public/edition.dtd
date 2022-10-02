@@ -14,16 +14,18 @@
 <!ELEMENT pre_title (#PCDATA)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT post_title (#PCDATA)>
-<!ELEMENT description (#PCDATA | em)*>
-<!ELEMENT em (#PCDATA)>
+<!ELEMENT description (description_firstline, description_more?)>
+<!ELEMENT description_firstline (#PCDATA|em)*>
+<!ELEMENT description_more (#PCDATA|em)*>
+<!ELEMENT em (#PCDATA)> 
 
 <!ELEMENT cover_image (url, image)>
 <!ELEMENT url (#PCDATA)>
 <!ELEMENT image (#PCDATA)>
 <!ATTLIST image href CDATA #REQUIRED>
 
-<!ELEMENT authors (author)*>
-<!ELEMENT author (author_type, author_names)>
+<!ELEMENT authors (author_group)*>
+<!ELEMENT author_group (author_type, author_names)>
 <!ELEMENT author_type (#PCDATA)>
 <!ELEMENT author_names (#PCDATA | a)*>
 <!ELEMENT a (#PCDATA)>

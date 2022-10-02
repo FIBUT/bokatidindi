@@ -15,8 +15,12 @@ class XmlFeedsController < ApplicationController
     categories = print_books_by_category(edition[:id])
 
     builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
-      xml.doc.create_internal_subset('edition', nil, asset_url('edition.dtd'))
-
+      dtd_path = if Rails.env.test?
+                   Rails.root.join('public/edition.dtd').to_s
+                 else
+                   asset_url('edition.dtd')
+                 end
+      xml.doc.create_internal_subset('edition', nil, dtd_path)
       xml.edition do
         xml.edition_id edition[:id]
         xml.edition_title edition[:title]
@@ -49,7 +53,12 @@ class XmlFeedsController < ApplicationController
       xml.title book[:title_hypenated]
       xml.post_title book[:post_title] unless book[:post_title].empty?
       xml.description do
-        xml << book.description_for_print
+        i = 0
+        book.description_for_print.each_line(chomp: true) do |l|
+          xml.description_firstline l if i.zero?
+          xml.description_more l unless i.zero?
+          i += 1
+        end
       end
       if book.cover_image?
         # Two paths for the front cover are provided. The full URL for
