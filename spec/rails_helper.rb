@@ -143,18 +143,18 @@ RSpec.configure do |config|
       group: :non_fiction, rod: 8
     )
 
-    50.times do
+    20.times do
       book = FactoryBot.create(:book)
       FactoryBot.create(:book_author, book:)
       FactoryBot.create(:book_category, book:)
       FactoryBot.build(:book_binding_type, book:)
       FactoryBot.create(:book_edition, book:)
 
-      image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
-      image_contents = File.read(
-        Rails.root.join("spec/assets/#{image_file_name}")
-      )
-      book.attach_cover_image_from_string(image_contents)
+      # image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
+      # image_contents = File.read(
+      #   Rails.root.join("spec/assets/#{image_file_name}")
+      # )
+      # book.attach_cover_image_from_string(image_contents)
     end
 
     # This emulates the bt:update_category_counters rake task.
