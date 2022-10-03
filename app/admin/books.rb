@@ -144,6 +144,8 @@ ActiveAdmin.register Book do
           @resource.attach_audio_sample_from_string(audio_sample_contents)
         end
 
+        Category.update_all_counts
+
         return redirect_to(
           admin_books_path,
           notice: "Bókin #{@resource.title} hefur verið uppfærð."
@@ -230,6 +232,8 @@ ActiveAdmin.register Book do
         sample_pages_files.each do |spf|
           @resource.attach_sample_page_from_string(spf[:contents])
         end
+
+        Category.update_all_counts
 
         return redirect_to(
           new_admin_book_path,

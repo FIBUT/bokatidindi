@@ -75,6 +75,7 @@ class Book < ApplicationRecord
   before_validation :sanitize_title, :sanitize_description
   before_create :set_title_hypenation, :set_slug
   before_update :set_title_hypenation
+  after_update :reset_book_edition_categories
 
   attribute :cover_image_file
   attribute :audio_sample_file
@@ -446,6 +447,10 @@ class Book < ApplicationRecord
   end
 
   private
+
+  def reset_book_edition_categories
+    book_editions.active.each(&:reset_book_edition_categories)
+  end
 
   def attach_cover_image_variants
     attach_cover_image_variant('webp')
