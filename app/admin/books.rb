@@ -61,10 +61,9 @@ ActiveAdmin.register Book do
         permitted_params[:book].except(:edition_ids, :cover_image_file)
       )
 
-      inactive_edition_ids = @resource.editions.inactive.pluck(:id)
-      active_session_ids   = permitted_params[:book][:edition_ids]
-      @resource.editions   = Edition.where(
-        id: (inactive_edition_ids + active_session_ids)
+      edition_ids        = permitted_params[:book][:edition_ids].to_a
+      @resource.editions = Edition.where(
+        id: (@resource.inactive_edition_ids + edition_ids)
       )
 
       # If the publisher_id attribute is not specified in the form, we should
@@ -168,10 +167,9 @@ ActiveAdmin.register Book do
         @resource[:publisher_id] = current_admin_user.publishers.first[:id]
       end
 
-      inactive_edition_ids = @resource.editions.inactive.pluck(:id)
-      active_session_ids   = permitted_params[:book][:edition_ids]
+      edition_ids          = permitted_params[:book][:edition_ids].to_a
       @resource.editions   = Edition.where(
-        id: (inactive_edition_ids + active_session_ids)
+        id: (@resource.inactive_edition_ids + edition_ids)
       )
 
       if permitted_params[:book][:cover_image_file]

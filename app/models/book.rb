@@ -138,6 +138,10 @@ class Book < ApplicationRecord
       .order(:title)
   }
 
+  def inactive_edition_ids
+    editions.inactive.pluck(:id).to_a
+  end
+
   def language_codes
     book_binding_types.where.not(language: 'is').map(&:language)
   end
