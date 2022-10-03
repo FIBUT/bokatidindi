@@ -29,6 +29,13 @@ class Category < ApplicationRecord
     name
   end
 
+  def self.update_all_counts
+    Category.all.find_each do |c|
+      c.update_counts
+      c.save
+    end
+  end
+
   def update_counts
     self.book_count       = book_count_collection.count
     self.book_count_web   = book_count_collection.where(for_web: true).count
