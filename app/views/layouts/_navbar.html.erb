@@ -13,7 +13,7 @@
       <ul class="dropdown-menu" aria-labelledby="navbarBarnabaekurLink">
         <%
         Category.where(group: category_group[1]).order('rod').each do |c|
-        next if c.book_count.zero?
+        next if c.book_count_web.zero?
         %>
         <li class="nav-item">
           <%= link_to c.name, category_path(c.slug), class: 'nav-link pl-3' %>
@@ -39,7 +39,7 @@
       <ul class="sub-nav-list list-unstyled mb-5">
         <%
         Category.where(group: category_group[1]).order('rod').each do |c|
-        next if c.book_count.zero?
+        next if c.book_count_web.zero?
         %>
         <li class="my-3">
           <%= link_to c.name, category_path(c.slug) %>

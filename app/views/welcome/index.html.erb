@@ -5,7 +5,7 @@
   <%= preload_link_tag 'https://cdn.bokatidindi.is/images/salka-square.svg', as: 'image' %>
   <%= preload_link_tag 'https://cdn.bokatidindi.is/images/storytel-square.svg', as: 'image' %>
 
-  <title>Bókatíðindi - Helstu bækur ársins á einum stað</title>
+  <title>Bókatíðindi - Helstu bækur ársins á einum stað - Jólabókaflóðið</title>
 
   <%= tag 'meta', name: 'description', content: @meta_description %>
   <%= tag 'link', rel: 'canonical', href: 'https://www.bokatidindi.is/' %>
@@ -40,7 +40,7 @@
           <ul class="list-unstyled">
             <%
             Category.where(group: category_group[1]).order('rod').each do |c|
-            next if c.book_count.zero?
+            next if c.book_count_web.zero?
             %>
             <li class="my-2">
               <%= link_to c.name, category_path(c.slug) %>
