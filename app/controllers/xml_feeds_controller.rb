@@ -12,7 +12,7 @@ class XmlFeedsController < ApplicationController
                 Edition.find(params[:id])
               end
 
-    categories = print_books_by_category(edition[:id])
+    categories = print_books_by_category(edition[:id], params[:publisher_id])
 
     builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
       dtd_path = if Rails.env.test?
@@ -91,13 +91,15 @@ class XmlFeedsController < ApplicationController
     end
   end
 
-  def print_books_by_category(edition_id = nil)
+  def print_books_by_category(edition_id = nil, publisher_id = nil)
     edition_id = Edition.current_edition[:id] if edition_id.nil?
     categories = []
     Category.order(rod: :asc).each do |c|
       books = Book.by_edition_and_category(
         edition_id, c[:id]
       ).order(title: :asc)
+
+      books = books.where(publisher_id:) unless publisher_id.nil?
 
       next if books.empty?
 
