@@ -241,6 +241,7 @@ is:
         url: "Vefslóð"
         email_address: "Tölvupóstfang"
         book_count: "Fjöldi bóka"
+        print_data: "Prentgögn"
       category:
         name: "Nafn"
         group: "Yfirflokkur"

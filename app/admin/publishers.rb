@@ -38,7 +38,15 @@ ActiveAdmin.register Publisher do
     end
     column :email_address
     column :url
-    column :book_count, &:book_count
+    column :book_count
+    column :print_data do |publisher|
+      unless publisher.book_count.zero?
+        link_to(
+          'Sækja prentgögn',
+          "/xml_feeds/editions_for_print/current?publisher_id=#{publisher.id}"
+        )
+      end
+    end
     actions
   end
 
