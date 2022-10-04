@@ -55,8 +55,16 @@ class XmlFeedsController < ApplicationController
       xml.description do
         i = 0
         book.description_for_print.each_line(chomp: true) do |l|
-          xml.description_firstline l if i.zero?
-          xml.description_more l unless i.zero?
+          if i.zero?
+            xml.description_firstline do
+              xml << l
+            end
+          end
+          unless i.zero?
+            xml.description_more do
+              xml << l
+            end
+          end
           i += 1
         end
       end
