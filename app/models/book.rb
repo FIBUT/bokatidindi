@@ -446,11 +446,11 @@ class Book < ApplicationRecord
     cover_variant.processed.url
   end
 
-  private
-
   def reset_book_edition_categories
     book_editions.active.each(&:reset_book_edition_categories)
   end
+
+  private
 
   def attach_cover_image_variants
     attach_cover_image_variant('webp')

@@ -220,4 +220,9 @@ namespace :bt do
                    .where(binding_type: { name: 'Endurútgáfa' })
                    .destroy_all
   end
+
+  desc 'Reset book_edition_categories for all books'
+  task reset_book_edition_categories: :environment do
+    Book.all.each(&:reset_book_edition_categories)
+  end
 end
