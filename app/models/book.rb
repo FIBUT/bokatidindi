@@ -197,7 +197,6 @@ class Book < ApplicationRecord
   def sanitize_title
     self.title      = title&.upcase_first
     self.pre_title  = pre_title&.upcase_first
-    self.post_title = post_title&.upcase_first
 
     self.title      = title&.chop if title.last == '.'
     self.pre_title  = title&.chop if pre_title.last == '.'
@@ -274,7 +273,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(audio_sample)
     end
 
-    audio_sample.processed.url
+    audio_sample.url
   end
 
   def cover_image_variant_url(width, image_format = 'webp')
