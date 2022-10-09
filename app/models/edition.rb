@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Edition < ApplicationRecord
+  has_many :book_editions, dependent: :restrict_with_error
+  has_many :book_edition_categories, through: :book_editions
+
   # Editions that are open for registration
   scope :active, lambda {
     where(
