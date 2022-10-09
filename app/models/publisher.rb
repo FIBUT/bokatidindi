@@ -11,6 +11,14 @@ class Publisher < ApplicationRecord
   validates :email_address, format: { with: Devise.email_regexp },
                             allow_blank: true
 
+  def book_edition_categories_by_edition_id(edition_id)
+    BookEditionCategory.joins(
+      book_edition: [book: [:publisher]]
+    ).where(
+      'books.publisher_id': id, 'book_editions.edition.id': edition_id
+    )
+  end
+
   def book_count
     Book.includes(
       :book_editions

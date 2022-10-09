@@ -58,6 +58,46 @@ ActiveAdmin.register Publisher do
         row :url
       end
     end
+    Edition.current.each do |e|
+      panel e.title do
+        table_for(
+          publisher.book_edition_categories_by_edition_id(e.id),
+          class: 'publisher_book_edition_categories'
+        ) do
+          column(:book, &:book)
+          column :category
+          column :for_web
+          column :for_print
+        end
+
+        table class: 'publisher_book_edition_category_totals' do
+          tr class: 'web_count' do
+            td class: 'th' do
+              'Fjöldi birtinga á vef'
+            end
+            td class: 'value' do
+              publisher.book_edition_categories_by_edition_id(
+                e.id
+              ).where(
+                for_web: true
+              ).count
+            end
+          end
+          tr class: 'print_count' do
+            td class: 'th' do
+              'Fjöldi birtinga á prenti'
+            end
+            td class: 'value' do
+              publisher.book_edition_categories_by_edition_id(
+                e.id
+              ).where(
+                for_print: true
+              ).count
+            end
+          end
+        end
+      end
+    end
   end
 
   form do |f|
