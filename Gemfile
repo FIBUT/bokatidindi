@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'rack-timeout'
+
 gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
