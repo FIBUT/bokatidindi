@@ -519,17 +519,22 @@ ActiveAdmin.register Book do
       bc.input :for_web
     end
 
-    if Edition.active.count.positive?
-      f.inputs do
-        f.input(
-          :editions,
-          as: :check_boxes,
-          collection: Edition.active,
-          input_html: { autocomplete: 'off' },
-          hint: 'Þegar hakað hefur viðeigandi reit birtist bókin á '\
-                'vefsíðu Bókatíðinda.'
-        )
-      end
+    if Edition.current_edition.closed?
+      para "Athugið að skráningu í #{Edition.current_edition.title} er nú "\
+           'lokið þegar kemur að prentútgáfu, en enn er opið fyrir skráningar '\
+           'í vefútgáfu. Vinsamlegast hafið samband við skrifstofu FÍBÚT '\
+           'fyrir nánari upplýsingar.'
+    end
+
+    f.inputs do
+      f.input(
+        :editions,
+        as: :check_boxes,
+        collection: (Edition.active + Edition.current).uniq,
+        input_html: { autocomplete: 'off' },
+        hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
+              'Bókatíðindum í þeim flokkum sem hafa verið valdir.'
+      )
     end
 
     f.inputs 'Nánari upplýsingar' do

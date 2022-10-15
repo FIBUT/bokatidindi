@@ -35,6 +35,10 @@ class Edition < ApplicationRecord
     ).order(id: :desc).limit(1).first
   end
 
+  def closed?
+    closing_date < DateTime.now
+  end
+
   def book_count
     Book.includes(
       :book_editions

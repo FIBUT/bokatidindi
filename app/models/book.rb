@@ -446,7 +446,8 @@ class Book < ApplicationRecord
   end
 
   def reset_book_edition_categories
-    book_editions.active.each(&:reset_book_edition_categories)
+    book_editions_to_reset = (book_editions.active + book_editions.current).uniq
+    book_editions_to_reset.each(&:reset_book_edition_categories)
   end
 
   private
