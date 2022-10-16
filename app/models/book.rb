@@ -446,7 +446,7 @@ class Book < ApplicationRecord
   end
 
   def reset_book_edition_categories
-    book_editions.active.each(&:reset_book_edition_categories)
+    book_editions.active.each(&:update_book_edition_categories)
   end
 
   private

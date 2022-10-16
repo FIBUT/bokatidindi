@@ -72,6 +72,7 @@ Metrics/MethodLength:
   Max: 80
   Exclude:
     - 'db/migrate/*'
+    - 'app/admin/books.rb'
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
