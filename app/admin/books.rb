@@ -64,17 +64,15 @@ ActiveAdmin.register Book do
       edition_ids        = permitted_params[:book][:edition_ids].to_a
       @resource.editions = Edition.where(
         id: (
-          @resource.editions.frozen.ids + @resource.editions.inactive.ids +
+          @resource.editions.frozen.ids +
+          @resource.editions.inactive.ids +
           edition_ids
         )
       )
+
       removed_edition_ids = @resource.editions.where.not(
         id: Edition.inactive.ids + Edition.frozen.ids
       ).where.not(id: (edition_ids - [''])).ids
-      @resource.book_editions.where(edition_id: removed_edition_ids).destroy_all
-      @resource.book_editions.each do |be|
-        be.update_book_edition_categories(force: current_admin_user.admin?)
-      end
 
       # If the publisher_id attribute is not specified in the form, we should
       # assign it to the current user's first (and presumabily only publisher).
@@ -133,6 +131,13 @@ ActiveAdmin.register Book do
       end
 
       if @resource.errors.none? && @resource.save
+        @resource.book_editions.where(
+          edition_id: removed_edition_ids
+        ).destroy_all
+        @resource.book_editions.each do |be|
+          be.update_book_edition_categories(force: current_admin_user.admin?)
+        end
+
         sample_pages_files.each do |spf|
           @resource.attach_sample_page_from_string(spf[:contents])
         end
@@ -529,12 +534,12 @@ ActiveAdmin.register Book do
       bc.input :for_web
     end
 
-    if Edition.form_collection.count.positive?
+    if Edition.form_collection(current_admin_user.admin?).count.positive?
       f.inputs do
         f.input(
           :editions,
           as: :check_boxes,
-          collection: Edition.form_collection,
+          collection: Edition.form_collection(current_admin_user.admin?),
           input_html: { autocomplete: 'off' },
           hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
                 'Bókatíðindum í þeim flokkum sem hafa verið valdir.'\

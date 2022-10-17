@@ -68,6 +68,8 @@ ActiveAdmin.register Publisher do
           column :category
           column :for_web
           column :for_print
+          column :created_at
+          column :updated_at
         end
 
         table class: 'publisher_book_edition_category_totals' do

@@ -31,13 +31,6 @@ class BookEdition < ApplicationRecord
   after_create :create_book_edition_categories
 
   def update_book_edition_categories(force: true)
-    book_categories = book.book_categories
-    category_ids = book_categories.pluck(:category_id)
-
-    book_edition_categories.where.not(
-      category_id: category_ids
-    ).destroy_all
-
     if edition.active? || force == true
       # Delete the BookEditionCategory records if the current edition is
       # open for both print and web registrations and re-enter them into the
@@ -80,6 +73,11 @@ class BookEdition < ApplicationRecord
   private
 
   def update_book_edition_categories_before_print_registration_ends
+    category_ids = book.book_categories.pluck(:category_id)
+    book_edition_categories.where.not(
+      category_id: category_ids
+    ).destroy_all
+
     book.book_categories.each do |bc|
       current_book_edition_category = book_edition_categories.find_by(
         book_edition_id: id,
@@ -113,6 +111,18 @@ class BookEdition < ApplicationRecord
           book_edition_id: id, category_id: bc.category_id,
           for_web: true, for_print: false
         )
+      end
+    end
+
+    category_ids = book.book_categories.pluck(:category_id)
+    book_edition_categories.where.not(
+      category_id: category_ids
+    ).find_each do |bec|
+      if bec.for_print == true
+        bec.for_web = false
+        bec.save
+      else
+        bec.destroy
       end
     end
   end
