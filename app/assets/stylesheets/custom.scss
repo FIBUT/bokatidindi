@@ -188,6 +188,12 @@ main {
     margin-top: 3rem;
   }
 
+  .preview-images {
+    img {
+      width: 100%;
+    }
+  }
+
   #book_audio_sample {
     h3 {
       font-family: $montserrat;

@@ -55,15 +55,38 @@
 
         <figure class="figure">
           <% if @book.cover_image.attached? %>
-          <img
-            src="<%= @book.cover_image_url %>"
-            height="<%= @book.cover_image.metadata[:height] %>"
-            width="<%= @book.cover_image.metadata[:width] %>"
-            srcset="<%= @book.cover_img_srcset(@image_format) %>"
-            class="img-fluid"
+          <a
+            data-fancybox="samples"
+            href="<%= @book.cover_image_url %>"
           >
+            <img
+              src="<%= @book.cover_image_url %>"
+              height="<%= @book.cover_image.metadata[:height] %>"
+              width="<%= @book.cover_image.metadata[:width] %>"
+              srcset="<%= @book.cover_img_srcset(@image_format) %>"
+              class="img-fluid"
+            >
+          </a>
           <% end %>
         </figure>
+
+        <div
+          class="preview-images d-none d-md-flex align-self-end row"
+          aria-label="Sýnishorn úr bók"
+        >
+          <% @book.sample_pages.each_with_index do |sp,i| %>
+          <a
+            class="preview-image-link col-md-6 col-xl-3 col-xxl-2 mb-2"
+            data-fancybox="samples"
+            href="<%= @book.sample_page_variant_url(i, 1600, @image_format) %>"
+          >
+            <img
+              src="<%= @book.sample_page_variant_url(i, 150, @image_format) %>"
+              class="sample_image"
+            >
+          </a>
+          <% end %>
+        </div>
 
         <div class="d-none d-md-block">
           <%= render 'books/meta', book: @book %>
@@ -127,3 +150,22 @@
 </div>
 
 </main>
+
+<script>
+Fancybox.defaults.l10n = {
+  CLOSE: "Loka",
+  NEXT: "Næsta mynd",
+  PREV: "Fyrri mynd",
+  MODAL: "Hægt er að loka þessum glugga með ESC-takkanum á lyklaborðinu",
+  ERROR: "Eitthvað kom upp, reyndu aftur síðar",
+  IMAGE_ERROR: "Myndin fannst ekki",
+  ELEMENT_NOT_FOUND: "HTML-Element fannst ekki",
+  AJAX_NOT_FOUND: "Error Loading AJAX : Not Found",
+  AJAX_FORBIDDEN: "Error Loading AJAX : Forbidden",
+  IFRAME_ERROR: "Error Loading Page",
+  TOGGLE_ZOOM: "Súma",
+  TOGGLE_SLIDESHOW: "Sjálfvirk glærusýning",
+  TOGGLE_FULLSCREEN: "Fullur skjár",
+  TOGGLE_THUMBS: "Smámyndir"
+};
+</script>
