@@ -91,6 +91,9 @@ Rails/BulkChangeTable:
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
 
+Style/OptionalBooleanParameter:
+  Enabled: false
+
 AllCops:
   NewCops: disable
   Exclude:

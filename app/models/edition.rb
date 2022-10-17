@@ -46,8 +46,20 @@ class Edition < ApplicationRecord
     Edition.active.ids.include?(id)
   end
 
-  def self.form_collection
-    editions = (Edition.active + Edition.active_for_web_only)
+  def frozen?
+    # "closing_date < '#{DateTime.now.to_fs(:db)}' and "\
+    # "print_date > '#{DateTime.now.to_fs(:db)}'"
+    return false unless closing_date < DateTime.now && print_date > DateTime.now
+
+    true
+  end
+
+  def self.form_collection(include_frozen = false)
+    editions = if include_frozen
+                 Edition.current
+               else
+                 (Edition.active + Edition.active_for_web_only)
+               end
 
     form_collection = []
     editions.each do |e|
@@ -58,6 +70,10 @@ class Edition < ApplicationRecord
   end
 
   def form_label
+    if frozen?
+      return "#{title} "\
+             '(skráningar eru frystar og eingöngu aðgengilegar stjórnendum)'
+    end
     if print_registration_over?
       return "#{title} (lokað fyrr skráningu í prentútgáfu)"
     end

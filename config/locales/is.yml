@@ -257,6 +257,8 @@ is:
         category: "Flokkur"
         for_web: "Í vefútgáfu"
         for_print: "Í prentútgáfu"
+        updated_at: "Uppfært"
+        created_at: "Skráð"
   active_admin:
     dashboard: "Mælaborð"
     dashboard_welcome:
