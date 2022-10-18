@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_195040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -62,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
     t.integer "publisher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["admin_user_id"], name: "index_admin_user_publishers_on_admin_user_id"
+    t.index ["publisher_id"], name: "index_admin_user_publishers_on_publisher_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -109,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
     t.string "order_by_name"
     t.integer "gender"
     t.string "name"
+    t.index ["gender"], name: "index_authors_on_gender"
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
     t.index ["slug"], name: "index_authors_on_slug", unique: true
@@ -157,6 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
     t.index ["barcode"], name: "index_book_binding_types_on_barcode"
     t.index ["binding_type_id"], name: "index_book_binding_types_on_binding_type_id"
     t.index ["book_id"], name: "index_book_binding_types_on_book_id"
+    t.index ["language"], name: "index_book_binding_types_on_language"
   end
 
   create_table "book_categories", force: :cascade do |t|
@@ -168,6 +172,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
     t.boolean "for_web", default: true, null: false
     t.index ["book_id"], name: "index_book_categories_on_book_id"
     t.index ["category_id"], name: "index_book_categories_on_category_id"
+    t.index ["for_print"], name: "index_book_categories_on_for_print"
+    t.index ["for_web"], name: "index_book_categories_on_for_web"
   end
 
   create_table "book_edition_categories", force: :cascade do |t|
@@ -206,6 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
     t.string "title_hypenated"
     t.string "country_of_origin"
     t.string "original_title"
+    t.index ["country_of_origin"], name: "index_books_on_country_of_origin"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
     t.index ["source_id"], name: "index_books_on_source_id", unique: true
@@ -236,6 +243,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
     t.datetime "closing_date"
     t.datetime "opening_date"
     t.datetime "online_date"
+    t.index ["closing_date"], name: "index_editions_on_closing_date"
+    t.index ["online_date"], name: "index_editions_on_online_date"
+    t.index ["opening_date"], name: "index_editions_on_opening_date"
+    t.index ["print_date"], name: "index_editions_on_print_date"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -261,6 +272,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_121958) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admin_user_publishers", "admin_users"
+  add_foreign_key "admin_user_publishers", "publishers"
   add_foreign_key "book_authors", "author_types"
   add_foreign_key "book_authors", "authors"
+  add_foreign_key "book_authors", "books"
+  add_foreign_key "book_binding_types", "binding_types"
+  add_foreign_key "book_binding_types", "books"
+  add_foreign_key "book_categories", "books"
+  add_foreign_key "book_categories", "categories"
+  add_foreign_key "book_editions", "books"
+  add_foreign_key "book_editions", "editions"
+  add_foreign_key "books", "publishers"
 end
