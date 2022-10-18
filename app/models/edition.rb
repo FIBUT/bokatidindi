@@ -42,6 +42,50 @@ class Edition < ApplicationRecord
   has_many :book_editions, dependent: :destroy
   has_many :books, through: :book_editions
 
+  def publisher_ids
+    books.distinct(:publisher_id).pluck(:publisher_id)
+  end
+
+  def publishers
+    Publisher.where(id: publisher_ids).order(:name)
+  end
+
+  def publishers_by_first_initial
+    initials = {}
+    publishers.each do |p|
+      initial = p.name.first
+      initials[initial] = [] unless initials.key?(initial)
+      initials[initial] << p
+    end
+    initials
+  end
+
+  def author_ids
+    BookAuthor.joins(
+      book: [:book_editions]
+    ).where(
+      book_editions: { edition_id: id }
+    ).distinct(
+      :author_id
+    ).pluck(
+      :author_id
+    )
+  end
+
+  def authors
+    Author.where(id: author_ids).order(:order_by_name)
+  end
+
+  def authors_by_first_initial
+    initials = {}
+    authors.each do |a|
+      initial = a.order_by_name.first
+      initials[initial] = [] unless initials.key?(initial)
+      initials[initial] << a
+    end
+    initials
+  end
+
   def active?
     Edition.active.ids.include?(id)
   end
