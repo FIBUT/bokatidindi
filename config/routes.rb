@@ -24,4 +24,7 @@ Rails.application.routes.draw do
 
   get 'xml_feeds/editions_for_print/:id', to: 'xml_feeds#edition_for_print'
   get 'xml_feeds/editions_for_print/current', to: 'xml_feeds#edition_for_print'
+
+  get 'utgefendur', to: 'indexes#publishers'
+  get 'hofundar', to: 'indexes#authors'
 end

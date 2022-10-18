@@ -1,5 +1,5 @@
 <nav aria-label="Aðalvalmynd" class="navbar order-4 d-none d-sm-block col-12 navbar-expand-md mt-3">
-  <ul class="navbar-nav">
+  <ul class="navbar-nav float-left">
     <% Category.groups.each do |category_group| %>
     <li class="nav-item dropdown">
       <a
@@ -22,6 +22,24 @@
       </ul>
     </li>
     <% end %>
+  </ul>
+  <ul class="navbar-nav float-right">
+    <li class="nav-item">
+      <a
+        href="/hofundar"
+        class="nav-link"
+      >
+        Höfundaskrá
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        href="/utgefendur"
+        class="nav-link"
+      >
+        Útgefendaskrá
+      </a>
+    </li>
   </ul>
 </nav>
 
@@ -48,5 +66,21 @@
       </ul>
     </li>
     <% end %>
+  </ul>
+  <ul class="nav-list list-unstyled mx-5">
+    <li class="">
+      <a
+        href="/hofundar"
+      >
+        Höfundaskrá
+      </a>
+    </li>
+    <li class="">
+      <a
+        href="/utgefendur"
+      >
+        Útgefendaskrá
+      </a>
+    </li>
   </ul>
 </nav>

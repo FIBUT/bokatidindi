@@ -1,0 +1,28 @@
+<main role="main">
+
+  <div class="container-fluid">
+
+    <div class="row mx-2">
+
+      <div class="col-12">
+
+        <h2>Útgefendur</h2>
+
+      </div>
+
+      <% @publishers_by_first_initial.each_key do |initial| %>
+      <div class="col-12 col-lg-3">
+        <h3><%= initial %></h3>
+        <ul>
+          <% @publishers_by_first_initial[initial].each do |p| %>
+          <li><%= link_to p.name, publisher_path(p.slug) %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+</main>
