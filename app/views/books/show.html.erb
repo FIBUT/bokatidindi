@@ -76,7 +76,7 @@
         >
           <% @book.sample_pages.each_with_index do |sp,i| %>
           <a
-            class="preview-image-link col-md-6 col-xl-3 col-xxl-2 mb-2"
+            class="preview-image-link col-6 col-xxl-3 mb-2"
             data-fancybox="samples"
             href="<%= @book.sample_page_variant_url(i, 1600, @image_format) %>"
           >
