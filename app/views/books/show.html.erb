@@ -35,6 +35,9 @@
   <% if @book.cover_image.attached? %>
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, 'jpg') %>
   <% end %>
+  <% @book.sample_pages.each_with_index do |sp,i| %>
+  <%= preload_link_tag @book.sample_page_variant_url(i, 150, @image_format), as: 'image' %>
+  <% end %>
 <% end %>
 
 <main role="main">
@@ -51,50 +54,7 @@
 
     <div class="row book-column-container m-2 p-2 py-md-5">
 
-      <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1" aria-hidden="true">
-
-        <figure class="figure">
-          <% if @book.cover_image.attached? %>
-          <a
-            data-fancybox="samples"
-            href="<%= @book.cover_image_url %>"
-          >
-            <img
-              src="<%= @book.cover_image_url %>"
-              height="<%= @book.cover_image.metadata[:height] %>"
-              width="<%= @book.cover_image.metadata[:width] %>"
-              srcset="<%= @book.cover_img_srcset(@image_format) %>"
-              class="img-fluid"
-            >
-          </a>
-          <% end %>
-        </figure>
-
-        <div
-          class="preview-images d-none d-md-flex align-self-end row"
-          aria-label="Sýnishorn úr bók"
-        >
-          <% @book.sample_pages.each_with_index do |sp,i| %>
-          <a
-            class="preview-image-link col-6 col-xxl-3 mb-2"
-            data-fancybox="samples"
-            href="<%= @book.sample_page_variant_url(i, 1600, @image_format) %>"
-          >
-            <img
-              src="<%= @book.sample_page_variant_url(i, 150, @image_format) %>"
-              class="sample_image"
-            >
-          </a>
-          <% end %>
-        </div>
-
-        <div class="d-none d-md-block">
-          <%= render 'books/meta', book: @book %>
-        </div>
-
-      </div>
-
-      <div class="col-lg-4 col-md-8 col-sm-12 offset-lg-1">
+      <div class="col-lg-4 col-md-8 col-sm-12 offset-lg-1 order-0 order-md-1">
 
       <% if @book.current_edition? == false %>
         <p class="book-meta-old-edition">
@@ -124,10 +84,6 @@
         </section>
       </article>
 
-      <div class="d-block d-md-none mb-4">
-        <%= render 'books/meta', book: @book %>
-      </div>
-
       <% if @book.audio_sample? %>
       <div id="book_audio_sample" class="mb-4 pb-4">
         <h3>Hljóðbrot</h3>
@@ -139,7 +95,57 @@
 
       </div>
 
+      <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 order-1 order-md-0">
+
+        <figure class="figure">
+          <% if @book.cover_image.attached? %>
+          <a
+            data-fancybox="samples"
+            href="<%= @book.cover_image_url %>"
+            title="Skoða forsíðu"
+          >
+            <img
+              src="<%= @book.cover_image_url %>"
+              height="<%= @book.cover_image.metadata[:height] %>"
+              width="<%= @book.cover_image.metadata[:width] %>"
+              srcset="<%= @book.cover_img_srcset(@image_format) %>"
+              class="img-fluid"
+              alt="Forsíða bókarinnar"
+            >
+          </a>
+          <% end %>
+        </figure>
+
+        <div
+          class="preview-images align-self-end row"
+          aria-label="Sýnishorn úr bók"
+        >
+          <% @book.sample_pages.each_with_index do |sp,i| %>
+          <a
+            class="preview-image-link col-6 col-xl-3 col-xxl-2 mb-2"
+            data-fancybox="samples"
+            href="<%= @book.sample_page_variant_url(i, 1600, @image_format) %>"
+            title="Skoða sýnidæmi"
+          >
+            <img
+              src="<%= @book.sample_page_variant_url(i, 150, @image_format) %>"
+              class="sample_image"
+              width="<%= @book.sample_pages[i].metadata[:width]/8 %>"
+              height="<%= @book.sample_pages[i].metadata[:height]/8 %>"
+              alt="Sýnidæmi <%= i + 1 %>"
+            >
+          </a>
+          <% end %>
+        </div>
+
+        <div>
+          <%= render 'books/meta', book: @book %>
+        </div>
+
+      </div>
+
     </div>
+    
     <div class="col-12">
       <%= render 'shared/ecommerce_links' %>
     </div>

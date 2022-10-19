@@ -3,14 +3,14 @@
     <% Category.groups.each do |category_group| %>
     <li class="nav-item dropdown">
       <a
-        id="navbarBarnabaekurLink"
+        id="navbar-<%= category_group.first %>-link"
         class="nav-link dropdown-toggle"
         href="#"
         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
       >
         <%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %>
       </a>
-      <ul class="dropdown-menu" aria-labelledby="navbarBarnabaekurLink">
+      <ul class="dropdown-menu" aria-labelledby="navbar-<%= category_group.first %>-link">
         <%
         Category.where(group: category_group[1]).order('rod').each do |c|
         next if c.book_count_web.zero?
