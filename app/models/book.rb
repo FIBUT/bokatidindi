@@ -90,7 +90,6 @@ class Book < ApplicationRecord
   scope :by_edition_and_category, lambda { |edition_id, category_id|
     includes(:publisher, :editions, :categories, :book_binding_types,
              :binding_types,
-             cover_image_attachment: :blob,
              book_authors: %i[author author_type],
              book_editions: %i[edition book_edition_categories])
       .where(book_editions: { edition_id: },
@@ -101,7 +100,6 @@ class Book < ApplicationRecord
   scope :current, lambda {
     includes(:publisher, :editions, :categories, :book_binding_types,
              :binding_types,
-             cover_image_attachment: :blob,
              book_authors: %i[author author_type],
              book_editions: %i[edition book_edition_categories])
       .where(book_editions: { edition_id: Edition.current_edition[:id] },
@@ -112,7 +110,6 @@ class Book < ApplicationRecord
   scope :current_by_category, lambda { |category_id|
     includes(:publisher, :editions, :categories, :book_binding_types,
              :binding_types,
-             cover_image_attachment: :blob,
              book_authors: %i[author author_type],
              book_editions: %i[edition book_edition_categories])
       .where(book_editions: { edition_id: Edition.current_edition[:id] },
@@ -123,7 +120,6 @@ class Book < ApplicationRecord
   scope :current_by_publisher, lambda { |publisher_id|
     includes(:publisher, :editions, :categories, :book_binding_types,
              :binding_types,
-             cover_image_attachment: :blob,
              book_authors: %i[author author_type],
              book_editions: %i[edition book_edition_categories])
       .where(publisher_id:,
@@ -135,7 +131,6 @@ class Book < ApplicationRecord
   scope :current_by_author, lambda { |author_id|
     includes(:publisher, :editions, :categories, :book_binding_types,
              :binding_types,
-             cover_image_attachment: :blob,
              book_authors: %i[author author_type],
              book_editions: %i[edition book_edition_categories])
       .where(book_authors: { author_id: },
@@ -270,7 +265,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.processed.url
+    cover_variant.url
   end
 
   def audio_sample_url
@@ -290,7 +285,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.processed.url
+    cover_variant.url
   end
 
   def cover_img_srcset(format = 'webp')
@@ -424,7 +419,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(sample_page_variant)
     end
 
-    sample_page_variant.processed.url
+    sample_page_variant.url
   end
 
   def attach_print_image_variant
@@ -441,7 +436,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.processed.url
+    cover_variant.url
   end
 
   def reset_book_edition_categories
