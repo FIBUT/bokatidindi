@@ -225,4 +225,11 @@ namespace :bt do
   task reset_book_edition_categories: :environment do
     Book.all.each(&:reset_book_edition_categories)
   end
+
+  desc 'Prewarm the database'
+  task prewarm_database: :environment do
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.execute("SELECT pg_prewarm('#{t}')")
+    end
+  end
 end
