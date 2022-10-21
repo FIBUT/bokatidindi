@@ -55,7 +55,7 @@ class BooksController < ApplicationController
     @title_tag = "Bókatíðindi - Höfundur - #{@author[:name]}"
     @meta_description = "Bækur eftir höfundinn #{@author[:name]}"
 
-    @books = Book.current_by_author(@author.id)
+    @books = Book.current_by_author(@author.id).with_attached_cover_image
   end
 
   def render_publisher
@@ -65,7 +65,7 @@ class BooksController < ApplicationController
     @title_tag = "Bókatíðindi - Útgefandi - #{@publisher[:name]}"
     @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
 
-    @books = Book.current_by_publisher(@publisher.id)
+    @books = Book.current_by_publisher(@publisher.id).with_attached_cover_image
   end
 
   def render_category
@@ -76,7 +76,7 @@ class BooksController < ApplicationController
     @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
                         "#{@category[:name_with_group]}"
 
-    @books = Book.current_by_category(@category.id)
+    @books = Book.current_by_category(@category.id).with_attached_cover_image
   end
 
   def image_format
