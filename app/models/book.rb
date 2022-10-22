@@ -6,8 +6,8 @@ class Book < ApplicationRecord
 
   PERMITTED_AUDIO_FORMATS = ['audio/aac', 'audio/mpeg', 'audio/ogg'].freeze
 
-  COVER_IMAGE_VARIANTS = [266, 364, 550, 768, 992, 1200, 1386, 1600].freeze
-  SAMPLE_PAGE_VARIANTS = [75, 150, 550, 1600].freeze
+  COVER_IMAGE_VARIANTS = [266, 550, 1600].freeze
+  SAMPLE_PAGE_VARIANTS = [150, 1600].freeze
   IMAGE_QUALITY        = 80
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
