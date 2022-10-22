@@ -70,7 +70,7 @@ class Book < ApplicationRecord
 
   has_many_attached :sample_pages, dependent: :destroy
 
-  paginates_per 18
+  paginates_per 9
 
   before_validation :sanitize_title, :sanitize_description
   before_create :set_title_hypenation, :set_slug
