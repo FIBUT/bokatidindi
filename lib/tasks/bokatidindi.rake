@@ -232,4 +232,14 @@ namespace :bt do
       ActiveRecord::Base.connection.execute("SELECT pg_prewarm('#{t}')")
     end
   end
+
+  desc 'Update image variant urls'
+  task set_image_variant_urls: :environment do
+    Book.current.each do |b|
+      if b.cover_image.attached? || b.sample_pages.attached?
+        b.update_srcsets
+        b.save
+      end
+    end
+  end
 end

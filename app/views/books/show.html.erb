@@ -108,7 +108,7 @@
               src="<%= @book.cover_image_url %>"
               height="<%= @book.cover_image.metadata[:height] %>"
               width="<%= @book.cover_image.metadata[:width] %>"
-              srcset="<%= @book.cover_img_srcset(@image_format) %>"
+              srcset="<%= @book.cover_image_srcsets[@image_format] %>"
               class="img-fluid"
               alt="Forsíða bókarinnar"
             >
@@ -124,12 +124,13 @@
           <a
             class="preview-image-link col-6 col-xl-3 col-xxl-2 mb-2"
             data-fancybox="samples"
-            href="<%= @book.sample_page_variant_url(i, 1600, @image_format) %>"
+            href="<%= @book.sample_page_url(i, @image_format) %>"
             title="Skoða sýnidæmi"
           >
             <img
-              src="<%= @book.sample_page_variant_url(i, 150, @image_format) %>"
               class="sample_image"
+              src="<%= @book.sample_page_url(i, @image_format) %>"
+              srcset="<%= @book.sample_pages_srcsets[@image_format][i].join(' ') %>"
               width="<%= @book.sample_pages[i].metadata[:width]/8 %>"
               height="<%= @book.sample_pages[i].metadata[:height]/8 %>"
               alt="Sýnidæmi <%= i + 1 %>"

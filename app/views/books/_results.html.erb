@@ -20,7 +20,7 @@
               src="<%= book.cover_image_url %>"
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
-              srcset="<%= book.cover_img_srcset(@image_format) %>"
+              srcset="<%= book.cover_image_srcsets[@image_format] %>"
               class="img-fluid"
               loading="lazy"
             >

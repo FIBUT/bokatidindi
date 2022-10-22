@@ -70,7 +70,7 @@ class Book < ApplicationRecord
 
   has_many_attached :sample_pages, dependent: :destroy
 
-  paginates_per 9
+  paginates_per 18
 
   before_validation :sanitize_title, :sanitize_description
   before_create :set_title_hypenation, :set_slug
@@ -258,6 +258,10 @@ class Book < ApplicationRecord
   def cover_image_url(image_format = 'webp')
     return '' unless cover_image.attached?
 
+    unless cover_image_srcsets['webp'].empty?
+      return cover_image_srcsets['webp'].split(', ').last.split(' ').first
+    end
+
     cover_variant = cover_image.variant(format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
@@ -288,6 +292,28 @@ class Book < ApplicationRecord
     cover_variant.url
   end
 
+  def update_srcsets
+    unless update_cover_image_srcsets && update_sample_pages_srcsets
+      return false
+    end
+
+    true
+  end
+
+  def update_sample_pages_srcsets
+    self.sample_pages_srcsets = {
+      webp: sample_page_srcsets('webp'),
+      jpg: sample_page_srcsets('jpg')
+    }
+  end
+
+  def update_cover_image_srcsets
+    self.cover_image_srcsets = {
+      webp: cover_img_srcset('webp'),
+      jpg: cover_img_srcset('jpg')
+    }
+  end
+
   def cover_img_srcset(format = 'webp')
     return '' unless cover_image.attached?
 
@@ -296,6 +322,25 @@ class Book < ApplicationRecord
       srcset << cover_image_variant_url(v, format) + " #{v}w"
     end
     srcset.join(', ')
+  end
+
+  def sample_page_srcsets(format = 'webp')
+    srcset_array = []
+    sample_pages.each_with_index do |_sp, i|
+      srcset_array[i] = []
+      SAMPLE_PAGE_VARIANTS.each do |v|
+        srcset_array[i] << "#{sample_page_variant_url(i, v, format)} #{v}w"
+      end
+    end
+    srcset_array
+  end
+
+  def sample_page_url(index, format = 'webp')
+    if sample_pages_srcsets[format].empty?
+      return sample_page_variant_url(index, 150, @image_format)
+    end
+
+    sample_pages_srcsets[format][index].last.split(' ').first
   end
 
   def short_description
