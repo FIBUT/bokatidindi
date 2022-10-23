@@ -108,7 +108,9 @@
               src="<%= @book.cover_image_url %>"
               height="<%= @book.cover_image.metadata[:height] %>"
               width="<%= @book.cover_image.metadata[:width] %>"
+              <% unless @book.cover_image_srcsets.empty? %>
               srcset="<%= @book.cover_image_srcsets[@image_format] %>"
+              <% end %>
               class="img-fluid"
               alt="Forsíða bókarinnar"
             >
@@ -122,17 +124,17 @@
         >
           <% @book.sample_pages.each_with_index do |sp,i| %>
           <a
-            class="preview-image-link col-6 col-xl-3 col-xxl-2 mb-2"
+            class="preview-image-link col-6 col-xl-3 mb-2"
             data-fancybox="samples"
             href="<%= @book.sample_page_url(i, @image_format) %>"
             title="Skoða sýnidæmi"
           >
             <img
-              class="sample_image"
+              class="img-fluid"
               src="<%= @book.sample_page_url(i, @image_format) %>"
+              <% unless @book.sample_pages_srcsets[@image_format].empty? %>
               srcset="<%= @book.sample_pages_srcsets[@image_format][i].join(' ') %>"
-              width="<%= @book.sample_pages[i].metadata[:width]/8 %>"
-              height="<%= @book.sample_pages[i].metadata[:height]/8 %>"
+              <% end %>
               alt="Sýnidæmi <%= i + 1 %>"
             >
           </a>
