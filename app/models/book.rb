@@ -6,8 +6,8 @@ class Book < ApplicationRecord
 
   PERMITTED_AUDIO_FORMATS = ['audio/aac', 'audio/mpeg', 'audio/ogg'].freeze
 
-  COVER_IMAGE_VARIANTS = [266, 550, 1600].freeze
-  SAMPLE_PAGE_VARIANTS = [150, 1600].freeze
+  COVER_IMAGE_VARIANTS = [150, 260, 550, 1200, 1600].freeze
+  SAMPLE_PAGE_VARIANTS = [150, 260, 550, 1200, 1600].freeze
   IMAGE_QUALITY        = 80
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
@@ -258,10 +258,6 @@ class Book < ApplicationRecord
   def cover_image_url(image_format = 'webp')
     return '' unless cover_image.attached?
 
-    unless cover_image_srcsets['webp'].empty?
-      return cover_image_srcsets['webp'].split(', ').last.split(' ').first
-    end
-
     cover_variant = cover_image.variant(format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
@@ -269,7 +265,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.url
+    cover_variant.processed.url
   end
 
   def audio_sample_url
@@ -281,7 +277,7 @@ class Book < ApplicationRecord
   end
 
   def cover_image_variant_url(width, image_format = 'webp')
-    cover_variant = cover_image.variant(resize_to_limit: [width, width],
+    cover_variant = cover_image.variant(resize_to_limit: [width, nil],
                                         format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
@@ -289,7 +285,7 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.url
+    cover_variant.processed.url
   end
 
   def update_srcsets
@@ -446,7 +442,10 @@ class Book < ApplicationRecord
 
   def attach_sample_page_from_string(string)
     sample_pages.attach(io: StringIO.new(string), filename: SecureRandom.uuid)
+    attach_sample_page_variants
+  end
 
+  def attach_sample_page_variants
     SAMPLE_PAGE_VARIANTS.each do |v|
       sample_pages.each do |s|
         s.variant(resize_to_limit: [v, nil], format: 'webp')
@@ -481,14 +480,12 @@ class Book < ApplicationRecord
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
-    cover_variant.url
+    cover_variant.processed.url
   end
 
   def reset_book_edition_categories
     book_editions.active.each(&:update_book_edition_categories)
   end
-
-  private
 
   def attach_cover_image_variants
     attach_cover_image_variant('webp')
@@ -499,6 +496,8 @@ class Book < ApplicationRecord
     end
     attach_print_image_variant
   end
+
+  private
 
   def attach_cover_image_variant(image_format, width = nil)
     if width
