@@ -237,12 +237,10 @@ namespace :bt do
   task set_image_variant_urls: :environment do
     Book.all.each do |b|
       puts "#{b.id} - #{b.slug}"
-      b.attach_cover_image_variants
-      b.attach_sample_page_variants
-      if b.cover_image.attached? || b.sample_pages.attached?
-        b.update_srcsets
-        b.save
-      end
+      b.attach_cover_image_variants if b.cover_image.attached?
+      b.attach_sample_page_variants if b.sample_pages.attached?
+      b.update_srcsets
+      b.save
     end
   end
 end
