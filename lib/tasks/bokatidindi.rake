@@ -236,6 +236,7 @@ namespace :bt do
   desc 'Update image variant urls'
   task set_image_variant_urls: :environment do
     Book.all.each do |b|
+      puts "#{b.id} - #{b.slug}"
       b.attach_cover_image_variants
       b.attach_sample_page_variants
       if b.cover_image.attached? || b.sample_pages.attached?
