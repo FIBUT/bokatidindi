@@ -409,7 +409,10 @@ ActiveAdmin.register Book do
     end
 
     f.inputs 'Mynd af forsíðu' do
-      if resource.cover_image.attached?
+      if resource.cover_image.attached? && (
+        resource.cover_image.metadata['width'] < 4000 &&
+        resource.cover_image.metadata['height'] < 4000
+      )
         f.img src: resource.cover_image_variant_url(266), class: 'cover-image'
       end
       f.input(
