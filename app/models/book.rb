@@ -297,17 +297,17 @@ class Book < ApplicationRecord
   end
 
   def update_sample_pages_srcsets
-    self.sample_pages_srcsets = {
-      webp: sample_page_srcsets('webp'),
-      jpg: sample_page_srcsets('jpg')
-    }
+    update_attribute(
+      'sample_pages_srcsets',
+      { webp: sample_page_srcsets('webp'), jpg: sample_page_srcsets('jpg') }
+    )
   end
 
   def update_cover_image_srcsets
-    self.cover_image_srcsets = {
-      webp: cover_img_srcset('webp'),
-      jpg: cover_img_srcset('jpg')
-    }
+    update_attribute(
+      'cover_image_srcsets',
+      { webp: cover_img_srcset('webp'), jpg: cover_img_srcset('jpg') }
+    )
   end
 
   def cover_img_srcset(format = 'webp')
