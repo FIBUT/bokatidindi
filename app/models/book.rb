@@ -449,7 +449,7 @@ class Book < ApplicationRecord
     SAMPLE_PAGE_VARIANTS.each do |v|
       sample_pages.each do |s|
         s.variant(resize_to_limit: [v, nil], format: 'webp').process
-        s.variant(resize_to_limit: [v, nil], format: 'jpeg').process
+        s.variant(resize_to_limit: [v, nil], format: 'jpg').process
       end
     end
   end
