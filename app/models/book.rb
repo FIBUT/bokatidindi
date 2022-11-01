@@ -448,8 +448,8 @@ class Book < ApplicationRecord
   def attach_sample_page_variants
     SAMPLE_PAGE_VARIANTS.each do |v|
       sample_pages.each do |s|
-        s.variant(resize_to_limit: [v, nil], format: 'webp')
-        s.variant(resize_to_limit: [v, nil], format: 'jpeg')
+        s.variant(resize_to_limit: [v, nil], format: 'webp').process
+        s.variant(resize_to_limit: [v, nil], format: 'jpeg').process
       end
     end
   end
