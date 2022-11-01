@@ -161,7 +161,7 @@ ActiveAdmin.register Book do
 
         Category.update_all_counts
 
-        SetImageVariantsJob.perform_later @resource
+        SetImageVariantsJob.set(wait: 60).perform_later @resource
 
         return redirect_to(
           admin_books_path,
@@ -250,7 +250,7 @@ ActiveAdmin.register Book do
           @resource.attach_sample_page_from_string(spf[:contents])
         end
 
-        SetImageVariantsJob.perform_later @resource
+        SetImageVariantsJob.set(wait: 60).perform_later @resource
 
         Category.update_all_counts
 
