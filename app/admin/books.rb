@@ -159,9 +159,9 @@ ActiveAdmin.register Book do
           @resource.attach_audio_sample_from_string(audio_sample_contents)
         end
 
-        @resource.update_srcsets
-
         Category.update_all_counts
+
+        SetImageVariantsJob.set(wait: 60).perform_later @resource
 
         return redirect_to(
           admin_books_path,
@@ -250,7 +250,7 @@ ActiveAdmin.register Book do
           @resource.attach_sample_page_from_string(spf[:contents])
         end
 
-        @resource.update_srcsets
+        SetImageVariantsJob.set(wait: 60).perform_later @resource
 
         Category.update_all_counts
 
