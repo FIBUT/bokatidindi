@@ -446,7 +446,7 @@ ActiveAdmin.register Book do
     f.inputs 'Sýnishorn innan úr bók' do
       li class: 'sample-pages' do
         resource.sample_pages.each_with_index do |_sample_page, i|
-          img(src: resource.sample_page_variant_url(i, 150, 'jpeg'), width: 75)
+          img(src: resource.sample_page_variant_url(i, 150, 'jpg'), width: 75)
         end
       end
       f.input(
