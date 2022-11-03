@@ -98,7 +98,7 @@
           <% if @book.cover_image.attached? %>
           <a
             data-fancybox="samples"
-            href="<%= @book.cover_image_url(original: true) %>"
+            href="<%= @book.cover_image_url(@image_format, true) %>"
             title="Skoða forsíðu"
           >
             <img
