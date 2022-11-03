@@ -245,8 +245,12 @@ class Book < ApplicationRecord
     uri.host.delete_prefix('www.')
   end
 
-  def cover_image_url(image_format = 'webp')
+  def cover_image_url(image_format = 'webp', original = false)
     return '' unless cover_image.attached?
+
+    unless cover_image_srcsets[image_format].empty? && original == true
+      return cover_image_srcsets[image_format].split(', ').last.split(' ').first
+    end
 
     cover_variant = cover_image.variant(format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
