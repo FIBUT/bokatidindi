@@ -20,7 +20,7 @@
               src="<%= book.cover_image_url %>"
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
-              <% unless book.cover_image_srcsets.empty? %>
+              <% unless book.cover_image_srcsets.blank? %>
               srcset="<%= book.cover_image_srcsets[@image_format] %>"
               sizes="(min-resolution: 200dpi 550px), 260px"
               <% end %>

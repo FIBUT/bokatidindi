@@ -41,7 +41,9 @@ class BooksController < ApplicationController
       book_editions: {
         book_edition_categories: { for_web: true }
       }
-    )
+    ).includes(
+      book_editions: [:book_edition_categories]
+    ).with_attached_cover_image.limit(100).uniq
 
     @books                   = []
     @books_from_old_editions = []
