@@ -19,14 +19,6 @@ class Book < ApplicationRecord
     '|', '&shy;', "\u00AD", '&#xAD;', '&#173;', '&shy;'
   ].freeze
 
-  SEARCH_COLUMNS = %i[
-    source_id pre_title title_noshy post_title description long_description
-    original_title
-  ].freeze
-  AUTHORS_SEARCH_COLUMMNS          = %i[firstname lastname].freeze
-  CATEGORIES_SEARCH_COLUMNS        = %i[origin_name slug].freeze
-  BOOK_BINDING_TYPE_SEARCH_COLUMNS = %i[barcode].freeze
-
   PRE_TITLE_MAX_LENGTH        = 60
   TITLE_MAX_LENGTH            = 120
   POST_TITLE_MAX_LENGTH       = 60
@@ -35,6 +27,14 @@ class Book < ApplicationRecord
 
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
+
+  SEARCH_COLUMNS = %i[
+    source_id pre_title title_noshy post_title description long_description
+    original_title
+  ].freeze
+  AUTHORS_SEARCH_COLUMMNS          = %i[firstname lastname].freeze
+  CATEGORIES_SEARCH_COLUMNS        = %i[origin_name slug].freeze
+  BOOK_BINDING_TYPE_SEARCH_COLUMNS = %i[barcode].freeze
 
   multisearchable against: %i[pre_title title_noshy post_title description
                               long_description]
@@ -87,56 +87,46 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
   validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
 
-  scope :by_edition_and_category, lambda { |edition_id, category_id|
-    includes(:publisher, :editions, :categories, :book_binding_types,
-             :binding_types,
-             book_authors: %i[author author_type],
-             book_editions: %i[edition book_edition_categories])
-      .where(book_editions: { edition_id: },
-             book_edition_categories: { category_id:, for_print: true })
-      .order(:title)
+  scope :by_edition, lambda { |edition_id|
+    includes(
+      :publisher, :categories,
+      book_authors: %i[author author_type],
+      book_editions: %i[book_edition_categories edition]
+    ).where(
+      book_editions: { edition_id: }
+    ).order(:title)
   }
 
-  scope :current, lambda {
-    includes(:publisher, :editions, :categories, :book_binding_types,
-             :binding_types,
-             book_authors: %i[author author_type],
-             book_editions: %i[edition book_edition_categories])
-      .where(book_editions: { edition_id: Edition.current_edition[:id] },
-             book_edition_categories: { for_web: true })
-      .order(:title)
+  scope :current, -> { by_edition(Edition.current_edition) }
+
+  scope :for_web, lambda {
+    where(
+      book_editions: {
+        book_edition_categories: { for_web: true }
+      }
+    )
   }
 
-  scope :current_by_category, lambda { |category_id|
-    includes(:publisher, :editions, :categories, :book_binding_types,
-             :binding_types,
-             book_authors: %i[author author_type],
-             book_editions: %i[edition book_edition_categories])
-      .where(book_editions: { edition_id: Edition.current_edition[:id] },
-             book_edition_categories: { category_id:, for_web: true })
-      .order(:title)
+  scope :for_print, lambda {
+    where(
+      book_editions: {
+        book_edition_categories: { for_print: true }
+      }
+    )
   }
 
-  scope :current_by_publisher, lambda { |publisher_id|
-    includes(:publisher, :editions, :categories, :book_binding_types,
-             :binding_types,
-             book_authors: %i[author author_type],
-             book_editions: %i[edition book_edition_categories])
-      .where(publisher_id:,
-             book_editions: { edition_id: Edition.current_edition[:id] },
-             book_edition_categories: { for_web: true })
-      .order(:title)
+  scope :by_category, lambda { |cateogry_id|
+    where(
+      book_editions: {
+        book_edition_categories: { category_id: cateogry_id }
+      }
+    )
   }
 
-  scope :current_by_author, lambda { |author_id|
-    includes(:publisher, :editions, :categories, :book_binding_types,
-             :binding_types,
-             book_authors: %i[author author_type],
-             book_editions: %i[edition book_edition_categories])
-      .where(book_authors: { author_id: },
-             book_editions: { edition_id: Edition.current_edition[:id] },
-             book_edition_categories: { for_web: true })
-      .order(:title)
+  scope :by_publisher, ->(publisher_id) { where(publisher_id:) }
+
+  scope :by_author, lambda { |author_id|
+    includes(:book_authors).where(book_authors: { author_id: })
   }
 
   def inactive_edition_ids

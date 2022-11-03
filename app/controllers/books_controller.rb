@@ -34,7 +34,14 @@ class BooksController < ApplicationController
 
   def render_search
     @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
-    book_results = Book.joins(:book_editions).search(params[:search])
+
+    book_results = Book.search(params[:search]).joins(
+      book_editions: :book_edition_categories
+    ).where(
+      book_editions: {
+        book_edition_categories: { for_web: true }
+      }
+    )
 
     @books                   = []
     @books_from_old_editions = []
@@ -55,7 +62,9 @@ class BooksController < ApplicationController
     @title_tag = "Bókatíðindi - Höfundur - #{@author[:name]}"
     @meta_description = "Bækur eftir höfundinn #{@author[:name]}"
 
-    @books = Book.current_by_author(@author.id).with_attached_cover_image
+    @books = Book.current.for_web.by_author(
+      @author.id
+    ).with_attached_cover_image
   end
 
   def render_publisher
@@ -65,7 +74,9 @@ class BooksController < ApplicationController
     @title_tag = "Bókatíðindi - Útgefandi - #{@publisher[:name]}"
     @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
 
-    @books = Book.current_by_publisher(@publisher.id).with_attached_cover_image
+    @books = Book.current.for_web.by_publisher(
+      @publisher.id
+    ).with_attached_cover_image
   end
 
   def render_category
@@ -76,7 +87,9 @@ class BooksController < ApplicationController
     @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
                         "#{@category[:name_with_group]}"
 
-    @books = Book.current_by_category(@category.id).with_attached_cover_image
+    @books = Book.current.for_web.by_category(
+      @category.id
+    ).with_attached_cover_image
   end
 
   def image_format
