@@ -300,12 +300,11 @@ ActiveAdmin.register Book do
     panel 'Upplýsingar um bók' do
       attributes_table_for book do
         row 'Titill', &:title_noshy
-        row :authors, &:authors_brief
+        row :authors
         row :publisher
         row :categories
         row :description
         row :long_description
-        row :source_id
       end
     end
   end
