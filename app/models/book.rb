@@ -357,7 +357,7 @@ class Book < ApplicationRecord
   def author_groups
     groups = []
 
-    book_authors_in_order = book_authors.order(id: :desc)
+    book_authors_in_order = book_authors.order(id: :asc)
 
     group_records = book_authors_in_order.group_by(&:author_type)
     group_records.each do |author_type, book_authors|
