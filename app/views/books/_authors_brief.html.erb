@@ -2,14 +2,15 @@
   class="book-authors d-block pl-0"
   aria-label="Höfundar"
 >
-  <% local_assigns[:book].book_authors.select { |ba| ba.author_type_id == 2 }.each_with_index do |a,i| %>
+  <% local_assigns[:book].book_authors.each_with_index do |ba,i| %>
+  <% next [1,2].include?(ba.author_type_id)  %>
   <li
-    id="book-<%= local_assigns[:book].id %>-authors--<%= i %>"
+    id="book-<%= local_assigns[:book].id %>-authors--<%= ba.id %>"
     class="authors mb-1 d-block"
   >
     <a
-      href="<%= author_path(a.author.slug) %>"
-      title="Skoða fleiri bækur eftir <%= a.name %>"
+      href="<%= author_path(ba.author.slug) %>"
+      title="Skoða fleiri bækur eftir <%= ba.author.name %>"
     >
       <%= a.name %>
     </a>
