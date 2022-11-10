@@ -3,7 +3,7 @@
   aria-label="Höfundar"
 >
   <% local_assigns[:book].book_authors.each_with_index do |ba,i| %>
-  <% next [1,2].include?(ba.author_type_id)  %>
+  <% next unless [1,2].include?(ba.author_type_id)  %>
   <li
     id="book-<%= local_assigns[:book].id %>-authors--<%= ba.id %>"
     class="authors mb-1 d-block"
