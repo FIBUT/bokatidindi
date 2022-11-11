@@ -2,8 +2,7 @@
   class="book-authors d-block pl-0"
   aria-label="Höfundar"
 >
-  <% local_assigns[:book].book_authors.order(id: :asc).each_with_index do |ba,i| %>
-  <% next unless [1,2].include?(ba.author_type_id)  %>
+  <% local_assigns[:book].book_authors.where(author_type_id: [1,2]).order(id: :asc).each_with_index do |ba,i| %>
   <li
     id="book-<%= local_assigns[:book].id %>-authors--<%= ba.id %>"
     class="authors mb-1 d-block"
