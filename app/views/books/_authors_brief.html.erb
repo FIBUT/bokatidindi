@@ -5,12 +5,13 @@
   <%
   book_authors = local_assigns[:book].book_authors.sort_by(&:id)
   book_authors.each_with_index do |ba,i|
-  next unless [1,2].include? ba.author_type_id
+  next unless [1,2,5].include? ba.author_type_id
   %>
   <li
     id="book-<%= local_assigns[:book].id %>-authors--<%= ba.id %>"
     class="authors mb-1 d-block"
   >
+    <strong><abbr title="<%= ba.author_type.name %>"><%= ba.author_type.abbreviation %></abbr></strong>
     <a
       href="<%= author_path(ba.author.slug) %>"
       title="Skoða fleiri bækur eftir <%= ba.author.name %>"
