@@ -126,7 +126,13 @@ class Book < ApplicationRecord
   scope :by_publisher, ->(publisher_id) { where(publisher_id:) }
 
   scope :by_author, lambda { |author_id|
-    includes(:book_authors).where(book_authors: { author_id: })
+    includes(
+      :book_authors
+    ).where(
+      book_authors: { author_id: }
+    ).left_joins(
+      :book_authors
+    )
   }
 
   def inactive_edition_ids
