@@ -95,7 +95,6 @@
       <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 order-1 order-md-0">
 
         <figure class="figure">
-          <% if @book.cover_image.attached? %>
           <a
             data-fancybox="samples"
             href="<%= @book.cover_image_url(@image_format, true) %>"
@@ -103,9 +102,11 @@
           >
             <img
               src="<%= @book.cover_image_url %>"
+              <% if @book.cover_image.attached? %>
               height="<%= @book.cover_image.metadata[:height] %>"
               width="<%= @book.cover_image.metadata[:width] %>"
-              <% if @book.cover_image_srcsets.present? %>
+              <% end %>
+              <% unless @book.cover_image_srcsets.blank? %>
               srcset="<%= @book.cover_image_srcsets[@image_format] %>"
               sizes="(min-resolution: 200dpi 1600px), 550px"
               <% end %>
@@ -113,7 +114,6 @@
               alt="Forsíða bókarinnar"
             >
           </a>
-          <% end %>
         </figure>
 
         <div
