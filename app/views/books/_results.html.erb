@@ -15,18 +15,18 @@
       >
         <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
           <figure class="figure mt-4">
-            <% if book.cover_image.attached? %>
             <img
               src="<%= book.cover_image_url %>"
+              <% if book.cover_image.attached? %>
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
+              <% end %>
               <% unless book.cover_image_srcsets.blank? %>
               srcset="<%= book.cover_image_srcsets[@image_format] %>"
               sizes="(min-resolution: 200dpi 550px), 260px"
               <% end %>
               class="img-fluid"
             >
-            <% end %>
           </figure>
         </a>
       </div>
