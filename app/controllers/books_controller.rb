@@ -85,9 +85,9 @@ class BooksController < ApplicationController
     @category = Category.find_by(slug: params[:category])
     return not_found if @category.nil?
 
-    @title_tag = "Bókatíðindi - Flokkur - #{@category[:name_with_group]}"
+    @title_tag = "Bókatíðindi - Flokkur - #{@category.name_with_group}"
     @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
-                        "#{@category[:name_with_group]}"
+                        "#{@category.name_with_group}"
 
     @books = Book.current.for_web.by_category(
       @category.id
