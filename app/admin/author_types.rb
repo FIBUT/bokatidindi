@@ -15,7 +15,7 @@ ActiveAdmin.register AuthorType do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  permit_params :name, :abbreviation, :rod
+  permit_params :name, :plural_name, :abbreviation, :rod
 
   config.sort_order = 'rod_asc'
   config.filters = false
@@ -25,6 +25,7 @@ ActiveAdmin.register AuthorType do
     column :name do |author_type|
       link_to author_type.name, admin_author_type_path(author_type)
     end
+    column :plural_name
     column :abbreviation
     column :rod
     actions
@@ -34,6 +35,7 @@ ActiveAdmin.register AuthorType do
     panel 'Upplýsingar um hlutverk' do
       attributes_table_for author_type do
         row :name
+        row :plural_name
         row :abbreviation
         row :rod
       end
@@ -45,6 +47,7 @@ ActiveAdmin.register AuthorType do
 
     f.inputs 'Upplýsingar um hlutverk' do
       f.input :name
+      f.input :plural_name
       f.input :abbreviation
       f.input :rod
     end
