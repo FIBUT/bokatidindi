@@ -37,7 +37,7 @@
         aria-hidden="true"
       >
         <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
-          <figure class="figure mt-4 w-100">
+          <figure class="figure mt-4">
             <img
               src="<%= book.cover_image_url %>"
               <% if book.cover_image.attached? %>
@@ -48,7 +48,7 @@
               srcset="<%= book.cover_image_srcsets[@image_format] %>"
               sizes="(min-resolution: 200dpi 550px), 260px"
               <% end %>
-              class="img-fluid w-100"
+              class="w-100"
             >
           </figure>
         </a>

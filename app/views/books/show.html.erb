@@ -35,6 +35,28 @@
   <% if @book.cover_image.attached? %>
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, 'jpg') %>
   <% end %>
+
+  <%= tag 'link', rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css' %>
+
+  <script type="module">
+  import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.esm.js";
+  Fancybox.defaults.l10n = {
+    CLOSE: "Loka",
+    NEXT: "Næsta mynd",
+    PREV: "Fyrri mynd",
+    MODAL: "Hægt er að loka þessum glugga með ESC-takkanum á lyklaborðinu",
+    ERROR: "Eitthvað kom upp, reyndu aftur síðar",
+    IMAGE_ERROR: "Myndin fannst ekki",
+    ELEMENT_NOT_FOUND: "HTML-Element fannst ekki",
+    AJAX_NOT_FOUND: "Error Loading AJAX : Not Found",
+    AJAX_FORBIDDEN: "Error Loading AJAX : Forbidden",
+    IFRAME_ERROR: "Error Loading Page",
+    TOGGLE_ZOOM: "Súma",
+    TOGGLE_SLIDESHOW: "Sjálfvirk glærusýning",
+    TOGGLE_FULLSCREEN: "Fullur skjár",
+    TOGGLE_THUMBS: "Smámyndir"
+  };
+  </script>
 <% end %>
 
 <main role="main">
@@ -161,21 +183,3 @@
 
 </main>
 
-<script>
-Fancybox.defaults.l10n = {
-  CLOSE: "Loka",
-  NEXT: "Næsta mynd",
-  PREV: "Fyrri mynd",
-  MODAL: "Hægt er að loka þessum glugga með ESC-takkanum á lyklaborðinu",
-  ERROR: "Eitthvað kom upp, reyndu aftur síðar",
-  IMAGE_ERROR: "Myndin fannst ekki",
-  ELEMENT_NOT_FOUND: "HTML-Element fannst ekki",
-  AJAX_NOT_FOUND: "Error Loading AJAX : Not Found",
-  AJAX_FORBIDDEN: "Error Loading AJAX : Forbidden",
-  IFRAME_ERROR: "Error Loading Page",
-  TOGGLE_ZOOM: "Súma",
-  TOGGLE_SLIDESHOW: "Sjálfvirk glærusýning",
-  TOGGLE_FULLSCREEN: "Fullur skjár",
-  TOGGLE_THUMBS: "Smámyndir"
-};
-</script>
