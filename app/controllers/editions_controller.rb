@@ -51,6 +51,7 @@ class EditionsController < ApplicationController
     {
       id: book.id,
       title: book.full_title_noshy,
+      slug: book.slug,
       description: book.description,
       long_description: book.long_description,
       authors: book_authors(book),
@@ -92,6 +93,7 @@ class EditionsController < ApplicationController
       binding_type_slug: bbt.binding_type.slug,
       binding_type_id: bbt.binding_type.id,
       book_title: bbt.book.full_title_noshy,
+      book_slug: bbt.book.slug,
       book_description: bbt.book.description.squish,
       book_long_description: bbt.book.long_description.squish,
       book_authors: book_authors_string(bbt.book)
