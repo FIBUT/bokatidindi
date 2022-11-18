@@ -37,7 +37,7 @@ class EditionsController < ApplicationController
     ).where(
       book_editions: { edition_id: edition.id }
     ).with_attached_cover_image.each do |b|
-      book = edition_book(b)
+      book = edition_book(b, edition.id)
       if include_images && b.cover_image?
         book[:book_cover_image_url] = b.cover_image_url
         book[:book_print_cover_image] = b.print_image_variant_url
@@ -55,7 +55,8 @@ class EditionsController < ApplicationController
       description: book.description,
       long_description: book.long_description,
       authors: book_authors(book),
-      binding_types: book_binding_types(book)
+      binding_types: book_binding_types(book),
+      categories: book_categories(book)
     }
   end
 
@@ -111,6 +112,19 @@ class EditionsController < ApplicationController
       book_authors << "#{ba.author_type.name}: #{ba.author.name}"
     end
     book_authors.join('; ')
+  end
+
+  def book_categories(book)
+    categories = []
+    book.categories.each do |c|
+      categories << {
+        id: c.id,
+        slug: c.slug,
+        name: c.name,
+        group: c.group
+      }
+    end
+    categories
   end
 
   def book_authors(book)
