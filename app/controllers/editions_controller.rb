@@ -31,13 +31,14 @@ class EditionsController < ApplicationController
     Book.includes(
       book_editions: [],
       book_authors: %i[author author_type],
-      book_binding_types: [:binding_type]
+      book_binding_types: [:binding_type],
+      categories: []
     ).order(
       id: :asc
     ).where(
       book_editions: { edition_id: edition.id }
     ).with_attached_cover_image.each do |b|
-      book = edition_book(b, edition.id)
+      book = edition_book(b)
       if include_images && b.cover_image?
         book[:book_cover_image_url] = b.cover_image_url
         book[:book_print_cover_image] = b.print_image_variant_url
