@@ -8,7 +8,7 @@ class EditionsController < ApplicationController
                 Edition.find(params[:id])
               end
 
-    include_images = (params[:include_images] == true)
+    include_images = (params[:include_images] == 'true')
 
     respond_to do |format|
       format.xml do
