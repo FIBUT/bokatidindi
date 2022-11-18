@@ -8,11 +8,17 @@ class EditionsController < ApplicationController
                 Edition.find(params[:id])
               end
 
+    include_images = (params[:include_images] == true)
+
     respond_to do |format|
-      format.xml { render(xml: edition_books(edition)) }
-      format.json { render(json: edition_books(edition)) }
+      format.xml do
+        render(xml: edition_books(edition, include_images))
+      end
+      format.json do
+        render(json: edition_books(edition, include_images))
+      end
       format.csv do
-        send_data(edition_book_bindings_csv(edition),
+        send_data(edition_book_bindings_csv(edition, include_images),
                   filename: "bokatidindi_#{DateTime.now.to_i}.csv")
       end
     end
@@ -20,7 +26,7 @@ class EditionsController < ApplicationController
 
   private
 
-  def edition_books(edition)
+  def edition_books(edition, include_images = false)
     books = []
     Book.includes(
       book_editions: [],
@@ -32,7 +38,7 @@ class EditionsController < ApplicationController
       book_editions: { edition_id: edition.id }
     ).with_attached_cover_image.each do |b|
       book = edition_book(b)
-      if b.cover_image?
+      if include_images && b.cover_image?
         book[:book_cover_image_url] = b.cover_image_url
         book[:book_print_cover_image] = b.print_image_variant_url
       end
