@@ -29,16 +29,17 @@ class EditionsController < ApplicationController
   def edition_books(edition, include_images = false)
     books = []
     Book.includes(
-      book_editions: [],
+      book_editions: { book_edition_categories: [:category] },
       book_authors: %i[author author_type],
       book_binding_types: [:binding_type],
-      categories: []
+      categories: [],
+      publisher: []
     ).order(
       id: :asc
     ).where(
       book_editions: { edition_id: edition.id }
     ).with_attached_cover_image.each do |b|
-      book = edition_book(b)
+      book = edition_book(b, edition.id)
       if include_images && b.cover_image?
         book[:book_cover_image_url] = b.cover_image_url
         book[:book_print_cover_image] = b.print_image_variant_url
@@ -48,7 +49,7 @@ class EditionsController < ApplicationController
     books
   end
 
-  def edition_book(book)
+  def edition_book(book, edition_id)
     {
       id: book.id,
       title: book.full_title_noshy,
@@ -56,8 +57,13 @@ class EditionsController < ApplicationController
       description: book.description,
       long_description: book.long_description,
       authors: book_authors(book),
+      publisher: {
+        id: book.publisher_id,
+        slug: book.publisher.slug,
+        name: book.publisher.name
+      },
       binding_types: book_binding_types(book),
-      categories: book_categories(book)
+      categories: book_categories(book, edition_id)
     }
   end
 
@@ -115,14 +121,19 @@ class EditionsController < ApplicationController
     book_authors.join('; ')
   end
 
-  def book_categories(book)
+  def book_categories(book, edition_id)
+    book_edition_categories = book.book_editions.find do |book_edition|
+      book_edition[:edition_id] == edition_id
+    end.book_edition_categories
     categories = []
-    book.categories.each do |c|
+    book_edition_categories.each do |bec|
       categories << {
-        id: c.id,
-        slug: c.slug,
-        name: c.name,
-        group: c.group
+        id: bec.category.id,
+        slug: bec.category.slug,
+        name: bec.category.name,
+        group: I18n.t(
+          "activerecord.attributes.category.groups.#{bec.category.group}"
+        )
       }
     end
     categories
@@ -132,6 +143,7 @@ class EditionsController < ApplicationController
     book_authors = []
     book.book_authors.each do |ba|
       book_authors << {
+        id: ba.author.id,
         type_name: ba.author_type.name,
         type_id: ba.author_type.id,
         slug: ba.author.slug,
