@@ -17,10 +17,6 @@ class EditionsController < ApplicationController
       format.json do
         render(json: edition_books(edition, include_images))
       end
-      format.csv do
-        send_data(edition_book_bindings_csv(edition, include_images),
-                  filename: "bokatidindi_#{DateTime.now.to_i}.csv")
-      end
     end
   end
 
@@ -32,7 +28,6 @@ class EditionsController < ApplicationController
       book_editions: { book_edition_categories: [:category] },
       book_authors: %i[author author_type],
       book_binding_types: [:binding_type],
-      categories: [],
       publisher: []
     ).order(
       id: :asc
@@ -52,7 +47,9 @@ class EditionsController < ApplicationController
   def edition_book(book, edition_id)
     {
       id: book.id,
-      title: book.full_title_noshy,
+      pre_title: book.pre_title,
+      title: book.title_noshy,
+      post_title: book.post_title,
       slug: book.slug,
       description: book.description,
       long_description: book.long_description,
@@ -60,65 +57,13 @@ class EditionsController < ApplicationController
       publisher: {
         id: book.publisher_id,
         slug: book.publisher.slug,
-        name: book.publisher.name
+        name: book.publisher.name,
+        url: publisher_url(book.publisher.slug)
       },
       binding_types: book_binding_types(book),
-      categories: book_categories(book, edition_id)
+      categories: book_categories(book, edition_id),
+      url: book_url(book.slug)
     }
-  end
-
-  def edition_book_bindings_csv(edition)
-    book_bindings = edition_book_bindings_array(edition)
-    CSV.generate do |csv|
-      csv << book_bindings.first.keys
-      book_bindings.each do |bbt|
-        csv << bbt.values
-      end
-    end
-  end
-
-  def edition_book_bindings_array(edition)
-    book_binding_types = []
-    BookBindingType.includes(
-      :binding_type, book: {
-        book_editions: [], book_authors: %i[author author_type]
-      }
-    ).where(
-      book: { book_editions: { edition_id: edition.id } }
-    ).order(
-      'book.id': :asc
-    ).each do |bbt|
-      book_binding_types << book_binding_type_for_csv(bbt)
-    end
-    book_binding_types
-  end
-
-  def book_binding_type_for_csv(bbt)
-    bbt_item = {
-      book_id: bbt.book.id,
-      barcode: bbt.barcode,
-      binding_type: bbt.binding_type.name,
-      binding_type_slug: bbt.binding_type.slug,
-      binding_type_id: bbt.binding_type.id,
-      book_title: bbt.book.full_title_noshy,
-      book_slug: bbt.book.slug,
-      book_description: bbt.book.description.squish,
-      book_long_description: bbt.book.long_description.squish,
-      book_authors: book_authors_string(bbt.book)
-    }
-    if bbt.book.cover_image?
-      bbt_item[:book_cover_image_url] = bbt.book.cover_image_url
-      bbt_item[:book_print_cover_image] = bbt.book.print_image_variant_url
-    end
-    bbt_item
-  end
-
-  def book_authors_string(book)
-    book_authors = []
-    book.book_authors.sort_by(&:id).each do |ba|
-      book_authors << "#{ba.author_type.name}: #{ba.author.name}"
-    end
-    book_authors.join('; ')
   end
 
   def book_categories(book, edition_id)
@@ -133,7 +78,8 @@ class EditionsController < ApplicationController
         name: bec.category.name,
         group: I18n.t(
           "activerecord.attributes.category.groups.#{bec.category.group}"
-        )
+        ),
+        url: category_url(bec.category.slug)
       }
     end
     categories
@@ -145,12 +91,15 @@ class EditionsController < ApplicationController
       book_authors << {
         id: ba.author.id,
         type_name: ba.author_type.name,
+        type_plural_name: ba.author_type.plural_name,
+        type_abbreviation: ba.author_type.abbreviation,
         type_id: ba.author_type.id,
         slug: ba.author.slug,
         name: ba.author.name,
         order_by_name: ba.author.order_by_name,
         is_icelandic: ba.author.is_icelandic,
-        gender: ba.author.gender
+        gender: ba.author.gender,
+        url: author_url(ba.author.slug)
       }
     end
     book_authors
