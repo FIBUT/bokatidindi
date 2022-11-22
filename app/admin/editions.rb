@@ -16,7 +16,9 @@ ActiveAdmin.register Edition do
   #   permitted
   # end
 
-  permit_params :title, :opening_date, :online_date, :closing_date, :print_date
+  permit_params :title, :opening_date, :online_date, :closing_date, :print_date,
+                :cover_image_file, :pdf_file,
+                :delete_cover_image_file, :delete_pdf_file
 
   config.filters = false
 
@@ -40,6 +42,24 @@ ActiveAdmin.register Edition do
       f.input :title
     end
 
+    f.inputs 'Forsíðumynd' do
+      if @resource.cover_image.attached?
+        img src: @resource.cover_image_variant_url(150, 'jpg')
+        f.input :delete_cover_image_file, as: :boolean
+      else
+        f.input :cover_image_file, as: :file
+      end
+    end
+
+    f.inputs 'PDF-skjal' do
+      if @resource.pdf_file.attached?
+        para link_to f.resource.pdf_file_url
+        f.input :delete_pdf_file, as: :boolean
+      else
+        f.input :pdf_file, as: :file
+      end
+    end
+
     f.inputs 'Dagsetningar' do
       f.input :opening_date
       f.input :online_date
@@ -48,5 +68,32 @@ ActiveAdmin.register Edition do
     end
 
     f.actions
+  end
+
+  controller do
+    def update
+      super
+
+      edition_form = permitted_params[:edition]
+
+      if edition_form[:delete_cover_image_file] == '1'
+        resource.cover_image.destroy
+        resource.cover_image_srcsets = ''
+      end
+
+      resource.pdf_file.destroy if edition_form[:delete_pdf_file] == '1'
+
+      if edition_form[:cover_image_file]
+        cover_image_contents = edition_form[:cover_image_file].read
+
+        cover_image_content_type = MimeMagic.by_magic(cover_image_contents).type
+
+        if Edition::PERMITTED_IMAGE_FORMATS.include?(cover_image_content_type)
+          resource.attach_cover_image_from_string(cover_image_contents)
+        end
+      end
+
+      SetEditionImageVariantsJob.set(wait: 60).perform_later resource
+    end
   end
 end
