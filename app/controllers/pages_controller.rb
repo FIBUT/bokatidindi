@@ -2,7 +2,8 @@
 
 class PagesController < ApplicationController
   def um_bokatidindi
-    @image_format = image_format
+    @image_format    = image_format
+    @current_edition = Edition.current_edition
   end
 
   def privacy_policy; end
