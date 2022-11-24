@@ -58,7 +58,9 @@
           <% if @current_edition.cover_image.attached? %>
           <img
             src="<%= @current_edition.cover_image_url %>"
+            <% unless @current_edition.cover_image_srcsets.empty? %>
             srcset="<%= @current_edition.cover_image_srcsets[@image_format] %>"
+            <% end %>
             sizes="(min-resolution: 200dpi 550px), 260px"
             class="w-100 img-fluid"
           >
