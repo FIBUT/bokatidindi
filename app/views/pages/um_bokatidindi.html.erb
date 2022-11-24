@@ -1,5 +1,19 @@
 <% content_for :meta do %>
   <title>Bókatíðindi - Um <%= @current_edition.title %></title>
+
+  <% if @current_edition.cover_image.attached? %>
+  <%= tag 'meta', property: 'og:image', content: @current_edition.cover_image_url %>
+  <% end %>
+  <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
+  <%= tag 'meta', property: 'og:title', content: 'Um Bókatíðindi' %>
+  <%= tag 'meta', property: 'og:locale', content: 'is_IS' %>
+  <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
+
+  <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
+  <%= tag 'meta', name: 'twitter:title', content: 'Um Bókatíðindi' %>
+  <% if @current_edition.cover_image.attached? %>
+  <%= tag 'meta', name: 'twitter:image', content: @current_edition.cover_image_url %>
+  <% end %>
 <% end %>
 
 <main role="main" class="page">
