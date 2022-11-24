@@ -29,13 +29,12 @@
 
 <main role="main">
 
-  <div class="container-fluid">
+  <div class="container-lg">
 
-    <div class="row mx-2" aria-label="Vöruflokkar">
+    <div class="row" aria-label="Vöruflokkar">
 
       <% Category.groups.each do |category_group| %>
-      <div class="col-md-4 mb-4">
-        <div class="">
+      <div class="col-md-4">
           <h2 class=""><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></h2>
           <ul class="list-unstyled">
             <%
@@ -47,13 +46,16 @@
             </li>
             <% end %>
           </ul>
-        </div>
       </div>
       <% end %>
 
     </div>
 
-    <div class="row">
+  </div>
+
+  <div class="container-fluid">
+
+    <div class="row mt-5">
       <div class="col-12">
         <div class="welcome-content p-4 pt-5 mt-2" aria-label="Um bókatíðindi">
           <p>

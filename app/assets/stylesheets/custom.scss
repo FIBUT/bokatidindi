@@ -241,18 +241,17 @@ main {
   }
 }
 
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(sm) {
   .logo-list figure {
-    width: calc(20% - 66px);
+    width: calc(33% - 66px);
     margin: 33px 15px;
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(xs) {
   .logo-list figure {
-    display: block !important;
-    width: 100%;
-    margin: 33px auto;
+    width: calc(33% - 10px);
+    margin: 5px auto;
   }
 }
 
