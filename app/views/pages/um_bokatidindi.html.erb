@@ -32,6 +32,11 @@
           var nægja að nefna blaðið Bókatíðindi, líkt og það hefur verið kallað,
           allar götur síðan ásamt ártali útáfuárs.
         </p>
+        <p>
+          Félag íslenskra bókaútgefenda hefur reynt að safna öllum útgáfunum
+          ritsins og tekur fagnandi á móti öllum eldri Bókaskrám eða Bókatíðindi
+          sem gefin voru út fram til ársins 1986.
+        </p>
         <h2 class="pb-2 pt-5">Um <%= @current_edition.title %></h2>
         <table class="table table-sm">
           <tbody>
@@ -58,7 +63,7 @@
           <% if @current_edition.cover_image.attached? %>
           <img
             src="<%= @current_edition.cover_image_url %>"
-            <% unless @current_edition.cover_image_srcsets.empty? %>
+            <% if @current_edition&.cover_image_srcsets.is_a?(Hash) && @current_edition&.cover_image_srcsets.key?(@image_format) %>
             srcset="<%= @current_edition.cover_image_srcsets[@image_format] %>"
             <% end %>
             sizes="(min-resolution: 200dpi 550px), 260px"

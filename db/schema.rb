@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_23_222650) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_24_162732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_prewarm"
   enable_extension "pg_stat_statements"
@@ -248,7 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_222650) do
     t.datetime "closing_date"
     t.datetime "opening_date"
     t.datetime "online_date"
-    t.json "cover_image_srcsets"
+    t.json "cover_image_srcsets", default: {"webp"=>"", "jpg"=>""}
     t.index ["closing_date"], name: "index_editions_on_closing_date"
     t.index ["online_date"], name: "index_editions_on_online_date"
     t.index ["opening_date"], name: "index_editions_on_opening_date"
