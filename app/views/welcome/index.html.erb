@@ -35,13 +35,17 @@
 
       <% Category.groups.each do |category_group| %>
       <div class="col-md-4">
-          <h2 class=""><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></h2>
-          <ul class="list-unstyled">
+          <h2
+            class="mb-3"
+          >
+            <%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %>
+          </h2>
+          <ul class="list-unstyled welcome-category-list">
             <%
             Category.where(group: category_group[1]).order('rod').each do |c|
             next if c.book_count_web.zero?
             %>
-            <li class="my-2">
+            <li class="">
               <%= link_to c.name, category_path(c.slug) %>
             </li>
             <% end %>

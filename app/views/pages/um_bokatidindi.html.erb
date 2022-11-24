@@ -7,7 +7,7 @@
   <div class="container-md">
 
     <div class="row">
-      <div class="col-12 col-lg-8">
+      <div class="col-12 col-lg-8 order-0">
         <h1 class="pb-2">Um Bókatíðindi</h1>
         <p>
           Bókatíðindi komu fyrst út árið 1928 undir nafninu Bókaskrá
@@ -37,6 +37,8 @@
           ritsins og tekur fagnandi á móti öllum eldri Bókaskrám eða Bókatíðindi
           sem gefin voru út fram til ársins 1986.
         </p>
+      </div>
+      <div class="col-12 col-md-8 col-lg-8 order-lg-2">
         <h2 class="pb-2 pt-5">Um <%= @current_edition.title %></h2>
         <table class="table table-sm">
           <tbody>
@@ -58,9 +60,10 @@
         </table>
         <p>Þeir sem vilja skrá nýja titla inn á vefinn eru beðnir um að hafa samband við félagið.</p>
       </div>
-      <div class="col-6 col-lg-3 offset-lg-1">
+
+      <div class="col-6 col-md-4 col-lg-3 offset-lg-1 mt-lg-5 order-lg-1">
         <% if @current_edition.pdf_file.attached? %>
-          <figure class="figure">
+          <figure class="figure mt-md-5 mt-lg-3">
           <% if @current_edition.cover_image.attached? %>
           <img
             src="<%= @current_edition.cover_image_url %>"
@@ -73,7 +76,10 @@
           <% end %>
           <figcaption class="figure-caption text-right">
 
-          <a href="<%= @current_edition.pdf_file_url %>" class="btn btn-darkgrey pdf-download-link">
+          <a
+            href="<%= @current_edition.pdf_file_url %>"
+            class="btn btn-darkgrey pdf-download-link"
+          >
             Sækja PDF-útgáfu
           </a>
           </figcaption>
