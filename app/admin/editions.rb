@@ -93,7 +93,7 @@ ActiveAdmin.register Edition do
         end
       end
 
-      SetEditionImageVariantsJob.set(wait: 60).perform_later resource
+      SetEditionImageVariantsJob.set(wait: 20).perform_later resource
     end
   end
 end
