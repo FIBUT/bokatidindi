@@ -24,7 +24,7 @@ gem 'rack', '~>2.2.4'
 gem 'rails', '~> 7.0.3'
 gem 'actionpack', '~>7.0.3'
 gem 'nokogiri', '~>1.13.10'
-gem 'rails-html-sanitizer', '~>1.4.3'
+gem 'rails-html-sanitizer', '~>1.4.4'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.6.4'
