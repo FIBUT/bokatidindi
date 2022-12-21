@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class EditionsController < ApplicationController
+  def index
+    @editions = Edition.where(is_legacy: true).order(:year, :id)
+
+    @image_format = image_format
+  end
+
   def show
     edition = if params[:id] == 'current'
                 Edition.current.first
@@ -21,6 +27,15 @@ class EditionsController < ApplicationController
   end
 
   private
+
+  def image_format
+    return 'jpg' if browser.ie?
+    return 'jpg' if browser.safari? && browser.platform.mac?('<11.6')
+    return 'jpg' if browser.platform.ios?('<14')
+    return 'jpg' if browser.platform.kai_os?
+
+    'webp'
+  end
 
   def edition_books(edition, include_images = false)
     books = []

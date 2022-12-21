@@ -149,6 +149,7 @@ class Edition < ApplicationRecord
   end
 
   def frozen?
+    return false if closing_date.nil? || print_date.nil?
     # "closing_date < '#{DateTime.now.to_fs(:db)}' and "\
     # "print_date > '#{DateTime.now.to_fs(:db)}'"
     return false unless closing_date < DateTime.now && print_date > DateTime.now

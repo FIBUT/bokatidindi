@@ -132,8 +132,23 @@ main {
   top: 30px;
 }
 
-.book {
+.older-edition {
+  background-color: $white;
+  border-radius: 5px;
+  width: 100%;
+  justify-content: flex-end;
 
+  .title {
+    font-weight: $font-weight-bold;
+    font-size: 1em;
+  }
+
+  .button-list {
+    text-align: right;
+  }
+}
+
+.book {
   hgroup {
     word-break: break-word;
   }
