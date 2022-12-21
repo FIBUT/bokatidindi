@@ -76,6 +76,22 @@ ActiveAdmin.register Edition do
   end
 
   controller do
+    def create
+      super
+
+      if edition_form[:cover_image_file]
+        cover_image_contents = edition_form[:cover_image_file].read
+
+        cover_image_content_type = MimeMagic.by_magic(cover_image_contents).type
+
+        if Edition::PERMITTED_IMAGE_FORMATS.include?(cover_image_content_type)
+          resource.attach_cover_image_from_string(cover_image_contents)
+        end
+      end
+
+      SetEditionImageVariantsJob.set(wait: 20).perform_later resource
+    end
+
     def update
       super
 
