@@ -7,7 +7,7 @@
   <div class="container-md">
 
     <div class="row">
-      <div class="col-12 mb-5">
+      <div class="col-12 mb-3">
         <h1 class="mb-3">Eldri tölublöð og árgangar Bókatíðinda</h1>
         <p>
           Hér má finna eldri útgáfur og árganga Bókatíðinda.
@@ -22,39 +22,22 @@
 
     <div class="row">
       <% @editions.each do |edition| %>
-        <div class="col-12 col-sm-6 mb-4">
-          <div class="older-edition p-4">
-          <div class="row">
-            <div class="col-7 content order-1">
-              <h2 class="title mb-4"><%= edition.title %></h2>
-              <ul class="list-inline mt-2 button-list">
-                <% if edition.pdf_file.attached? %>
-                <li class="list-item mb-2">
-                  <a
-                    class="btn btn-sm btn-primary"
-                    href="<%= edition.pdf_file_url %>"
-                  >
-                    PDF-skrá
-                  </a>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="col-5 order-0">
-              <% if edition.cover_image.attached? %>
-              <img
-                class="w-100 img-fluid"
-                src="<%= edition.cover_image_url[@image_format] %>"
-                srcset="<%= edition.cover_image_srcsets[@image_format] %>"
-                sizes="(min-resolution: 200dpi 260px), 150px"
-              />
-              <% end %>
-            </div>
+        <div class="col-6 col-sm-3 col-xl-2">
+        <a href="<%= edition.pdf_file_url %>" class="older-edition d-flex flex-column justify-content-end h-100 p-2 m-1">
+          <h2 class="title order-2 mt-2"><%= edition.title %></h2>
+          <% if edition.cover_image.attached? %>
+          <div class="order-1">
+          <img
+            class="w-100 img-fluid"
+            src="<%= edition.cover_image_url[@image_format] %>"
+            srcset="<%= edition.cover_image_srcsets[@image_format] %>"
+            sizes="(min-resolution: 200dpi 260px), 150px"
+          />
           </div>
-          </div>
+          <% end %>
+        </a>
         </div>
-        <% end %>
-      </div>
+      <% end %>
     </div>
 
   </div>
