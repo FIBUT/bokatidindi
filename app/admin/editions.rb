@@ -17,7 +17,7 @@ ActiveAdmin.register Edition do
   # end
 
   permit_params :title, :opening_date, :online_date, :closing_date, :print_date,
-                :cover_image_file, :pdf_file,
+                :cover_image_file, :pdf_file, :is_legacy, :year,
                 :delete_cover_image_file, :delete_pdf_file
 
   config.filters = false
@@ -58,6 +58,11 @@ ActiveAdmin.register Edition do
       else
         f.input :pdf_file, as: :file
       end
+    end
+
+    f.inputs 'Stillingar fyrir eldri tölublöð' do
+      f.input :year
+      f.input :is_legacy
     end
 
     f.inputs 'Dagsetningar' do

@@ -1,0 +1,54 @@
+<% content_for :meta do %>
+  <title>Eldri tölublöð</title>
+<% end %>
+
+<main role="main" aria-label="Bækur">
+
+  <div class="container-md">
+
+    <div class="row">
+      <div class="col-12">
+        <h1 class="mb-5">Eldri árgangar Bókatíðinda</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <% @editions.each do |edition| %>
+        <div class="col-4 mb-4">
+          <div class="older-edition p-4">
+          <div class="row">
+            <div class="col-4">
+              <% if edition.cover_image.attached? %>
+              <img
+                class="w-100 img-fluid"
+                src="<%= edition.cover_image_url[@image_format] %>"
+                srcset="<%= edition.cover_image_srcsets[@image_format] %>"
+                sizes="(min-resolution: 200dpi 260px), 150px"
+              />
+              <% end %>
+            </div>
+            <div class="col-8 content">
+              <h2 class="title mb-4"><%= edition.title %></h2>
+              <ul class="list-inline mt-5 button-list">
+                <% if edition.pdf_file.attached? %>
+                <li class="list-item mb-2">
+                  <a
+                    class="btn btn-sm btn-primary"
+                    href="<%= edition.pdf_file_url %>"
+                  >
+                    PDF-skrá
+                  </a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+</main>
