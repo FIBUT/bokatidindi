@@ -80,18 +80,40 @@ ActiveAdmin.register Edition do
 
       panel 'Fjöldi skráninga eftir flokkum' do
         table class: 'edition-stats-table' do
-          Category.order(rod: :asc).each do |category|
-            tr do
-              th scope: 'row' do
-                category.name_with_group
-              end
-              td do
-                BookEditionCategory.includes(
-                  :book_edition
-                ).where(
-                  category_id: category.id,
-                  book_edition: { edition_id: edition.id }
-                ).count
+          thead do
+            th do
+            end
+            th do
+              'Vefur'
+            end
+            th do
+              'Prent'
+            end
+          end
+          tbody do
+            Category.order(rod: :asc).each do |category|
+              tr do
+                th scope: 'row' do
+                  category.name_with_group
+                end
+                td do
+                  BookEditionCategory.includes(
+                    :book_edition
+                  ).where(
+                    category_id: category.id,
+                    for_web: true,
+                    book_edition: { edition_id: edition.id }
+                  ).count
+                end
+                td do
+                  BookEditionCategory.includes(
+                    :book_edition
+                  ).where(
+                    category_id: category.id,
+                    for_print: true,
+                    book_edition: { edition_id: edition.id }
+                  ).count
+                end
               end
             end
           end
