@@ -42,6 +42,30 @@ form.formtastic {
   .status_tag.no { background: #933; }
 }
 
+table.edition-dates-table {
+  width: auto;
+  th {
+    width: 16em;
+    text-align: left;
+  }
+  td {
+    padding-top: 10px;
+  }
+}
+
+table.edition-stats-table {
+  width: auto;
+  th {
+    width: 30em;
+    text-align: right;
+  }
+  td {
+    padding-top: 10px;
+    text-align: right;
+    width: 6em;
+  }
+}
+
 table.publisher_book_edition_categories {
   .col-book { width: 40em; text-align: right; font-weight: bold; }
 }

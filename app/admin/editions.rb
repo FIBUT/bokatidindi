@@ -22,6 +22,389 @@ ActiveAdmin.register Edition do
 
   config.filters = false
 
+  show do
+    panel 'Forsíðumynd' do
+      img src: edition.cover_image_variant_url(150, 'jpg')
+    end
+
+    if edition.is_legacy
+      panel 'Frestir og dagsetningar' do
+        table class: 'edition-dates-table' do
+          tr do
+            th scope: 'row' do
+              'Opnað fyrir skráningar'
+            end
+            td do
+              edition.opening_date.strftime('%d.%m.%Y')
+            end
+            td class: 'description' do
+              'Opnað fyrir skráningar í þennan árgang Bókatíðinda.'
+            end
+          end
+          tr do
+            th scope: 'row' do
+              'Árgangur birtist á vef'
+            end
+            td do
+              edition.online_date.strftime('%d.%m.%Y')
+            end
+            td class: 'Description' do
+              'Þessi árgangur Bókatíðinda birtist á vefnum.'
+            end
+          end
+          tr do
+            th scope: 'row' do
+              'Lokað fyrir skráningar'
+            end
+            td do
+              edition.closing_date.strftime('%d.%m.%Y')
+            end
+            td class: 'description' do
+              'Lokað fyrir skráningar fram að frágangi prentútgáfu.'
+            end
+          end
+          tr do
+            th scope: 'row' do
+              'Gengið frá prentútgáfu'
+            end
+            td do
+              edition.print_date.strftime('%d.%m.%Y')
+            end
+            td class: 'Description' do
+              'Eftir þessa dagsetningu er opnað aftur fyrir skráningar í '\
+              'vefútgáfu.'
+            end
+          end
+        end
+      end
+
+      panel 'Fjöldi skráninga eftir flokkum' do
+        table class: 'edition-stats-table' do
+          Category.order(rod: :asc).each do |category|
+            tr do
+              th scope: 'row' do
+                category.name_with_group
+              end
+              td do
+                BookEditionCategory.includes(
+                  :book_edition
+                ).where(
+                  category_id: category.id,
+                  book_edition: { edition_id: edition.id }
+                ).count
+              end
+            end
+          end
+        end
+      end
+
+      panel 'Samtalstölur skráninga' do
+        table class: 'edition-stats-table' do
+          tr do
+            th scope: 'row' do
+              'Heildarfjöldi bóka'
+            end
+            td do
+              BookEdition.where(edition_id: edition.id).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              'Heildarfjöldi skráninga'
+            end
+            td do
+              BookEditionCategory.includes(
+                :book_edition
+              ).where(
+                book_edition: { edition_id: 2 }
+              ).count
+            end
+          end
+        end
+      end
+
+      panel 'Kynjahlutföll' do
+        h4 'Höfundar'
+
+        table class: 'edition-stats-table' do
+          tr do
+            th scope: 'row' do
+              '♂️ Bækur með karlkyns höfund'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'male',
+                      author_types: {
+                        name: 'Höfundur'
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              '♀️ Bækur með kvenkyns höfund'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'female',
+                      author_types: {
+                        name: 'Höfundur'
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              '⚧️ Bækur með kynsegin höfund'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'non_binary',
+                      author_types: {
+                        name: 'Höfundur'
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+            tr do
+              th scope: 'row' do
+                '👽 Bækur með höfund af óskilgreindu kyni'
+              end
+              td do
+                BookEdition.includes(
+                  book: %i[book_authors authors author_types]
+                ).where(
+                  edition_id: edition.id,
+                  book: {
+                    book_authors: {
+                      authors: {
+                        gender: 'undefined',
+                        author_types: {
+                          name: 'Höfundur'
+                        }
+                      }
+                    }
+                  }
+                ).count
+              end
+            end
+          end
+        end
+
+        h4 'Þýðendur'
+
+        table class: 'edition-stats-table' do
+          tr do
+            th scope: 'row' do
+              '♂️ Bækur með karlkyns þýðanda'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'male',
+                      author_types: {
+                        name: 'Þýðandi'
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              '♀️ Bækur með kvenkyns þýðanda'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'female',
+                      author_types: {
+                        name: 'Þýðandi'
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              '⚧️ Bækur með kynsegin þýðanda'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'non_binary',
+                      author_types: {
+                        name: 'Þýðandi'
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+            tr do
+              th scope: 'row' do
+                '👽 Bækur með þýðanda af óskilgreindu kyni'
+              end
+              td do
+                BookEdition.includes(
+                  book: %i[book_authors authors author_types]
+                ).where(
+                  edition_id: edition.id,
+                  book: {
+                    book_authors: {
+                      authors: {
+                        gender: 'undefined',
+                        author_types: {
+                          name: 'Þýðandi'
+                        }
+                      }
+                    }
+                  }
+                ).count
+              end
+            end
+          end
+        end
+        h4 'Myndir og Myndhöfundar'
+
+        table class: 'edition-stats-table' do
+          tr do
+            th scope: 'row' do
+              '♂️ Bækur með karlkyns myndhöfund'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'male',
+                      author_types: {
+                        name: ['Myndhöfundur', 'Myndir']
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              '♀️ Bækur með kvenkyns myndhöfund'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'female',
+                      author_types: {
+                        name: ['Myndhöfundur', 'Myndir']
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+          end
+          tr do
+            th scope: 'row' do
+              '⚧️ Bækur með kynsegin myndhöfund'
+            end
+            td do
+              BookEdition.includes(
+                book: %i[book_authors authors author_types]
+              ).where(
+                edition_id: edition.id,
+                book: {
+                  book_authors: {
+                    authors: {
+                      gender: 'non_binary',
+                      author_types: {
+                        name: ['Myndhöfundur', 'Myndir']
+                      }
+                    }
+                  }
+                }
+              ).count
+            end
+            tr do
+              th scope: 'row' do
+                '👽 Bækur með myndhöfund af óskilgreindu kyni'
+              end
+              td do
+                BookEdition.includes(
+                  book: %i[book_authors authors author_types]
+                ).where(
+                  edition_id: edition.id,
+                  book: {
+                    book_authors: {
+                      authors: {
+                        gender: 'undefined',
+                        author_types: {
+                          name: ['Myndhöfundur', 'Myndir']
+                        }
+                      }
+                    }
+                  }
+                ).count
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
   index do
     selectable_column
     column :title do |edition|
