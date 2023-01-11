@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 class EditionsController < ApplicationController
-  def index
-    @editions = Edition.where(is_legacy: true).order(:year, :id)
-
-    @image_format = image_format
-  end
-
   def show
     edition = if params[:id] == 'current'
                 Edition.current.first
