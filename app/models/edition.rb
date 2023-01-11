@@ -159,13 +159,13 @@ class Edition < ApplicationRecord
 
   def self.form_collection(include_frozen = false)
     editions = if include_frozen
-                 Edition.current
+                 (Edition.active + Edition.frozen + Edition.active_for_web_only)
                else
                  (Edition.active + Edition.active_for_web_only)
                end
 
     form_collection = []
-    editions.each do |e|
+    editions.uniq.each do |e|
       form_collection << [e.form_label, e[:id]]
     end
 
