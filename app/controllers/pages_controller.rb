@@ -3,6 +3,7 @@
 class PagesController < ApplicationController
   def um_bokatidindi
     @image_format    = image_format
+    @editions        = Edition.where(is_legacy: true).order(year: :desc)
     @current_edition = Edition.current_edition
   end
 
