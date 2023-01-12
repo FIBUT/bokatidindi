@@ -1,6 +1,6 @@
 <div class="row">
 
-  <% @books.each do |book| %>
+  <% @books.each_with_index  do |book,i| %>
   <section
     id="book-<%= book.id %>"
     class="book col-12 col-md-6 col-xl-4 px-0"
@@ -48,7 +48,9 @@
               sizes="(min-resolution: 200dpi 550px), 260px"
               <% end %>
               class="w-100 img-fluid"
+              <% if i > 5 %>
               loading="lazy"
+              <% end %>
             >
           </figure>
         </a>
