@@ -138,6 +138,7 @@
           </a>
         </figure>
 
+        <% if @book.sample_pages.any? %>
         <div
           class="preview-images align-self-end row"
           aria-label="Sýnishorn úr bók"
@@ -163,6 +164,7 @@
           </a>
           <% end %>
         </div>
+        <% end %>
 
         <div>
           <%= render 'books/meta', book: @book %>
