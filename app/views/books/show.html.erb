@@ -1,4 +1,7 @@
 <% content_for :meta do %>
+  <%= tag 'link', rel: 'preload', as: 'script', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.esm.js', crossorigin: 'anonymous' %>
+  <%= tag 'link', rel: 'preload', as: 'style', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.css', integrity: 'sha256-7gMVmh7i2Xmo99mvvfnSn9dZfunTii7j4yPdmTAMUR0=', crossorigin: 'anonymous' %>
+
   <%= preload_link_tag 'https://cdn.bokatidindi.is/images/boksala-square.svg', as: 'image' %>
   <%= preload_link_tag 'https://cdn.bokatidindi.is/images/forlagid-square.svg', as: 'image' %>
   <%= preload_link_tag 'https://cdn.bokatidindi.is/images/penninn-eymundsson-square.svg', as: 'image' %>
@@ -36,10 +39,10 @@
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, 'jpg') %>
   <% end %>
 
-  <%= tag 'link', rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css' %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.css" integrity="sha256-7gMVmh7i2Xmo99mvvfnSn9dZfunTii7j4yPdmTAMUR0=" crossorigin="anonymous">
 
   <script type="module">
-  import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.esm.js";
+  import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.esm.js";
   Fancybox.defaults.l10n = {
     CLOSE: "Loka",
     NEXT: "Næsta mynd",
