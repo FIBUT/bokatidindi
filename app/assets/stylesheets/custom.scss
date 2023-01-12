@@ -43,7 +43,7 @@ $grid-breakpoints: (
   sm:   576px,
   md:   670px,
   lg:   992px,
-  xl:   1600px,
+  xl:   1400px,
   xxl:  2000ox
 ) ;
 
@@ -171,6 +171,7 @@ main {
     }
     a {
       font-weight: $font-weight-bold;
+      padding: 3px 0;
     }
   }
 
@@ -209,6 +210,7 @@ main {
   #book-binding-types {
     a {
       font-weight: $font-weight-bold;
+      padding: 3px 0;
     }
     h3 {
       font-family: $montserrat;

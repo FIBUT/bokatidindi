@@ -3,7 +3,7 @@
   <% @books.each do |book| %>
   <section
     id="book-<%= book.id %>"
-    class="book col-12 col-md-6 col-xl-4"
+    class="book col-12 col-md-6 col-xl-4 px-0"
     aria-labelledby="book-<%= book.id %>-hgroup"
   >
 
@@ -34,7 +34,6 @@
 
       <div
         class="mt-1 col-lg-4 overflow-hidden order-0"
-        aria-hidden="true"
       >
         <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
           <figure class="figure mt-4 w-100">
