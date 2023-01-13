@@ -290,6 +290,10 @@ main {
   }  
 }
 
+.dropdown-toggle::after {
+  margin-left: 1rem;
+}
+
 // Header
 header {
   background-color: theme-color("primary");
@@ -307,7 +311,7 @@ header {
     .nav-link:hover {
       color: $link-hover-color;
       text-decoration: underline;
-    }  
+    }
   }
 }
 
