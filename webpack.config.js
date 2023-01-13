@@ -12,7 +12,6 @@
     devtool: "source-map",
     entry: {
       application: [
-        "./app/javascript/application.js",
         "./app/assets/stylesheets/application.scss",
       ],
       custom: './app/assets/stylesheets/custom.scss'
@@ -41,7 +40,7 @@
   },
   resolve: {
     // Add additional file types
-    extensions: ['.js', '.jsx', '.scss', '.css'],
+    extensions: ['.scss', '.css'],
   },
   plugins: [
     new RemoveEmptyScriptsPlugin(),
