@@ -1,23 +1,18 @@
 <nav aria-label="Aðalvalmynd" class="navbar order-4 d-none d-sm-block col-12 navbar-expand-md mt-3">
   <ul class="navbar-nav">
     <% Category.groups.each do |category_group| %>
-    <li class="nav-item dropdown">
-      <a
+    <li class="nav-item dropdown"><a
         id="navbar-<%= category_group.first %>-link"
-        class="nav-link dropdown-toggle"
+        class="nav-link dropdown-toggle pr-4"
         href="#"
         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-      >
-        <%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %>
-      </a>
+      ><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></a>
       <ul class="dropdown-menu" aria-labelledby="navbar-<%= category_group.first %>-link">
         <%
         Category.where(group: category_group[1]).order('rod').each do |c|
         next if c.book_count_web.zero?
         %>
-        <li class="nav-item">
-          <%= link_to c.name, category_path(c.slug), class: 'nav-link pl-3' %>
-        </li>
+        <li class="nav-item"><%= link_to c.name, category_path(c.slug), class: 'nav-link pl-3' %></li>
         <% end %>
       </ul>
     </li>
@@ -41,9 +36,7 @@
         Category.where(group: category_group[1]).order('rod').each do |c|
         next if c.book_count_web.zero?
         %>
-        <li class="my-3">
-          <%= link_to c.name, category_path(c.slug) %>
-        </li>
+        <li class="my-3"><%= link_to c.name, category_path(c.slug) %></li>
         <% end %>
       </ul>
     </li>
