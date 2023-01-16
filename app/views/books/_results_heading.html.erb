@@ -1,31 +1,20 @@
 <div class="row">
   <div class="col-12 pb-3">
-    <% unless params[:publisher] || params[:category] || params[:author] || params[:search] %>
-      <h1>Allar bækur</h1>
-    <% else %>
-      <h1>Niðurstöður</h1>
-    <ul class="d-block p-0">
+    <h1>
+      <% unless params[:publisher] || params[:category] || params[:author] || params[:search] %>
+        Allar bækur
+      <% end %>
       <% unless params[:author].nil? %>
-      <li class="d-inline-block badge badge-darkgrey">
-        <%= @author.name %>
-      </li>
+        Höfundur: <%= @author.name %>
       <% end %>
       <% unless params[:publisher].nil? %>
-      <li class="d-inline-block badge badge-darkgrey">
-        <%= @publisher.name %>
-      </li>
+        Útgefandi: <%= @publisher.name %>
       <% end %>
       <% unless params[:category].nil? %>
-      <li class="d-inline-block badge badge-darkgrey">
         <%= @category.name_with_group %>
-      </li>
       <% end %>
       <% unless params[:search].nil? %>
-      <li class="d-inline-block badge badge-darkgrey">
-        <%= params[:search] %>
-      </li>
+        Leitarorð: <%= params[:search] %>
       <% end %>
-    </ul>
-    <% end %>
   </div>
 </div>
