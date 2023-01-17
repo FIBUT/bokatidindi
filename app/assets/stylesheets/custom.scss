@@ -267,6 +267,20 @@ main {
     width: calc(33% - 66px);
     margin: 33px 15px;
   }
+  .book {
+    .authors a, .book-authors a, .book-meta-list a, #book-binding-types a {
+      padding: 14px 0;
+      display: inline-block;
+    }
+    .book-author-group {
+      padding: 14px 0;
+      display: block;
+    }
+  }
+  .footer-container a {
+    padding: 14px 0;
+    display: inline-block;
+  }
 }
 
 @include media-breakpoint-down(xs) {
