@@ -138,4 +138,8 @@ Rails.application.configure do
     password: Rails.application.credentials.dig(:sendinblue, :password),
     authentication: :plain
   }
+
+  # Use the Google Cloud CDN servive for static assets
+  config.action_controller.asset_host = '//cdn.bokatidindi.is'
+  config.assets.prefix = '/assets'
 end
