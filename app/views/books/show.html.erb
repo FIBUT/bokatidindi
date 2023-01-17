@@ -2,11 +2,11 @@
   <%= tag 'link', rel: 'preload', as: 'script', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.esm.js', crossorigin: 'anonymous' %>
   <%= tag 'link', rel: 'preload', as: 'style', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.css', integrity: 'sha256-7gMVmh7i2Xmo99mvvfnSn9dZfunTii7j4yPdmTAMUR0=', crossorigin: 'anonymous' %>
 
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/boksala-square.svg', as: 'image' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/forlagid-square.svg', as: 'image' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/penninn-eymundsson-square.svg', as: 'image' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/salka-square.svg', as: 'image' %>
-  <%= preload_link_tag 'https://cdn.bokatidindi.is/images/storytel-square.svg', as: 'image' %>
+  <%= preload_link_tag asset_url('boksala-square.svg'), as: 'image' %>
+  <%= preload_link_tag asset_url('forlagid-square.svg'), as: 'image' %>
+  <%= preload_link_tag asset_url('penninn-eymundsson-square.svg'), as: 'image' %>
+  <%= preload_link_tag asset_url('salka-square.svg'), as: 'image' %>
+  <%= preload_link_tag asset_url('storytel-square.svg'), as: 'image' %>
 
   <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
 
