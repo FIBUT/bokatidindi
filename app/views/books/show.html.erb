@@ -119,7 +119,7 @@
 
       <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 order-1 order-md-0">
 
-        <figure class="figure">
+        <figure class="figure w-100">
           <a
             data-fancybox="samples"
             href="<%= @book.cover_image_url(@image_format, true) %>"
@@ -133,9 +133,26 @@
               <% end %>
               <% unless @book.cover_image_srcsets.blank? %>
               srcset="<%= @book.cover_image_srcsets[@image_format] %>"
-              sizes="(min-resolution: 200dpi 1600px), 550px"
+              sizes="
+                ( min-width: 2000px ) and ( max-resolution: 200dpi ) 1200px,
+                ( min-width: 2000px ) and ( min-resolution: 200dpi ) 1600px,
+
+                ( min-width: 1400px ) and ( max-resolution: 200dpi ) 550px,
+                ( min-width: 1400px ) and ( min-resolution: 200dpi ) 1200px,
+
+                ( min-width: 992px ) and ( max-resolution: 200dpi ) 260px,
+                ( min-width: 992px ) and ( min-resolution: 200dpi ) 550px,
+
+                ( min-width: 670px ) and ( max-resolution: 200dpi ) 150px,
+                ( min-width: 670px ) and ( min-resolution: 200dpi ) 260px,
+
+                ( min-width: 576px ) and ( max-resolution: 200dpi ) 550px,
+                ( min-width: 576px ) and ( min-resolution: 200dpi ) 1200px,
+
+                (max-width: 576px ) 260px
+              "
               <% end %>
-              class="img-fluid"
+              class="img-fluid w-100"
               alt="Forsíða bókarinnar"
             >
           </a>
