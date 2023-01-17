@@ -1,5 +1,4 @@
 <% content_for :meta do %>
-  <%= tag 'link', rel: 'preload', as: 'script', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.esm.js', crossorigin: 'anonymous' %>
   <%= tag 'link', rel: 'preload', as: 'style', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.css', integrity: 'sha256-7gMVmh7i2Xmo99mvvfnSn9dZfunTii7j4yPdmTAMUR0=', crossorigin: 'anonymous' %>
 
   <%= preload_link_tag asset_url('boksala-square.svg'), as: 'image' %>
