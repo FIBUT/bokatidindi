@@ -18,7 +18,12 @@
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
 
-<link href="<%= asset_url('favicon.png') %>" type="image/png" rel="icon" />
+<%= tag 'link', rel: 'manifest', href: '/manifest.json' %>
+
+<%= tag 'meta', name: 'theme-color', content: '#37171f' %>
+
+<%= tag 'link', href: asset_url('favicon.png'), type: 'image/png', rel: 'icon' %>
+<%= tag 'link', href: asset_url('apple-touch-icon.png'), type: 'image/png', rel: 'apple-touch-icon' %>
 
 <meta name="google-site-verification" content="ctHSqkdyh_2IRJWl3o2mY9Qq2PlsK_Ns1VLzdvb9Hsc" />
 
