@@ -33,7 +33,7 @@
   "version": "0.1.0",
   "devDependencies": {},
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "bundle exec rake assets:clobber && webpack --config webpack.config.js"
   },
   "babel": {
     "presets": [
