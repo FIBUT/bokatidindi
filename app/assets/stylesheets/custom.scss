@@ -162,7 +162,14 @@ main {
   ul li {
     font-size: 0.8em;
   }
-  .pre-title, .post-title { font-size: 0.8em; }
+  .pre-title, .post-title {
+    font-size: 1rem;
+    font-weight: normal;
+    display: block;
+  }
+  .pre-title {
+    margin-bottom: 8px;
+  }
 
   .book-column-container {
     background-color: $white;
@@ -198,7 +205,7 @@ main {
 
 .book-single {
   .title { font-weight: $font-weight-bold; font-size: 2.5em; }
-  .pre-title, .post-title { font-size: 1.8em; }
+  .pre-title, .post-title { font-size: 1.8rem; }
 
   .book-meta-list {
     margin-top: 3rem;
