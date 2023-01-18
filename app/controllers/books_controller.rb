@@ -14,6 +14,7 @@ class BooksController < ApplicationController
 
       @books = Book.current if @books.nil?
       @books = @books.order(:title).page(params[:page])
+      @title_tag ||= 'Bókatíðindi - Allar bækur'
     end
   end
 
