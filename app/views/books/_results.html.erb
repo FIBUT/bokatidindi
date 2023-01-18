@@ -46,21 +46,7 @@
               <% unless book.cover_image_srcsets.blank? %>
               srcset="<%= book.cover_image_srcsets[@image_format] %>"
               sizes="
-                ( min-width: 2000px ) and ( max-resolution: 200dpi ) 260px,
-                ( min-width: 2000px ) and ( min-resolution: 200dpi ) 550px,
-
-                ( min-width: 1400px ) and ( max-resolution: 200dpi ) 150px,
-                ( min-width: 1400px ) and ( min-resolution: 200dpi ) 260px,
-
-                ( min-width: 992px ) and ( max-resolution: 200dpi ) 150px,
-                ( min-width: 992px ) and ( min-resolution: 200dpi ) 260px,
-
-                ( min-width: 670px ) and ( max-resolution: 200dpi ) 150px,
-                ( min-width: 670px ) and ( min-resolution: 200dpi ) 260px,
-
-                ( min-width: 576px ) and ( max-resolution: 200dpi ) 550px,
-                ( min-width: 576px ) and ( min-resolution: 200dpi ) 1200px,
-
+                ( min-width: 576px ) 150px,
                 (max-width: 576px ) 260px
               "
               <% end %>
