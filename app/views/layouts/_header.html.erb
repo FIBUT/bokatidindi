@@ -14,13 +14,15 @@
   </div>
 
   <form
-    class="order-3 col-lg-6 col-sm-12 mt-4 mt-lg-5"
+    id="header-search-form"
+    class="order-3 col-lg-4 col-sm-12 mt-4 mt-lg-5"
     aria-label="Leit"
     method="get"
     action="/baekur"
   >
     <div class="input-group">
       <input
+        id="header-search-field"
         class="form-control form-control"
         aria-label="Leitarorð"
         type="search"
@@ -30,8 +32,27 @@
         value="<%= params[:search] %>"
         <% end %>
       >
-      <input type="submit" value="Leita" class="btn btn-lightgrey ml-2">
+      <input
+        id="header-search-submit"
+        type="submit"
+        value="Leita"
+        class="btn btn-lightgrey ml-2"
+        disabled="true"
+      />
     </div>
   </form>
+  <script>
+    search_field  = document.getElementById('header-search-field');
+    search_submit = document.getElementById('header-search-submit');
+
+    function conditionallyDisableSearchSubmit() {
+      if (search_field.value == '') {
+        return search_submit.disabled = true;
+      }
+      search_submit.disabled = false;
+    }
+
+    search_field.addEventListener('input', conditionallyDisableSearchSubmit);
+  </script>
   <%= render 'layouts/navbar' %>
 </header>
