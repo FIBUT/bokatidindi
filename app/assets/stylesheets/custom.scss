@@ -209,6 +209,9 @@ main {
 
   .book-meta-list {
     margin-top: 3rem;
+    a {
+      outline: 5px solid red;
+    }
   }
 
   #book_audio_sample {
