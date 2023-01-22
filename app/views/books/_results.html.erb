@@ -1,7 +1,7 @@
 <div class="row">
 
-  <% @books.each_with_index  do |book,i| %>
-  <section
+  <% @books.each_with_index do |book,i| %>
+  <article
     id="book-<%= book.id %>"
     class="book col-12 col-md-6 col-xl-4 px-0"
     aria-labelledby="book-<%= book.id %>-hgroup"
@@ -9,10 +9,13 @@
 
     <div class="row book-column-container m-2 p-2 pb-4">
 
-      <div class="content-column pt-md-3 col-lg-8 order-1">
+      <article class="content-column pt-md-3 col-lg-8 order-1">
 
-        <a href="<%= book_path(book.slug) %>">
-        <%= render 'books/hgroup_results', book: book %>
+        <a
+          href="<%= book_path(book.slug) %>"
+          title="Skoða upplýsingar um bókina <%= book_path(book.slug) %>"
+        >
+          <%= render 'books/hgroup_results', book: book %>
         </a>
 
         <%= render 'books/authors_brief', book: book %>
@@ -30,13 +33,17 @@
           <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary" %>
         </div>
 
-      </div>
+      </article>
 
-      <div
+      <aside
         class="mt-1 col-lg-4 overflow-hidden order-0"
+        role="presentation"
       >
-        <a class="product-image-link" href="<%= book_path(book.slug) %>" tabindex="-1">
-          <figure class="figure mt-4 w-100">
+        <a
+          class="product-image-link"
+          href="<%= book_path(book.slug) %>"
+        >
+          <div class="figure mt-4 w-100">
             <img
               src="<%= book.cover_image_url %>"
               <% if book.cover_image.attached? %>
@@ -56,13 +63,13 @@
               <% end %>
               alt="Bókakápa: <%= book.full_title_noshy %>"
             >
-          </figure>
+          </div>
         </a>
-      </div>
+      </aside>
 
     </div>
 
-  </section>
+  </article>
 
 <% end %>
 

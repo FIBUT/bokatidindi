@@ -6,6 +6,6 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="first page-item">
+<li class="first page-item" aria-label="Fara á fyrstu síðu">
   <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, remote: remote, class: 'page-link' %>
 </li>

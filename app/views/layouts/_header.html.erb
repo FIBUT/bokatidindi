@@ -19,8 +19,15 @@
     aria-label="Leit"
     method="get"
     action="/baekur"
+    role="search"
   >
     <div class="input-group">
+      <label
+        for="header-search-field"
+        class="mr-3 mt-1"
+      >
+        Leit
+      </label>
       <input
         id="header-search-field"
         class="form-control form-control"
@@ -31,6 +38,7 @@
         <% unless params[:search].nil? %>
         value="<%= params[:search] %>"
         <% end %>
+        role="searchbox"
       >
       <input
         id="header-search-submit"

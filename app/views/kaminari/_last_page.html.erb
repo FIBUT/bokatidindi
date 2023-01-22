@@ -6,6 +6,9 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="last page-item">
+<li
+  class="last page-item"
+  aria-label="Fara á öftustu síðu"
+>
   <%= link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, remote: remote, class: 'page-link' %>
 </li>
