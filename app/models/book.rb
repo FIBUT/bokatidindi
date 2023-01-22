@@ -87,6 +87,9 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
   validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
 
+  validates :book_authors, length: { minimum: 1 }
+  validates :book_binding_types, length: { minimum: 1 }
+
   scope :by_edition, lambda { |edition_id|
     includes(
       :publisher, :categories,

@@ -108,7 +108,11 @@ is:
             cover_image_file:
               invalid: 'er ógild'
             original_title:
-              blank: 'þarf að vera skilgreindur ef bókin er erlend'
+              blank: 'þarf að vera skilgreindur ef bókin er erlend af uppruna'
+            book_authors:
+              too_short: 'þurfa að vera skilgeindir'
+            book_binding_types:
+              too_short: 'þurfa að vera skilgreind'
     models:
       book:
         one: 'bók'
@@ -116,6 +120,9 @@ is:
       publisher:
         one: 'útgefandi'
         other: 'útgefendur'
+      book_author:
+        one: 'höfundur bókar'
+        other: 'höfundar bókar'
       author:
         one: 'höfundur'
         other: 'höfundar'
@@ -164,6 +171,8 @@ is:
         current_edition: 'Í núverandi tbl.'
         record_valid: 'Rétt skráð'
         cover_image: 'Forsíðumynd'
+        book_authors: 'Höfundar bókar'
+        book_binding_types: 'Útgáfuform bókar'
       book_category:
         category: 'Flokkur'
         for_print: 'Birtist í prentútgáfu'

@@ -144,12 +144,7 @@ RSpec.configure do |config|
     )
 
     20.times do
-      book = FactoryBot.create(:book)
-      FactoryBot.create(:book_author, book:)
-      FactoryBot.create(:book_category, book:)
-      FactoryBot.build(:book_binding_type, book:)
-      FactoryBot.create(:book_edition, book:)
-
+      FactoryBot.create(:book)
       # image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
       # image_contents = File.read(
       #   Rails.root.join("spec/assets/#{image_file_name}")

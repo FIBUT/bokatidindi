@@ -19,14 +19,18 @@ FactoryBot.define do
   end
 
   factory :book do
-    pre_title         { ['', '', '', FFaker::Book.title].sample }
-    title             { FFaker::Book.title }
-    post_title        { ['', '', '', FFaker::Book.title].sample }
-    description       { FFaker::Lorem.paragraph }
-    long_description  { FFaker::Lorem.paragraphs(4).join("\n\n") }
-    publisher         { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
-    original_title    { FFaker::Book.title }
-    country_of_origin { ['IS', 'US', 'JP', 'DE', 'FO', 'GL', 'FI'].sample }
+    pre_title          { ['', '', '', FFaker::Book.title].sample }
+    title              { FFaker::Book.title }
+    post_title         { ['', '', '', FFaker::Book.title].sample }
+    description        { FFaker::Lorem.paragraph }
+    long_description   { FFaker::Lorem.paragraphs(4).join("\n\n") }
+    publisher          { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
+    original_title     { FFaker::Book.title }
+    country_of_origin  { ['IS', 'US', 'JP', 'DE', 'FO', 'GL', 'FI'].sample }
+    book_categories    { [association(:book_category, book: instance)] }
+    book_authors       { [association(:book_author, book: instance)] }
+    book_binding_types { [association(:book_binding_type, book: instance)] }
+    book_editions      { [association(:book_edition, book: instance)] }
   end
 
   factory :book_category do
