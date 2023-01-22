@@ -145,11 +145,6 @@ RSpec.configure do |config|
 
     20.times do
       FactoryBot.create(:book)
-      # image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
-      # image_contents = File.read(
-      #   Rails.root.join("spec/assets/#{image_file_name}")
-      # )
-      # book.attach_cover_image_from_string(image_contents)
     end
 
     # This emulates the bt:update_category_counters rake task.
