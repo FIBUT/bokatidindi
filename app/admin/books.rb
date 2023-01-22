@@ -323,9 +323,12 @@ ActiveAdmin.register Book do
            'þá sem komu að gerð bókarinnar, séu þeir ekki skráðir í grunninn '\
            'nú þegar til að skráningin sé gild.'
 
-      para 'Þegar það hefur verið gert þarf að sækja þetta eyðublað upp á nýtt til að skrá hvern höfund bókarinnar (eða þýðendur, myndhöfunda o.s.frv.) og merkja við hlutverk þeirra.'
+      para 'Þegar það hefur verið gert þarf að sækja þetta eyðublað upp á '\
+           'nýtt til að skrá hvern höfund bókarinnar (eða þýðendur, '\
+           'myndhöfunda o.s.frv.) og merkja við hlutverk þeirra.'
 
-      para 'Gilt ISBN-númer þarf einnig að vera skráð fyrir hvert útgáfuform en ekki er hægt að skrá sama ISBN-númer oftar en einu sinni.'
+      para 'Gilt ISBN-númer þarf einnig að vera skráð fyrir hvert útgáfuform '\
+           'en ekki er hægt að skrá sama ISBN-númer oftar en einu sinni.'
 
       a('Leita að og skrá höfunda', class: 'button', href: '/admin/authors')
     end
