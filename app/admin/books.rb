@@ -318,6 +318,18 @@ ActiveAdmin.register Book do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
 
+    f.div class: 'intro-tip' do
+      para 'Áður en lengra er haldið er mikilvægt að forskrá höfunda og aðra '\
+           'þá sem komu að gerð bókarinnar, séu þeir ekki skráðir í grunninn '\
+           'nú þegar til að skráningin sé gild.'
+
+      para 'Þegar það hefur verið gert þarf að sækja þetta eyðublað upp á nýtt til að skrá hvern höfund bókarinnar (eða þýðendur, myndhöfunda o.s.frv.) og merkja við hlutverk þeirra.'
+
+      para 'Gilt ISBN-númer þarf einnig að vera skráð fyrir hvert útgáfuform en ekki er hægt að skrá sama ISBN-númer oftar en einu sinni.'
+
+      a('Leita að og skrá höfunda', class: 'button', href: '/admin/authors')
+    end
+
     publishers = Publisher.all if current_admin_user.admin?
     publishers = current_admin_user.publishers if current_admin_user.publisher?
 
@@ -332,7 +344,8 @@ ActiveAdmin.register Book do
 
     f.inputs 'Titill' do
       li 'Vinsamlegast ekki skrifa bókatitla eða hluta þeirra í hástöfum nema '\
-         'um sé að ræða skammstafanir.',
+         'um sé að ræða skammstafanir. Að öðru leyti gilda almennar '\
+         'ritreglur um hástaf í upphafi setningar og línu, sérnöfnum o.s.frv.',
          class: 'tip'
 
       f.input :pre_title,
@@ -363,7 +376,7 @@ ActiveAdmin.register Book do
     end
 
     f.has_many :book_authors,
-               heading: 'Höfundar, þýðendur og aðrir aðkomendur bókarinnar',
+               heading: 'Höfundar, þýðendur og aðrir þeir sem koma að bókinni',
                allow_destroy: true do |ba|
       ba.input :author_type,
                collection: AuthorType.order(rod: :asc),
@@ -378,9 +391,24 @@ ActiveAdmin.register Book do
                      '„höfundar“ hér efst á síðunni og svo „skrá höfund“.'
     end
 
-    f.inputs 'Lýsing' do
+    f.inputs 'Meginmálstexti' do
       li 'Athugið að skráning alls texta og yfirlestur er á ábyrgð útgefanda.',
          class: 'tip'
+      li 'Meginmálstexti er ekki ætlaður í lista yfir höfunda, '\
+         'ritnefndir eða aðra þá sem koma að framleiðslu hverrar bókar.',
+         class: 'tip'
+      li 'Aðeins skal skrifa hástafi í upphafi setninga, í skammstöfunum og í '\
+         'sérnöfnum.',
+         class: 'tip'
+      li 'Hvert línubil jafngildir málsgreinabili.',
+         class: 'tip'
+      li 'Nota má HTML-kóðann <em> og </em> til að afmarka skáletraðan texta. '\
+         'Skáletrun birtist bæði í prent- og vefútgáfu.',
+         class: 'tip'
+      li 'Allur texti í stuttri og áframhaldandi lýsingu skal vera á '\
+         'Íslensku, þó svo að bókin sé gefin út á erlendu tungumáli.',
+         class: 'tip'
+
       f.input :description,
               as: :text,
               required: true,
@@ -391,13 +419,8 @@ ActiveAdmin.register Book do
               },
               hint: 'Stuttur kynningartexti sem birtist á yfirlitssíðu '\
                     'vefsins og í prentútgáfu Bókatíðinda. '\
-                    "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög með bilum. "\
-                    'Aðeins skal skrifa hástafi í upphafi setninga og '\
-                    'í sérnöfnum. '\
-                    'Línubil jafngildir málsgreinabili. ' \
-                    'Nota má HTML-kóðann <em> og </em> til að merkja '\
-                    'skáletraðan texta. '\
-                    'Allur texti skal vera á Íslensku.'
+                    "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög með bilum og "\
+                    'HTML-táknum.'
       f.input :long_description,
               as: :text,
               input_html: {
@@ -408,7 +431,6 @@ ActiveAdmin.register Book do
               hint: 'Lengri lýsing sem birtist neðan við stuttu lýsinguna á '\
                     'ítarsíðu hverrar bókar í vefútgáfu. '\
                     'Langa lýsingin birtist ekki í prentútgáfu. '\
-                    'Sömu ritreglur og í styttri lýsingu. ' \
                     'Autt ef ekki á við.'
     end
 

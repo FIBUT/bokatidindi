@@ -152,7 +152,7 @@ is:
         title: 'Titill'
         post_title: 'Undirtitill'
         description: 'Stutt lýsing'
-        long_description: 'Löng lýsing'
+        long_description: 'Áframhaldandi lýsing'
         cover_image_file: 'Skrá fyrir forsíðumynd'
         audio_sample_file: 'Skrá fyrir hljóðbrot'
         delete_audio_sample: 'Eyða hljóðbroti'
