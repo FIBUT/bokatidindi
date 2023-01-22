@@ -10,4 +10,16 @@ RSpec.describe Author, type: :model do
       expect(author.name).to eq("#{author.firstname} #{author.lastname}")
     end
   end
+
+  context 'firstname and lastname' do
+    it 'are automatically stipped of spaces' do
+      author = create(
+        :author, is_icelandic: false,
+                 firstname: ' Xavier ',
+                 lastname: ' Salomó  '
+      )
+      expect(author.name).to eq('Xavier Salomó')
+      expect(author.order_by_name).to eq('Salomó, Xavier')
+    end
+  end
 end
