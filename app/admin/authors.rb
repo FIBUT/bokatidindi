@@ -42,6 +42,14 @@ ActiveAdmin.register Author do
   form do |f|
     f.semantic_errors
 
+    f.div class: 'intro-tip' do
+      para 'Athugið að og einn einstakling úr hópi eða tvíeyki þarf að skrá '\
+           'sérstaklega og með fullu nafni.'
+      para 'Fornafn og eftirnafn höfundar er skráð í sitt hvorn reitinn.'
+      para 'Munið einnig að skrá kyn höfundar svo rétt sé og hvort höfundur '\
+           'sé íslenskur eða erlendur.'
+    end
+
     f.inputs 'Nafn' do
       f.input :firstname
       f.input(
