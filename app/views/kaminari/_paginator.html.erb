@@ -7,7 +7,7 @@
     paginator:     the paginator that renders the pagination tags inside
 -%>
 <%= paginator.render do -%>
-<nav class="d-flex justify-content-center m-5" role="navigation" aria-label="Aðrar undirsíður lista">
+<nav class="d-flex justify-content-center m-5" role="navigation" aria-label="Síðuskipting">
   <ul class="pagination d-none d-md-flex">
     <%= first_page_tag unless current_page.first? %>
     <%= prev_page_tag unless current_page.first? %>
@@ -24,7 +24,7 @@
     <% end %>
   </ul>
 
-  <ul class="pagination d-md-none d-sm-flex" aria-label="síður">
+  <ul class="pagination d-md-none d-sm-flex">
     <%= prev_page_tag unless current_page.first? %>
     <% each_page do |page| -%>
       <% if page.display_tag? -%>
