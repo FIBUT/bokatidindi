@@ -27,9 +27,14 @@ form.formtastic {
   input.language { width: 16em; }
   input.datepicker { width: 8em; }
   a.has_many_remove { margin-left: 20%; margin-top: 1em; }
-  li.tip { margin-left: 20%; margin-top: 1em; font-weight: bold; }
+  .tip { margin-left: 20%; font-weight: bold; font-size: 1.2em; }
   textarea#book_description, textarea#book_long_description { max-width: 80em; }
   li.sample-pages { margin-left: 20%; }
+  p.field-group-note {
+    margin: 0.5em 0 0 20%;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
 }
 
 .index_as_table {
