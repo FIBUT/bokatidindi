@@ -331,6 +331,10 @@ ActiveAdmin.register Book do
     end
 
     f.inputs 'Titill' do
+      li 'Vinsamlegast ekki skrifa bókatitla eða hluta þeirra í hástöfum nema '\
+         'um sé að ræða skammstafanir.',
+         class: 'tip'
+
       f.input :pre_title,
               required: false,
               input_html: {
@@ -338,8 +342,8 @@ ActiveAdmin.register Book do
                 maxlength: Book::TITLE_MAX_LENGTH
               },
               hint: 'Nafn ritraðar eða bókaflokks, t.d. „Lærdómsrit '\
-                    'Bókmenntafélagsins“, „Risasyrpa“, „Dagbók Kidda '\
-                    'Klaufa 15“ eða „Goðheimar 2“. Autt ef ekki á við.'
+                    'Bókmenntafélagsins“, „Risasyrpa“, „Útkall“ '\
+                    'eða „Goðheimar 2“. Autt ef ekki á við.'
       f.input :title,
               required: true,
               input_html: {
@@ -358,25 +362,25 @@ ActiveAdmin.register Book do
               hint: 'Autt ef ekki á við.'
     end
 
-    f.has_many :book_authors, heading: 'Höfundar', allow_destroy: true do |ba|
+    f.has_many :book_authors,
+               heading: 'Höfundar, þýðendur og aðrir aðkomendur bókarinnar',
+               allow_destroy: true do |ba|
       ba.input :author_type,
                collection: AuthorType.order(rod: :asc),
-               input_html: { autocomplete: 'off' }
-      ba.input(
-        :author,
-        collection: Author.order(:name),
-        hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. þarf að '\
-              'skrá í sitt hvoru lagi. Ef höfundur finnst ekki í fellilista '\
-              'þarf að skrá hann með því að smella á „höfundar“ hér efst á '\
-              'síðunni og svo „skrá höfund“.'
-      )
+               input_html: { autocomplete: 'off' },
+               hint: 'Vinsamlegast hafið samband við skrifstofu FÍBÚT ef '\
+                     'hlutverk vantar í fellilista.'
+      ba.input :author,
+               collection: Author.order(:name),
+               hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. þarf '\
+                     'að skrá í sitt hvoru lagi. Ef höfundur finnst ekki í '\
+                     'fellilista þarf að skrá hann með því að smella á '\
+                     '„höfundar“ hér efst á síðunni og svo „skrá höfund“.'
     end
 
     f.inputs 'Lýsing' do
-      li(
-        'Athugið að skráning alls texta og yfirlestur er á ábyrgð útgefanda.',
-        class: 'tip'
-      )
+      li 'Athugið að skráning alls texta og yfirlestur er á ábyrgð útgefanda.',
+         class: 'tip'
       f.input :description,
               as: :text,
               required: true,
@@ -392,7 +396,8 @@ ActiveAdmin.register Book do
                     'í sérnöfnum. '\
                     'Línubil jafngildir málsgreinabili. ' \
                     'Nota má HTML-kóðann <em> og </em> til að merkja '\
-                    'skáletraðan texta.'
+                    'skáletraðan texta. '\
+                    'Allur texti skal vera á Íslensku.'
       f.input :long_description,
               as: :text,
               input_html: {
