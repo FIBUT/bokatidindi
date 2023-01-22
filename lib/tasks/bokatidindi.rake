@@ -246,4 +246,12 @@ namespace :bt do
       b.save
     end
   end
+
+  desc 'Strip trailing spaces from author names'
+  task strip_author_names: :environment do
+    Author.all.each do |a|
+      a.strip_text
+      a.save
+    end
+  end
 end

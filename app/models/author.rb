@@ -6,6 +6,7 @@ class Author < ApplicationRecord
 
   enum :gender, %i[undefined male female non_binary]
 
+  before_validation :strip_text
   before_validation :set_name
   before_create :set_slug, :set_order_by_name
   before_update :set_order_by_name
@@ -42,5 +43,10 @@ class Author < ApplicationRecord
       parameterized_name = parameterized_name.chop
     end
     self.slug = "#{parameterized_name}-#{random_string}"
+  end
+
+  def strip_text
+    self.firstname = firstname.try(:strip)
+    self.lastname  = lastname.try(:strip)
   end
 end
