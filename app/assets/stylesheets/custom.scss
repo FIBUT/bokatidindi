@@ -278,7 +278,7 @@ main {
 }
 
 @include media-breakpoint-down(sm) {
-  .logo-list figure {
+  .logo-list .figure {
     width: calc(33% - 66px);
     margin: 33px 15px;
   }
