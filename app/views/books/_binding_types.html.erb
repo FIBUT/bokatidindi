@@ -1,8 +1,16 @@
-<aside id="book-binding-types">
-<h3 class="mb-3">Útgáfuform</h3>
+<aside id="book-binding-types" aria-labelledby="book-binding-types-heading">
+<h3 class="mb-3" id="book-binding-types-heading">Útgáfuform</h3>
+<div role="list">
 <% local_assigns[:book].book_binding_types.each do |book_binding_type,i| %>
-<div id="book-binding-type-<%= book_binding_type.id %>" class="book-binding-type">
-  <h4 class="d-inline-block mr-2 mb-0">
+<div
+  id="book-binding-type-<%= book_binding_type.id %>"
+  class="book-binding-type" role="list-item"
+  aria-labelledby="book-binding-type-<%= book_binding_type.id %>-heading"
+>
+  <h4
+    class="d-inline-block mr-2 mb-0"
+    id="book-binding-type-<%= book_binding_type.id %>-heading"
+  >
     <%= book_binding_type.binding_type.corrected_name %>
   </h4>
     <% unless book_binding_type.availability == 'unknown' %>
@@ -41,4 +49,5 @@
     </ul>
   </div>
 <% end %>
+</div>
 </aside>

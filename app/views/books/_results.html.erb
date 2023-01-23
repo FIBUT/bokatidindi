@@ -14,7 +14,7 @@
 
         <a
           href="<%= book_path(book.slug) %>"
-          title="Skoða upplýsingar um bókina <%= book_path(book.slug) %>"
+          title="Skoða upplýsingar um bókina <%= book.full_title_noshy %>"
         >
           <%= render 'books/hgroup_results', book: book %>
         </a>
