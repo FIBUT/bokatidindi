@@ -112,7 +112,7 @@
         </div>
         <% end %>
 
-        <%= render 'books/binding_types', book: @book %>
+        <%= render('books/binding_types', book: @book) unless @book.book_binding_types.length.zero? %>
 
       </article>
 
