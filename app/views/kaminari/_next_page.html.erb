@@ -7,8 +7,8 @@
     remote:        data-remote
 -%>
 <li class="next page-item d-none d-md-flex">
-  <%= link_to_unless current_page.last?, t('views.pagination.next').html_safe, url, rel: 'next', remote: remote, class: 'page-link' %>
+  <%= link_to_unless current_page.last?, t('views.pagination.next').html_safe, url, rel: 'next', remote: remote, class: 'page-link', 'aria-label': 'Næsta síða' %>
 </li>
 <li class="next page-item d-md-none d-sm-flex">
-  <%= link_to_unless current_page.last?, '&raquo;'.html_safe, url, rel: 'next', remote: remote, class: 'page-link', 'aria-label': t('views.pagination.next').html_safe %>
+  <%= link_to_unless current_page.last?, '&raquo;'.html_safe, url, rel: 'next', remote: remote, class: 'page-link', 'aria-label': 'Næsta síða' %>
 </li>

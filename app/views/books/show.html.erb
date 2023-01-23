@@ -61,13 +61,13 @@
   </script>
 <% end %>
 
-<main role="main">
+<main>
 
 <div class="container-fluid">
 
 <div class="row">
 
-  <section
+  <div
     id="book-<%= @book.id %>"
     class="book book-single col-lg-12 col-md-12"
     aria-labelledby="book-<%= @book.id %>-hgroup"
@@ -75,50 +75,53 @@
 
     <div class="row book-column-container m-2 p-2 py-md-5">
 
-      <div class="col-lg-5 col-md-8 col-sm-12 offset-lg-1 order-0 order-md-1">
-
-      <% if @book.current_edition? == false %>
-        <p class="book-meta-old-edition">
-        <strong>
-          Athugið að þessi bók er úr eldri útgáfu Bókatíðinda og birt hér með
-          fyrirvara um mögulega sé ekki um að ræða nýjustu upplýsingar.
-          Hafið samband við útgefanda til að fá nánari upplýsingar um hvort
-          bókin sé fáanleg.
-        </strong>
-        </p>
-      <% end %>
-
-      <%= render 'books/hgroup', book: @book %>
-
-      <%= render 'books/authors', book: @book %>
-
       <article
-        aria-label="Lýsing"
-        class="book-description mb-5 bt-5 overflow-hidden"
+        class="col-lg-5 col-md-8 col-sm-12 offset-lg-1 order-0 order-md-1"
+        aria-label="Um bókina"
       >
-        <section id="book_description">
-          <%= simple_format @book.description, tags: ['em'] %>
-        </section>
 
-        <section id="book_long_description">
-          <%=  simple_format @book.long_description, tags: ['em'] %>
-        </section>
+        <% if @book.current_edition? == false %>
+          <p class="book-meta-old-edition" role="note">
+          <strong>
+            Athugið að þessi bók er úr eldri útgáfu Bókatíðinda og birt hér með
+            fyrirvara um mögulega sé ekki um að ræða nýjustu upplýsingar.
+            Hafið samband við útgefanda til að fá nánari upplýsingar um hvort
+            bókin sé fáanleg.
+          </strong>
+          </p>
+        <% end %>
+
+        <%= render 'books/hgroup', book: @book %>
+
+        <%= render 'books/authors', book: @book %>
+
+        <div class="book-description mb-5 bt-5 overflow-hidden">
+          <article id="book_description">
+            <%= simple_format @book.description, tags: ['em'] %>
+          </article>
+
+          <article id="book_long_description">
+            <%=  simple_format @book.long_description, tags: ['em'] %>
+          </article>
+        </div>
+
+        <% if @book.audio_sample? %>
+        <div id="book_audio_sample" class="mb-4 pb-4">
+          <h3>Hljóðbrot</h3>
+          <%= audio_tag @book.audio_sample_url, controls: true %>
+        </div>
+        <% end %>
+
+        <%= render 'books/binding_types', book: @book %>
+
       </article>
 
-      <% if @book.audio_sample? %>
-      <div id="book_audio_sample" class="mb-4 pb-4">
-        <h3>Hljóðbrot</h3>
-        <%= audio_tag @book.audio_sample_url, controls: true %>
-      </div>
-      <% end %>
+      <aside
+        class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 order-1 order-md-0"
+        aria-label="Myndefni og lýsigögn"
+      >
 
-      <%= render 'books/binding_types', book: @book %>
-
-      </div>
-
-      <div class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 order-1 order-md-0">
-
-        <figure class="figure w-100">
+        <figure class="figure w-100" aria-label="Forsíðumynd">
           <a
             data-fancybox="samples"
             href="<%= @book.cover_image_url(@image_format, true) %>"
@@ -175,18 +178,18 @@
         </div>
         <% end %>
 
-        <div>
+        <div aria-label="Lýsigögn">
           <%= render 'books/meta', book: @book %>
         </div>
 
-      </div>
+      </aside>
 
     </div>
     
-    <div class="col-12">
+    <footer class="col-12" aria-label="Styrktaraðilar">
       <%= render 'shared/ecommerce_links' %>
-    </div>
-  </section>
+    </footer>
+  </div>
 
 </div>
 

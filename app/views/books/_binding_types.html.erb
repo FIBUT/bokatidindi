@@ -1,7 +1,7 @@
-<section id="book-binding-types">
+<aside id="book-binding-types">
 <h3 class="mb-3">Útgáfuform</h3>
 <% local_assigns[:book].book_binding_types.each do |book_binding_type,i| %>
-<section id="book-binding-type-<%= book_binding_type.id %>" class="book-binding-type">
+<div id="book-binding-type-<%= book_binding_type.id %>" class="book-binding-type">
   <h4 class="d-inline-block mr-2 mb-0">
     <%= book_binding_type.binding_type.corrected_name %>
   </h4>
@@ -13,12 +13,14 @@
     <ul class="list-unstyled d-block">
     <% if book_binding_type.page_count %>
     <li class="page_count d-inline-block mr-2">
-      <%= book_binding_type.page_count %> bls.
+      <%= book_binding_type.page_count %>
+      <abbr title="blaðsíður" class="text-decoration-none">bls.</abbr>
     </li>
     <% end %>
     <% if book_binding_type.minutes %>
     <li class="hours d-inline-block mr-2">
-      <%= book_binding_type.hours %> klst.
+      <%= book_binding_type.hours %>
+      <abbr title="klukkustundir" class="text-decoration-none">klst.</abbr>
     </li>
     <% end %>
     <li class="isbn d-inline">
@@ -37,6 +39,6 @@
     </li>
     <% end %>
     </ul>
-  </section>
+  </div>
 <% end %>
-</section>
+</aside>
