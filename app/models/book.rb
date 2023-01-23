@@ -138,6 +138,18 @@ class Book < ApplicationRecord
     )
   }
 
+  def main_authors_ids
+    book_authors.where(
+      author_type_id: 2
+    ).pluck(
+      :author_id
+    )
+  end
+
+  def main_authors_string
+    Author.where(id: main_authors_ids).pluck(:name).to_sentence
+  end
+
   def inactive_edition_ids
     editions.inactive.pluck(:id).to_a
   end
