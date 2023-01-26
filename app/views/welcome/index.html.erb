@@ -50,8 +50,8 @@
             </p>
             <nav class="hero-nav-links d-block d-lg-none">
               <ul class="list-unstyled">
-                <li><a class="" href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
-                <li><a class="" href="#">Um Bókatíðindi (eldri árgangar)</a></li>
+                <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
+                <li><a href="/pages/um_bokatidindi">Um Bókatíðindi (eldri árgangar)</a></li>
               </ul>
             </nav>
           </div>
@@ -67,13 +67,13 @@
             />
             <ul class="hero-nav-links list-unstyled d-none d-lg-block d-xl-none">
               <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
-              <li><a href="#">Um Bókatíðindi</a></li>
+              <li><a href="/pages/um_bokatidindi">Um Bókatíðindi</a></li>
             </ul>
           </nav>
           <nav class="col-3 d-none d-xl-block offset-9">
             <ul class="hero-nav-links list-unstyled">
               <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
-              <li><a href="#">Um Bókatíðindi</a></li>
+              <li><a href="/pages/um_bokatidindi">Um Bókatíðindi</a></li>
             </ul>
           </nav>
           <% end %>
