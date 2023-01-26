@@ -33,10 +33,10 @@
     <div class="welcome-content py-5 px-md-0">
       <div class="container-lg">
         <div class="row mx-4">
-          <div class="d-flex flex-column justify-content-end col-12 col-lg-5 col-xl-5">
+          <div class="hero-heading-column d-flex flex-column justify-content-xl-end col-12 col-lg-5 col-xl-5 mb-4 mb-lg-0">
             <h1 class="hero-heading">Flestar bækur miðað við höfða&shy;tölu</h1>
           </div>
-          <div class="d-flex flex-column justify-content-end col-12 col-lg-4 col-xl-<%= @welcome_textbox_cols %> pt-4">
+          <div class="hero-body-column d-flex flex-column justify-content-xl-end col-12 col-sm-8 col-lg-4 col-xl-<%= @welcome_textbox_cols %>">
             <p>
               Bókatíðindi hafa síðan 1928 veitt yfirlit yfir útgáfu ársins fyrir
               bókaunnendur. Þar má alltaf nálgast upplýsingar um þær bækur sem gefnar
@@ -48,45 +48,59 @@
               aðgengileg allan ársins hring, hvenær sem bókaorma langar að kynna sér
               hvað er nýtt og spennandi að lesa.
             </p>
+            <nav class="hero-nav-links d-block d-lg-none">
+              <ul class="list-unstyled">
+                <li><a class="" href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
+                <li><a class="" href="#">Um Bókatíðindi (eldri árgangar)</a></li>
+              </ul>
+            </nav>
           </div>
           <% unless Edition.current_edition.cover_image_url.empty? %>
-          <div class="d-none d-lg-flex flex-column justify-content-end col-3" role="presentation">
+          <nav class="hero-image-column d-flex flex-column justify-content-xl-end col-12 col-sm-4 col-lg-3" role="presentation">
             <img
               class="w-100"
               role="presentation"
               srcset="<%= Edition.current_edition.cover_image_srcsets[@image_format] %>"
               src="<%= Edition.current_edition.cover_image_url %>"
-              sizes="260px"
-              alt="Forsíða Bókatíðinda"
+              sizes="( min-width: 576px ) 260px, (max-width: 576px ) 550px"
+              alt="Forsíðan fyrir <%= Edition.current_edition.title %>"
             />
-          </div>
-          <% unless Edition.current_edition.pdf_file_url.empty? %>
-          <div class="col-12 col-xl-3 offset-lg-9 offset-xl-9 mt-2">
-              <a
-                href="<%= Edition.current_edition.pdf_file_url %>"
-                class="btn btn-darkgrey"
-              >
-                Sækja PDF-útgáfu
-              </a>
-          </div>
-          <% end %>
+            <ul class="hero-nav-links list-unstyled d-none d-lg-block d-xl-none">
+              <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
+              <li><a href="#">Um Bókatíðindi</a></li>
+            </ul>
+          </nav>
+          <nav class="col-3 d-none d-xl-block offset-9">
+            <ul class="hero-nav-links list-unstyled">
+              <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
+              <li><a href="#">Um Bókatíðindi</a></li>
+            </ul>
+          </nav>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <aside class="container-lg">
+  <div id="welcome-current-edition" class="container-lg">
 
-    <nav class="row mx-4" aria-label="Vöruflokkar">
+    <div class="row mx-4 mb-4" aria-labelledby="current-edition-categories-heading">
+
+      <div class="col-12">
+        <h2 id="current-edition-categories-heading">Nýjasta tölublað</h2>
+      </div>
+
+    </div>
+
+    <div class="row mx-4">
 
       <% Category.groups.each do |category_group| %>
-      <div class="col-md-4 py-0 px-3 pb-5">
-          <h2
+      <div class="category-group col-md-4 py-0 px-3 pb-5">
+          <h3
             class="mb-3"
           >
             <%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %>
-          </h2>
+          </h3>
           <ul class="list-unstyled welcome-category-list">
             <%
             Category.where(group: category_group[1]).order('rod').each do |c|
@@ -100,9 +114,9 @@
       </div>
       <% end %>
 
-    </nav>
+    </div>
 
-  </aside>
+  </div>
 
   <footer aria-labelledby="sponsor-blurp">
     <div class="welcome-content p-4 pt-5">
