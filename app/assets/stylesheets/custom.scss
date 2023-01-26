@@ -293,6 +293,79 @@ main {
   }
 }
 
+
+
+.footer-container {
+  grid-row: 3;
+  background-color: $footer-bg;
+  color: $white;
+  h2, h3 {
+    font-size: $font-size-lg;
+    color: $white;
+    font-weight: $font-weight-bold;
+  }
+  li {
+    color: $white;
+  }
+  a {
+    color: $body-bg;
+    font-weight: $font-weight-bold;
+  }  
+}
+
+.dropdown-toggle::after {
+  margin-left: 1rem;
+}
+
+// Header
+header {
+  min-height: 135px;
+  .site-logo {
+    img {
+      width: 300px;
+      height: auto;
+      min-height: 45px;
+    }
+  }
+  #mobile-menu-button {
+    position: absolute;
+    top: 45px;
+    left: 30px;
+  }  
+  #header-search-form {
+    label {
+      color: $body-bg
+    }
+  }
+  background-color: theme-color("primary");
+  .nav-link {
+    color: $header-link-color;
+  }
+  .nav-link:hover {
+    color: $white;
+    text-decoration: underline;
+  }
+  .dropdown-menu {
+    .nav-link {
+      color: $link-color;
+    }
+    .nav-link:hover {
+      color: $link-hover-color;
+      text-decoration: underline;
+    }
+  }
+  .input-group {
+    align-items: center;
+    label {
+      color: $header-link-color;
+    }
+  }
+}
+
+.pdf-download-link {
+  font-size: $font-size-sm;
+}
+
 @include media-breakpoint-down(lg) {
   .welcome-content {
     .hero-heading {
@@ -307,6 +380,9 @@ main {
 }
 
 @include media-breakpoint-down(sm) {
+  .site-logo {
+    width: 80%;
+  }
   .logo-list .figure {
     width: calc(33% - 66px);
     margin: 33px 15px;
@@ -345,59 +421,16 @@ main {
       font-size: 2em;
     }
   }
-  
 }
 
-.footer-container {
-  grid-row: 3;
-  background-color: $footer-bg;
-  color: $white;
-  h2, h3 {
-    font-size: $font-size-lg;
-    color: $white;
-    font-weight: $font-weight-bold;
-  }
-  li {
-    color: $white;
-  }
-  a {
-    color: $body-bg;
-    font-weight: $font-weight-bold;
-  }  
-}
-
-.dropdown-toggle::after {
-  margin-left: 1rem;
-}
-
-// Header
-header {
-  background-color: theme-color("primary");
-  .nav-link {
-    color: $header-link-color;
-  }
-  .nav-link:hover {
-    color: $white;
-    text-decoration: underline;
-  }
-  .dropdown-menu {
-    .nav-link {
-      color: $link-color;
-    }
-    .nav-link:hover {
-      color: $link-hover-color;
-      text-decoration: underline;
-    }
-  }
-  .input-group {
-    align-items: center;
-    label {
-      color: $header-link-color;
-    }
+@include media-breakpoint-up(md) {
+  #header-search-form {
+    width: 33%;
   }
 }
 
-.pdf-download-link {
-  font-size: $font-size-sm;
+@include media-breakpoint-up(lg) {
+  #header-search-form {
+    width: 20%;
+  }
 }
-

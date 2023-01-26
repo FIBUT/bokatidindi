@@ -1,36 +1,34 @@
-<header class="row px-4 pb-3 pt-4 pt-sm-0 justify-content-between align-items-end">
-  <nav class="site-logo order-2 col-9 col-xl-2 col-lg-3 col-md-4 col-sm-12 mt-4 mt-lg-0">
+<div class="d-flex justify-content-between align-items-end flex-column align-items-sm-start">
+  <nav class="site-logo mb-4 mb-md-0 d-flex">
+    <button id="mobile-menu-button" class="d-sm-none btn btn-lg btn-lightgrey mr-3" title="Aðalvalmynd">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
     <a href="<%= root_path %>" title="Fara á forsíðu Bókatíðinda">
-      <%= image_tag 'logotype-cropped.svg', height: '105', width: '689', alt: 'Bókatíðindi', class: 'img-fluid ml-2' %>
+      <%= image_tag 'logotype-cropped.svg', height: '105', width: '689', alt: 'Bókatíðindi', class: 'img-fluid' %>
     </a>
   </nav>
 
-  <div class="col-1 d-sm-none">
-    <button id="mobile-menu-button" class="btn btn-lg btn-lightgrey" title="Aðalvalmynd">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-    </svg>
-    </button>
-  </div>
-
+<!--
   <form
     id="header-search-form"
-    class="order-3 col-lg-4 col-sm-12 mt-5"
+    class=""
     aria-label="Leit"
     method="get"
     action="/baekur"
     role="search"
   >
+    <label
+      for="header-search-field"
+      class="mr-3 mt-1"
+    >
+      Leita í Bókatíðindum
+    </label>
     <div class="input-group">
-      <label
-        for="header-search-field"
-        class="mr-3 mt-1"
-      >
-        Leit
-      </label>
       <input
         id="header-search-field"
-        class="form-control form-control"
+        class="form-control form-control-sm"
         aria-label="Leitarorð"
         type="search"
         name="search"
@@ -44,7 +42,7 @@
         id="header-search-submit"
         type="submit"
         value="Leita"
-        class="btn btn-lightgrey ml-2"
+        class="btn btn-sm btn-lightgrey ml-2"
         disabled="true"
       />
     </div>
@@ -62,5 +60,7 @@
 
     search_field.addEventListener('input', conditionallyDisableSearchSubmit);
   </script>
-  <%= render 'layouts/navbar' %>
-</header>
+-->
+</div>
+
+<%= render 'layouts/navbar' %>
