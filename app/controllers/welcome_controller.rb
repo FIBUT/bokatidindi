@@ -7,12 +7,6 @@ class WelcomeController < ApplicationController
                         'útgáfu ársins fyrir bókaunnendur. Þar má alltaf '\
                         'nálgast upplýsingar um þær bækur sem gefnar eru '\
                         'út á hverju ári.'
-
-    if Edition.current_edition.cover_image.attached?
-      @welcome_textbox_cols = 4
-    else
-      @welcome_textbox_cols = 7
-    end
   end
 
   def image_format
