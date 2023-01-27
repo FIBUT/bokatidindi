@@ -142,6 +142,17 @@ main {
   top: 30px;
 }
 
+.logo-list {
+  .sponsor {
+    max-width: 80px;
+    width: calc(30% - 66px);
+    margin: 33px 15px;
+  }
+  .sponsor:hover {
+    transform: scale(1.05);
+  }
+}
+
 .older-edition {
   width: 100%;
   justify-content: flex-end;
@@ -279,20 +290,6 @@ main {
   font-size: 0.8em;
 }
 
-.logo-list{
-  text-align: center;
-  .figure {
-    width: 120px;
-    margin: 10px;
-    transition: all 0.1s ease-in-out;
-  }
-  .figure:hover {
-    transform: scale(1.05);
-  }
-}
-
-
-
 .footer-container {
   grid-row: 3;
   background-color: $footer-bg;
@@ -377,9 +374,9 @@ header {
   .site-logo {
     width: 80%;
   }
-  .logo-list .figure {
-    width: calc(33% - 66px);
-    margin: 33px 15px;
+  .logo-list .sponsor {
+    max-width: 120px;
+    width: calc(50% - 66px);
   }
   .book {
     .authors a, .book-authors a, .book-meta-list a, #book-binding-types a {
@@ -414,9 +411,8 @@ header {
   h1 {
     font-size: 1.2em;
   }
-  .logo-list figure {
-    width: calc(33% - 10px);
-    margin: 5px auto;
+  .logo-list .sponsor {
+    width: 20%;
   }
   .welcome-content {
     .hero-heading {
