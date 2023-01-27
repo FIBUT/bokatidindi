@@ -328,13 +328,11 @@ header {
     }
   }
   #mobile-menu-button {
-    position: absolute;
-    top: 45px;
-    left: 30px;
   }  
   #header-search-form {
     label {
-      color: $body-bg
+      color: $body-bg;
+      font-size: 0.8em;
     }
   }
   background-color: theme-color("primary");
@@ -420,17 +418,5 @@ header {
     .hero-heading {
       font-size: 2em;
     }
-  }
-}
-
-@include media-breakpoint-up(md) {
-  #header-search-form {
-    width: 33%;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  #header-search-form {
-    width: 20%;
   }
 }
