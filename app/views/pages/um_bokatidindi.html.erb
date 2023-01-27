@@ -101,28 +101,5 @@
         <% end %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-12">
-        <h2 class="pb-2 pt-5">Eldri árgangar Bókatíðinda</h2>
-      </div>
-      <% @editions.each do |edition| %>
-        <div class="col-6 col-sm-3 col-xl-2">
-        <a href="<%= edition.pdf_file_url %>" class="older-edition d-flex flex-column justify-content-end h-100 p-2 m-1">
-          <h2 class="title order-2 mt-2"><%= edition.title %></h2>
-          <% if edition.cover_image.attached? %>
-          <div class="order-1">
-          <img
-            class="w-100 img-fluid"
-            src="<%= edition.cover_image_url[@image_format] %>"
-            srcset="<%= edition.cover_image_srcsets[@image_format] %>"
-            sizes="(min-resolution: 200dpi 260px), 150px"
-          />
-          </div>
-          <% end %>
-        </a>
-        </div>
-      <% end %>
-    </div>
   </div>
 </main>
