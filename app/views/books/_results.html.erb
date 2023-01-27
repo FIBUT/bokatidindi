@@ -1,11 +1,10 @@
-<div class="row" role="list">
+<div class="row">
 
   <% @books.each_with_index do |book,i| %>
   <article
     id="book-<%= book.id %>"
-    class="book col-12 col-md-6 col-xl-4 px-0"
+    class="book d-flex col-12 col-md-6 col-xl-4 px-0"
     aria-labelledby="book-<%= book.id %>-hgroup"
-    role="list-item"
   >
 
     <div class="row book-column-container m-2 p-2 pb-4">

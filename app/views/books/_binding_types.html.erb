@@ -1,18 +1,18 @@
 <aside id="book-binding-types" aria-labelledby="book-binding-types-heading">
-<h3 class="mb-3" id="book-binding-types-heading">Útgáfuform</h3>
-<div role="list">
+<h2 class="mb-3" id="book-binding-types-heading">Útgáfuform</h2>
+<div>
 <% local_assigns[:book].book_binding_types.each do |book_binding_type,i| %>
 <div
   id="book-binding-type-<%= book_binding_type.id %>"
-  class="book-binding-type" role="list-item"
+  class="book-binding-type"
   aria-labelledby="book-binding-type-<%= book_binding_type.id %>-heading"
 >
-  <h4
+  <h3
     class="d-inline-block mr-2 mb-0"
     id="book-binding-type-<%= book_binding_type.id %>-heading"
   >
     <%= book_binding_type.binding_type.corrected_name %>
-  </h4>
+  </h3>
     <% unless book_binding_type.availability == 'unknown' %>
     <p class="availability d-inline-block mb-0">
       <%= I18n.t "activerecord.attributes.book_binding_type.availabilities.#{book_binding_type.availability}" %>
