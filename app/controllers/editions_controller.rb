@@ -22,13 +22,11 @@ class EditionsController < ApplicationController
 
   def index
     @image_format    = image_format
-    @editions        = Edition.where(
-      is_legacy: true
-    ).order(
+    @editions        = Edition.joins(:pdf_file_attachment).order(
       year: :desc,
       title: :desc,
       id: :desc
-    )
+    ).with_attached_pdf_file
   end
 
   private
