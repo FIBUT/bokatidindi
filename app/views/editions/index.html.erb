@@ -1,39 +1,40 @@
 <% content_for :meta do %>
-  <title>Bókatíðindi - Eldri tölublöð og árgangar</title>
+  <title>Bókatíðindi - Tölublöð og árgangar</title>
 <% end %>
 
-<main role="main" aria-label="Bækur">
+<main role="main" aria-label="Bækur" class="my-5">
 
   <div class="container-md">
 
-    <div class="row">
+    <article class="row">
       <div class="col-12 mb-3">
-        <h1 class="mb-3">Eldri tölublöð og árgangar Bókatíðinda</h1>
+        <h1 class="mb-3">Árgangar Bókatíðinda</h1>
         <p>
-          Hér má finna eldri útgáfur og árganga Bókatíðinda.
+          Hér má finna prentútgáfur Bókatíðinda í gegn um árin á PDF-formi.
         </p>
         <p>
           Félag íslenskra bókaútgefenda hefur reynt að safna öllum útgáfunum
-          ritsins og tekur fagnandi á móti öllum eldri Bókaskrám eða Bókatíðindi
-          sem gefin voru út fram til ársins 1986.
+          ritsins og tekur fagnandi á móti öllum eldri Bókaskrám eða
+          Bókatíðindum sem gefin voru út fram til ársins 1986.
         </p>
       </div>
-    </div>
+    </article>
 
-    <div class="row">
+    <div class="row" role="list">
       <% @editions.each do |edition| %>
-        <div class="col-6 col-sm-3 col-xl-2">
-        <a href="<%= edition.pdf_file_url %>" class="older-edition d-flex flex-column justify-content-end h-100 p-2 m-1">
+        <div class="col-6 col-sm-3 col-xl-2" role="list-item">
+        <a href="<%= edition.pdf_file_url %>" target="_blank" title="Skoða <%= edition.title %> í prentútgáfu" class="older-edition d-flex flex-column justify-content-end h-100 p-2 m-1">
           <h2 class="title order-2 mt-2"><%= edition.title %></h2>
           <% if edition.cover_image.attached? %>
-          <div class="order-1">
-          <img
-            class="w-100 img-fluid"
-            src="<%= edition.cover_image_url[@image_format] %>"
-            srcset="<%= edition.cover_image_srcsets[@image_format] %>"
-            sizes="(min-resolution: 200dpi 260px), 150px"
-          />
-          </div>
+          <aside class="order-1">
+            <img
+              class="w-100 img-fluid"
+              src="<%= edition.cover_image_url %>"
+              srcset="<%= edition.cover_image_srcsets[@image_format] %>"
+              sizes="(min-resolution: 200dpi 260px), 150px"
+              alt="Forsíðan fyrir <%= edition.title %>"
+            />
+          </aside>
           <% end %>
         </a>
         </div>

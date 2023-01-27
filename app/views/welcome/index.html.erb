@@ -48,33 +48,24 @@
               aðgengileg allan ársins hring, hvenær sem bókaorma langar að kynna sér
               hvað er nýtt og spennandi að lesa.
             </p>
-            <nav class="hero-nav-links d-block d-lg-none">
-              <ul class="list-unstyled">
-                <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
-                <li><a href="/pages/um_bokatidindi">Um Bókatíðindi (eldri árgangar)</a></li>
-              </ul>
-            </nav>
+            <a class="hero-nav-link d-none d-sm-inline-block d-lg-none" href="/argangar">Sækja prentútgáfu</a>
           </div>
           <% unless Edition.current_edition.cover_image_url.empty? %>
           <nav class="hero-image-column d-flex flex-column justify-content-xl-end col-12 col-sm-4 col-lg-3" role="presentation">
-            <img
-              class="w-100"
-              role="presentation"
-              srcset="<%= Edition.current_edition.cover_image_srcsets[@image_format] %>"
-              src="<%= Edition.current_edition.cover_image_url %>"
-              sizes="( min-width: 576px ) 260px, (max-width: 576px ) 550px"
-              alt="Forsíðan fyrir <%= Edition.current_edition.title %>"
-            />
-            <ul class="hero-nav-links list-unstyled d-none d-lg-block d-xl-none">
-              <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
-              <li><a href="/pages/um_bokatidindi">Um Bókatíðindi</a></li>
-            </ul>
+            <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda">
+              <img
+                class="w-100"
+                role="presentation"
+                srcset="<%= Edition.current_edition.cover_image_srcsets[@image_format] %>"
+                src="<%= Edition.current_edition.cover_image_url %>"
+                sizes="( min-width: 576px ) 260px, (max-width: 576px ) 550px"
+                alt="Forsíðan fyrir <%= Edition.current_edition.title %>"
+              />
+            </a>
+            <a class="hero-nav-link list-unstyled d-none d-lg-inline d-xl-none" href="/argangar">Sækja prentútgáfu</a>
           </nav>
-          <nav class="col-3 d-none d-xl-block offset-9">
-            <ul class="hero-nav-links list-unstyled">
-              <li><a href="<%= Edition.current_edition.pdf_file_url %>">Sækja PDF-útgáfu</a></li>
-              <li><a href="/pages/um_bokatidindi">Um Bókatíðindi</a></li>
-            </ul>
+          <nav class="col-12 col-xl-3 d-sm-none d-xl-block offset-xl-9 text-xl-right">
+            <a class="hero-nav-link" href="/argangar">Sækja prentútgáfu</a></li>
           </nav>
           <% end %>
         </div>

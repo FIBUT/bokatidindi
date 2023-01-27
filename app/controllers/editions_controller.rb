@@ -20,6 +20,11 @@ class EditionsController < ApplicationController
     end
   end
 
+  def index
+    @image_format    = image_format
+    @editions        = Edition.order(year: :desc)
+  end
+
   private
 
   def image_format

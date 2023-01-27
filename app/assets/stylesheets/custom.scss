@@ -258,10 +258,8 @@ main {
     line-height: 1em;
     margin-bottom: 0.12em;
   }
-  .hero-nav-links {
-    a {
-      font-size: 0.8em;
-    }
+  .hero-nav-link {
+    font-size: 0.8em;
   }
 }
 
@@ -327,8 +325,6 @@ header {
       min-height: 45px;
     }
   }
-  #mobile-menu-button {
-  }  
   #header-search-form {
     label {
       color: $body-bg;
@@ -410,6 +406,14 @@ header {
 }
 
 @include media-breakpoint-down(xs) {
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
   .logo-list figure {
     width: calc(33% - 10px);
     margin: 5px auto;
