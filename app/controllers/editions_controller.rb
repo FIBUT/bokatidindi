@@ -22,7 +22,13 @@ class EditionsController < ApplicationController
 
   def index
     @image_format    = image_format
-    @editions        = Edition.order(year: :desc)
+    @editions        = Edition.where(
+      is_legacy: true
+    ).order(
+      year: :desc,
+      title: :desc,
+      id: :desc
+    )
   end
 
   private
