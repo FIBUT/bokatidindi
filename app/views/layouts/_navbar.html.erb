@@ -30,6 +30,7 @@
       <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
     </svg>
   </button>
+
   <ul class="nav-list list-unstyled mx-5">
     <% Category.groups.each do |category_group| %>
     <li>
@@ -45,4 +46,41 @@
     </li>
     <% end %>
   </ul>
+
+  <form
+    id="mobile-search-form"
+    class="m-5"
+    aria-label="Leit"
+    method="get"
+    action="/baekur"
+    role="search"
+  >
+    <label
+      for="mobile-search-field"
+      class="mb-0"
+    >
+      Leita í Bókatíðindum
+    </label>
+    <div class="input-group">
+      <input
+        id="mobile-search-field"
+        class="form-control form-control-sm"
+        aria-label="Leitarorð"
+        type="search"
+        name="search"
+        placeholder="Leitarorð…"
+        <% unless params[:search].nil? %>
+        value="<%= params[:search] %>"
+        <% end %>
+        role="searchbox"
+      >
+      <input
+        id="header-search-submit"
+        type="submit"
+        value="Leita"
+        class="btn btn-sm btn-lightgrey ml-2"
+        disabled="true"
+      />
+    </div>
+  </form>
 </nav>

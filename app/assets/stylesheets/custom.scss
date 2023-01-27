@@ -317,10 +317,9 @@ main {
 
 // Header
 header {
-  min-height: 135px;
   .site-logo {
     img {
-      width: 300px;
+      width: 220px;
       height: auto;
       min-height: 45px;
     }
@@ -334,6 +333,7 @@ header {
   background-color: theme-color("primary");
   .nav-link {
     color: $header-link-color;
+    font-size: 0.8em;
   }
   .nav-link:hover {
     color: $white;
