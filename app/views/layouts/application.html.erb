@@ -6,12 +6,14 @@
     <%= render 'layouts/meta' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column h-100">
     <header class="px-4 pt-4 pt-md-5 px-md-5">
       <%= render 'layouts/header' %>
     </header>
 
+    <div class="flex-shrink-0">
     <%= yield %>
+    </div>
 
     <%= render 'layouts/footer' %>
   </body>

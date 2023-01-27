@@ -83,7 +83,6 @@ $container-max-widths: (
 // Allt annað hér
 
 body {
-  display: grid;
   min-height: 100vh;
 }
 
@@ -291,7 +290,6 @@ main {
 }
 
 .footer-container {
-  grid-row: 3;
   background-color: $footer-bg;
   color: $white;
   font-size: 0.8em;
