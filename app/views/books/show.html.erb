@@ -95,6 +95,20 @@
 
         <%= render 'books/authors', book: @book %>
 
+        <img
+          src="<%= @book.cover_image_url %>"
+          <% if @book.cover_image.attached? %>
+          height="<%= @book.cover_image.metadata[:height] %>"
+          width="<%= @book.cover_image.metadata[:width] %>"
+          <% end %>
+          <% unless @book.cover_image_srcsets.blank? %>
+          srcset="<%= @book.cover_image_srcsets[@image_format] %>"
+          sizes="560px"
+          <% end %>
+          class="img-fluid w-100 d-md-none mb-5"
+          alt="Forsíða bókarinnar"
+        >
+
         <div class="book-description mb-5 bt-5 overflow-hidden">
           <article id="book_description">
             <%= simple_format @book.description, tags: ['em'] %>
@@ -121,7 +135,7 @@
         aria-label="Myndefni og lýsigögn"
       >
 
-        <figure class="figure w-100" aria-label="Forsíðumynd">
+        <figure class="d-none d-md-block figure w-100" aria-label="Forsíðumynd">
           <a
             data-fancybox="samples"
             href="<%= @book.cover_image_url(@image_format, true) %>"
