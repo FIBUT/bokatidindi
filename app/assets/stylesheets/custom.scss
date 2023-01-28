@@ -380,6 +380,16 @@ header {
       font-size: 0.7em;
     }
   }
+  main.page {
+    background-color: $white;
+  }
+  .page-container {
+    border: none;
+  }
+}
+
+@include media-breakpoint-down(md) {
+
 }
 
 @include media-breakpoint-down(sm) {
