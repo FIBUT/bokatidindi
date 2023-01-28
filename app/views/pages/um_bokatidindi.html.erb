@@ -16,15 +16,14 @@
   <% end %>
 <% end %>
 
-<main role="main" class="page">
+<main role="main" class="page pt-3">
 
   <div class="container-xl">
 
-  <h1 class="mx-4 mb-4 mt-5">Um Bókatíðindi</h1>
-
-  <div class="">
-
     <div class="row">
+      <div class="col-12 px-5 pb-0 pt-5 pb-md-3">
+        <h1 class="">Um Bókatíðindi</h1>
+      </div>
       <div class="page-container col-12 col-lg-8 p-5 mb-5 order-0">
         <p>
           Bókatíðindi komu fyrst út árið 1928 undir nafninu Bókaskrá
@@ -49,27 +48,10 @@
           var nægja að nefna blaðið Bókatíðindi, líkt og það hefur verið kallað,
           allar götur síðan ásamt ártali útáfuárs.
         </p>
-
-        <h2 class="pb-2 pt-5">Um <%= @current_edition.title %></h2>
-        <table class="table table-sm">
-          <tbody>
-            <tr>
-              <th class="py-2 pr-3 align-top text-right" scope="row">Útgefandi</th>
-              <td class="py-2 align-top">
-                Félag íslenskra bókaútgefenda<br>
-                Barónsstíg 5<br>
-                101 Reykjavík<br>
-                Sími 511-8020<br>
-                <a href="https://www.fibut.is/" target="_blank">www.fibut.is</a>
-              </td>
-            </tr>
-            <tr>
-              <th class="py-2 pr-3 align-top text-right" scope="row">Ábyrgðarmaður</th>
-              <td class="py-2 align-top">Bryndís Loftsdóttir</td>
-            </tr>
-          </tbody>
-        </table>
-        <p>Þeir sem vilja skrá nýja titla inn á vefinn eru beðnir um að hafa samband við félagið.</p>
+        <p>
+          Þeir sem vilja skrá nýja titla inn á vefinn eru beðnir um að hafa
+          samband við félagið.
+        </p>
       </div>
 
       <div class="col-6 col-md-4 col-lg-3 offset-lg-1 order-lg-1">
@@ -97,7 +79,6 @@
           </figure>
         <% end %>
       </div>
-    </div>
     </div>
   </div>
 </main>
