@@ -1,0 +1,92 @@
+<% content_for :meta do %>
+  <title>Bókatíðindi - Opin gögn</title>
+<% end %>
+
+<main role="main" class="page pt-3">
+
+<div class="container-xl">
+
+<div class="row">
+
+  <div class="col-12 px-5 pb-0 pt-5 pb-md-3">
+    <h1 class="">Opin gögn</h1>
+  </div>
+
+  <div class="col-12 page-container px-5 pb-5 pt-0 pt-md-5 mb-5">
+    <p>
+      Opin gögn úr Bókatíðindum eru fyrst og fremst ætluð til hægðarauka fyrir
+      bókasöfn, verslanir eða fólk sem vinnur með upplýsingar um bækur og þarf
+      að færa upplýsingarnar sjálfvirkt inn í sína gagnagrunna, töflureikna og
+      önnur tölvukerfi.
+    </p>
+
+    <h2>Skilyrði um notkun gagna úr Bókatíðindum</h2>
+
+    <ol>
+      <li>
+        Upplýsingar og gögn úr umsjónarkerfi Bókatíðinda eru varðar með
+        höfundarrétti og er ýmist í eigu eða á ábyrgð Félags íslenskra
+        bókaútgefenda eða einstakra útgefenda, höfunda, myndhöfunda, þýðenda
+        o.s.frv. og eru þær sömu og birtast í prent- og vefútgáfum Bókatíðinda.
+      </li>
+      <li>
+        Opinber notkun og birting, t.d. vef eða í appi á gögnum úr Bókatíðindum,
+        sem og notkun í hagnaðarskyni er háð sérstöku leyfi og uppfylltum
+        skilyrðum frá Félagi íslenskra bókaútgefenda.
+      </li>
+      <li>
+        Ekki er leyfilegt að gefa það í skyn að Félag íslenskra bókaútgefenda
+        eða einstakir bókaútgefendur hafi lagt sérstaka blessun sína yfir notkun
+        á gögnum úr Bókatíðindum nema með sérstöku leyfi og uppfylltum skilyrðum
+        frá Félagi íslenskra bókaútgefenda.
+      </li>
+      <li>
+        Birting, uppbygging gagnanna og staðsetning endapunkta getur breyst án
+        fyrirvara.
+      </li>
+      <li>
+        Eins og er er ekki krafist auðkenningar til notkunar á gögnum úr
+        Bókatíðindum en það getur einnig breyst án fyrirvara.
+      </li>
+    </ol>
+    <h2>Uppbygging gagna</h2>
+    <p>
+      JSON-gögnin eru byggð upp af fylki (e. array) af hlutum (e. objects) sem
+      svo innihalda upplýsingar um hverja bók í þeim árgangi Bókatíðinda sem
+      hefur verið valinn.
+    </p>
+    <h2>Slóðir á myndir</h2>
+    <p>
+      Hægt er að bæta <code>?include_images=true</code> aftan við vefslóðina til
+      að fá vefslóðir á mynd af kápu hverrar bókar.
+    </p>
+  </div>
+  <div class="col-12 page-container p-5 mb-5">
+    <h2>Vefslóðir</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th span="tow">Árgangur</th>
+          <th span="tow">Vefslóð</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Núverandi árgangur</td>
+          <td><%= argangar_url %>/current.json</td>
+        </tr>
+        <% Edition.all.each do |edition| %>
+        <% next if edition.books.count.zero? %>
+        <tr>
+          <td><%= edition.title %></td>
+          <td><%= argangar_url %>/<%= edition.id %>.json</td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+</main>
