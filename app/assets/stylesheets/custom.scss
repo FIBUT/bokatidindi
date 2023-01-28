@@ -141,6 +141,13 @@ main {
   top: 30px;
 }
 
+.page-container {
+  background-color: $white;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  font-size: 0.8em;
+}
+
 .logo-list {
   .sponsor {
     max-width: 80px;
