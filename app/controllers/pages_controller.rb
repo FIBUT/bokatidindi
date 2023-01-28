@@ -8,6 +8,8 @@ class PagesController < ApplicationController
 
   def privacy_policy; end
 
+  def open_data; end
+
   private
 
   def image_format

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'pages/um_bokatidindi'
   get 'pages/privacy_policy'
+  get 'pages/open_data'
 
   get 'baekur/', to: 'books#index'
   get 'baekur/sida/:page', to: 'books#index'
@@ -27,5 +28,4 @@ Rails.application.routes.draw do
 
   get 'argangar', to: 'editions#index'
   get 'argangar/:id', to: 'editions#show'
-  get 'argangar/current', to: 'editions#show'
 end
