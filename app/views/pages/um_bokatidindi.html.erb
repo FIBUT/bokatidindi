@@ -16,13 +16,16 @@
   <% end %>
 <% end %>
 
-<main role="main" class="page my-5">
+<main role="main" class="page">
 
-  <div class="container-md">
+  <div class="container-xl">
+
+  <h1 class="mx-4 mb-4 mt-5">Um Bókatíðindi</h1>
+
+  <div class="">
 
     <div class="row">
-      <div class="col-12 col-lg-8 order-0">
-        <h1 class="pb-2">Um Bókatíðindi</h1>
+      <div class="page-container col-12 col-lg-8 p-5 mb-5 order-0">
         <p>
           Bókatíðindi komu fyrst út árið 1928 undir nafninu Bókaskrá
           Bóksalafélagsins. Það var Ársæll Árnason sem fyrstu tók saman þetta
@@ -46,13 +49,7 @@
           var nægja að nefna blaðið Bókatíðindi, líkt og það hefur verið kallað,
           allar götur síðan ásamt ártali útáfuárs.
         </p>
-        <p>
-          Félag íslenskra bókaútgefenda hefur reynt að safna öllum útgáfunum
-          ritsins og tekur fagnandi á móti öllum eldri Bókaskrám eða Bókatíðindi
-          sem gefin voru út fram til ársins 1986.
-        </p>
-      </div>
-      <div class="col-12 col-md-8 col-lg-8 order-lg-2">
+
         <h2 class="pb-2 pt-5">Um <%= @current_edition.title %></h2>
         <table class="table table-sm">
           <tbody>
@@ -75,9 +72,9 @@
         <p>Þeir sem vilja skrá nýja titla inn á vefinn eru beðnir um að hafa samband við félagið.</p>
       </div>
 
-      <div class="col-6 col-md-4 col-lg-3 offset-lg-1 mt-lg-5 order-lg-1">
+      <div class="col-6 col-md-4 col-lg-3 offset-lg-1 order-lg-1">
         <% if @current_edition.pdf_file.attached? %>
-          <figure class="figure mt-md-5 mt-lg-3">
+          <figure class="figure">
           <% if @current_edition.cover_image.attached? %>
           <img
             src="<%= @current_edition.cover_image_url %>"
@@ -100,6 +97,7 @@
           </figure>
         <% end %>
       </div>
+    </div>
     </div>
   </div>
 </main>
