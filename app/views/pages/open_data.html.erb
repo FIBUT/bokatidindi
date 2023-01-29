@@ -2,17 +2,17 @@
   <title>Bókatíðindi - Opin gögn</title>
 <% end %>
 
-<main role="main" class="page pt-3">
+<main role="main" class="page pb-5">
 
 <div class="container-xl">
 
 <div class="row">
 
-  <div class="col-12 px-5 pb-0 pt-5 pb-md-3">
-    <h1 class="">Opin gögn</h1>
+  <div class="col-12 px-5 pb-3 pt-5 pb-xl-3">
+    <h1>Opin gögn</h1>
   </div>
 
-  <div class="col-12 page-container px-5 pb-5 pt-0 pt-md-5 mb-5">
+  <div class="col-12 page-container px-5 py-xl-5 mb-xl-5">
     <p>
       Opin gögn úr Bókatíðindum eru fyrst og fremst ætluð til hægðarauka fyrir
       bókasöfn, verslanir eða fólk sem vinnur með upplýsingar um bækur og þarf
@@ -62,7 +62,7 @@
     </p>
   </div>
   <div class="col-12 page-container p-5 mb-5">
-    <h2>Vefslóðir</h2>
+    <h2 class="mb-3">Vefslóðir</h2>
     <table class="table">
       <thead>
         <tr>
@@ -73,13 +73,13 @@
       <tbody>
         <tr>
           <td>Núverandi árgangur</td>
-          <td><%= argangar_url %>/current.json</td>
+          <td><a title="Vefslóð á JSON-tendapunkt núverandi árgangs" href="<%= argangar_url %>/current.json"><%= argangar_url %>/current.json</a></td>
         </tr>
         <% Edition.all.each do |edition| %>
         <% next if edition.books.count.zero? %>
         <tr>
           <td><%= edition.title %></td>
-          <td><%= argangar_url %>/<%= edition.id %>.json</td>
+          <td><a title="Vefslóð á JSON-endapunkt árgangsins" href="<%= argangar_url %>/<%= edition.id %>.json<"><%= argangar_url %>/<%= edition.id %>.json</a></td>
         </tr>
         <% end %>
       </tbody>

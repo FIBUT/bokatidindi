@@ -1,10 +1,11 @@
 <aside id="book-binding-types" aria-labelledby="book-binding-types-heading">
 <h2 class="mb-3" id="book-binding-types-heading">Útgáfuform</h2>
-<div>
+<div role="list">
 <% local_assigns[:book].book_binding_types.each do |book_binding_type,i| %>
 <div
   id="book-binding-type-<%= book_binding_type.id %>"
   class="book-binding-type"
+  role="listitem"
   aria-labelledby="book-binding-type-<%= book_binding_type.id %>-heading"
 >
   <h3
