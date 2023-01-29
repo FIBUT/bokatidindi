@@ -141,6 +141,12 @@ main {
   top: 30px;
 }
 
+#mobile-search-form {
+  label {
+    color: $white;
+  }
+}
+
 .page-container {
   background-color: $white;
   border-radius: 5px;
@@ -381,6 +387,9 @@ header {
 }
 
 @include media-breakpoint-down(lg) {
+  body {
+    background-color: $white;
+  }
   .welcome-content {
     .hero-heading {
       font-size: 3.8em;
