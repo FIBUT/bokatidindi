@@ -63,7 +63,7 @@ is:
             firstname:
               blank: 'þarf að vera skilgreint'
             lastname:
-              blank: 'þarf að vera skilgreint'
+              has_to_be_set_if_not_admin: 'tóm eftirnöfn er eingöngu hægt að skrá af stjórnendum, látið skrifstofu FÍBÚT vita ef skrá þarf höfund án eftirnafns'
         publisher:
           attributes:
             email_address:

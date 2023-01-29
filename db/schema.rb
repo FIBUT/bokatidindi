@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_19_232706) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_29_164244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_prewarm"
   enable_extension "pg_stat_statements"
@@ -114,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_19_232706) do
     t.string "order_by_name"
     t.integer "gender"
     t.string "name"
+    t.integer "added_by_id"
     t.index ["gender"], name: "index_authors_on_gender"
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
@@ -282,6 +283,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_19_232706) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_user_publishers", "admin_users"
   add_foreign_key "admin_user_publishers", "publishers"
+  add_foreign_key "authors", "admin_users", column: "added_by_id"
   add_foreign_key "book_authors", "author_types"
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"

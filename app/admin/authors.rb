@@ -54,7 +54,8 @@ ActiveAdmin.register Author do
       f.input :firstname
       f.input(
         :lastname, hint: 'Ef ætlunin er að skrá fleiri en einn höfund eru '\
-                         'þeir skráðir sitt hvoru lagi og með fullu nafni.'
+                         'þeir skráðir sitt hvoru lagi og með fullu nafni.',
+                   required: true
       )
       f.input(
         :is_icelandic,
@@ -64,5 +65,9 @@ ActiveAdmin.register Author do
     end
 
     f.actions
+  end
+
+  before_create do |author|
+    author.added_by_id = current_admin_user.id
   end
 end

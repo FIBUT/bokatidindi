@@ -3,6 +3,7 @@
 class Author < ApplicationRecord
   has_many :book_authors, dependent: :restrict_with_error
   has_many :books, through: :book_authors
+  belongs_to :added_by, class_name: 'AdminUser'
 
   enum :gender, %i[undefined male female non_binary]
 
@@ -11,7 +12,19 @@ class Author < ApplicationRecord
   before_create :set_slug, :set_order_by_name
   before_update :set_order_by_name
 
-  validates :firstname, :lastname, presence: true
+  validates :firstname, presence: true
+
+  validate :lastname_has_to_be_set_if_not_admin
+
+  def lastname_has_to_be_set_if_not_admin
+    return nil unless lastname.empty? && added_by.role != 'admin'
+
+    errors.add(
+      :lastname,
+      I18n.t('activerecord.errors.models.author.attributes.'\
+             'lastname.has_to_be_set_if_not_admin')
+    )
+  end
 
   def book_count
     Book.includes(
@@ -23,6 +36,8 @@ class Author < ApplicationRecord
   end
 
   def set_order_by_name
+    return self.order_by_name = firstname if lastname.empty?
+
     if is_icelandic == true
       return self.order_by_name = "#{firstname} #{lastname}"
     end
