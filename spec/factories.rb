@@ -63,9 +63,10 @@ FactoryBot.define do
   end
 
   factory :author do
-    source_id { FFaker::Random.rand(1..999_999_999) }
-    firstname { FFaker::Name.first_name }
-    lastname  { FFaker::Name.last_name }
+    source_id   { FFaker::Random.rand(1..999_999_999) }
+    firstname   { FFaker::Name.first_name }
+    lastname    { FFaker::Name.last_name }
+    association :added_by, factory: :admin_user
   end
 
   factory :author_type do
