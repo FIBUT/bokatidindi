@@ -163,6 +163,15 @@ class Book < ApplicationRecord
     nodes.to_sentence
   end
 
+  def isbns_string
+    nodes = []
+    records = book_binding_types.joins(:binding_type)
+    records.each do |r|
+      nodes << "#{r.barcode} (#{r.binding_type.name})"
+    end
+    nodes.to_sentence
+  end
+
   def inactive_edition_ids
     editions.inactive.pluck(:id).to_a
   end
