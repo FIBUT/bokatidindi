@@ -151,7 +151,16 @@ class Book < ApplicationRecord
   end
 
   def other_authors_string
-    authors.where.not(id: main_authors_ids).pluck(:name).to_sentence
+    nodes = []
+    records = book_authors.joins(
+      :author
+    ).where.not(
+      author: { id: main_authors_ids }
+    )
+    records.each do |r|
+      nodes << "#{r.author.name} (#{r.author_type.name})"
+    end
+    nodes.to_sentence
   end
 
   def inactive_edition_ids
