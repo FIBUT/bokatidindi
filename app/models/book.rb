@@ -147,7 +147,11 @@ class Book < ApplicationRecord
   end
 
   def main_authors_string
-    Author.where(id: main_authors_ids).pluck(:name).to_sentence
+    authors.where(id: main_authors_ids).pluck(:name).to_sentence
+  end
+
+  def other_authors_string
+    authors.where.not(id: main_authors_ids).pluck(:name).to_sentence
   end
 
   def inactive_edition_ids

@@ -73,6 +73,7 @@ class EditionsController < ApplicationController
       long_description: book.long_description,
       authors: book_authors(book),
       main_authors: book.main_authors_string,
+      other_authors: book.other_authors_string,
       publisher: {
         id: book.publisher_id,
         slug: book.publisher.slug,
