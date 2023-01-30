@@ -68,6 +68,7 @@ class EditionsController < ApplicationController
       pre_title: book.pre_title,
       title: book.title_noshy,
       post_title: book.post_title,
+      full_title: book.full_title_noshy,
       slug: book.slug,
       description: book.description,
       long_description: book.long_description,
@@ -80,7 +81,9 @@ class EditionsController < ApplicationController
         name: book.publisher.name,
         url: publisher_url(book.publisher.slug)
       },
+      publisher_name: book.publisher.name,
       binding_types: book_binding_types(book),
+      isbns: book.isbns_string,
       categories: book_categories(book, edition_id),
       url: book_url(book.slug)
     }
