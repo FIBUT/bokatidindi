@@ -39,6 +39,8 @@
               srcset="<%= edition.cover_image_srcsets[@image_format] %>"
               sizes="260px"
               alt="Forsíðan fyrir <%= edition.title %>"
+              height="<%= edition.cover_image.metadata[:height] %>"
+              width="<%= edition.cover_image.metadata[:width] %>"
             />
           </aside>
           <% end %>
