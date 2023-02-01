@@ -114,6 +114,9 @@ is:
             book_binding_types:
               too_short: 'þurfa að vera skilgreind'
     models:
+      page:
+        one: 'síða'
+        other: 'síður'
       book:
         one: 'bók'
         other: 'bækur'
@@ -144,6 +147,10 @@ is:
         one: 'flokkur'
         other: 'flokkar'
     attributes:
+      page:
+        title: 'Titill'
+        body: 'Meginmál'
+        slug: 'Tilvísun'
       book:
         id: 'númer'
         source_id: "Upprunalegt raðnúmer"

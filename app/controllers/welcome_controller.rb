@@ -2,6 +2,7 @@
 
 class WelcomeController < ApplicationController
   def index
+    @page_content = Page.find_by(slug: 'forsida')
     @image_format = image_format
     @meta_description = ' Bókatíðindi hafa síðan 1928 veitt yfirlit yfir '\
                         'útgáfu ársins fyrir bókaunnendur. Þar má alltaf '\

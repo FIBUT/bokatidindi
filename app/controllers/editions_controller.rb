@@ -21,8 +21,9 @@ class EditionsController < ApplicationController
   end
 
   def index
-    @image_format    = image_format
-    @editions        = Edition.joins(:pdf_file_attachment).order(
+    @page_content = Page.find_by(slug: 'argangar')
+    @image_format = image_format
+    @editions     = Edition.joins(:pdf_file_attachment).order(
       year: :desc,
       title: :desc,
       id: :desc

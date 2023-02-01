@@ -9,39 +9,11 @@
 <div class="row">
 
   <div class="col-12 px-5 pb-3 pt-5 pb-xl-3">
-    <h1>Köku- og friðhelgisstefna</h1>
+    <h1><%= @page_content[:title] if @page_content %></h1>
   </div>
 
   <div class="col-12 page-container col-12 px-5 py-xl-5">
-
-    <p>
-      Bókatíðindi safna engum persónugreinanlegum upplýsingum um lesendur sína.
-    </p>
-    <p>
-      Einu gögnin sem er safnað á þesssum vef er hversu oft einstaka síður
-      eru skoðaðar, hversu lengi og hvaða tækni er notuð við að sækja síðurnar
-      (upplýsingar um vafra og skjástærð).
-    </p>
-    <p>
-      Til þess er notað greiningartól frá Plausible. Þau gögn er ekki hægt að
-      rekja til lesenda.
-    </p>
-    <p>
-      Við notum ekki kökur, tengingar við samfélagsmiðla, eða álíka tækni til
-      að greina hver lesandi er eða sjá hvort sami lesandi kemur aftur.
-    </p>
-    <p>
-      Bókatíðindi notast við efnisveitunet á vegum jsDelivr (rekið af Prospect
-      One) og eigið efnisveitunet sem hýst er hjá Google Cloud Services. Hvorugt
-      þeirra safnar persónugreinanlegum upplýsingum um notendur.
-    </p>
-
-    <p>
-      Fyrir almenna lesendur Bókatíðinda er eingöngu vistuð ein kaka í vafra,
-      <code>_bokatidindi_session</code>, sem eingöngu er notuð til að halda utan um
-      upplýsingar um innskráða notendur í umsjónarkerfi Bókatíðinda.
-    </p>
-
+    <%= markdown(@page_content.body) if @page_content %>
   </div>
 
 </div>

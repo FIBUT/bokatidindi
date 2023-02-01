@@ -83,6 +83,7 @@ Rails/SkipsModelValidations:
 Rails/OutputSafety:
   Exclude:
    - 'app/models/book.rb'
+   - 'app/helpers/application_helper.rb'
 
 Rails/BulkChangeTable:
   Exclude:
