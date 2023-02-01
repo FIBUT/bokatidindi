@@ -79,7 +79,7 @@
         <% next if edition.books.count.zero? %>
         <tr>
           <td><%= edition.title %></td>
-          <td><a title="Vefslóð á JSON-endapunkt árgangsins" href="<%= argangar_url %>/<%= edition.id %>.json<"><%= argangar_url %>/<%= edition.id %>.json</a></td>
+          <td><a title="Vefslóð á JSON-endapunkt árgangsins" href="<%= argangar_url %>/<%= edition.id %>.json"><%= argangar_url %>/<%= edition.id %>.json</a></td>
         </tr>
         <% end %>
       </tbody>
