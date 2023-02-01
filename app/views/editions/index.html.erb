@@ -8,21 +8,11 @@
 
     <article class="row">
       <div class="col-12 px-5 pb-3 pt-5 pb-xl-3">
-        <h1>Prentútgáfa Bókatíðinda</h1>
+        <h1><%= @page_content[:title] if @page_content %></h1>
       </div>
 
       <div class="col-12 page-container px-5 py-xl-5">
-        <p>
-          Hér má finna prentútgáfu Bókatíðinda í gegn um árin á PDF-formi.
-        </p>
-        <p>
-          Félag íslenskra bókaútgefenda hefur reynt að safna öllum árgöngum
-          ritsins og tekur fagnandi á móti öllum eldri Bókaskrám eða
-          Bókatíðindum sem gefin voru út fram til ársins 1986.
-        </p>
-        <p>
-          Unnið er að því að koma eldri árgöngum hingað inn.
-        </p>
+        <%= markdown(@page_content.body) if @page_content %>
       </div>
     </article>
 

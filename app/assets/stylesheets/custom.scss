@@ -275,8 +275,8 @@ main {
   background-color: $white;
   height: 100%;
   h2 {
-    font-size: $font-size-lg;
-    border-bottom: 2px solid theme-color("lightgrey");
+    font-weight: bold;
+    font-size: 18px;
   }
   p {
     font-size: 14px;
