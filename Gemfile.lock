@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/aldavigdis/jpg_or_webp
+  revision: 1b515f3cfb5e42d77594352868c2f1913b154f68
+  branch: main
+  specs:
+    jpg_or_webp (0.1.0)
+      browser (~> 5.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -464,6 +472,7 @@ DEPENDENCIES
   isbn_validation
   iso-639
   jbuilder (~> 2.7)
+  jpg_or_webp!
   jsbundling-rails
   kaminari (>= 1.2.0)
   listen (~> 3.3)

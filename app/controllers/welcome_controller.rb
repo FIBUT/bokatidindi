@@ -9,13 +9,4 @@ class WelcomeController < ApplicationController
                         'nálgast upplýsingar um þær bækur sem gefnar eru '\
                         'út á hverju ári.'
   end
-
-  def image_format
-    return 'jpg' if browser.ie?
-    return 'jpg' if browser.safari? && browser.platform.mac?('<11.6')
-    return 'jpg' if browser.platform.ios?('<14')
-    return 'jpg' if browser.platform.kai_os?
-
-    'webp'
-  end
 end
