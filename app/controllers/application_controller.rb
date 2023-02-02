@@ -38,4 +38,9 @@ class ApplicationController < ActionController::Base
       allow_other_host: true
     )
   end
+
+  def image_format
+    j = JpgOrWebp.new(request.user_agent)
+    j.image_format
+  end
 end
