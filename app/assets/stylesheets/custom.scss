@@ -106,9 +106,15 @@ main {
 #search-results-from-older-editions {
   background-color: $white;
   border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
 
   td, th {
+    font-size: 12px;
+  }
+
+  p {
     font-size: 14px;
+    font-weight: 600;
   }
 }
 
@@ -387,9 +393,6 @@ header {
 }
 
 @include media-breakpoint-down(lg) {
-  body {
-    background-color: $white;
-  }
   .welcome-content {
     .hero-heading {
       font-size: 3.8em;
