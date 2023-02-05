@@ -19,19 +19,12 @@
     role="search"
   >
     <div class="input-group">
-      <label
-        for="header-search-field"
-        class="mb-0 mr-3"
-      >
-        Leit
-      </label>
       <input
         id="header-search-field"
         class="form-control form-control-sm"
         aria-label="Leitarorð"
         type="search"
         name="search"
-        placeholder="Leitarorð…"
         <% unless params[:search].nil? %>
         value="<%= params[:search] %>"
         <% end %>
