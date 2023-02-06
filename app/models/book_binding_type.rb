@@ -39,7 +39,7 @@ class BookBindingType < ApplicationRecord
 
   before_validation :sanitize_barcode
 
-  validate :issn_must_be_valid
+  validate :issn_must_be_valid, :ean13_must_be_valid
 
   def ean13_must_be_valid
     unless binding_type.barcode_type == 'EAN13' && EAN13.new(barcode).valid?
