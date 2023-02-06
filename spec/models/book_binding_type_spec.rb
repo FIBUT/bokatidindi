@@ -57,26 +57,4 @@ RSpec.describe BookBindingType, type: :model do
              ])
     end.to raise_error(ActiveRecord::RecordInvalid)
   end
-
-  it 'Validates EAN-13 barcodes' do
-    binding_type = create(:binding_type, name: 'Spil', barcode_type: 'EAN13')
-
-    expect do
-      create(:book, book_binding_types: [
-               create(:book_binding_type, barcode: '6667394068098',
-                                          binding_type:),
-               create(:book_binding_type, barcode: '1430363830164',
-                                          binding_type:)
-             ])
-    end.not_to raise_error(ActiveRecord::RecordInvalid)
-
-    expect do
-      create(:book, book_binding_types: [
-               create(:book_binding_type, barcode: '',
-                                          binding_type:),
-               create(:book_binding_type, barcode: '',
-                                          binding_type:)
-             ])
-    end.to raise_error(ActiveRecord::RecordInvalid)
-  end
 end

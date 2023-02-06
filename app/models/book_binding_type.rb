@@ -39,15 +39,7 @@ class BookBindingType < ApplicationRecord
 
   before_validation :sanitize_barcode
 
-  validate :issn_must_be_valid, :ean13_must_be_valid
-
-  def ean13_must_be_valid
-    unless binding_type.barcode_type == 'EAN13' && EAN13.new(barcode).valid?
-      return nil
-    end
-
-    errors.add(:barcode, 'Þarf að vera gilt EAN-13 strikamerki')
-  end
+  validate :issn_must_be_valid
 
   def issn_must_be_valid
     return nil unless binding_type.barcode_type == 'ISSN' && !valid_issn?
