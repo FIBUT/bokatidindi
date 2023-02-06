@@ -13,8 +13,6 @@ gem 'isbn-calculator'
 gem 'isbn_validation'
 gem 'validate_url'
 
-gem 'barby', path: '/home/aldavigdis/barby'
-
 gem 'library_stdnums'
 gem 'ean13'
 

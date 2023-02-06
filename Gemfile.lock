@@ -6,11 +6,6 @@ GIT
     jpg_or_webp (0.1.0)
       browser (~> 5.3)
 
-PATH
-  remote: /home/aldavigdis/barby
-  specs:
-    barby (0.6.8)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -459,7 +454,6 @@ DEPENDENCIES
   actionpack (~> 7.0.4)
   activeadmin
   appsignal
-  barby!
   barnes
   bootsnap (>= 1.4.4)
   browser
