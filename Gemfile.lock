@@ -6,6 +6,11 @@ GIT
     jpg_or_webp (0.1.0)
       browser (~> 5.3)
 
+PATH
+  remote: /home/aldavigdis/barby
+  specs:
+    barby (0.6.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -135,6 +140,7 @@ GEM
     digest-crc (0.6.4)
       rake (>= 12.0.0, < 14.0.0)
     e2mmap (0.1.0)
+    ean13 (2.0.2)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -229,6 +235,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    library_stdnums (1.6.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -452,6 +459,7 @@ DEPENDENCIES
   actionpack (~> 7.0.4)
   activeadmin
   appsignal
+  barby!
   barnes
   bootsnap (>= 1.4.4)
   browser
@@ -462,6 +470,7 @@ DEPENDENCIES
   country_select
   database_cleaner-active_record
   devise
+  ean13
   factory_bot_rails
   faker
   ffaker
@@ -475,6 +484,7 @@ DEPENDENCIES
   jpg_or_webp!
   jsbundling-rails
   kaminari (>= 1.2.0)
+  library_stdnums
   listen (~> 3.3)
   mimemagic
   mysql2 (>= 0.5.3)

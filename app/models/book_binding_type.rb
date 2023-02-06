@@ -15,16 +15,19 @@ class BookBindingType < ApplicationRecord
   delegate :name, to: :binding_type
 
   validates :barcode, :book, :language, presence: true
+
   validates(
     :barcode, isbn_format: {
       with: :isbn13,
       message: 'þarf að vera gilt ISBN-13-númer'
     },
-              unless: proc { |bbt| bbt.barcode.blank? }
+              unless: proc { |bbt| bbt.barcode.blank? },
+              if: proc { |bbt| bbt&.binding_type&.barcode_type == 'ISBN' }
   )
   validates(
     :barcode, uniqueness: true,
               allow_nil: true,
+              if: proc { |bbt| bbt&.binding_type&.barcode_type == 'ISBN' },
               unless: proc { |bbt| bbt.barcode.blank? }
   )
 
@@ -34,7 +37,31 @@ class BookBindingType < ApplicationRecord
 
   validates :url, url: true, allow_blank: true
 
-  before_validation :sanitize_isbn
+  before_validation :sanitize_barcode
+
+  validate :issn_must_be_valid
+
+  def ean13_must_be_valid
+    unless binding_type.barcode_type == 'EAN13' && EAN13.new(barcode).valid?
+      return nil
+    end
+
+    errors.add(:barcode, 'Þarf að vera gilt EAN-13 strikamerki')
+  end
+
+  def issn_must_be_valid
+    return nil unless binding_type.barcode_type == 'ISSN' && !valid_issn?
+
+    errors.add(:barcode, 'Þarf að vera gilt ISSN-númer')
+  end
+
+  def valid_issn?
+    return true if barcode.starts_with?('977') && EAN13.new(barcode).valid?
+
+    return true if StdNum::ISSN.valid?(barcode)
+
+    false
+  end
 
   def self.random_isbn
     isbn10            = rand(11_111..99_999).to_s
@@ -57,7 +84,7 @@ class BookBindingType < ApplicationRecord
 
   private
 
-  def sanitize_isbn
+  def sanitize_barcode
     barcode.delete('^0-9')
   end
 
