@@ -511,7 +511,8 @@ ActiveAdmin.register Book do
           autocomplete: 'off',
           class: 'barcode'
         },
-        hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer.'
+        hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer, ' \
+              'eða ISSN-númer þegar um er að ræða tímarit.'
       )
       bb.input(
         :language,

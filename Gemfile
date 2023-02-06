@@ -13,6 +13,9 @@ gem 'isbn-calculator'
 gem 'isbn_validation'
 gem 'validate_url'
 
+gem 'library_stdnums'
+gem 'ean13'
+
 gem 'country_select'
 gem 'iso-639'
 

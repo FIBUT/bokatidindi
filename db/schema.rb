@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_01_090629) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_01_112328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_prewarm"
   enable_extension "pg_stat_statements"
@@ -131,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_090629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "group", default: 0, null: false
+    t.integer "barcode_type", default: 0
     t.index ["name"], name: "index_binding_types_on_name", unique: true
     t.index ["slug"], name: "index_binding_types_on_slug", unique: true
     t.index ["source_id"], name: "index_binding_types_on_source_id", unique: true

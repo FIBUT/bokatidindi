@@ -44,6 +44,14 @@ FactoryBot.define do
     author_type { AuthorType.first }
   end
 
+  factory :binding_type do
+    name         { FFaker::Lorem.word }
+    slug         { FFaker::Lorem }
+    open         { true }
+    group        { 'printed_books' }
+    barcode_type { 'ISBN' }
+  end
+
   factory :book_binding_type do
     barcode      { BookBindingType.random_isbn }
     binding_type { BindingType.first }

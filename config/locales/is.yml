@@ -252,6 +252,7 @@ is:
           printed_books: "Prentaðar bækur"
           ebooks: "Rafbækur"
           audiobooks: "Hljóðbækur"
+        barcode_type: "Gerð strikamerkis"
       publisher:
         name: "Nafn"
         url: "Vefslóð"

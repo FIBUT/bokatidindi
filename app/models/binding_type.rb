@@ -5,6 +5,8 @@ class BindingType < ApplicationRecord
 
   enum :group, %i[printed_books ebooks audiobooks]
 
+  enum :barcode_type, %i[ISBN ISSN]
+
   default_scope { order('rod ASC, name ASC') }
   scope :open, -> { order('rod ASC, name ASC').where(open: true) }
 

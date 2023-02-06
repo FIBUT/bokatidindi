@@ -1,25 +1,10 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register BindingType do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :source_id, :name, :slug, :rod, :open
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:source_id, :name, :slug, :rod, :open]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-
   config.filters = false
   config.sort_order = 'rod_asc'
 
-  permit_params :name, :rod, :open, :group
+  permit_params :name, :rod, :open, :group, :barcode_type
 
   controller do
     def build_new_resource
@@ -51,7 +36,8 @@ ActiveAdmin.register BindingType do
     f.semantic_errors
     f.inputs do
       f.input :name
-      f.input :group
+      f.input :barcode_type, include_blank: false
+      f.input :group, include_blank: false
       f.input :rod
       f.input :open
     end
