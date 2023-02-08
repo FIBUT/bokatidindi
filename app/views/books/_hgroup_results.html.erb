@@ -2,12 +2,12 @@
 
   <h2 class="h2 title">
     <% unless local_assigns[:book].pre_title.empty? %>
-    <span class="pre-title"><%= local_assigns[:book].pre_title %></span>
+    <span class="pre-title"><%= Shyguy.display_shy(local_assigns[:book].pre_title) %></span>
     <% end %>
     <%= local_assigns[:book].title_hypenated %>
   </h2>
 
   <% unless local_assigns[:book].post_title.empty? %>
-    <h3 class="post-title"><%= raw local_assigns[:book].post_title %></h3>
+    <h3 class="post-title"><%= Shyguy.display_shy(raw local_assigns[:book].post_title) %></h3>
   <% end %>
 </hgroup>
