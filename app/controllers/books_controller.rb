@@ -6,7 +6,9 @@ class BooksController < ApplicationController
 
     if params[:search]
       render_search
-      return redirect_to book_path(@books.first[:slug]) if @books.length == 1
+      if @books.length + @books_from_old_editions.length == 1
+        redirect_to book_path(@books.first[:slug])
+      end
     else
       render_category if params[:category]
       render_publisher if params[:publisher]

@@ -49,7 +49,7 @@ class BookEdition < ApplicationRecord
 
   def create_book_edition_categories
     book.book_categories.each do |bc|
-      next unless (Edition.current.ids).include?(edition.id)
+      next unless Edition.current.ids.include?(edition.id)
 
       for_print = if bc.for_print == true
                     if edition.print_registration_over?
