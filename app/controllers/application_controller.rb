@@ -14,14 +14,14 @@ class ApplicationController < ActionController::Base
 
   def access_denied(_exception)
     render(
-      status: :unauthorized, layout: false,
-      plain: 'HTTP-villa 403: Aðgangur óheimilli'
+      status: :unauthorized,
+      file: Rails.root.join('public/403.html'), layout: false
     )
   end
 
   def bad_request(_exception)
     render(
-      status: :unauthorized, layout: false,
+      status: :bad_request, layout: false,
       plain: 'HTTP-villa 400: Villa í fyrirspurn'
     )
   end
