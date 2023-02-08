@@ -35,7 +35,7 @@
         <div class="row mx-4">
           <div class="hero-heading-column d-flex flex-column justify-content-xl-end col-12 col-lg-5 col-xl-5 mb-4 mb-lg-0">
             <h1 class="hero-heading">
-              <%= @page_content.title if @page_content %>
+              <%= Shyguy.display_shy(@page_content.title) if @page_content %>
             </h1>
           </div>
           <div class="hero-body-column d-flex flex-column justify-content-xl-end col-12 col-sm-8 col-lg-4 col-xl-<%= @welcome_textbox_cols %>">

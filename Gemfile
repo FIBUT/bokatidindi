@@ -75,7 +75,9 @@ gem 'pg_search'
 
 gem 'barnes'
 
-gem 'jpg_or_webp', git: 'https://github.com/aldavigdis/jpg_or_webp', branch: 'main'
+gem 'jpg_or_webp', '~> 0.1.1'
+
+gem 'shyguy', '~> 0.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

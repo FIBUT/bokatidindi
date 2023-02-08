@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/aldavigdis/jpg_or_webp
-  revision: 1b515f3cfb5e42d77594352868c2f1913b154f68
-  branch: main
-  specs:
-    jpg_or_webp (0.1.0)
-      browser (~> 5.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -211,6 +203,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jpg_or_webp (0.1.1)
+      browser (~> 5.3)
     jquery-rails (4.5.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -390,6 +384,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shyguy (0.1.1)
     signet (0.17.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -475,7 +470,7 @@ DEPENDENCIES
   isbn_validation
   iso-639
   jbuilder (~> 2.7)
-  jpg_or_webp!
+  jpg_or_webp (~> 0.1.1)
   jsbundling-rails
   kaminari (>= 1.2.0)
   library_stdnums
@@ -499,6 +494,7 @@ DEPENDENCIES
   rubocop-rspec
   sass-rails (>= 6)
   selenium-webdriver
+  shyguy (~> 0.1.1)
   spring
   sqlite3 (~> 1.4)
   thwait
