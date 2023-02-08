@@ -153,6 +153,15 @@ main {
   }
 }
 
+.book-social-media-links {
+  border-top: 2px solid theme-color('lightgrey');
+  h2 {
+    font-family: $montserrat;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
 .page-container {
   background-color: $white;
   border-radius: 5px;
