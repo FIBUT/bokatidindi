@@ -230,7 +230,7 @@ is:
         publishers: "Útgefendur"
       author:
         name: "Nafn"
-        book_count: "Fjöldi bóka"
+        book_count: "Fj. bóka í ár"
         firstname: "Fornafn"
         lastname: "Eftirnafn"
         is_icelandic: "Er íslenskur"
@@ -246,7 +246,7 @@ is:
       binding_type:
         name: "Nafn"
         open: "Opið"
-        book_count: "Fjöldi bóka"
+        book_count: "Fj. bóka í ár"
         group: "Yfirflokkur"
         groups:
           printed_books: "Prentaðar bækur"
@@ -257,12 +257,12 @@ is:
         name: "Nafn"
         url: "Vefslóð"
         email_address: "Tölvupóstfang"
-        book_count: "Fjöldi bóka"
+        book_count: "Fj. bóka í ár"
         print_data: "Prentgögn"
       category:
         name: "Nafn"
         group: "Yfirflokkur"
-        book_count: "Fjöldi bóka"
+        book_count: "Fj. bóka í ár"
         book_count_web: "Fjöldi bóka á vef"
         book_count_print: "Fjöldi bóka í prentútgáfu"
         groups:
