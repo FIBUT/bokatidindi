@@ -557,6 +557,7 @@ class Book < ApplicationRecord
       name: author_group_name_plural(
         authors.count, author_type.name, author_type.plural_name
       ),
+      name_abbr: author_type.abbreviation,
       author_links: (
         authors.map do |a|
           if a.author.book_count.positive?

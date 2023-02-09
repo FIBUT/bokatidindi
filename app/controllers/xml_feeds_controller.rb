@@ -84,7 +84,7 @@ class XmlFeedsController < ApplicationController
       xml.authors do
         book.author_groups.each do |author_group|
           xml.author_group do
-            xml.author_type author_group[:name]
+            xml.author_type author_group[:name_abbr]
             xml.author_names strip_tags(author_group[:author_links])
           end
         end
