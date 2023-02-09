@@ -138,8 +138,8 @@ is:
         one: "Comment"
         other: "Comments"
       edition:
-        one: 'útgáfa Bókatíðinda'
-        other: 'útgáfur Bókatíðinda'
+        one: 'árgangur'
+        other: 'árgangar'
       admin_user:
         one: 'notandi'
         other: 'notendur'
@@ -173,7 +173,7 @@ is:
         minutes: 'Mínútufjöldi'
         original_title: 'Titill á frummmáli'
         country_of_origin: 'Upprunaland'
-        editions: 'Útgáfur Bókatíðinda'
+        editions: 'Árgangar'
         book_categories: 'Flokkar bókarinnar'
         current_edition: 'Í núverandi tbl.'
         record_valid: 'Rétt skráð'
