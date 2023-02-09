@@ -172,6 +172,7 @@ is:
         page_count: 'Blaðsíðufjöldi'
         minutes: 'Mínútufjöldi'
         original_title: 'Titill á frummmáli'
+        original_language: 'Frummál'
         country_of_origin: 'Upprunaland'
         editions: 'Árgangar'
         book_categories: 'Flokkar bókarinnar'

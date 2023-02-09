@@ -594,6 +594,15 @@ ActiveAdmin.register Book do
         input_html: { autocomplete: 'off' },
         hint: 'Upprunaland bókar.'
       )
+      input(
+        :original_language,
+        include_blank: true,
+        collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
+          ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
+        end,
+        input_html: { autocomplete: 'off', class: 'language' },
+        hint: 'Upprunalegt tungumál bókar.'
+      )
     end
 
     f.actions

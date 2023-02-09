@@ -5,7 +5,7 @@
 
   <% if action_name == 'show' %>
   <li
-    class="book-meta-publisher d-block font-weight-bold pb-3"
+    class="book-meta-publisher d-block pb-3"
     aria-labelledby="book-meta-publisher-label<%= local_assigns[:book].id %>"
   >
     <strong
@@ -23,7 +23,7 @@
   </li>
   <% unless local_assigns[:book].language_codes.count.zero? %>
   <li
-    class="book-meta-languages d-block font-weight-bold pb-3"
+    class="book-meta-languages d-block pb-3"
     aria-labelledby="book-meta-languages-label"
   >
     <strong id="book-meta-languages-label">Tungumál</strong>
@@ -32,16 +32,22 @@
   <% end %>
   <% if local_assigns[:book].original_title.present? %>
   <li
-    class="book-meta-original-title d-block font-weight-bold pb-3"
+    class="book-meta-original-title d-block pb-3"
     aria-labelledby="book-meta-original-title-label"
   >
     <strong id="book-meta-original-title-label">Upprunalegur titill</strong>
-    <%= local_assigns[:book].original_title %>
+    <span
+      <% unless local_assigns[:book].original_language.blank? %>
+      lang="<%= local_assigns[:book].original_language %>"
+      <% end %>
+    >
+      <%= local_assigns[:book].original_title %>
+    </span>
   </li>
   <% end %>
   <% else %>
     <li
-    class="book-meta-publisher d-block font-weight-bold pb-3"
+    class="book-meta-publisher d-block pb-3"
     aria-label="Útgefandi"
   >
     <%=
