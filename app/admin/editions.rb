@@ -468,7 +468,7 @@ ActiveAdmin.register Edition do
       end
     end
 
-    f.inputs 'Stillingar fyrir eldri tölublöð' do
+    f.inputs 'Stillingar fyrir eldri árganga' do
       f.input :year
       f.input :is_legacy
     end
