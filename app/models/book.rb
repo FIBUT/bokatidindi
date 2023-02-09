@@ -90,6 +90,16 @@ class Book < ApplicationRecord
   validates :book_authors, length: { minimum: 1 }
   validates :book_binding_types, length: { minimum: 1 }
 
+  scope :old, lambda {
+    includes(
+      :publisher, :categories,
+      book_authors: %i[author author_type],
+      book_editions: %i[book_edition_categories edition]
+    ).where.not(
+      book_editions: { edition_id: Edition.current_edition[:id] }
+    ).order(:title)
+  }
+
   scope :by_edition, lambda { |edition_id|
     includes(
       :publisher, :categories,

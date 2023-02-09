@@ -26,12 +26,12 @@
 
     <%= render 'books/results' %>
 
-    <%= render 'books/older_results' %>
+    <% unless params[:search] %>
+    <%= paginate @books %>
+    <% end %>
+
+    <%= render 'books/older_results' if params[:search] || !params.key?(:page) %>
 
   </div>
-
-  <% unless params[:search] %>
-  <%= paginate @books %>
-  <% end %>
 
 </main>

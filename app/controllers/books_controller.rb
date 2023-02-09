@@ -70,6 +70,8 @@ class BooksController < ApplicationController
     @books = Book.current.for_web.by_author(
       @author.id
     ).with_attached_cover_image
+
+    @books_from_old_editions = Book.old.for_web.by_author(@author.id)
   end
 
   def render_publisher
