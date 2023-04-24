@@ -105,6 +105,10 @@ is:
             description:
               blank: 'er tóm'
               too_long: 'er of löng'
+            blockquote:
+              too_long: 'er of löng'
+            blockquote_source:
+              too_long: 'er of langur'
             cover_image_file:
               invalid: 'er ógild'
             original_title:
@@ -160,6 +164,8 @@ is:
         post_title: 'Undirtitill'
         description: 'Stutt lýsing'
         long_description: 'Áframhaldandi lýsing'
+        blockquote: 'Tilvitnun eða ritdómur'
+        blockquote_source: 'Uppruni ritdóms eða tilvitnunar'
         cover_image_file: 'Skrá fyrir forsíðumynd'
         audio_sample_file: 'Skrá fyrir hljóðbrot'
         delete_audio_sample: 'Eyða hljóðbroti'

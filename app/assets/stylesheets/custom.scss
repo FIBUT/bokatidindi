@@ -261,6 +261,17 @@ main {
     margin-top: 3rem;
   }
 
+  blockquote {
+    padding: 3em;
+    p {
+      font-size: 3em;
+      line-height: 1.2em;
+      font-style: italic;
+      font-family: $lora;
+      text-indent: -0.45em;
+    }
+  }
+
   #book_audio_sample {
     h3 {
       font-family: $montserrat;
