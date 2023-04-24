@@ -268,7 +268,9 @@ main {
       line-height: 1.2em;
       font-style: italic;
       font-family: $lora;
-      text-indent: -0.45em;
+      &:first-child {
+        text-indent: -0.45em;
+      }
     }
   }
 
