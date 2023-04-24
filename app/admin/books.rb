@@ -3,6 +3,7 @@
 ActiveAdmin.register Book do
   permit_params :id, :pre_title, :title, :post_title,
                 :description, :long_description,
+                :blockquote, :blockquote_source,
                 :country_of_origin, :original_title,
                 :cover_image_file,
                 :audio_sample_file,
@@ -424,6 +425,22 @@ ActiveAdmin.register Book do
                     'vefsins og í prentútgáfu Bókatíðinda. '\
                     "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög með bilum og "\
                     'HTML-táknum.'
+      f.input :blockquote,
+              as: :text,
+              input_html: {
+                rows: 3,
+                autocomplete: 'off',
+                maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
+              },
+              hint: 'Stutt tilvitnun, t.d. í ritdóm eða ummfjöllun '\
+                    'fjölmiðils, sem birtist í vefútgáfu Bókatíðinda. '\
+                    'Gæsalöppum er sjálfkrafa bætt við tilvitunina. '\
+                    "Hámark #{Book::BLOCKQUOTE_MAX_LENGTH} slög með bilum "\
+                    'og HTML-táknum'
+      f.input :blockquote_source,
+              hint: 'Uppruni tilvitnunarinnar, t.d. Jón Viðar Jónsson, '\
+                    'Þjóðviljinn, Lestrarklefinn o.s.frv. '\
+                    "Hámark #{Book::BLOCKQUOTE_CITE_MAX_LENGTH} slög."
       f.input :long_description,
               as: :text,
               input_html: {

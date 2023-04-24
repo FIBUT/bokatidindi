@@ -114,6 +114,15 @@
             <%= simple_format @book.description, tags: ['em'] %>
           </article>
 
+          <% if @book.blockquote.present? %>
+          <blockquote>
+            <%= simple_format '„' + @book.blockquote + '“', tags: ['em'] %>
+            <% if @book.blockquote_source.present? %>
+            <cite><%= @book.blockquote_source %></cite>
+            <% end %>
+          </blockquote>
+          <% end %>
+
           <article id="book_long_description">
             <%=  simple_format @book.long_description, tags: ['em'] %>
           </article>

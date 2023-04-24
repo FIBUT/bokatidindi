@@ -29,6 +29,8 @@ form.formtastic {
   a.has_many_remove { margin-left: 20%; margin-top: 1em; }
   .tip { margin-left: 20%; font-weight: bold; font-size: 1.2em; }
   textarea#book_description, textarea#book_long_description { max-width: 80em; }
+  textarea#book_blockquote { max-width: 45em; }
+  input#book_blockquote_source { width: 40em; }
   li.sample-pages { margin-left: 20%; }
   p.field-group-note {
     margin: 0.5em 0 0 20%;

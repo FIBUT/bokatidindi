@@ -24,6 +24,8 @@ class Book < ApplicationRecord
   POST_TITLE_MAX_LENGTH       = 60
   DESCRIPTION_MAX_LENGTH      = 350
   LONG_DESCRIPTION_MAX_LENGTH = 3000
+  BLOCKQUOTE_MAX_LENGTH       = 255
+  BLOCKQUOTE_CITE_MAX_LENGTH  = 63
 
   include ActionView::Helpers::UrlHelper
   include PgSearch::Model
