@@ -334,292 +334,324 @@ ActiveAdmin.register Book do
       a('Leita að og skrá höfunda', class: 'button', href: '/admin/authors')
     end
 
-    publishers = Publisher.all if current_admin_user.admin?
-    publishers = current_admin_user.publishers if current_admin_user.publisher?
+    tabs do
+      tab I18n.t('active_admin.tabs.book.general') do
+        publishers = if current_admin_user.publisher?
+                       current_admin_user.publishers
+                     else
+                       Publisher.all
+                     end
 
-    if publishers.count > 1
-      f.inputs 'Útefandi' do
-        f.input :publisher,
-                collection: publishers,
-                include_blank: false,
-                input_html: { autocomplete: 'off' }
-      end
-    end
+        if publishers.count > 1
+          f.inputs 'Útefandi' do
+            f.input :publisher,
+                    collection: publishers,
+                    include_blank: false,
+                    input_html: { autocomplete: 'off' }
+          end
+        end
 
-    f.inputs 'Titill' do
-      li 'Vinsamlegast ekki skrifa bókatitla eða hluta þeirra í hástöfum nema '\
-         'um sé að ræða skammstafanir. Að öðru leyti gilda almennar '\
-         'ritreglur um hástaf í upphafi setningar og línu, sérnöfnum o.s.frv.',
-         class: 'tip'
+        f.inputs 'Titill' do
+          li 'Vinsamlegast ekki skrifa bókatitla eða hluta þeirra í hástöfum '\
+             'nema um sé að ræða skammstafanir. Að öðru leyti gilda almennar '\
+             'ritreglur um hástaf í upphafi setningar og línu, sérnöfnum '\
+             'o.s.frv.',
+             class: 'tip'
 
-      f.input :pre_title,
-              required: false,
-              input_html: {
-                autocomplete: 'off',
-                maxlength: Book::TITLE_MAX_LENGTH
-              },
-              hint: 'Nafn ritraðar eða bókaflokks, t.d. „Lærdómsrit '\
-                    'Bókmenntafélagsins“, „Risasyrpa“, „Útkall“ '\
-                    'eða „Goðheimar 2“. Autt ef ekki á við.'
-      f.input :title,
-              required: true,
-              input_html: {
-                autocomplete: 'off',
-                maxlength: Book::TITLE_MAX_LENGTH
-              },
-              hint: 'Titill bókar. Hér má nota táknið | til að skipta '\
-                    'orðum upp í orðhluta vegna birtingar á minni skjátækjum '\
-                    'og fyrir prentvinnslu. Dæmi: „Brekku|kots|ann|áll“.'
-      f.input :post_title,
-              required: false,
-              input_html: {
-                autocomplete: 'off',
-                maxlength: Book::TITLE_MAX_LENGTH
-              },
-              hint: 'Autt ef ekki á við.'
-    end
+          f.input :pre_title,
+                  required: false,
+                  input_html: {
+                    autocomplete: 'off',
+                    maxlength: Book::TITLE_MAX_LENGTH
+                  },
+                  hint: 'Nafn ritraðar eða bókaflokks, t.d. „Lærdómsrit '\
+                        'Bókmenntafélagsins“, „Risasyrpa“, „Útkall“ '\
+                        'eða „Goðheimar 2“. Autt ef ekki á við.'
+          f.input :title,
+                  required: true,
+                  input_html: {
+                    autocomplete: 'off',
+                    maxlength: Book::TITLE_MAX_LENGTH
+                  },
+                  hint: 'Titill bókar. Hér má nota táknið | til að skipta '\
+                        'orðum upp í orðhluta vegna birtingar á minni skjám '\
+                        'og fyrir prentvinnslu. Dæmi: „Brekku|kots|ann|áll“.'
+          f.input :post_title,
+                  required: false,
+                  input_html: {
+                    autocomplete: 'off',
+                    maxlength: Book::TITLE_MAX_LENGTH
+                  },
+                  hint: 'Autt ef á ekki við.'
+        end
 
-    f.has_many :book_authors,
-               heading: 'Höfundar, þýðendur og aðrir þeir sem koma að bókinni',
-               allow_destroy: true do |ba|
-      ba.input :author_type,
-               collection: AuthorType.order(rod: :asc),
-               input_html: { autocomplete: 'off' },
-               hint: 'Vinsamlegast hafið samband við skrifstofu FÍBÚT ef '\
-                     'hlutverk vantar í fellilista.'
-      ba.input :author,
-               collection: Author.order(:name),
-               hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. þarf '\
-                     'að skrá í sitt hvoru lagi. Ef höfundur finnst ekki í '\
-                     'fellilista þarf að skrá hann með því að smella á '\
-                     '„höfundar“ hér efst á síðunni og svo „skrá höfund“.'
-    end
+        f.has_many :book_authors,
+                   heading: 'Höfundar, þýðendur og aðrir þeir sem koma að '\
+                            'bókinni',
+                   allow_destroy: true do |ba|
+          ba.input :author_type,
+                   collection: AuthorType.order(rod: :asc),
+                   input_html: { autocomplete: 'off' },
+                   hint: 'Vinsamlegast hafið samband við skrifstofu FÍBÚT ef '\
+                         'hlutverk vantar í fellilista.'
+          ba.input :author,
+                   collection: Author.order(:name),
+                   hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. '\
+                         'þarf að skrá í sitt hvoru lagi. Ef höfundur finnst '\
+                         'ekki í fellilista þarf að skrá hann með því að '\
+                         'smella á „höfundar“ hér efst á síðunni og svo '\
+                         '„skrá höfund“.'
+        end
 
-    f.inputs 'Meginmálstexti' do
-      li 'Athugið að skráning alls texta og yfirlestur er á ábyrgð útgefanda.',
-         class: 'tip'
-      li 'Meginmálstexti er ekki ætlaður í lista yfir höfunda, '\
-         'ritnefndir eða aðra þá sem koma að framleiðslu hverrar bókar.',
-         class: 'tip'
-      li 'Aðeins skal skrifa hástafi í upphafi setninga, í skammstöfunum og í '\
-         'sérnöfnum.',
-         class: 'tip'
-      li 'Hvert línubil jafngildir málsgreinabili.',
-         class: 'tip'
-      li 'Nota má HTML-kóðann <em> og </em> til að afmarka skáletraðan texta. '\
-         'Skáletrun birtist bæði í prent- og vefútgáfu.',
-         class: 'tip'
-      li 'Allur texti í stuttri og áframhaldandi lýsingu skal vera á '\
-         'Íslensku, þó svo að bókin sé gefin út á erlendu tungumáli.',
-         class: 'tip'
+        f.inputs 'Meginmálstexti' do
+          li 'Athugið að skráning alls texta og yfirlestur er á ábyrgð hvers '\
+             'og eins útgefanda.',
+             class: 'tip'
+          li 'Meginmálstexti er ekki ætlaður í lista yfir höfunda, '\
+            'ritnefndir eða aðra þá sem koma að framleiðslu hverrar bókar.',
+             class: 'tip'
+          li 'Aðeins skal skrifa hástafi í upphafi setninga, í skammstöfunum '\
+             'og í sérnöfnum.',
+             class: 'tip'
+          li 'Hvert línubil jafngildir málsgreinabili.',
+             class: 'tip'
+          li 'Nota má HTML-kóðann <em> og </em> til að afmarka skáletraðan '\
+             'texta. Skáletrun birtist bæði í prent- og vefútgáfu.',
+             class: 'tip'
+          li 'Allur texti í stuttri og áframhaldandi lýsingu skal vera á '\
+             'Íslensku, þó svo að bókin sé gefin út á erlendu tungumáli.',
+             class: 'tip'
 
-      f.input :description,
-              as: :text,
-              required: true,
-              input_html: {
-                rows: 5,
-                autocomplete: 'off',
-                maxlength: Book::DESCRIPTION_MAX_LENGTH
-              },
-              hint: 'Stuttur kynningartexti sem birtist á yfirlitssíðu '\
-                    'vefsins og í prentútgáfu Bókatíðinda. '\
-                    "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög með bilum og "\
-                    'HTML-táknum.'
-      f.input :blockquote,
-              as: :text,
-              input_html: {
-                rows: 3,
-                autocomplete: 'off',
-                maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
-              },
-              hint: 'Stutt tilvitnun, t.d. í ritdóm eða ummfjöllun '\
-                    'fjölmiðils, sem birtist í vefútgáfu Bókatíðinda. '\
-                    'Gæsalöppum er sjálfkrafa bætt við tilvitunina. '\
-                    "Hámark #{Book::BLOCKQUOTE_MAX_LENGTH} slög með bilum "\
-                    'og HTML-táknum'
-      f.input :blockquote_source,
-              hint: 'Uppruni tilvitnunarinnar, t.d. Jón Viðar Jónsson, '\
-                    'Þjóðviljinn, Lestrarklefinn o.s.frv. '\
-                    "Hámark #{Book::BLOCKQUOTE_CITE_MAX_LENGTH} slög."
-      f.input :long_description,
-              as: :text,
-              input_html: {
-                rows: 30,
-                autocomplete: 'off',
-                maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
-              },
-              hint: 'Lengri lýsing sem birtist neðan við stuttu lýsinguna á '\
-                    'ítarsíðu hverrar bókar í vefútgáfu. '\
-                    'Langa lýsingin birtist ekki í prentútgáfu. '\
-                    'Autt ef ekki á við.'
-    end
+          f.input :description,
+                  as: :text,
+                  required: true,
+                  input_html: {
+                    rows: 5,
+                    autocomplete: 'off',
+                    maxlength: Book::DESCRIPTION_MAX_LENGTH
+                  },
+                  hint: 'Stuttur kynningartexti sem birtist á yfirlitssíðu '\
+                        'vefsins og í prentútgáfu Bókatíðinda. '\
+                        "Hámark #{Book::DESCRIPTION_MAX_LENGTH} slög með "\
+                        'bilum og HTML-táknum.'
+          f.input :long_description,
+                  as: :text,
+                  input_html: {
+                    rows: 30,
+                    autocomplete: 'off',
+                    maxlength: Book::LONG_DESCRIPTION_MAX_LENGTH
+                  },
+                  hint: 'Lengri lýsing sem birtist neðan við stuttu lýsinguna '\
+                        'á ítarsíðu hverrar bókar í vefútgáfu. '\
+                        'Langa lýsingin birtist ekki í prentútgáfu. '\
+                        'Autt ef ekki á við.'
+        end
 
-    f.inputs 'Mynd af forsíðu' do
-      if resource.cover_image.attached? && (
-        resource.cover_image.metadata['width'] < 4000 &&
-        resource.cover_image.metadata['height'] < 4000
-      )
-        f.img src: resource.cover_image_variant_url(266), class: 'cover-image'
-      end
-      f.input(
-        :cover_image_file,
-        as: :file,
-        input_html: {
-          accept: Book::PERMITTED_IMAGE_FORMATS.join(', ')
-        },
-        hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, '\
-              'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
-              'viðeigandi snið fyrir vef og prent við skráningu '\
-              'og þurfa að vera að lágmarki 1600 px breiðar.'
-      )
-    end
+        f.inputs 'Mynd af forsíðu' do
+          if resource.cover_image.attached? && (
+            resource.cover_image.metadata['width'] < 4000 &&
+            resource.cover_image.metadata['height'] < 4000
+          )
+            f.img(
+              src: resource.cover_image_variant_url(266),
+              class: 'cover-image'
+            )
+          end
+          f.input(
+            :cover_image_file,
+            as: :file,
+            input_html: {
+              accept: Book::PERMITTED_IMAGE_FORMATS.join(', ')
+            },
+            hint: 'Tekið er við myndum á sniðunum JPEG, PNG, WebP, '\
+                  'JPEG 2000 og JPEG XL. Myndir eru unnar sjálfkrafa yfir í '\
+                  'viðeigandi snið fyrir vef og prent við skráningu '\
+                  'og þurfa að vera að lágmarki 1600 px breiðar.'
+          )
+        end
 
-    f.inputs 'Hljóðbrot' do
-      if resource.audio_sample.attached?
-        audio src: resource.audio_sample_url, controls: true
-      end
-      f.input(
-        :audio_sample_file,
-        as: :file,
-        hint: 'Tekið er við hljóðskrám á sniðunum AAC, MP3, og OGG. '\
-              'Hljóðskrárnar eru ekki unnar sjálfkrafa yfir í mismunandi snið.'
-      )
-      if resource.audio_sample.attached?
-        f.input(:delete_audio_sample, as: :boolean)
-      end
-    end
+        f.has_many(
+          :book_binding_types, heading: 'Útgáfuform', allow_destroy: true
+        ) do |bb|
+          bb.input(
+            :binding_type,
+            collection: BindingType.order(rod: :asc),
+            input_html: { class: 'binding-type' }
+          )
+          bb.input(
+            :barcode,
+            input_html: {
+              inputmode: 'numeric',
+              pattern: '[0-9]*',
+              maxlength: 13,
+              autocomplete: 'off',
+              class: 'barcode'
+            },
+            hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer, ' \
+                  'eða ISSN-númer þegar um er að ræða tímarit.'
+          )
+          bb.input(
+            :language,
+            include_blank: false,
+            collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
+              ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
+            end,
+            input_html: { autocomplete: 'off', class: 'language' }
+          )
+          bb.input(
+            :page_count,
+            input_html: { autocomplete: 'off', min: 0, class: 'page-count' }
+          )
+          bb.input(
+            :minutes,
+            input_html: { autocomplete: 'off', min: 0, class: 'minutes' }
+          )
+          bb.input(
+            :url,
+            input_html: { autocomplete: 'off', class: 'url' },
+            hint: 'Vefslóð beint á viðkomandi bók á vef útgefanda eða '\
+                  'söluaðila.'
+          )
+          bb.input(
+            :availability,
+            collection: BookBindingType::AVAILABILITIES.map do |s|
+              [
+                I18n.t(
+                  'activerecord.attributes.book_binding_type'\
+                  ".availabilities.#{s}"
+                ),
+                s
+              ]
+            end,
+            include_blank: false
+          )
+          bb.input(
+            :publication_date,
+            as: :datepicker,
+            class: 'publication-date',
+            hint: 'Ef bók er skráð sem væntanleg er hún sjálfkrafa skráð sem '\
+                  'fáanleg á útgáfudegi.'
+          )
+        end
 
-    f.inputs 'Sýnishorn innan úr bók' do
-      li class: 'sample-pages' do
-        resource.sample_pages.each_with_index do |_sample_page, i|
-          img(src: resource.sample_page_variant_url(i, 150, 'jpg'), width: 75)
+        f.has_many(
+          :book_categories, heading: 'Flokkar (hámark 3)', allow_destroy: true
+        ) do |bc|
+          bc.input(
+            :category,
+            collection: grouped_options_for_select(
+              Category.order(rod: :asc).grouped_options, bc.object.category_id
+            ),
+            selected: 3,
+            member_label: :name_with_group
+          )
+          bc.input :for_print
+          bc.input :for_web
+        end
+
+        if Edition.form_collection(current_admin_user.admin?).count.positive?
+          f.inputs do
+            f.input(
+              :editions,
+              as: :check_boxes,
+              collection: Edition.form_collection(current_admin_user.admin?),
+              input_html: { autocomplete: 'off' },
+              hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
+                    'Bókatíðindum í þeim flokkum sem hafa verið valdir.'\
+            )
+          end
         end
       end
-      f.input(
-        :sample_pages_files,
-        as: :file,
-        input_html: {
-          accept: Book::PERMITTED_IMAGE_FORMATS.join(', '),
-          multiple: true
-        },
-        hint: 'Sýnishorn af stökum síðum innan úr prentútgáfu bókar. '\
-              'Hægt er að velja fleiri en eina skrá. '\
-              'Sömu reglur um skráasnið gilda og um forsíðumyndir.'
-      )
-      unless resource.sample_pages.count.zero?
-        f.input(:delete_sample_pages, as: :boolean)
+
+      tab I18n.t('active_admin.tabs.book.quotes_and_reviews') do
+        f.inputs do
+          f.input(
+            :blockquote,
+            as: :text,
+            input_html: {
+              rows: 7,
+              autocomplete: 'off',
+              maxlength: Book::BLOCKQUOTE_MAX_LENGTH
+            },
+            hint: 'Stutt tilvitnun, t.d. í ritdóm eða ummfjöllun '\
+                  'fjölmiðils, sem birtist í vefútgáfu Bókatíðinda. '\
+                  'Gæsalöppum er sjálfkrafa bætt við tilvitunina. '\
+                  "Hámark #{Book::BLOCKQUOTE_MAX_LENGTH} slög með bilum "\
+                  'og HTML-táknum'
+          )
+          f.input(
+            :blockquote_source,
+            hint: 'Uppruni tilvitnunarinnar, t.d. Jón Viðar Jónsson, '\
+                  'Þjóðviljinn, Lestrarklefinn o.s.frv. '\
+                  "Hámark #{Book::BLOCKQUOTE_CITE_MAX_LENGTH} slög."
+          )
+        end
       end
-    end
 
-    f.has_many(
-      :book_binding_types, heading: 'Útgáfuform', allow_destroy: true
-    ) do |bb|
-      bb.input(
-        :binding_type,
-        collection: BindingType.order(rod: :asc),
-        input_html: { class: 'binding-type' }
-      )
-      bb.input(
-        :barcode,
-        input_html: {
-          inputmode: 'numeric',
-          pattern: '[0-9]*',
-          maxlength: 13,
-          autocomplete: 'off',
-          class: 'barcode'
-        },
-        hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer, ' \
-              'eða ISSN-númer þegar um er að ræða tímarit.'
-      )
-      bb.input(
-        :language,
-        include_blank: false,
-        collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
-          ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
-        end,
-        input_html: { autocomplete: 'off', class: 'language' }
-      )
-      bb.input(
-        :page_count,
-        input_html: { autocomplete: 'off', min: 0, class: 'page-count' }
-      )
-      bb.input(
-        :minutes,
-        input_html: { autocomplete: 'off', min: 0, class: 'minutes' }
-      )
-      bb.input(
-        :url,
-        input_html: { autocomplete: 'off', class: 'url' },
-        hint: 'Vefslóð beint á viðkomandi bók á vef útgefanda eða söluaðila.'
-      )
-      bb.input(
-        :availability,
-        collection: BookBindingType::AVAILABILITIES.map do |s|
-          [
-            I18n.t(
-              "activerecord.attributes.book_binding_type.availabilities.#{s}"
-            ),
-            s
-          ]
-        end,
-        include_blank: false
-      )
-      bb.input(
-        :publication_date,
-        as: :datepicker,
-        class: 'publication-date',
-        hint: 'Ef bók er skráð sem væntanleg er hún sjálfkrafa skráð sem '\
-              'fáanleg á útgáfudegi.'
-      )
-    end
+      tab I18n.t('active_admin.tabs.book.samples') do
+        f.inputs 'Hljóðbrot' do
+          if resource.audio_sample.attached?
+            audio src: resource.audio_sample_url, controls: true
+          end
+          f.input(
+            :audio_sample_file,
+            as: :file,
+            hint: 'Tekið er við hljóðskrám á sniðunum AAC, MP3, og OGG. '\
+                  'Hljóðskrárnar eru ekki unnar sjálfkrafa yfir í mismunandi '\
+                  'snið.'
+          )
+          if resource.audio_sample.attached?
+            f.input(:delete_audio_sample, as: :boolean)
+          end
+        end
 
-    f.has_many(
-      :book_categories, heading: 'Flokkar (hámark 3)', allow_destroy: true
-    ) do |bc|
-      bc.input(
-        :category,
-        collection: grouped_options_for_select(
-          Category.order(rod: :asc).grouped_options, bc.object.category_id
-        ),
-        selected: 3,
-        member_label: :name_with_group
-      )
-      bc.input :for_print
-      bc.input :for_web
-    end
-
-    if Edition.form_collection(current_admin_user.admin?).count.positive?
-      f.inputs do
-        f.input(
-          :editions,
-          as: :check_boxes,
-          collection: Edition.form_collection(current_admin_user.admin?),
-          input_html: { autocomplete: 'off' },
-          hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
-                'Bókatíðindum í þeim flokkum sem hafa verið valdir.'\
-        )
+        f.inputs 'Sýnishorn innan úr bók' do
+          li class: 'sample-pages' do
+            resource.sample_pages.each_with_index do |_sample_page, i|
+              img(
+                src: resource.sample_page_variant_url(i, 150, 'jpg'), width: 75
+              )
+            end
+          end
+          f.input(
+            :sample_pages_files,
+            as: :file,
+            input_html: {
+              accept: Book::PERMITTED_IMAGE_FORMATS.join(', '),
+              multiple: true
+            },
+            hint: 'Sýnishorn af stökum síðum innan úr prentútgáfu bókar. '\
+                  'Hægt er að velja fleiri en eina skrá. '\
+                  'Sömu reglur um skráasnið gilda og um forsíðumyndir.'
+          )
+          unless resource.sample_pages.count.zero?
+            f.input(:delete_sample_pages, as: :boolean)
+          end
+        end
       end
-    end
 
-    f.inputs 'Nánari upplýsingar' do
-      f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
-      f.input(
-        :country_of_origin,
-        as: :country,
-        include_blank: true,
-        priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
-        input_html: { autocomplete: 'off' },
-        hint: 'Upprunaland bókar.'
-      )
-      input(
-        :original_language,
-        include_blank: true,
-        collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
-          ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
-        end,
-        input_html: { autocomplete: 'off', class: 'language' },
-        hint: 'Upprunalegt tungumál bókar.'
-      )
+      tab I18n.t('active_admin.tabs.book.bibliography') do
+        f.inputs 'Nánari upplýsingar' do
+          f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
+          f.input(
+            :country_of_origin,
+            as: :country,
+            include_blank: true,
+            priority_countries: Book::PRIORITY_COUNTRIES_OF_ORIGIN,
+            input_html: { autocomplete: 'off' },
+            hint: 'Upprunaland bókar.'
+          )
+          input(
+            :original_language,
+            include_blank: true,
+            collection: BookBindingType::AVAILABLE_LANGUAGES.map do |l|
+              ["#{l[0]} - #{I18n.t("languages.#{l[0]}")}", l[0]]
+            end,
+            input_html: { autocomplete: 'off', class: 'language' },
+            hint: 'Upprunalegt tungumál bókar.'
+          )
+        end
+      end
     end
 
     f.actions

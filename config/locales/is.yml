@@ -306,6 +306,12 @@ is:
     has_many_delete: "eyða"
     has_many_remove: "fjarlægja"
     move: "Færa"
+    tabs:
+      book:
+        general: 'Almennt'
+        quotes_and_reviews: 'Tilvitnanir og ritdómar'
+        samples: 'Sýnishorn'
+        bibliography: 'Flokkunarfræðilegar upplýsingar'
     filters:
       buttons:
         filter: "Sía"
