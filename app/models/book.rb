@@ -57,6 +57,8 @@ class Book < ApplicationRecord
   has_many :book_binding_types, dependent: :destroy, inverse_of: :book
   has_many :binding_types, through: :book_binding_types
 
+  has_many :blockquotes, dependent: :destroy, inverse_of: :book
+
   # This prevents the deletion of books that have been assigned bo editions.
   has_many :book_editions, dependent: :restrict_with_error
   has_many :editions, through: :book_editions
@@ -66,6 +68,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :book_authors, allow_destroy: true
   accepts_nested_attributes_for :book_categories, allow_destroy: true
   accepts_nested_attributes_for :book_binding_types, allow_destroy: true
+  accepts_nested_attributes_for :blockquotes, allow_destroy: true
 
   has_one_attached :cover_image, dependent: :destroy
   has_one_attached :audio_sample, dependent: :destroy

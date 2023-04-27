@@ -1,0 +1,6 @@
+<blockquote class="<%= local_assigns[:blockquote].size %>">
+<%= simple_format '„' + local_assigns[:blockquote].quote + '“', tags: ['em'] %>
+<% if local_assigns[:blockquote].citation.present? %>
+<cite><%= local_assigns[:blockquote].citation %></cite>
+<% end %>
+</blockquote>

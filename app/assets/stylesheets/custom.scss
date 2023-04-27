@@ -264,7 +264,7 @@ main {
   blockquote {
     padding: 2em;
     p {
-      font-size: 2em;
+      font-size: 1.2em;
       line-height: 1.2em;
       font-style: italic;
       font-family: $lora;
@@ -272,6 +272,12 @@ main {
         text-indent: -0.45em;
       }
     }
+  }
+  blockquote.large p {
+    font-size: 2.2em;
+  }
+  blockquote.extra_large p {
+    font-size: 3.2em;
   }
 
   #book_audio_sample {

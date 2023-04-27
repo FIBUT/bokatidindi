@@ -114,18 +114,17 @@
             <%= simple_format @book.description, tags: ['em'] %>
           </article>
 
-          <% if @book.blockquote.present? %>
-          <blockquote>
-            <%= simple_format '„' + @book.blockquote + '“', tags: ['em'] %>
-            <% if @book.blockquote_source.present? %>
-            <cite><%= @book.blockquote_source %></cite>
-            <% end %>
-          </blockquote>
+          <% @book.blockquotes.where(location: :below_book_description).each do |blockquote, i| %>
+            <%= render 'books/blockquote', blockquote: blockquote %>
           <% end %>
 
           <article id="book_long_description">
             <%=  simple_format @book.long_description, tags: ['em'] %>
           </article>
+
+          <% @book.blockquotes.where(location: :below_long_description).each do |blockquote, i| %>
+            <%= render 'books/blockquote', blockquote: blockquote %>
+          <% end %>
         </div>
 
         <% if @book.audio_sample? %>
