@@ -124,6 +124,9 @@ is:
       book:
         one: 'bók'
         other: 'bækur'
+      blockquote:
+        one: 'tilvitnun'
+        other: 'tilvitnanir og ritdómar'
       publisher:
         one: 'útgefandi'
         other: 'útgefendur'
@@ -187,6 +190,18 @@ is:
         cover_image: 'Forsíðumynd'
         book_authors: 'Höfundar bókar'
         book_binding_types: 'Útgáfuform bókar'
+      blockquote:
+        size: 'Stærð'
+        sizes:
+          medium: 'Miðlungs'
+          large: 'Stór'
+          extra_large: 'Mjög stór'
+        location: 'Staðsetning'
+        locations:
+          below_long_description: 'Fyrir neðan áframhaldandi lýsingu'
+          below_book_description: 'Fyrir neðan stutta lýsingu'
+        quote: 'Tilvitnun'
+        citation: 'Heimild'
       book_category:
         category: 'Flokkur'
         for_print: 'Birtist í prentútgáfu'

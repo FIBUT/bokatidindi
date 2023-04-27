@@ -48,7 +48,7 @@ gem 'jsbundling-rails'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.12'
 
-gem 'pg'
+gem 'pg', '~> 1.5.2'
 
 gem 'htmlentities'
 

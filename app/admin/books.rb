@@ -21,6 +21,9 @@ ActiveAdmin.register Book do
                   book_categories_attributes: %i[
                     id category_id for_print for_web _destroy
                   ],
+                  blockquotes_attributes: %i[
+                    id size location quote citation _destroy
+                  ],
                   edition_ids: [],
                   sample_pages_files: []
                 }
@@ -564,26 +567,54 @@ ActiveAdmin.register Book do
       end
 
       tab I18n.t('active_admin.tabs.book.quotes_and_reviews') do
-        f.inputs do
-          f.input(
-            :blockquote,
+        f.has_many(
+          :blockquotes, allow_destroy: true
+        ) do |bq|
+          bq.input(
+            :size,
+            include_blank: false,
+            collection: Blockquote.sizes.map do |s|
+              [
+                I18n.t("activerecord.attributes.blockquote.sizes.#{s.first}"),
+                s.last
+              ]
+            end
+          )
+          bq.input(
+            :location,
+            include_blank: false,
+            collection: Blockquote.locations.map do |l|
+              [
+                I18n.t(
+                  "activerecord.attributes.blockquote.locations.#{l.first}"
+                ),
+                l.last
+              ]
+            end
+          )
+          bq.input(
+            :quote,
             as: :text,
             input_html: {
-              rows: 7,
+              class: 'blockquote_quote',
+              rows: 14,
               autocomplete: 'off',
-              maxlength: Book::BLOCKQUOTE_MAX_LENGTH
+              maxlength: Blockquote::QUOTE_MAX_LENGTH
             },
             hint: 'Stutt tilvitnun, t.d. í ritdóm eða ummfjöllun '\
                   'fjölmiðils, sem birtist í vefútgáfu Bókatíðinda. '\
                   'Gæsalöppum er sjálfkrafa bætt við tilvitunina. '\
-                  "Hámark #{Book::BLOCKQUOTE_MAX_LENGTH} slög með bilum "\
-                  'og HTML-táknum'
+                  "Hámark #{Blockquote::QUOTE_MAX_LENGTH} slög með bilum."
           )
-          f.input(
-            :blockquote_source,
+          bq.input(
+            :citation,
+            input_html: {
+              class: 'blockquote_citation',
+              maxlength: Blockquote::CITATION_MAX_LENGTH
+            },
             hint: 'Uppruni tilvitnunarinnar, t.d. Jón Viðar Jónsson, '\
                   'Þjóðviljinn, Lestrarklefinn o.s.frv. '\
-                  "Hámark #{Book::BLOCKQUOTE_CITE_MAX_LENGTH} slög."
+                  "Hámark #{Blockquote::CITATION_MAX_LENGTH} slög með bilum."
           )
         end
       end

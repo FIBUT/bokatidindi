@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :blockquote do
+  end
+
   factory :admin_user_publisher do
     admin_user_id { 1 }
     publisher_id { 1 }
