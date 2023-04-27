@@ -18,9 +18,9 @@ class BookBindingType < ApplicationRecord
 
   validates(
     :barcode, isbn_format: {
-                with: :isbn13,
-                message: 'þarf að vera gilt ISBN-13-númer'
-              },
+      with: :isbn13,
+      message: 'þarf að vera gilt ISBN-13-númer'
+    },
               unless: proc { |bbt| bbt.barcode.blank? },
               if: proc { |bbt| bbt&.binding_type&.barcode_type == 'ISBN' }
   )
