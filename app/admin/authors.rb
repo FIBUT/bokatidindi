@@ -3,7 +3,7 @@
 ActiveAdmin.register Author do
   config.sort_order = 'order_by_name_asc'
 
-  permit_params :firstname, :lastname, :gender, :is_icelandic
+  permit_params :firstname, :lastname, :is_icelandic
 
   filter :firstname_contains
   filter :lastname_contains
@@ -12,11 +12,6 @@ ActiveAdmin.register Author do
     selectable_column
     column :name do |author|
       link_to author.name, edit_admin_author_path(author)
-    end
-    column :gender do |author|
-      unless author.gender.nil?
-        I18n.t("activerecord.attributes.author.genders.#{author.gender}")
-      end
     end
     column :is_icelandic
     column :book_count, &:book_count
@@ -61,7 +56,6 @@ ActiveAdmin.register Author do
         :is_icelandic,
         label: 'Höfundur er íslenskur'
       )
-      f.input :gender, include_blank: false
     end
 
     f.actions

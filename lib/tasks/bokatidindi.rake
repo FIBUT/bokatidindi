@@ -10,18 +10,6 @@ namespace :bt do
     end
   end
 
-  desc 'Automatically gender Icelandic authors based on son/dóttir'
-  task autogender_authors: :environment do
-    count = 0
-    Author.where(is_icelandic: true, gender: nil).each do |a|
-      a[:gender] = :male if a[:lastname].end_with?('son')
-      a[:gender] = :female if a[:lastname].end_with?('dóttir')
-      a[:gender] = :non_binary if a[:lastname].end_with?('bur')
-      count += 1 if a.save
-    end
-    puts "Gender assumed for #{count} authors."
-  end
-
   desc 'Remove zero-page counts'
   task clean_zero_pages: :environment do
     count = 0

@@ -256,12 +256,6 @@ is:
         firstname: "Fornafn"
         lastname: "Eftirnafn"
         is_icelandic: "Er íslenskur"
-        gender: "Kyn"
-        genders:
-          undefined: "Ótilgreint"
-          male: "Karlkyns"
-          female: "Kvenkyns"
-          non_binary: "Kynsegin"
       author_type:
         name: "Nafn"
         rod: "Röðun"

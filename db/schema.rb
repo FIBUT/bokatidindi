@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_172855) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_220834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_prewarm"
   enable_extension "pg_stat_statements"
@@ -112,10 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_172855) do
     t.datetime "updated_at", null: false
     t.boolean "is_icelandic"
     t.string "order_by_name"
-    t.integer "gender"
     t.string "name"
     t.integer "added_by_id"
-    t.index ["gender"], name: "index_authors_on_gender"
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
     t.index ["slug"], name: "index_authors_on_slug", unique: true
