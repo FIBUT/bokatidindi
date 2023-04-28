@@ -262,7 +262,7 @@ main {
   }
 
   blockquote {
-    padding: 2em;
+    padding: 0.5em 2em;
     p {
       font-size: 1.2em;
       line-height: 1.2em;
@@ -289,6 +289,7 @@ main {
   }
 
   #book-binding-types {
+    font-size: 14px;
     a {
       font-weight: $font-weight-bold;
       padding: 3px 0;
@@ -296,11 +297,13 @@ main {
     h2 {
       font-family: $montserrat;
       font-weight: $font-weight-bold;
+      font-size: 1em;
     }
 
    h3 {
       font-family: $montserrat;
       font-weight: $font-weight-bold;
+      font-size: 14px;
     }
   }
 }
