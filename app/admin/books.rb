@@ -576,7 +576,7 @@ ActiveAdmin.register Book do
             collection: Blockquote.sizes.map do |s|
               [
                 I18n.t("activerecord.attributes.blockquote.sizes.#{s.first}"),
-                s.last
+                s.first
               ]
             end
           )
@@ -588,7 +588,7 @@ ActiveAdmin.register Book do
                 I18n.t(
                   "activerecord.attributes.blockquote.locations.#{l.first}"
                 ),
-                l.last
+                l.first
               ]
             end
           )
