@@ -1,4 +1,16 @@
-<blockquote class="<%= local_assigns[:blockquote].size %>">
+
+<% if local_assigns[:blockquote].heading.present? %>
+<h2 id="blockquote-heading-<%= local_assigns[:blockquote].id %>" class="blockquote-heading">
+<%= local_assigns[:blockquote].heading %>
+</h2>
+<% end %>
+
+<blockquote
+    class="<%= local_assigns[:blockquote].size %>"
+    <% if local_assigns[:blockquote].heading.present? %>
+    aria-labelledby="blockquote-heading-<%= local_assigns[:blockquote].id %>"
+    <% end %>
+>
 <%= simple_format '„' + local_assigns[:blockquote].quote + '“', tags: ['em'] %>
 <% if local_assigns[:blockquote].citation.present? %>
 <cite><%= local_assigns[:blockquote].citation %></cite>
