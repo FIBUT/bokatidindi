@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Blockquote < ApplicationRecord
-  QUOTE_MAX_LENGTH    = 255
+  QUOTE_MAX_LENGTH    = 512
   CITATION_MAX_LENGTH = 63
 
   belongs_to :book
