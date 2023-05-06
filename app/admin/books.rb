@@ -22,7 +22,7 @@ ActiveAdmin.register Book do
                     id category_id for_print for_web _destroy
                   ],
                   blockquotes_attributes: %i[
-                    id size location quote citation _destroy
+                    id size location heading quote citation _destroy
                   ],
                   edition_ids: [],
                   sample_pages_files: []
@@ -591,6 +591,12 @@ ActiveAdmin.register Book do
                 l.first
               ]
             end
+          )
+          bq.input(
+            :heading,
+            input_html: {
+              class: 'blockquote_heading'
+            }
           )
           bq.input(
             :quote,

@@ -30,7 +30,7 @@ form.formtastic {
   .tip { margin-left: 20%; font-weight: bold; font-size: 1.2em; }
   textarea#book_description, textarea#book_long_description { max-width: 80em; }
   textarea.blockquote_quote { max-width: 45em; }
-  input.blockquote_citation { width: 40em; }
+  input.blockquote_citation, input.blockquote_heading { width: 40em; }
   li.sample-pages { margin-left: 20%; }
   p.field-group-note {
     margin: 0.5em 0 0 20%;
