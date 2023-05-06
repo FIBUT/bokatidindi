@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_06_102424) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_151528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_prewarm"
   enable_extension "pg_stat_statements"
@@ -136,7 +136,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_102424) do
   end
 
   create_table "blockquotes", force: :cascade do |t|
-    t.string "quote", limit: 255
+    t.string "quote", limit: 512
     t.string "citation", limit: 63
     t.integer "location", default: 0
     t.integer "size", default: 0
