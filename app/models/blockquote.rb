@@ -6,6 +6,8 @@ class Blockquote < ApplicationRecord
 
   belongs_to :book
 
+  default_scope { order(id: :asc) }
+
   enum size: { medium: 0, large: 1, extra_large: 2 }
   enum location: { below_long_description: 0, below_book_description: 1 }
 end
