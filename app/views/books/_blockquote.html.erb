@@ -6,12 +6,16 @@
 <% end %>
 
 <blockquote
-    class="<%= local_assigns[:blockquote].size %>"
+    class="<%= local_assigns[:blockquote].size %> <%= local_assigns[:blockquote].quote_type %>"
     <% if local_assigns[:blockquote].heading.present? %>
     aria-labelledby="blockquote-heading-<%= local_assigns[:blockquote].id %>"
     <% end %>
 >
+<% if local_assigns[:blockquote].quote_type == 'citation' %>
 <%= simple_format '„' + local_assigns[:blockquote].quote + '“', tags: ['em'] %>
+<% else %>
+<%= simple_format local_assigns[:blockquote].quote, tags: ['em'] %>
+<% end %>
 <% if local_assigns[:blockquote].citation.present? %>
 <cite><%= local_assigns[:blockquote].citation %></cite>
 <% end %>
