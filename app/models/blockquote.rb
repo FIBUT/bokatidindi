@@ -9,6 +9,5 @@ class Blockquote < ApplicationRecord
   default_scope { order(id: :asc) }
 
   enum quote_type: { citation: 0, direct: 1 }
-  enum size: { medium: 0, large: 1, extra_large: 2 }
   enum location: { below_long_description: 0, below_book_description: 1 }
 end
