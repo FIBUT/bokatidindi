@@ -22,7 +22,7 @@ ActiveAdmin.register Book do
                     id category_id for_print for_web _destroy
                   ],
                   blockquotes_attributes: %i[
-                    id quote_type size location heading quote citation _destroy
+                    id quote_type location heading quote citation _destroy
                   ],
                   edition_ids: [],
                   sample_pages_files: []
@@ -581,16 +581,6 @@ ActiveAdmin.register Book do
             end,
             hint: 'Tilvitnanir fá sjálfkrafa íslenskar gæsalappir en '\
                   'úrdrættir ekki. Einnig er útlitsmunur.'
-          )
-          bq.input(
-            :size,
-            include_blank: false,
-            collection: Blockquote.sizes.map do |s|
-              [
-                I18n.t("activerecord.attributes.blockquote.sizes.#{s.first}"),
-                s.first
-              ]
-            end
           )
           bq.input(
             :location,

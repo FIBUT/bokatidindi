@@ -6,7 +6,7 @@
 <% end %>
 
 <blockquote
-    class="<%= local_assigns[:blockquote].size %> <%= local_assigns[:blockquote].quote_type %>"
+    class="medium <%= local_assigns[:blockquote].quote_type %>"
     <% if local_assigns[:blockquote].heading.present? %>
     aria-labelledby="blockquote-heading-<%= local_assigns[:blockquote].id %>"
     <% end %>
