@@ -280,6 +280,9 @@ main {
     p:first-child {
       text-indent: -0.45em;
     }
+    p:nth-last-child(n+1) {
+      margin-bottom: 0.2em;
+    }
   }
   blockquote.direct {
     padding: 0 2em;
