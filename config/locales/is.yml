@@ -191,6 +191,8 @@ is:
         book_authors: 'Höfundar bókar'
         book_binding_types: 'Útgáfuform bókar'
       blockquote:
+        heading: 'Fyrirsögn'
+        quote_type: 'Gerð'
         type: 'Gerð'
         types:
           citation: 'Tilvitnun'
