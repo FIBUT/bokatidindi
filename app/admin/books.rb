@@ -422,7 +422,7 @@ ActiveAdmin.register Book do
              'texta. Skáletrun birtist bæði í prent- og vefútgáfu.',
              class: 'tip'
           li 'Allur texti í stuttri og áframhaldandi lýsingu skal vera á '\
-             'Íslensku, þó svo að bókin sé gefin út á erlendu tungumáli.',
+             'íslensku, þó svo að bókin sé gefin út á erlendu tungumáli.',
              class: 'tip'
 
           f.input :description,
