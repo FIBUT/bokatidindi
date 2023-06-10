@@ -77,8 +77,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
-    appsignal (3.4.1)
-      rack
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -450,7 +448,6 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 7.0.4)
   activeadmin
-  appsignal
   barnes
   bootsnap (>= 1.4.4)
   browser
