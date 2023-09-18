@@ -519,12 +519,12 @@ class Book < ApplicationRecord
   end
 
   def attach_print_image_variant
-    cover_image.variant(resize_to_limit: [300, nil], units: 'PixelsPerInch',
+    cover_image.variant(resize_to_limit: [325, nil], units: 'PixelsPerInch',
                         density: 330, format: 'tiff').process
   end
 
   def print_image_variant_url
-    cover_variant = cover_image.variant(resize_to_limit: [300, nil],
+    cover_variant = cover_image.variant(resize_to_limit: [325, nil],
                                         units: 'PixelsPerInch',
                                         density: 330, format: 'tiff')
 
