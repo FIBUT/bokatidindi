@@ -23,5 +23,8 @@ module Bokatidindi
     config.i18n.default_locale = :is
 
     config.active_storage.variant_processor = :mini_magick
+
+    config.active_job.queue_adapter = :good_job
+    config.good_job.execution_mode = :external
   end
 end
