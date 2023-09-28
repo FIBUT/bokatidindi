@@ -242,4 +242,18 @@ namespace :bt do
       a.save
     end
   end
+
+  desc 'Reset the database index sequence'
+  task reset_db_index: :environment do
+    skip_tables = ['schema_migrations', 'ar_internal_metadata', 'good_jobs',
+                   'good_job_batches', 'good_job_executions',
+                   'good_job_processes', 'good_job_settings']
+    tables = ActiveRecord::Base.connection.tables - skip_tables
+    tables.each do |t|
+      ActiveRecord::Base.connection.execute(
+        "SELECT pg_catalog.setval(pg_get_serial_sequence('#{t}', 'id'), "\
+        "MAX(id)) FROM #{t};"
+      )
+    end
+  end
 end
