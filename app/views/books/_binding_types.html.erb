@@ -33,7 +33,7 @@
     </li>
     <% end %>
     <li class="isbn d-inline">
-      ISBN <%= book_binding_type.barcode %>
+      <%= book_binding_type.binding_type.barcode_type %> <%= book_binding_type.barcode %>
     </li>
     <% unless book_binding_type.language == 'is' %>
     <li class="language d-block">
