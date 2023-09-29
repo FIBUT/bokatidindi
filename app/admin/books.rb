@@ -171,7 +171,8 @@ ActiveAdmin.register Book do
 
         return redirect_to(
           admin_books_path,
-          notice: "Bókin #{@resource.title} hefur verið uppfærð."
+          notice: "Bókin #{@resource.title} hefur verið uppfærð. Athugið að " \
+                  'vinnsla á myndum getur tekið allt að 10 mínútur.'
         )
       end
 
@@ -491,8 +492,9 @@ ActiveAdmin.register Book do
               autocomplete: 'off',
               class: 'barcode'
             },
-            hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer, ' \
-                  'eða ISSN-númer þegar um er að ræða tímarit.'
+            hint: 'Strikamerkið þarf að vera gilt ISBN-13 númer, eða '\
+                  'ISSN-númer (á GTIN/EAN 13 formi) þegar um er að ræða '\
+                  'tímarit.'
           )
           bb.input(
             :language,
