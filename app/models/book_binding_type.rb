@@ -37,7 +37,7 @@ class BookBindingType < ApplicationRecord
 
   validates :url, url: true, allow_blank: true
 
-  before_validation :sanitize_barcode
+  before_validation :sanitize_barcode, :strip_url
 
   validate :issn_must_be_valid
 
@@ -78,6 +78,10 @@ class BookBindingType < ApplicationRecord
 
   def sanitize_barcode
     barcode.delete('^0-9')
+  end
+
+  def strip_url
+    url&.strip!
   end
 
   def language_a
