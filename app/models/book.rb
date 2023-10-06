@@ -232,12 +232,17 @@ class Book < ApplicationRecord
                                   .gsub('.  ', '. ')
                                   .gsub('`', '\'')
                                   .gsub('´', '\'')
+                                  .gsub(Unicode::Emoji::REGEX_WELL_FORMED, '')
                                   .strip&.upcase_first
 
     self.long_description = long_description.gsub(/[\r\n]+/, "\r\n\r\n")
                                             .gsub('.  ', '. ')
                                             .gsub('`', '\'')
                                             .gsub('´', '\'')
+                                            .gsub(
+                                              Unicode::Emoji::REGEX_WELL_FORMED,
+                                              ''
+                                            )
                                             .strip&.upcase_first
     nil
   end
