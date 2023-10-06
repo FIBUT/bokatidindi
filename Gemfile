@@ -118,3 +118,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "good_job", "~> 3.19"
+
+gem "unicode-emoji", "~> 3.4"
