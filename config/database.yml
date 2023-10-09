@@ -28,11 +28,7 @@ test:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
-  adapter: postgresql
+  host: <%= ENV['DATABASE_URL'] %>
   encoding: unicode
-  host: ec2-54-73-22-169.eu-west-1.compute.amazonaws.com
-  database: dfue2la98ldmo2
-  username: aawriogqscqnmj
-  password: <%= ENV['DATABASE_PASSWORD'] %>
   pool: 5
   timeout: 5000
