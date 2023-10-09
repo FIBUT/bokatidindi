@@ -4,9 +4,8 @@ class SetImageVariantsJob < ApplicationJob
   queue_as :default
 
   def perform(book)
+    book.attach_cover_image_variants
+    book.attach_sample_page_variants
     book.update_srcsets
-    book.update_sample_pages_srcsets
-    book.update_cover_image_srcsets
-    book.save
   end
 end
