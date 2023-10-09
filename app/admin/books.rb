@@ -128,7 +128,8 @@ ActiveAdmin.register Book do
 
         if permitted_params[:book][:cover_image_file]
           @resource.cover_image.attach(
-            permitted_params[:book][:cover_image_file]
+            io: permitted_params[:book][:cover_image_file].to_io,
+            filename: SecureRandom.uuid
           )
         end
 
@@ -202,7 +203,7 @@ ActiveAdmin.register Book do
 
       if @resource.errors.none? && @resource.save
         @resource.cover_image.attach(
-          permitted_params[:book][:cover_image_file],
+          io: permitted_params[:book][:cover_image_file].to_io,
           filename: SecureRandom.uuid
         )
 
