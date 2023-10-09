@@ -96,18 +96,6 @@ ActiveAdmin.register Book do
         @resource.errors.add(:book_categories, :too_many)
       end
 
-      if permitted_params[:book][:cover_image_file]
-        cover_image_contents = permitted_params[:book][:cover_image_file].read
-
-        cover_image_content_type = MimeMagic.by_magic(cover_image_contents).type
-
-        if Book::PERMITTED_IMAGE_FORMATS.include?(cover_image_content_type)
-          cover_image_file_valid = true
-        else
-          @resource.errors.add(:cover_image_file, :invalid)
-        end
-      end
-
       if permitted_params[:book][:audio_sample_file]
         audio_sample_contents = permitted_params[:book][:audio_sample_file].read
 
@@ -121,19 +109,6 @@ ActiveAdmin.register Book do
         end
       end
 
-      sample_pages_files = []
-      permitted_params[:book][:sample_pages_files].each do |c|
-        next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
-
-        contents = c.read
-        mime_type = MimeMagic.by_magic(contents).type
-        sample_pages_files << { contents:, mime_type: }
-
-        unless Book::PERMITTED_IMAGE_FORMATS.include?(mime_type)
-          @resource.errors.add(:sample_pages_files, :invalid)
-        end
-      end
-
       if @resource.errors.none? && @resource.save
         @resource.book_editions.where(
           edition_id: removed_edition_ids
@@ -142,13 +117,14 @@ ActiveAdmin.register Book do
           be.update_book_edition_categories(force: current_admin_user.admin?)
         end
 
-        sample_pages_files.each do |spf|
-          @resource.attach_sample_page_from_string(spf[:contents])
-        end
+        @resource.sample_pages.attach(
+          permitted_params[:book][:sample_pages_files]
+        )
 
-        if cover_image_file_valid
-          @resource.cover_image.purge if @resource.cover_image.attached?
-          @resource.attach_cover_image_from_string(cover_image_contents)
+        if permitted_params[:book][:cover_image_file]
+          @resource.cover_image.attach(
+            permitted_params[:book][:cover_image_file]
+          )
         end
 
         if permitted_params[:book][:delete_sample_pages].to_i == 1
@@ -198,18 +174,6 @@ ActiveAdmin.register Book do
         id: (@resource.inactive_edition_ids + edition_ids)
       )
 
-      if permitted_params[:book][:cover_image_file]
-        cover_image_contents = permitted_params[:book][:cover_image_file].read
-
-        cover_image_content_type = MimeMagic.by_magic(cover_image_contents).type
-
-        if Book::PERMITTED_IMAGE_FORMATS.include?(cover_image_content_type)
-          cover_image_file_valid = true
-        else
-          @resource.errors.add(:cover_image_file, :invalid)
-        end
-      end
-
       if permitted_params[:book][:audio_sample_file]
         audio_sample_contents = permitted_params[:book][:audio_sample_file].read
 
@@ -223,19 +187,6 @@ ActiveAdmin.register Book do
         end
       end
 
-      sample_pages_files = []
-      permitted_params[:book][:sample_pages_files].each do |c|
-        next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
-
-        contents = c.read
-        mime_type = MimeMagic.by_magic(contents).type
-        sample_pages_files << { contents:, mime_type: }
-
-        unless Book::PERMITTED_IMAGE_FORMATS.include?(mime_type)
-          @resource.errors.add(:sample_pages_files, :invalid)
-        end
-      end
-
       authorize! :create, @resource
 
       @resource.validate
@@ -245,16 +196,14 @@ ActiveAdmin.register Book do
       end
 
       if @resource.errors.none? && @resource.save
-        if cover_image_file_valid
-          @resource.attach_cover_image_from_string(cover_image_contents)
-        end
+        @resource.cover_image.attach(permitted_params[:book][:cover_image_file])
+
+        @resource.sample_pages.attach(
+          permitted_params[:book][:sample_pages_files]
+        )
 
         if audio_sample_file_valid
           @resource.attach_audio_sample_from_string(audio_sample_contents)
-        end
-
-        sample_pages_files.each do |spf|
-          @resource.attach_sample_page_from_string(spf[:contents])
         end
 
         SetImageVariantsJob.set(
