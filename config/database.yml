@@ -29,10 +29,10 @@ test:
 
 production:
   adapter: postgresql
-  host: <%= ENV['HEROKU_POSTGRESQL_RED_URL'] %>
   encoding: unicode
-  username: bokatidindi
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-  database: bokatidindi_production
+  host: ec2-54-73-22-169.eu-west-1.compute.amazonaws.com
+  database: dfue2la98ldmo2
+  username: aawriogqscqnmj
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   pool: 5
   timeout: 5000
