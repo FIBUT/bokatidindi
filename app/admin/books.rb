@@ -202,10 +202,12 @@ ActiveAdmin.register Book do
       end
 
       if @resource.errors.none? && @resource.save
-        @resource.cover_image.attach(
-          io: permitted_params[:book][:cover_image_file].to_io,
-          filename: SecureRandom.uuid
-        )
+        if permitted_params[:book][:cover_image_file]
+          @resource.cover_image.attach(
+            io: permitted_params[:book][:cover_image_file].to_io,
+            filename: SecureRandom.uuid
+          )
+        end
 
         permitted_params[:book][:sample_pages_files].each do |c|
           next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
