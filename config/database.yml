@@ -28,7 +28,7 @@ test:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
-  host: <%= ENV['DATABASE_URL'] %>
+  host: <%= ENV['HEROKU_POSTGRESQL_RED_URL'] %>
   encoding: unicode
   username: bokatidindi
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
