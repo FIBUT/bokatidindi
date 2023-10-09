@@ -28,6 +28,7 @@ test:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
+  adapter: postgresql
   host: <%= ENV['HEROKU_POSTGRESQL_RED_URL'] %>
   encoding: unicode
   username: bokatidindi
