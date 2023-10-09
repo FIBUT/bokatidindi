@@ -117,9 +117,11 @@ ActiveAdmin.register Book do
           be.update_book_edition_categories(force: current_admin_user.admin?)
         end
 
-        @resource.sample_pages.attach(
-          permitted_params[:book][:sample_pages_files]
-        )
+        permitted_params[:book][:sample_pages_files].each do |c|
+          next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
+
+          @resource.sample_pages.attach(io: c, filename: SecureRandom.uuid)
+        end
 
         if permitted_params[:book][:cover_image_file]
           @resource.cover_image.attach(
@@ -196,11 +198,16 @@ ActiveAdmin.register Book do
       end
 
       if @resource.errors.none? && @resource.save
-        @resource.cover_image.attach(permitted_params[:book][:cover_image_file])
-
-        @resource.sample_pages.attach(
-          permitted_params[:book][:sample_pages_files]
+        @resource.cover_image.attach(
+          permitted_params[:book][:cover_image_file],
+          filename: SecureRandom.uuid
         )
+
+        permitted_params[:book][:sample_pages_files].each do |c|
+          next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
+
+          @resource.sample_pages.attach(io: c, filename: SecureRandom.uuid)
+        end
 
         if audio_sample_file_valid
           @resource.attach_audio_sample_from_string(audio_sample_contents)
