@@ -120,7 +120,10 @@ ActiveAdmin.register Book do
         permitted_params[:book][:sample_pages_files].each do |c|
           next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
 
-          @resource.sample_pages.attach(io: c, filename: SecureRandom.uuid)
+          @resource.sample_pages.attach(
+            io: c.to_io,
+            filename: SecureRandom.uuid
+          )
         end
 
         if permitted_params[:book][:cover_image_file]
@@ -206,7 +209,9 @@ ActiveAdmin.register Book do
         permitted_params[:book][:sample_pages_files].each do |c|
           next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
 
-          @resource.sample_pages.attach(io: c, filename: SecureRandom.uuid)
+          @resource.sample_pages.attach(
+            io: c.to_io, filename: SecureRandom.uuid
+          )
         end
 
         if audio_sample_file_valid
