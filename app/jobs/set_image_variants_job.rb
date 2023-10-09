@@ -5,8 +5,8 @@ class SetImageVariantsJob < ApplicationJob
 
   def perform(book)
     book.update_srcsets
-    book.attach_sample_page_variants
-    book.attach_cover_image_variants
+    book.update_sample_pages_srcsets
+    book.update_cover_image_srcsets
     book.save
   end
 end
