@@ -178,6 +178,7 @@
           aria-label="Sýnishorn úr bók"
         >
           <% @book.sample_pages.each_with_index do |sp,i| %>
+          <% if @book.sample_page_url(i, @image_format) %>
           <a
             class="preview-image-link col-6 col-lg-3 mb-2"
             data-fancybox="samples"
@@ -196,6 +197,7 @@
               width="<%= sp.metadata[:width] %>"
             >
           </a>
+          <% end %>
           <% end %>
         </div>
         <% end %>

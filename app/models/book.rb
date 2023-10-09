@@ -393,7 +393,7 @@ class Book < ApplicationRecord
       return sample_page_variant_url(index, 150, @image_format)
     end
 
-    sample_pages_srcsets[format][index].last.split(' ').first
+    sample_pages_srcsets[format][index]&.last&.split(' ')&.first
   end
 
   def short_description
