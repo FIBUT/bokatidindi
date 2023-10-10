@@ -25,6 +25,6 @@ module Bokatidindi
     config.active_storage.variant_processor = :mini_magick
 
     config.active_job.queue_adapter = :good_job
-    config.good_job.execution_mode = :external
+    config.good_job.execution_mode = ENV['JOB_EXECUTION_MODE']&.to_sym || :async
   end
 end
