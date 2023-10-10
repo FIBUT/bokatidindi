@@ -445,6 +445,7 @@ ActiveAdmin.register Book do
           bb.input(
             :binding_type,
             collection: BindingType.order(rod: :asc),
+            include_blank: false,
             input_html: { class: 'binding-type' }
           )
           bb.input(
