@@ -120,3 +120,19 @@ production environment, we need to preprocess all the different cover image
 variants for the CDN, while in the development environemnt, those will be
 generated on the fly. This means that running this in production can be expexted
 to take a couple of hours and should be avoided during.
+
+## ActiveJob and GoodJob
+
+The system uses [GoodJob](https://github.com/bensheldon/good_job) for handling
+background jobs; image processing in particular.
+
+Setting the environment variable `JOB_EXECUTION_MODE` to `external` will enable
+the GoodJob external processor, which runs in a separate worker dyno on Heroku
+(defined in the Procfile). This should be done during high season, when we are
+expecting a lot of incoming registrations.
+
+During low season, the default value of `async` can be used. This enables us to
+disable the worker dyno to save money on hosting, as the processing happens
+asynchronously in the web server process. Note that the memory use may jump well
+above 512 MB during image processing, so do make sure to tweak the
+`GOOD_JOB_MAX_THREADS` environment variable to account for that.
