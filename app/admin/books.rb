@@ -376,23 +376,38 @@ ActiveAdmin.register Book do
         end
 
         f.inputs 'Meginmálstexti' do
-          li 'Athugið að skráning alls texta og yfirlestur er á ábyrgð hvers '\
-             'og eins útgefanda.',
-             class: 'tip'
-          li 'Meginmálstexti er ekki ætlaður í lista yfir höfunda, '\
-            'ritnefndir eða aðra þá sem koma að framleiðslu hverrar bókar.',
-             class: 'tip'
-          li 'Aðeins skal skrifa hástafi í upphafi setninga, í skammstöfunum '\
-             'og í sérnöfnum.',
-             class: 'tip'
-          li 'Hvert línubil jafngildir málsgreinabili.',
-             class: 'tip'
-          li 'Nota má HTML-kóðann <em> og </em> til að afmarka skáletraðan '\
-             'texta. Skáletrun birtist bæði í prent- og vefútgáfu.',
-             class: 'tip'
-          li 'Allur texti í stuttri og áframhaldandi lýsingu skal vera á '\
-             'íslensku, þó svo að bókin sé gefin út á erlendu tungumáli.',
-             class: 'tip'
+          li 'Leiðbeiningar um ritun kynningartexta', class: 'tip-heading'
+          li do
+            ul do
+              li 'Forðist að skrá titil og höfundarnafn í stutta '\
+                 'kynningartextanum. Hvort tveggja kemur þegar fram fyrir '\
+                 'ofan texta.',
+                 class: 'tip'
+
+              li 'Eldri titlar sem vísað er til, skulu alltaf skáletraðir með '\
+                 'HTML-kóðanum <em> og </em>.',
+                 class: 'tip'
+
+              li 'Aðeins skal skrifa hástafi í upphafi setninga, sérnöfnum og '\
+                 'skammstöfunum.',
+                 class: 'tip'
+
+              li 'Hvert línubil jafngildir málsgreinabili, ef texti er '\
+                 'afritaður gæti þurft að fjarlægja línubil svo texti flæði '\
+                 'eðlilega.',
+                 class: 'tip'
+
+              li 'Notið íslenskar „gæsalappir“.', class: 'tip'
+
+              li 'Kynningartexti ætti að vera á íslensku, þó að bók sé á '\
+                 'erlendu tungumáli. Efni á vefsíðu er þýðanlegt á öll '\
+                 'tungumál.',
+                 class: 'tip'
+
+              li 'Skráning texta og yfirlestur eru á ábyrgð útgefanda.',
+                 class: 'tip'
+            end
+          end
 
           f.input :description,
                   as: :text,
