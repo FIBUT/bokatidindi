@@ -22,7 +22,7 @@ module Bokatidindi
     config.i18n.available_locales = [:is]
     config.i18n.default_locale = :is
 
-    config.active_storage.variant_processor = :mini_magick
+    config.active_storage.variant_processor = :vips
 
     config.active_job.queue_adapter = :good_job
     config.good_job.execution_mode = ENV['JOB_EXECUTION_MODE']&.to_sym || :async

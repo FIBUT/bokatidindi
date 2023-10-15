@@ -532,16 +532,16 @@ class Book < ApplicationRecord
   end
 
   def attach_print_image_variant
-    cover_image.variant(resize_to_limit: [325, nil], units: 'PixelsPerInch',
-                        density: 330, format: 'tiff').process
+    cover_image.variant(resize_to_limit: [325, nil],
+                        format: 'tiff', saver: { dpi: 330 }).process
   end
 
   def print_image_variant_url
     cover_variant = cover_image.variant(resize_to_limit: [325, nil],
-                                        units: 'PixelsPerInch',
-                                        density: 330, format: 'tiff')
+                                        format: 'tiff',
+                                        saver: { dpi: 330 })
 
-    if ActiveStorage::Blob.service.name.to_s == 'local'
+    if ActiveStorage::Blob.service.name == :local
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
@@ -566,7 +566,7 @@ class Book < ApplicationRecord
 
   def attach_cover_image_variant(image_format, width = nil)
     if width
-      return cover_image.variant(resize_to_limit: [width, width],
+      return cover_image.variant(resize_to_limit: [width, nil],
                                  format: image_format,
                                  saver: { quality: IMAGE_QUALITY }).process
     end
