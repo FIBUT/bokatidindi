@@ -38,6 +38,8 @@ class Book < ApplicationRecord
   CATEGORIES_SEARCH_COLUMNS        = %i[origin_name slug].freeze
   BOOK_BINDING_TYPE_SEARCH_COLUMNS = %i[barcode].freeze
 
+  PRINT_RES = 330 / 25.4
+
   multisearchable against: %i[pre_title title_noshy post_title description
                               long_description]
 
@@ -532,16 +534,19 @@ class Book < ApplicationRecord
   end
 
   def attach_print_image_variant
-    cover_image.variant(resize_to_limit: [325, nil], units: 'PixelsPerInch',
-                        density: 330, format: 'tiff').process
+    cover_image.variant(resize_to_limit: [325, nil],
+                        copy: { xres: PRINT_RES,
+                                yres: PRINT_RES },
+                        format: 'tiff').process
   end
 
   def print_image_variant_url
     cover_variant = cover_image.variant(resize_to_limit: [325, nil],
-                                        units: 'PixelsPerInch',
-                                        density: 330, format: 'tiff')
+                                        copy: { xres: PRINT_RES,
+                                                yres: PRINT_RES },
+                                        format: 'tiff')
 
-    if ActiveStorage::Blob.service.name.to_s == 'local'
+    if ActiveStorage::Blob.service.name == :local
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
@@ -566,7 +571,7 @@ class Book < ApplicationRecord
 
   def attach_cover_image_variant(image_format, width = nil)
     if width
-      return cover_image.variant(resize_to_limit: [width, width],
+      return cover_image.variant(resize_to_limit: [width, nil],
                                  format: image_format,
                                  saver: { quality: IMAGE_QUALITY }).process
     end
