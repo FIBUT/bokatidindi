@@ -153,6 +153,14 @@ class Book < ApplicationRecord
     )
   }
 
+  def self.ransackable_associations(_auth_object = nil)
+    reflect_on_all_associations.map { |a| a.name.to_s }
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    column_names
+  end
+
   def main_authors_ids
     book_authors.where(
       author_type_id: 2
