@@ -7,5 +7,7 @@ class SetImageVariantsJob < ApplicationJob
     book.attach_cover_image_variants
     book.attach_sample_page_variants
     book.update_srcsets
+
+    GC.start
   end
 end
