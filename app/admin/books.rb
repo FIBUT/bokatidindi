@@ -151,6 +151,8 @@ ActiveAdmin.register Book do
           queue: :book_cover_image_variants
         ).perform_later(@resource)
 
+        GC.start
+
         return redirect_to(
           admin_books_path,
           notice: "Bókin #{@resource.title} hefur verið uppfærð. Athugið að " \
@@ -226,6 +228,8 @@ ActiveAdmin.register Book do
         ).perform_later(@resource)
 
         Category.update_all_counts
+
+        GC.start
 
         return redirect_to(
           new_admin_book_path,
