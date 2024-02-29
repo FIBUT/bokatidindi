@@ -23,7 +23,7 @@ gem 'mimemagic'
 
 gem 'cocoon'
 
-gem 'rack', '~>2.2.6'
+gem 'rack', '~>2.2.8'
 gem 'rails', '~> 7.0.8'
 gem 'actionpack', '~>7.0.5'
 gem 'nokogiri', '~>1.16.2'
