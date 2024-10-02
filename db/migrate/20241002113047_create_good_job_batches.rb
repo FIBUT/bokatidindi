@@ -28,8 +28,8 @@ class CreateGoodJobBatches < ActiveRecord::Migration[7.0]
       t.uuid :batch_id
       t.uuid :batch_callback_id
 
-      t.index :batch_id, where: "batch_id IS NOT NULL"
-      t.index :batch_callback_id, where: "batch_callback_id IS NOT NULL"
+      t.index :batch_id, where: 'batch_id IS NOT NULL'
+      t.index :batch_callback_id, where: 'batch_callback_id IS NOT NULL'
     end
   end
 end
