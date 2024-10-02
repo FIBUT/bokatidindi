@@ -188,18 +188,18 @@ namespace :bt do
     end
   end
 
-  desc 'Generate the print image variant'
+  desc 'Generate the print image variant for current books'
   task attach_print_image_variants: :environment do
-    Book.all.each do |b|
+    Book.current.each do |b|
       next unless b.cover_image?
 
       puts "✅ #{b.slug}" if b.attach_print_image_variant
     end
   end
 
-  desc 'Run .sanitize_description on all books'
+  desc 'Run .sanitize_description on current books'
   task sanitize_book_descriptions: :environment do
-    Book.all.each do |b|
+    Book.current.each do |b|
       b.sanitize_description
       b.save
     end
