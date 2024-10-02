@@ -16,7 +16,7 @@ gem 'validate_url'
 gem 'library_stdnums'
 gem 'ean13'
 
-gem 'country_select'
+gem 'country_select', '~>8.0.3'
 gem 'iso-639'
 
 gem 'mimemagic'
