@@ -24,8 +24,7 @@ gem 'mimemagic'
 gem 'cocoon'
 
 gem 'rack', '~>2.2.8'
-gem 'rails', '~> 7.0.8'
-gem 'actionpack', '~>7.0.5'
+gem 'rails', '~> 7.0.8.7'
 gem 'nokogiri', '~>1.16.2'
 gem 'rails-html-sanitizer', '~>1.4.4'
 
@@ -58,7 +57,7 @@ gem 'redcarpet'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'mysql2', '>= 0.5.3'
-gem 'rubocop', '~> 1.29.1', require: false
+gem 'rubocop', '~> 1.69.2', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 gem 'kaminari', '>=1.2.0'
