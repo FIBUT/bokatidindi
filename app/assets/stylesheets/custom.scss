@@ -226,6 +226,7 @@ main {
     background-color: $white;
     border-radius: 5px;
     border: 0.5px solid rgba(0, 0, 0, 0.25);
+    flex: 0 0 calc(100% - 10px);
   }
 
   .book-authors, .book-meta-list {
