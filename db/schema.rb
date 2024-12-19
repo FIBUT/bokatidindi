@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_02_113053) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_19_002648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -198,6 +198,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_02_113053) do
     t.boolean "for_print", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "invoiced", default: false
+    t.string "dk_invoice_number"
+    t.index ["invoiced"], name: "index_book_edition_categories_on_invoiced"
   end
 
   create_table "book_editions", force: :cascade do |t|
@@ -373,6 +376,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_02_113053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email_address"
+    t.string "kennitala"
+    t.boolean "is_member", default: true
+    t.index ["kennitala"], name: "index_publishers_on_kennitala"
     t.index ["slug"], name: "index_publishers_on_slug", unique: true
     t.index ["source_id"], name: "index_publishers_on_source_id", unique: true
   end
