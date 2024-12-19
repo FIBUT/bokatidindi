@@ -28,7 +28,7 @@ test:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
-  host: <%= ENV['HEROKU_POSTGRESQL_PURPLE_URL'] %>
+  host: <%= ENV['DATABASE_URL'] %>
   encoding: unicode
   pool: 5
   timeout: 5000
