@@ -17,9 +17,12 @@ ActiveAdmin.register Publisher do
   # end
   config.sort_order = 'name_asc'
 
-  permit_params :name, :email_address, :url
+  permit_params :name, :kennitala, :email_address, :url
 
   filter :name_contains
+
+  member_action :invoice, method: :post do
+  end
 
   controller do
     def build_new_resource
@@ -54,6 +57,7 @@ ActiveAdmin.register Publisher do
     panel 'Upplýsingar um útgefanda' do
       attributes_table_for publisher do
         row :name
+        row :kennitala
         row :email_address
         row :url
       end
@@ -70,6 +74,8 @@ ActiveAdmin.register Publisher do
           column :for_print
           column :created_at
           column :updated_at
+          column :invoiced
+          column :dk_invoice_number
         end
 
         table class: 'publisher_book_edition_category_totals' do
@@ -107,6 +113,7 @@ ActiveAdmin.register Publisher do
 
     f.inputs 'Upplýsingar um útgefanda' do
       f.input :name
+      f.input :kennitala
       f.input :email_address
       f.input :url
     end
