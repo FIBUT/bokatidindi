@@ -122,3 +122,13 @@ table.publisher_book_edition_categories {
 table.publisher_book_edition_category_totals {
   .th { width: 14em; text-align: right; font-weight: bold; }
 }
+
+.dk-invoice-button-container {
+  border-top: 1px solid #ccc;
+  padding-top: 2em;
+  text-align: right;
+
+  input {
+    margin-bottom: 1em;
+  }
+}
