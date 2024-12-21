@@ -42,7 +42,9 @@ class Publisher < ApplicationRecord
 
     api_key = ENV['DK_API_KEY']
 
-    to_be_invoiced = book_edition_categories_by_edition_id(edition_id).uninvoiced
+    to_be_invoiced = book_edition_categories_by_edition_id(
+      edition_id
+    ).uninvoiced
 
     return nil if to_be_invoiced.empty?
 

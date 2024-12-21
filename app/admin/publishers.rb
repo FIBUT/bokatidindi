@@ -79,9 +79,7 @@ ActiveAdmin.register Publisher do
         row :kennitala
         row :email_address
         row :url
-        row :is_in_dk do |publisher|
-          publisher.in_dk?
-        end
+        row :is_in_dk, &:in_dk?
       end
     end
     Edition.current.each do |e|
@@ -140,7 +138,9 @@ ActiveAdmin.register Publisher do
            publisher.in_dk? &&
            Edition.current_edition == e &&
            current_admin_user.admin? &&
-           !publisher.book_edition_categories_by_edition_id(e.id).uninvoiced.empty?
+           !publisher.book_edition_categories_by_edition_id(
+             e.id
+           ).uninvoiced.empty?
           form class: 'dk-invoice-button-container', method: :post,
                action: "/admin/publishers/#{publisher.id}/invoice" do
             input name: 'authenticity_token', type: :text,
