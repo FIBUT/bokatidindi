@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class BookEditionCategory < ApplicationRecord
-  DK_WEB_ITEM_CODE   = ENV['DK_PRINT_ITEM_CODE'] || 'ruslapoki'
-  DK_PRINT_ITEM_CODE = ENV['DK_WEB_ITEM_CODE'] || 'shipping'
+  DK_WEB_ITEM_CODE   = ENV['DK_PRINT_ITEM_CODE']
+  DK_PRINT_ITEM_CODE = ENV['DK_WEB_ITEM_CODE']
 
   belongs_to :book_edition
   has_one :book, through: :book_edition
