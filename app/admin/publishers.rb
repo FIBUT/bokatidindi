@@ -22,6 +22,19 @@ ActiveAdmin.register Publisher do
   filter :name_contains
 
   member_action :invoice, method: :post do
+    render status: :unauthorized unless current_admin_user.admin?
+
+    dk_invoice_number = resource.create_dk_invoice_by_edition_id!(
+      Edition.current_edition.id
+    )
+
+    unless dk_invoice_number
+      return redirect_to resource_path,
+                         notice: 'Invoice was not created due to an error.'
+    end
+
+    redirect_to resource_path,
+                notice: "Invoice #{dk_invoice_number} was created."
   end
 
   controller do
@@ -39,8 +52,8 @@ ActiveAdmin.register Publisher do
     column :name do |publisher|
       link_to publisher.name, admin_publisher_path(publisher)
     end
+    column :kennitala
     column :email_address
-    column :url
     column :book_count
     column :print_data do |publisher|
       unless publisher.book_count.zero?
@@ -54,12 +67,21 @@ ActiveAdmin.register Publisher do
   end
 
   show do
+    div do
+      if current_admin_user.admin? && !ENV.key?('DK_API_KEY')
+        para 'API-lykill fyrir DK hefur ekki verið settur inn. '\
+             'DK-tengingin er því óvirk.'
+      end
+    end
     panel 'Upplýsingar um útgefanda' do
       attributes_table_for publisher do
         row :name
         row :kennitala
         row :email_address
         row :url
+        row :is_in_dk do |publisher|
+          publisher.in_dk?
+        end
       end
     end
     Edition.current.each do |e|
@@ -102,6 +124,30 @@ ActiveAdmin.register Publisher do
                 for_print: true
               ).count
             end
+          end
+          tr class: 'invoiced_count' do
+            td class: 'th' do
+              'Fjöldi birtinga á reikning'
+            end
+            td class: 'value' do
+              publisher.book_edition_categories_by_edition_id(
+                e.id
+              ).invoiced.count
+            end
+          end
+        end
+        if ENV.key?('DK_API_KEY') &&
+           publisher.in_dk? &&
+           Edition.current_edition == e &&
+           current_admin_user.admin? &&
+           !publisher.book_edition_categories_by_edition_id(e.id).uninvoiced.empty?
+          form class: 'dk-invoice-button-container', method: :post,
+               action: "/admin/publishers/#{publisher.id}/invoice" do
+            input name: 'authenticity_token', type: :text,
+                  value: form_authenticity_token
+            input type: :submit, value: 'Búa til reikning í DK'
+            para 'Reikningar eru útbúnir til fyrir birtingar sem hafa ekki '\
+                'verið skráðar sem settar á reikning áður'
           end
         end
       end

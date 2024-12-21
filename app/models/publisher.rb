@@ -19,18 +19,34 @@ class Publisher < ApplicationRecord
     )
   end
 
-  def create_dk_invoice_by_edition_id!(edition_id)
+  def in_dk?
+    return nil unless ENV.key?('DK_API_KEY')
+
+    return nil unless kennitala
+
     api_key = ENV['DK_API_KEY']
 
-    return nil unless api_key
+    uri = URI "https://api.dkplus.is/api/v1/customer/#{kennitala}"
+
+    response = Net::HTTP.get_response(uri, api_headers(api_key))
+
+    return false unless response.instance_of? Net::HTTPOK
+
+    true
+  end
+
+  def create_dk_invoice_by_edition_id!(edition_id)
+    return nil unless ENV.key?('DK_API_KEY')
+
+    return nil unless kennitala
+
+    api_key = ENV['DK_API_KEY']
 
     to_be_invoiced = book_edition_categories_by_edition_id(edition_id).uninvoiced
 
+    return nil if to_be_invoiced.empty?
+
     invoice_hash = dk_invoice(to_be_invoiced)
-
-    puts 'Foo'
-
-    puts invoice_hash.inspect
 
     return nil unless invoice_hash
 
@@ -38,10 +54,7 @@ class Publisher < ApplicationRecord
 
     uri = URI 'https://api.dkplus.is/api/v1/Sales/Invoice'
 
-    headers = { 'Content-Type': 'application/json',
-                'Authorization': "Bearer #{api_key}" }
-
-    response = Net::HTTP.post(uri, invoice_hash.to_json, headers)
+    response = Net::HTTP.post(uri, invoice_hash.to_json, api_headers(api_key))
 
     return nil unless response.instance_of? Net::HTTPOK
 
@@ -81,6 +94,11 @@ class Publisher < ApplicationRecord
   end
 
   private
+
+  def api_headers(api_key)
+    { 'Content-Type': 'application/json',
+      'Authorization': "Bearer #{api_key}" }
+  end
 
   def prepare_dk_invoice_lines(to_be_invoiced)
     invoice_lines = []
