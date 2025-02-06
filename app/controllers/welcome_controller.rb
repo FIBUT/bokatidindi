@@ -2,6 +2,8 @@
 
 class WelcomeController < ApplicationController
   def index
+    expires_in 1.hour, public: true
+
     @page_content = Page.find_by(slug: 'forsida')
     @image_format = image_format
     @meta_description = ' Bókatíðindi hafa síðan 1928 veitt yfirlit yfir '\

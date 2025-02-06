@@ -46,7 +46,9 @@
           <nav class="hero-image-column d-flex flex-column justify-content-xl-end col-12 col-sm-4 col-lg-3" role="presentation">
             <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda">
               <img
-                class="w-100"
+                width="<%= Edition.current_edition.cover_image.metadata['width'] %>"
+                height="<%= Edition.current_edition.cover_image.metadata['height'] %>"
+                class="img-fluid"
                 role="presentation"
                 srcset="<%= Edition.current_edition.cover_image_srcsets[@image_format] %>"
                 src="<%= Edition.current_edition.cover_image_url %>"
