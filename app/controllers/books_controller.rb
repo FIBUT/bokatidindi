@@ -2,6 +2,8 @@
 
 class BooksController < ApplicationController
   def index
+    expires_in 1.hour, public: true
+
     @image_format = image_format
 
     if params[:search]
@@ -22,6 +24,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    expires_in 1.hour, public: true
+
     @image_format = image_format
 
     @book = Book.find_by(slug: params[:slug])
