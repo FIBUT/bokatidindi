@@ -23,7 +23,7 @@ gem 'mimemagic'
 
 gem 'cocoon'
 
-gem 'rack', '~>2.2.8'
+gem 'rack', '~>2.2.11'
 gem 'rails', '~> 7.0.8.7'
 gem 'nokogiri', '~>1.16.2'
 gem 'rails-html-sanitizer', '~>1.4.4'
