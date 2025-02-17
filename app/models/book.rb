@@ -163,113 +163,30 @@ class Book < ApplicationRecord
     column_names
   end
 
-  def structured_data_article
-    result = {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      '@id': "https://www.bokatidindi.is/bok/#{slug}",
-      '@url': "https://www.bokatidindi.is/bok/#{slug}",
-      additionalType: ['AdvertiserContentArticle'],
-      headline: full_title_noshy,
-      description: description,
-      isPartOf: structured_data_publication,
-      image: [],
-      maintainer: publisher.ld_json,
-      dateModified: updated_at,
-      datePublished: created_at
-    }
-
-    result[:image] << cover_image_url('jpg') if cover_image.attached?
-
-    sample_pages.each_with_index do |_sp, i|
-      result[:image] << sample_page_url(i, 'jpg')
-    end
-
-    result
-  end
-
   def structured_data
     result = {
       '@context': 'https://schema.org',
       '@type': 'Book',
-      '@id': "https://www.bokatidindi.is/bok/#{slug}",
-      '@url': "https://www.bokatidindi.is/bok/#{slug}",
-      name: full_title_noshy,
-      author: structured_data_authors,
-      description: description,
-      review: structured_data_reviews,
-      isbn: book_binding_types.pluck(:barcode),
-      publisher: publisher.ld_json,
-      dateModified: updated_at
+      'name': full_title_noshy,
+      'description': description,
+      'publisher': publisher.name
     }
+
+    result['isbn'] = structured_data_isbn unless structured_data_isbn.empty?
+
+    unless structured_data_author.empty?
+      result['author'] = structured_data_author
+    end
 
     unless structured_data_translator.empty?
-      result[:translator] = structured_data_translator
+      result['translator'] = structured_data_translator
     end
 
-    result[:sameAs] = structured_data_url unless structured_data_url.empty?
+    result['sameAs'] = structured_data_url unless structured_data_url.empty?
 
-    result[:image] = cover_image_url('jpg') if cover_image.attached?
-
-    sample_pages.each_with_index do |_sp, i|
-      result[:image] << sample_page_url(i, 'jpg')
-    end
+    result['image'] = cover_image_url if cover_image.attached?
 
     result
-  end
-
-  def structured_data_publication
-    result = {
-      '@context': 'https://schema.org/',
-      '@id': 'https://www.bokatidindi.is/',
-      '@type': ['WebSite', 'Periodical'],
-      name: 'Bókatíðindi',
-      abstract: WelcomeController::META_DESCRIPTION,
-      inLanguage: 'is',
-      image: [
-        ActionController::Base.helpers.asset_url('favicon-512.png'),
-        ActionController::Base.helpers.asset_url('logotype-cropped.svg')
-      ],
-      maintainer: structured_data_fibut,
-      url: 'https://www.bokatidindi.is/',
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: 'https://www.bokatidindi.is/baekur?search={search_term_string}',
-        'query-input': 'required name=search_term_string'
-      }
-    }
-
-    temporal_coverage = editions.pluck(:year) - [nil]
-
-    result[:temporalCoverage] = temporal_coverage if temporal_coverage.any?
-
-    result
-  end
-
-  def structured_data_fibut
-    {
-      '@type': ['Organization'],
-      name: 'Félag íslenskra bókaútgefenda',
-      alternateName: 'FÍBÚT',
-      url: 'https://fibut.is/',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Reykjavík',
-        postalCode: '101',
-        streetAddress: 'Barónsstíg 5',
-        addressCountry: 'IS'
-      }
-    }
-  end
-
-  def structured_data_reviews
-    blockquotes.map do |bq|
-      {
-        '@type': 'Review',
-        reviewBody: bq.quote,
-        author: bq.citation
-      }
-    end
   end
 
   def structured_data_isbn
@@ -284,15 +201,40 @@ class Book < ApplicationRecord
     book_binding_types.where.not(url: '').pluck(:url).uniq
   end
 
-  def structured_data_authors
-    book_authors.includes(:author_type, :author).map do |ba|
-      {
-        '@type': 'Person',
-        name: ba.name,
-        jobTitle: ba.author_type.name,
-        url: "https://www.bokatidindi.is/baekur/hofundur/#{ba.author.slug}"
-      }
+  def structured_data_author
+    selected_book_authors = book_authors.includes(:author_type).where(
+      author_type: { name: ['Höfundur', 'Myndhöfundur'] }
+    )
+
+    results = []
+
+    selected_book_authors.each do |ba|
+      results << ba.author.structured_data
     end
+
+    results
+  end
+
+  def structured_data_translator
+    selected_book_authors = book_authors.includes(:author_type).where(
+      author_type: { name: 'Þýðandi' }
+    )
+
+    results = []
+
+    selected_book_authors.each do |ba|
+      results << ba.author.structured_data
+    end
+
+    results
+  end
+
+  def main_authors_ids
+    book_authors.where(
+      author_type_id: 2
+    ).pluck(
+      :author_id
+    )
   end
 
   def main_authors_string

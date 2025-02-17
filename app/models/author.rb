@@ -66,8 +66,7 @@ class Author < ApplicationRecord
   def structured_data
     {
       '@type': 'Person',
-      name: name,
-      url: "https://www.bokatidindi.is/baekur/hofundur/#{slug}"
+      'name': name
     }
   end
 end
