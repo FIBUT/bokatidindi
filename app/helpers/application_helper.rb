@@ -19,4 +19,49 @@ module ApplicationHelper
     end
     groups
   end
+
+  def specification_rules
+    {
+      "prerender": [
+        {
+          "where": {
+            "and": [
+              { "href_matches": '/baekur/flokkur/*' },
+              { "selector_matches": 'header nav a' }
+            ]
+          },
+          "eagerness": 'moderate'
+        },
+        {
+          "where": {
+            "and": [
+              { "href_matches": '/baekur/flokkur/*' },
+              { "selector_matches": 'main .welcome-category-list a' }
+            ]
+          },
+          "eagerness": 'moderate'
+        },
+        {
+          "where": { "href_matches": '/baekur/hofundur/*' },
+          "eagerness": 'moderate'
+        },
+        {
+          "where": { "href_matches": '/baekur/utgefandi/*' },
+          "eagerness": 'moderate'
+        },
+        {
+          "where": { "href_matches": '/bok/*' },
+          "eagerness": 'moderate'
+        },
+        {
+          "where": { "href_matches": '/bok/*' },
+          "eagerness": 'moderate'
+        },
+        {
+          "where": { "selector_matches": '.book-cover a' },
+          "eagerness": 'moderate'
+        }
+      ]
+    }
+  end
 end

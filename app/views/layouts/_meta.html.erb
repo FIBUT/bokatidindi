@@ -37,43 +37,4 @@
 <script defer data-domain="bokatidindi.is" src="https://plausible.io/js/plausible.js"></script>
 <% end %>
 
-<script type="speculationrules">
-    {
-        "prerender": [
-            {
-                "where": {
-                    "and": [
-                        { "href_matches": "/baekur/flokkur/*" },
-                        { "selector_matches": "header nav a" }
-                    ]
-                },
-                "eagerness": "eager"
-            },
-            {
-                "where": {
-                    "and": [
-                        { "href_matches": "/baekur/flokkur/*" },
-                        { "selector_matches": "main a" }
-                    ]
-                },
-                "eagerness": "moderate"
-            },
-            {
-                "where": { "href_matches": "/baekur/hofundur/*" },
-                "eagerness": "moderate"
-            },
-            {
-                "where": { "href_matches": "/baekur/utgefandi/*" },
-                "eagerness": "moderate"
-            },
-            {
-                "where": { "href_matches": "/bok/*" },
-                "eagerness": "moderate"
-            },
-            {
-                "where": { "href_matches": "/pages/*" },
-                "eagerness": "conservative"
-            }
-        ]
-    }
-</script>
+<script type="speculationrules"><%= raw specification_rules.to_json %></script>

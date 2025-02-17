@@ -163,6 +163,72 @@ class Book < ApplicationRecord
     column_names
   end
 
+  def structured_data
+    result = {
+      '@context': 'https://schema.org',
+      '@type': 'Book',
+      'name': full_title_noshy,
+      'description': description,
+      'publisher': publisher.name
+    }
+
+    result['isbn'] = structured_data_isbn unless structured_data_isbn.empty?
+
+    unless structured_data_author.empty?
+      result['author'] = structured_data_author
+    end
+
+    unless structured_data_translator.empty?
+      result['translator'] = structured_data_translator
+    end
+
+    result['sameAs'] = structured_data_url unless structured_data_url.empty?
+
+    result['image'] = cover_image_url if cover_image.attached?
+
+    result
+  end
+
+  def structured_data_isbn
+    book_binding_types.joins(
+      :binding_type
+    ).where(
+      binding_type: { barcode_type: 'ISBN' }
+    ).pluck(:barcode)
+  end
+
+  def structured_data_url
+    book_binding_types.where.not(url: '').pluck(:url).uniq
+  end
+
+  def structured_data_author
+    selected_book_authors = book_authors.includes(:author_type).where(
+      author_type: { name: ['Höfundur', 'Myndhöfundur'] }
+    )
+
+    results = []
+
+    selected_book_authors.each do |ba|
+      results << ba.author.structured_data
+    end
+
+    results
+  end
+
+  def structured_data_translator
+    selected_book_authors = book_authors.includes(:author_type).where(
+      author_type: { name: 'Þýðandi' }
+    )
+
+    results = []
+
+    selected_book_authors.each do |ba|
+      results << ba.author.structured_data
+    end
+
+    results
+  end
+
   def main_authors_ids
     book_authors.where(
       author_type_id: 2
