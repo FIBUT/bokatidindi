@@ -9,13 +9,19 @@
 
   <%= tag 'meta', property: 'og:title', content: @title_tag %>
   <%= tag 'meta', property: 'og:description', content: @meta_description %>
-  <%= tag 'meta', property: 'og:image', content: asset_path('favicon.png') %>
+  <%= tag 'meta', property: 'og:image', content: asset_path('favicon-512.png') %>
   <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
 
   <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
   <%= tag 'meta', name: 'twitter:title', content: @title_tag %>
   <%= tag 'meta', name: 'twitter:description', content: @meta_description %>
-  <%= tag 'meta', name: 'twitter:image', content: asset_path('favicon.png') %>
+  <%= tag 'meta', name: 'twitter:image', content: asset_path('favicon-512.png') %>
+
+  <% @books.first(6).each_with_index do |book,i| %>
+  <% if book.cover_image.attached? %>
+  <%= tag 'link', rel: 'preload', as: 'image', href: book.cover_image_url, imagesrcset: book.cover_image_srcsets[@image_format], imagesizes: @image_sizes %>
+  <% end %>
+  <% end %>
 <% end %>
 
 <main id="books-index" class="my-5" role="main" aria-labelledby="results-heading">

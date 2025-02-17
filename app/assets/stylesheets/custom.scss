@@ -30,6 +30,8 @@ $body-color: theme-color("darkgrey");
 $link-color: #4a242e;
 $link-hover-color: #30131a;
 
+$navbar-nav-link-padding-x: 0;
+
 $header-link-color: theme-color("lightgrey");
 
 $pagination-color: $link-color;
@@ -63,20 +65,26 @@ $container-max-widths: (
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
 @import "../../../node_modules/bootstrap/scss/reboot";
-@import "../../../node_modules/bootstrap/scss/print";
 @import "../../../node_modules/bootstrap/scss/type";
 @import "../../../node_modules/bootstrap/scss/images";
-@import "../../../node_modules/bootstrap/scss/code";
 @import "../../../node_modules/bootstrap/scss/grid";
 @import "../../../node_modules/bootstrap/scss/nav";
 @import "../../../node_modules/bootstrap/scss/navbar";
 @import "../../../node_modules/bootstrap/scss/pagination";
 @import "../../../node_modules/bootstrap/scss/forms";
-@import "../../../node_modules/bootstrap/scss/custom-forms";
 @import "../../../node_modules/bootstrap/scss/buttons";
 @import "../../../node_modules/bootstrap/scss/dropdown";
 @import "../../../node_modules/bootstrap/scss/input-group";
-@import "../../../node_modules/bootstrap/scss/utilities";
+
+@import "../../../node_modules/bootstrap/scss/utilities/align";
+@import "../../../node_modules/bootstrap/scss/utilities/background";
+@import "../../../node_modules/bootstrap/scss/utilities/display";
+@import "../../../node_modules/bootstrap/scss/utilities/flex";
+@import "../../../node_modules/bootstrap/scss/utilities/sizing";
+@import "../../../node_modules/bootstrap/scss/utilities/spacing";
+@import "../../../node_modules/bootstrap/scss/utilities/text";
+@import "../../../node_modules/bootstrap/scss/utilities/visibility";
+
 @import "../../../node_modules/bootstrap/scss/badge";
 @import "../../../node_modules/bootstrap/scss/tables";
 
@@ -125,7 +133,7 @@ main {
   left: 0;
   width: 100%;
   min-height: 100%;
-  z-index: 1000;
+  z-index: 10000;
   a {
     color: theme-color('lightgrey');
     text-decoration: underline;
@@ -175,9 +183,11 @@ main {
     max-width: 80px;
     width: calc(30% - 66px);
     margin: 33px 15px;
+    transition-property: all;
+    transition-duration: 100ms;
   }
   .sponsor:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
   }
 }
 
@@ -211,6 +221,7 @@ main {
     font-size: 14px;
   }
   ul li {
+    line-height: 1.5em;
     font-size: 14px;
   }
   .pre-title, .post-title {
@@ -219,7 +230,6 @@ main {
     display: block;
   }
   .pre-title {
-    margin-bottom: 8px;
   }
 
   .book-column-container {
@@ -256,7 +266,7 @@ main {
 }
 
 .book-single {
-  .title { font-weight: $font-weight-bold; font-size: 2.5em; }
+  .title { font-weight: $font-weight-bold; font-size: 2.5em; line-height: 1em; }
   .pre-title, .post-title { font-size: 1.8rem; }
 
   .book-meta-list {
@@ -389,17 +399,17 @@ main {
   a {
     color: $body-bg;
     font-weight: $font-weight-bold;
-  }  
+  }
 }
 
 .dropdown-toggle::after {
-  margin-left: 1rem;
+  margin-left: 0.75rem;
 }
 
 // Header
 header {
   .site-logo {
-    img {
+    a img {
       width: 220px;
       height: auto;
       min-height: 45px;
@@ -475,11 +485,10 @@ header {
   .book {
     .authors a, .book-authors a, .book-meta-list a, #book-binding-types a {
       padding: 14px 0;
-      display: inline-block;
     }
     .book-author-group {
-      padding: 14px 0;
-      display: block;
+      margin-right: 0.25em;
+      display: inline-block;
     }
   }
   .footer-container a {
@@ -493,6 +502,9 @@ header {
   }
   .welcome-category-list li {
     font-size: 1em
+  }
+  .book-single {
+    background-color: $white;
   }
 }
 
@@ -514,10 +526,26 @@ header {
     }
   }
   .book-single {
+    .title {
+      font-size: 2rem;
+      .pre-title {
+        font-size: 1.5rem;
+      }
+    }
     blockquote {
       p {
         font-size: 1em;
       }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .book-single {
+    .bookrow {
+      border-radius: 5px;
+      border: 0.5px solid rgba(0, 0, 0, 0.25);
+      background-color: $white;
     }
   }
 }

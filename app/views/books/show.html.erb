@@ -1,12 +1,4 @@
 <% content_for :meta do %>
-  <%= tag 'link', rel: 'preload', as: 'style', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.css', integrity: 'sha256-7gMVmh7i2Xmo99mvvfnSn9dZfunTii7j4yPdmTAMUR0=', crossorigin: 'anonymous' %>
-
-  <%= preload_link_tag asset_url('boksala-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('forlagid-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('penninn-eymundsson-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('salka-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('storytel-square.svg'), as: 'image' %>
-
   <title>Bókatíðindi - <%= @book.full_title_with_author %></title>
 
   <%= tag 'meta', name: 'description', content: html_escape_once(strip_tags(@book.description).squish) %>
@@ -22,7 +14,7 @@
   <%= tag 'meta', property: 'og:image:height', content: @book.cover_image.metadata[:height] %>
   <% end %>
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
-  <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title) %>
+  <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title_noshy) %>
   <% @book.book_binding_types.each do |book_binding_type| %>
   <%= tag('meta', property: 'og:isbn', content: book_binding_type.barcode) if book_binding_type.barcode %>
   <% end %>
@@ -38,10 +30,18 @@
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, 'jpg') %>
   <% end %>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.css" integrity="sha256-7gMVmh7i2Xmo99mvvfnSn9dZfunTii7j4yPdmTAMUR0=" crossorigin="anonymous">
+  <%=
+  tag(
+    'link',
+    rel: 'preload', as: 'image', href: @book.cover_image_url,
+    imagesrcset: @book.cover_image_srcsets[@image_format],
+    imagesizes: @image_sizes, type: "image/#{@image_format}"
+  )
+  %>
 
   <script type="module">
-  import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.31/dist/fancybox.esm.js";
+  import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.esm.min.js";
+  Fancybox.bind('[data-fancybox="samples"]', {});
   Fancybox.defaults.l10n = {
     CLOSE: "Loka",
     NEXT: "Næsta mynd",
@@ -61,7 +61,7 @@
   </script>
 <% end %>
 
-<main class="my-5">
+<main class="m-md-5">
 
 <div class="container-fluid">
 
@@ -69,19 +69,19 @@
 
   <div
     id="book-<%= @book.id %>"
-    class="book book-single col-lg-12 col-md-12"
+    class="book book-single col-12 pt-4 pt-md-0"
     aria-labelledby="book-<%= @book.id %>-hgroup"
   >
 
-    <div class="row book-column-container m-2 p-2 py-md-5">
+    <div class="row bookrow">
 
       <article
-        class="col-lg-5 col-md-8 col-sm-12 offset-lg-1 order-0 order-md-1"
+        class="px-4 px-sm-5 pl-md-3 col-12 col-md-8 col-lg-7 col-xl-5 offset-lg-1 order-0 order-md-1"
         aria-label="Um bókina"
       >
 
         <% if @book.current_edition? == false %>
-          <p class="book-meta-old-edition" role="note">
+          <p class="book-meta-old-edition mt-3 mt-md-5" role="note">
           <strong>
             Athugið að þessi bók er úr eldri útgáfu Bókatíðinda og birt hér með
             fyrirvara um mögulega sé ekki um að ræða nýjustu upplýsingar.
@@ -103,10 +103,10 @@
           <% end %>
           <% unless @book.cover_image_srcsets.blank? %>
           srcset="<%= @book.cover_image_srcsets[@image_format] %>"
-          sizes="560px"
+          sizes="<%= @image_sizes %>"
           <% end %>
           class="img-fluid w-100 d-md-none mb-5"
-          alt="Forsíða bókarinnar"
+          alt="Forsíða kápu bókarinnar"
         >
 
         <div class="book-description mb-5 bt-5 overflow-hidden">
@@ -136,38 +136,40 @@
 
         <%= render('books/binding_types', book: @book) unless @book.book_binding_types.length.zero? %>
 
+        <%= render 'books/social_media', book: @book %>
+
       </article>
 
       <aside
-        class="col-lg-4 col-md-4 col-sm-12 p-3 offset-lg-1 order-1 order-md-0"
+        class="d-none d-md-block pl-5 mt-4 mt-md-5 col col-lg-4 offset-xl-1 order-1 order-md-0"
         aria-label="Myndefni og lýsigögn"
       >
 
-        <figure class="d-none d-md-block figure w-100" aria-label="Forsíðumynd">
+        <figure class="book-cover d-none d-md-block figure w-100" aria-label="Forsíðumynd">
           <a
+            class="d-block"
             data-fancybox="samples"
             href="<%= @book.cover_image_url(@image_format, true) %>"
-            title="Skoða forsíðu"
+            title="Skoða forsíðu kápu"
           >
             <img
-              src="<%= @book.cover_image_url %>"
               <% if @book.cover_image.attached? %>
+              src="<%= @book.cover_image_url %>"
               height="<%= @book.cover_image.metadata[:height] %>"
               width="<%= @book.cover_image.metadata[:width] %>"
+              loading="eager"
+              <% else %>
+              src="<%= asset_url('blank.svg') %>"
+              height="594"
+              width="420"
+              alt="Mynd af bókakápu vantar"
               <% end %>
               <% unless @book.cover_image_srcsets.blank? %>
               srcset="<%= @book.cover_image_srcsets[@image_format] %>"
-              sizes="
-                ( min-width: 2000px ) 1200px,
-                ( min-width: 1400px ) 550px,
-                ( min-width: 992px ) 260px,
-                ( min-width: 670px ) 150px,
-                ( min-width: 576px ) 550px,
-                (max-width: 576px ) 260px
-              "
+              sizes="<%= @image_sizes %>"
               <% end %>
               class="img-fluid w-100"
-              alt="Forsíða bókarinnar"
+              alt="Forsíða kápu bókarinnar"
             >
           </a>
         </figure>
@@ -207,8 +209,6 @@
         </div>
 
       </aside>
-
-      <%= render 'books/social_media', book: @book %>
 
     </div>
 

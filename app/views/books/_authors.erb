@@ -1,13 +1,13 @@
-<ul class="book-authors d-block pl-0" aria-label="Höfundar og aðrir aðkomendur">
+<ul class="book-authors d-block pl-0 mb-5 mb-md-4 mt-md-1 mt-lg-3" aria-label="Höfundar og aðrir aðkomendur">
   <% local_assigns[:book].author_groups.each_with_index do |g,i| %>
   <li
     id="book-<%= local_assigns[:book].id %>-authors--<%= i %>"
-    class="authors mb-1 d-block"
+    class="authors mb-1 mb-md-2 d-block"
     aria-labelledby="book-<%= local_assigns[:book].id %>-authors-label--<%= i %>"
   >
     <strong
       id="book-<%= local_assigns[:book].id %>-authors-label--<%= i %>"
-      class="book-author-group"
+      class="book-author-group d-block d-md-inline-block"
     ><%= g[:name] %></strong>
     <%= raw g[:author_links] %>
   </li>

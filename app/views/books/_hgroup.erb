@@ -1,4 +1,10 @@
-<hgroup id="book-<%= local_assigns[:book].id %>-hgroup" class="py-2 inline-block">
+<hgroup
+  id="book-<%= local_assigns[:book].id %>-hgroup"
+  class="pb-2 pt-4 pt-md-5 block"
+  <% if current_page?(controller: 'books', action: 'index') %>
+  role="region-heading"
+  <% end %>
+>
 
   <h1 class="h2 title">
     <% unless local_assigns[:book].pre_title.empty? %>

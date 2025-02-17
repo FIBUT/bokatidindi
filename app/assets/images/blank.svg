@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="420"
+   height="594"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="blank.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.71891835"
+     inkscape:cx="397.12437"
+     inkscape:cy="520.92146"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="m 92.652766,170.90141 q 0,-6.70278 1.234723,-11.46529 1.411113,-4.93889 4.586115,-9.34861 3.351386,-4.40973 8.995836,-9.17223 6.87917,-5.82084 10.58334,-9.7014 3.88056,-3.88056 5.46806,-7.58472 1.5875,-3.70417 1.5875,-8.99584 0,-8.46668 -5.46806,-13.05279 -5.46805,-4.586115 -15.87501,-4.586115 -8.643057,0 -15.34584,2.293057 -6.702782,2.116668 -12.876397,5.115278 l -5.46806,-12.347227 q 7.055561,-3.704169 15.522233,-6.173615 8.643061,-2.469446 19.226404,-2.469446 16.75695,0 25.92918,8.290283 9.17223,8.290283 9.17223,22.577795 0,7.9375 -2.64583,13.58195 -2.46945,5.46806 -7.23195,10.23056 -4.58612,4.58612 -10.93612,9.87779 -5.82084,4.93889 -8.99584,8.64306 -2.99861,3.70417 -4.05695,7.40834 Q 105,167.55002 105,172.6653 v 2.99861 H 92.652766 Z m -4.056947,30.69169 q 0,-6.5264 2.998613,-9.17223 3.175003,-2.64584 7.937506,-2.64584 4.409722,0 7.584732,2.64584 3.175,2.64583 3.175,9.17223 0,6.35 -3.175,9.17223 -3.17501,2.82222 -7.584732,2.82222 -4.762503,0 -7.937506,-2.82222 -2.998613,-2.82223 -2.998613,-9.17223 z"
+       id="text2"
+       style="font-size:176.389px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans, Normal';fill:#cccccc;stroke-width:0.264583"
+       aria-label="?" />
+  </g>
+</svg>
