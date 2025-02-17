@@ -30,7 +30,6 @@
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_variant_url(1200, 'jpg') %>
   <% end %>
 
-  <% if @book.cover_image_srcsets.kind_of?(Array) %>
   <%=
   tag(
     'link',
@@ -39,7 +38,6 @@
     imagesizes: @image_sizes, type: "image/#{@image_format}"
   )
   %>
-  <% end %>
 
   <script type="module">
   import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.esm.min.js";
