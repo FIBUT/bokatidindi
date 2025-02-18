@@ -28,7 +28,25 @@ class Publisher < ApplicationRecord
     ).count
   end
 
+  def ld_json
+    {
+      '@id': "https://www.bokatidindi.is/baekur/utgefandi/#{slug}",
+      '@type': 'Organization',
+      url: ld_json_urls,
+      name: name
+    }
+  end
+
   private
+
+  def ld_json_urls
+    urls = ["https://www.bokatidindi.is/baekur/utgefandi/#{slug}"]
+    urls << url if URI(url).scheme
+
+    return urls.first if urls.length == 1
+
+    urls
+  end
 
   def set_slug
     self.slug = name.parameterize(locale: :is)

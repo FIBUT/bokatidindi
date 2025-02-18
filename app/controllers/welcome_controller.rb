@@ -13,6 +13,7 @@ class WelcomeController < ApplicationController
     expires_in 1.hour, public: true
 
     @website_ld_json = ld_json
+    @org_ld_json     = ld_json_org
 
     @page_content = Page.find_by(slug: 'forsida')
     @image_format = image_format
@@ -29,30 +30,37 @@ class WelcomeController < ApplicationController
   def ld_json
     {
       '@context': 'https://schema.org/',
+      '@id': 'https://www.bokatidindi.is/',
       '@type': ['WebSite', 'Periodical'],
       name: 'Bókatíðindi',
       about: META_DESCRIPTION,
       inLanguage: 'is',
-      publisher: {
-        '@type': ['Organization'],
-        name: 'Félag íslenskra bókaútgefenda',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Reykjavík',
-          postalCode: '101',
-          streetAddress: 'Barónsstíg 5',
-          addressCountry: 'IS'
-        },
-        image: [
-          ActionController::Base.helpers.asset_url('favicon-512.png'),
-          ActionController::Base.helpers.asset_url('logotype-cropped.svg')
-        ]
-      },
+      maintainer: ld_json_org,
+      image: [
+        ActionController::Base.helpers.asset_url('favicon-512.png'),
+        ActionController::Base.helpers.asset_url('logotype-cropped.svg')
+      ],
       url: 'https://www.bokatidindi.is/',
       potentialAction: {
         '@type': 'SearchAction',
         target: 'https://www.bokatidindi.is/baekur?search={search_term_string}',
         'query-input': 'required name=search_term_string'
+      }
+    }
+  end
+
+  def ld_json_org
+    {
+      '@type': ['Organization'],
+      name: 'Félag íslenskra bókaútgefenda',
+      alternateName: 'FÍBÚT',
+      url: 'https://fibut.is/',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Reykjavík',
+        postalCode: '101',
+        streetAddress: 'Barónsstíg 5',
+        addressCountry: 'IS'
       }
     }
   end

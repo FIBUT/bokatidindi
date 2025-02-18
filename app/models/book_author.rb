@@ -19,4 +19,13 @@ class BookAuthor < ApplicationRecord
   def name
     [author.firstname, author.lastname].join(' ')
   end
+
+  def structured_data
+    {
+      '@type': 'Person',
+      name: name,
+      jobTitle: author_type.name,
+      url: "https://www.bokatidindi.is/baekur/hofundur/#{slug}"
+    }
+  end
 end
