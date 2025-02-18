@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="is">
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= yield :meta %>
     <%= render 'layouts/meta' %>
   </head>
 
   <body class="d-flex flex-column h-100">
-    <header class="px-4 pt-4 pt-md-5 px-md-5">
+    <header class="px-4 px-sm-5 pt-4 pt-md-4 pt-xl-5 pb-xl-3">
       <%= render 'layouts/header' %>
     </header>
 
     <nav id="mobile-menu" aria-label="Aðalvalmynd" class="d-none">
       <button id="mobile-menu-close-button" class="btn btn-lightgrey" aria-label="Loka valmynd">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-          <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-        </svg>
+        <%= image_tag 'close_menu_button.svg', height: '16', width: '16', alt: '' %>
       </button>
 
       <form
@@ -77,27 +73,28 @@
     </div>
 
     <%= render 'layouts/footer' %>
+
+    <script>
+      function toggleMobileMenu(event) {
+        document.querySelector('#mobile-menu').classList.toggle('d-none');
+        document.querySelector('main').classList.toggle('d-none');
+        document.querySelector('footer.footer-container').classList.toggle('d-none');
+      }
+
+      function focusOnMobileMenu(event) {
+        document.querySelector('#mobile-menu').focus();
+      }
+
+      document.querySelector('#mobile-menu-button').addEventListener(
+        'click',
+        function() { toggleMobileMenu(); focusOnMobileMenu(); }
+      );
+
+      document.querySelector('#mobile-menu-close-button').addEventListener(
+        'click',
+        function() { toggleMobileMenu() }
+      );
+    </script>
+
   </body>
-
-<script>
-  function toggleMobileMenu(event) {
-    document.querySelector('#mobile-menu').classList.toggle('d-none');
-    document.querySelector('main').classList.toggle('d-none');
-    document.querySelector('footer.footer-container').classList.toggle('d-none');
-  }
-
-  function focusOnMobileMenu(event) {
-    document.querySelector('#mobile-menu').focus();
-  }
-
-  document.querySelector('#mobile-menu-button').addEventListener(
-    'click',
-    function() { toggleMobileMenu(); focusOnMobileMenu(); }
-  );
-
-  document.querySelector('#mobile-menu-close-button').addEventListener(
-    'click',
-    function() { toggleMobileMenu() }
-  );
-  </script>
 </html>

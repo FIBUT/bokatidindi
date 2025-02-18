@@ -6,6 +6,15 @@ class BooksController < ApplicationController
 
     @image_format = image_format
 
+    @image_sizes = '(min-width: 2000px) 260px, '\
+                   '(min-width: 1400px) 150px, '\
+                   '(min-width: 1230px) 260px, '\
+                   '(min-width: 992px) 150px, '\
+                   '(min-width: 720px) 550px, '\
+                   '(min-width: 670px) 260px, '\
+                   '(min-width: 420px) 550px, '\
+                   '(min-width: 460px) 260px'
+
     if params[:search]
       render_search
       book_results = @books + @books_from_old_editions
@@ -29,6 +38,11 @@ class BooksController < ApplicationController
     @image_format = image_format
 
     @book = Book.find_by(slug: params[:slug])
+
+    @image_sizes = '( min-width: 1050px ) 550px, '\
+                   '( min-width: 900px ) 260px, '\
+                   '( min-width: 670px ) 150px, '\
+                   '( max-width: 670px ) 550px, '\
 
     unless @book
       render file: 'public/404.html', status: :not_found,

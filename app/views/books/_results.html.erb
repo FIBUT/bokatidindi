@@ -1,16 +1,16 @@
-<div class="row" role="list">
+<div class="row">
 
   <% @books.each_with_index do |book,i| %>
   <article
     id="book-<%= book.id %>"
     class="book d-flex col-12 col-md-6 col-xl-4 px-0"
     aria-labelledby="book-<%= book.id %>-hgroup"
-    role="listitem"
+    role="region"
   >
 
-    <div class="row book-column-container m-2 p-2 pb-4">
+    <div class="row book-column-container flex-column flex-lg-row m-2 p-2 pb-4">
 
-      <article class="content-column pt-md-3 col-lg-8 order-1">
+      <div class="content-column flex-grow-1 col-lg-8 order-1">
 
         <a
           href="<%= book_path(book.slug) %>"
@@ -23,7 +23,7 @@
 
           <p
             aria-label="Lýsing"
-            class="book-description overflow-hidden"
+            class="book-description"
           >
             <%= sanitize book.short_description, tags: ['em'] %>
           </p>
@@ -31,38 +31,42 @@
         <%= render 'books/meta', book: book %>
 
         <div class="more-button text-right mt-4">
-          <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary" %>
+          <%= link_to 'Meira', book_path(book.slug), class: "btn btn-primary", title: "Nánar um bókina #{book.title}" %>
         </div>
 
-      </article>
+      </div>
 
       <aside
-        class="mt-1 col-lg-4 overflow-hidden order-0"
+        class="mt-1 col-lg-4 order-0"
         role="presentation"
       >
         <a
-          class="product-image-link"
+          class="product-image-link d-block"
           href="<%= book_path(book.slug) %>"
+          title="Skoða upplýsingar um bókina <%= book.full_title_noshy %>"
+          tabindex="-1"
         >
           <div class="figure mt-4 w-100">
             <img
-              src="<%= book.cover_image_url %>"
+              class="w-100 img-fluid"
               <% if book.cover_image.attached? %>
+              src="<%= book.cover_image_url %>"
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
-              <% end %>
               <% unless book.cover_image_srcsets.blank? %>
+              alt="Bókakápa: <%= book.full_title_noshy %>"
               srcset="<%= book.cover_image_srcsets[@image_format] %>"
-              sizes="
-                ( min-width: 576px ) 150px,
-                (max-width: 576px ) 260px
-              "
+              sizes="<%= @image_sizes %>"
               <% end %>
-              class="w-100 img-fluid"
-              <% if i > 5 %>
+              <% else %>
+              src="<%= asset_url('blank.svg') %>"
+              height="594"
+              width="420"
+              alt="Mynd af bókakápu vantar"
+              <% end %>
+              <% if i > 6 %>
               loading="lazy"
               <% end %>
-              alt="Bókakápa: <%= book.full_title_noshy %>"
             >
           </div>
         </a>

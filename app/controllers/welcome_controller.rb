@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class WelcomeController < ApplicationController
+  TILE_SIZES = [16, 32, 58, 64, 76, 80, 114, 120, 128, 144, 152, 167, 180,
+                192, 256, 512].freeze
+
   def index
     expires_in 1.hour, public: true
 
