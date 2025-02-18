@@ -8,35 +8,27 @@ class BookEdition < ApplicationRecord
 
   # Editions that are open for registration
   scope :active, lambda {
-    joins(:edition).where(
-      "opening_date < '#{DateTime.now.to_fs(:db)}' "\
-      "AND closing_date > '#{DateTime.now.to_fs(:db)}'"
-    )
+    joins(:edition).where(open_to_web_registrations: true)
   }
 
   scope :inactive, lambda {
-    joins(:edition).where.not(
-      "opening_date < '#{DateTime.now.to_fs(:db)}' "\
-      "AND closing_date > '#{DateTime.now.to_fs(:db)}'"
-    )
+    joins(:edition).where(open_to_web_registrations: false)
   }
 
   # Editions that are currently visible online
   scope :current, lambda {
-    joins(:edition).where(
-      "online_date < '#{DateTime.now.to_fs(:db)}' "\
-    ).order(id: :desc).limit(1)
+    joins(:edition).where(online: true)
   }
 
   after_create :create_book_edition_categories
 
   def update_book_edition_categories(force: true)
-    if edition.active? || force == true
+    if edition.open_to_print_registrations || force == true
       # Delete the BookEditionCategory records if the current edition is
       # open for both print and web registrations and re-enter them into the
       # database
       update_book_edition_categories_before_print_registration_ends
-    elsif edition.print_registration_over?
+    elsif edition.open_to_web_registrations
       # Only amend records to set for_web to false if for_print equals true
       # instead of deleting them.
       update_book_edition_categories_after_print_registration
@@ -52,7 +44,7 @@ class BookEdition < ApplicationRecord
       next unless Edition.current.ids.include?(edition.id)
 
       for_print = if bc.for_print == true
-                    if edition.print_registration_over?
+                    if edition.open_to_print_registrations == false
                       false
                     else
                       bc.for_print

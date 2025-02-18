@@ -17,37 +17,20 @@ class Edition < ApplicationRecord
 
   # Editions that are open for registration
   scope :active, lambda {
-    where(
-      "opening_date < '#{DateTime.now.to_fs(:db)}' "\
-      "AND closing_date > '#{DateTime.now.to_fs(:db)}'"\
-    )
-  }
-
-  scope :frozen, lambda {
-    where(
-      "closing_date < '#{DateTime.now.to_fs(:db)}' and "\
-      "print_date > '#{DateTime.now.to_fs(:db)}'"
-    )
+    where(open_to_web_registrations: true)
   }
 
   scope :inactive, lambda {
-    where.not(
-      id: Edition.current.ids
-    )
+    where(open_to_web_registrations: false)
   }
 
   # Editions that are currently visible online
   scope :current, lambda {
-    where(
-      "online_date < '#{DateTime.now.to_fs(:db)}'"
-    ).order(id: :desc).limit(1)
+    where(online: true).order(id: :desc)
   }
 
-  scope :active_for_web_only, lambda {
-    where(
-      "opening_date >= '#{Edition.current.first.opening_date.to_fs(:db)}' and "\
-      "print_date < '#{DateTime.now.to_fs(:db)}'"
-    )
+  scope :old, lambda {
+    where(online: false).order(id: :desc)
   }
 
   has_many :book_editions, dependent: :destroy
@@ -144,54 +127,18 @@ class Edition < ApplicationRecord
     srcset.join(', ')
   end
 
-  def active?
-    Edition.active.ids.include?(id)
-  end
-
-  def frozen?
-    return false if closing_date.nil? || print_date.nil?
-    # "closing_date < '#{DateTime.now.to_fs(:db)}' and "\
-    # "print_date > '#{DateTime.now.to_fs(:db)}'"
-    return false unless closing_date < DateTime.now && print_date > DateTime.now
-
-    true
-  end
-
-  def self.form_collection(include_frozen = false)
-    editions = if include_frozen
-                 (Edition.active + Edition.frozen + Edition.active_for_web_only)
-               else
-                 (Edition.active + Edition.active_for_web_only)
-               end
-
-    form_collection = []
-    editions.uniq.each do |e|
-      form_collection << [e.form_label, e[:id]]
+  def self.form_collection
+    Edition.where(open_to_web_registrations: true).map do |edition|
+      [edition.form_label, edition.id]
     end
-
-    form_collection
   end
 
   def form_label
-    if frozen?
-      return "#{title} "\
-             '(skráningar eru frystar og eingöngu aðgengilegar stjórnendum)'
-    end
-    if print_registration_over?
+    unless open_to_print_registrations
       return "#{title} (lokað fyrr skráningu í prentútgáfu)"
     end
 
     title
-  end
-
-  def print_registration_over?
-    true if print_date < DateTime.now
-  end
-
-  def self.current_edition
-    Edition.where(
-      "online_date < '#{DateTime.now.to_fs(:db)}'"
-    ).order(id: :desc).limit(1).first
   end
 
   def book_count

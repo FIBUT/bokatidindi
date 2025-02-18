@@ -37,17 +37,17 @@
             <%= markdown(@page_content.body) if @page_content %>
             <a class="hero-nav-link d-none d-sm-inline-block d-lg-none" href="/argangar">Sækja prentútgáfu</a>
           </div>
-          <% unless Edition.current_edition.cover_image_url.empty? %>
+          <% if @editions_with_cover.any? %>
           <nav class="hero-image-column d-flex flex-column justify-content-xl-end col-12 col-sm-4 col-lg-3">
             <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda" tabindex="-1" role="presentation">
               <img
-                width="<%= Edition.current_edition.cover_image.metadata['width'] %>"
-                height="<%= Edition.current_edition.cover_image.metadata['height'] %>"
+                width="<%= @editions_with_cover.first.cover_image.metadata['width'] %>"
+                height="<%= @editions_with_cover.first.cover_image.metadata['height'] %>"
                 class="img-fluid"
-                srcset="<%= Edition.current_edition.cover_image_srcsets[@image_format] %>"
-                src="<%= Edition.current_edition.cover_image_url %>"
+                srcset="<%= @editions_with_cover.first.cover_image_srcsets[@image_format] %>"
+                src="<%= @editions_with_cover.first.cover_image_url %>"
                 sizes="( min-width: 576px ) 260px, (max-width: 576px ) 442px"
-                alt="Forsíðan fyrir <%= Edition.current_edition.title %>"
+                alt="Forsíðan fyrir <%= @editions_with_cover.first.title %>"
               />
             </a>
             <a class="hero-nav-link list-unstyled d-none d-lg-inline d-xl-none" href="/argangar">Sækja prentútgáfu</a>

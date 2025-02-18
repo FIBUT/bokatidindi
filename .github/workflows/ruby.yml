@@ -30,7 +30,7 @@ jobs:
     - name: Run bundle install
       run: bundle install && yarn install
     - name: Load the database schema
-      run: bundle exec rake db:schema:load
+      run: bundle exec rake db:schema:load && bundle exec rake db:migrate:redo
       env:
         RAILS_ENV: test
         POSTGRES_HOST: localhost

@@ -117,7 +117,7 @@ class Book < ApplicationRecord
     ).order(:title)
   }
 
-  scope :current, -> { by_edition(Edition.current_edition) }
+  scope :current, -> { by_edition(Edition.current) }
 
   scope :for_web, lambda {
     where(
@@ -555,7 +555,7 @@ class Book < ApplicationRecord
   end
 
   def current_edition?
-    editions.pluck(:id).include?(Edition.current_edition[:id])
+    (Edition.current.pluck(:id) & edition_ids).any?
   end
 
   def attach_cover_image_from_string(string)
@@ -620,7 +620,7 @@ class Book < ApplicationRecord
   end
 
   def reset_book_edition_categories
-    book_editions.active.each(&:update_book_edition_categories)
+    # book_editions.active.each(&:update_book_edition_categories)
   end
 
   def attach_cover_image_variants
