@@ -92,5 +92,9 @@ FactoryBot.define do
     online_date  { DateTime.now - 1.month }
     closing_date { DateTime.now + 3.months }
     print_date   { DateTime.now + 3.months }
+
+    online                      { true }
+    open_to_web_registrations   { true }
+    open_to_print_registrations { true }
   end
 end

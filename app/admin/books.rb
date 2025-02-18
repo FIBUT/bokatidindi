@@ -28,14 +28,6 @@ ActiveAdmin.register Book do
                   sample_pages_files: []
                 }
 
-  member_action :reset_categories do
-    book_edition = resource.book_edition.where(
-      edition_id: Edition.current_edition[:id]
-    )
-    book_edition.reset_book_edition_categories
-    redirect_to resource_path, notice: 'Birtir flokkar hafa verið endurstilltir'
-  end
-
   controller do
     def build_new_resource
       super.tap do |r|
@@ -48,7 +40,7 @@ ActiveAdmin.register Book do
           book_authors: [BookAuthor.new],
           book_binding_types: [BookBindingType.new],
           book_categories: [BookCategory.new],
-          editions: Edition.active,
+          editions: Edition.where(open_to_web_registrations: true),
           country_of_origin: 'IS'
         )
       end
@@ -67,15 +59,11 @@ ActiveAdmin.register Book do
 
       edition_ids        = permitted_params[:book][:edition_ids].to_a
       @resource.editions = Edition.where(
-        id: (
-          @resource.editions.frozen.ids +
-          @resource.editions.inactive.ids +
-          edition_ids
-        )
+        id: @resource.editions.inactive.ids + edition_ids
       )
 
       removed_edition_ids = @resource.editions.where.not(
-        id: Edition.inactive.ids + Edition.frozen.ids
+        id: Edition.inactive.ids
       ).where.not(id: (edition_ids - [''])).ids
 
       # If the publisher_id attribute is not specified in the form, we should
@@ -539,17 +527,15 @@ ActiveAdmin.register Book do
           bc.input :for_web
         end
 
-        if Edition.form_collection(current_admin_user.admin?).count.positive?
-          f.inputs do
-            f.input(
-              :editions,
-              as: :check_boxes,
-              collection: Edition.form_collection(current_admin_user.admin?),
-              input_html: { autocomplete: 'off' },
-              hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
-                    'Bókatíðindum í þeim flokkum sem hafa verið valdir.'\
-            )
-          end
+        f.inputs do
+          f.input(
+            :editions,
+            as: :check_boxes,
+            collection: Edition.order(id: :desc).form_collection,
+            input_html: { autocomplete: 'off' },
+            hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
+                  'Bókatíðindum í þeim flokkum sem hafa verið valdir.'\
+          )
         end
       end
 

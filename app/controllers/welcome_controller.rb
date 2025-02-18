@@ -17,6 +17,10 @@ class WelcomeController < ApplicationController
 
     @page_content = Page.find_by(slug: 'forsida')
     @image_format = image_format
+
+    @editions_with_cover = Edition.joins(
+      :cover_image_attachment
+    ).with_attached_cover_image.current
   end
 
   def manifest

@@ -24,7 +24,7 @@ class Publisher < ApplicationRecord
       :book_editions
     ).where(
       publisher_id: id,
-      book_editions: { 'edition_id': Edition.current_edition[:id] }
+      book_editions: { 'edition_id': Edition.current.pluck(:id) }
     ).count
   end
 

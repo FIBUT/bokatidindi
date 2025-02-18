@@ -18,6 +18,8 @@ ActiveAdmin.register Edition do
 
   permit_params :title, :opening_date, :online_date, :closing_date, :print_date,
                 :cover_image_file, :pdf_file, :is_legacy, :year,
+                :online,
+                :open_to_web_registrations, :open_to_print_registrations,
                 :delete_cover_image_file, :delete_pdf_file
 
   config.filters = false
@@ -177,6 +179,12 @@ ActiveAdmin.register Edition do
       else
         f.input :cover_image_file, as: :file
       end
+    end
+
+    f.inputs 'Staða' do
+      f.input :online
+      f.input :open_to_web_registrations
+      f.input :open_to_print_registrations
     end
 
     f.inputs 'PDF-skjal' do

@@ -26,7 +26,10 @@ class BooksController < ApplicationController
       render_publisher if params[:publisher]
       render_author if params[:author]
 
-      @books = Book.current if @books.nil?
+      # List out all the books if we have chosen not to isolate them by
+      # category, author or publisher
+      @books = Book.current.for_web if @books.nil?
+
       @books = @books.order(:title).page(params[:page])
       @title_tag ||= 'Bókatíðindi - Allar bækur'
     end
@@ -86,11 +89,11 @@ class BooksController < ApplicationController
     @title_tag = "Bókatíðindi - Höfundur - #{@author[:name]}"
     @meta_description = "Bækur eftir höfundinn #{@author[:name]}"
 
-    @books = Book.current.for_web.by_author(
-      @author.id
-    ).with_attached_cover_image
+    author_books = Book.by_author(@author)
 
-    @books_from_old_editions = Book.old.for_web.by_author(@author.id)
+    @books = author_books.current.with_attached_cover_image
+
+    @books_from_old_editions = author_books - @books
   end
 
   def render_publisher

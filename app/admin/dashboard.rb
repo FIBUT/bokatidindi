@@ -4,53 +4,61 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
-    edition = Edition.current_edition
+    edition = Edition.current.last
 
     panel 'Frestir og dagsetningar' do
       table class: 'edition-dates-table' do
-        tr do
-          th scope: 'row' do
-            'Opnað fyrir skráningar'
-          end
-          td do
-            edition.opening_date.strftime('%d.%m.%Y')
-          end
-          td class: 'description' do
-            'Opnað fyrir skráningar í þennan árgang Bókatíðinda.'
-          end
-        end
-        tr do
-          th scope: 'row' do
-            'Árgangur birtist á vef'
-          end
-          td do
-            edition.online_date.strftime('%d.%m.%Y')
-          end
-          td class: 'Description' do
-            'Þessi árgangur Bókatíðinda birtist á vefnum.'
+        if edition.opening_date
+          tr do
+            th scope: 'row' do
+              'Opnað fyrir skráningar'
+            end
+            td do
+              edition&.opening_date&.strftime('%d.%m.%Y')
+            end
+            td class: 'description' do
+              'Opnað fyrir skráningar í þennan árgang Bókatíðinda.'
+            end
           end
         end
-        tr do
-          th scope: 'row' do
-            'Lokað fyrir skráningar'
-          end
-          td do
-            edition.closing_date.strftime('%d.%m.%Y')
-          end
-          td class: 'description' do
-            'Lokað fyrir skráningar fram að frágangi prentútgáfu.'
+        if edition.online_date
+          tr do
+            th scope: 'row' do
+              'Árgangur birtist á vef'
+            end
+            td do
+              edition&.online_date&.strftime('%d.%m.%Y')
+            end
+            td class: 'Description' do
+              'Þessi árgangur Bókatíðinda birtist á vefnum.'
+            end
           end
         end
-        tr do
-          th scope: 'row' do
-            'Gengið frá prentútgáfu'
+        if edition.closing_date
+          tr do
+            th scope: 'row' do
+              'Lokað fyrir skráningar'
+            end
+            td do
+              edition&.closing_date&.strftime('%d.%m.%Y')
+            end
+            td class: 'description' do
+              'Lokað fyrir skráningar fram að frágangi prentútgáfu.'
+            end
           end
-          td do
-            edition.print_date.strftime('%d.%m.%Y')
-          end
-          td class: 'Description' do
-            'Eftir þessa dagsetningu er opnað aftur fyrir skráningar í '\
-            'vefútgáfu.'
+        end
+        if edition.print_date
+          tr do
+            th scope: 'row' do
+              'Gengið frá prentútgáfu'
+            end
+            td do
+              edition&.print_date&.strftime('%d.%m.%Y')
+            end
+            td class: 'Description' do
+              'Eftir þessa dagsetningu er opnað aftur fyrir skráningar í '\
+              'vefútgáfu.'
+            end
           end
         end
       end

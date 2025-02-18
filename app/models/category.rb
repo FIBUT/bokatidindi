@@ -52,7 +52,7 @@ class Category < ApplicationRecord
       :category
     ).where(
       category_id: id,
-      book_edition: { edition_id: Edition.current_edition[:id] }
+      book_edition: { edition_id: Edition.current }
     )
   end
 
