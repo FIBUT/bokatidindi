@@ -91,9 +91,7 @@ class BooksController < ApplicationController
 
     author_books = Book.by_author(@author)
 
-    @books = author_books.by_edition(
-      Edition.current.ids
-    ).with_attached_cover_image
+    @books = author_books.current.with_attached_cover_image
 
     @books_from_old_editions = author_books - @books
   end
