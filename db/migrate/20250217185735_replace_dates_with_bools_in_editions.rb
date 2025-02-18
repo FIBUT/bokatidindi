@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReplaceDatesWithBoolsInEditions < ActiveRecord::Migration[7.0]
   def up
     add_column :editions, :online, :boolean, default: false
