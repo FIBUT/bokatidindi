@@ -133,7 +133,7 @@
 
         <% if @book.audio_sample? %>
         <div id="book_audio_sample" class="mb-4 pb-4">
-          <h3>Hljóðbrot</h3>
+          <h2 class="h3">Hljóðbrot</h2>
           <%= audio_tag @book.audio_sample_url, controls: true %>
         </div>
         <% end %>
