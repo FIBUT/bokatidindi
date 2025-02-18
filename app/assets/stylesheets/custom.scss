@@ -185,6 +185,7 @@ main {
     margin: 33px 15px;
     transition-property: all;
     transition-duration: 100ms;
+    transform: rotate(0.1deg);
   }
   .sponsor:hover {
     transform: scale(1.10);
