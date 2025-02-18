@@ -62,4 +62,11 @@ class Author < ApplicationRecord
     self.firstname = firstname.try(:strip)
     self.lastname  = lastname.try(:strip)
   end
+
+  def structured_data
+    {
+      '@type': 'Person',
+      'name': name
+    }
+  end
 end

@@ -17,6 +17,8 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
   Max: 500
+  Exclude:
+    - 'app/models/book.rb'
 
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:

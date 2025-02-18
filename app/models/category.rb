@@ -20,11 +20,13 @@ class Category < ApplicationRecord
     optgroups
   end
 
-  def name_with_group
+  def name_with_group(separator = '-')
     translated_group_name = I18n.t(
       "activerecord.attributes.category.groups.#{group}"
     )
-    return "#{translated_group_name} - #{name}" if group_before_type_cast.zero?
+    if group_before_type_cast.zero?
+      return "#{translated_group_name} #{separator} #{name}"
+    end
 
     name
   end

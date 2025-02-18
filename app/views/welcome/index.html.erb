@@ -1,13 +1,7 @@
 <% content_for :meta do %>
-  <%= preload_link_tag asset_url('boksala-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('forlagid-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('penninn-eymundsson-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('salka-square.svg'), as: 'image' %>
-  <%= preload_link_tag asset_url('storytel-square.svg'), as: 'image' %>
-
   <title>Bókatíðindi - Helstu bækur ársins á einum stað - Jólabókaflóðið</title>
 
-  <%= tag 'meta', name: 'description', content: @meta_description %>
+  <%= tag 'meta', name: 'description', content: WelcomeController::META_DESCRIPTION %>
   <%= tag 'link', rel: 'canonical', href: 'https://www.bokatidindi.is/' %>
 
   <%= tag 'meta', property: 'og:type', content: 'website' %>
@@ -16,15 +10,16 @@
   <%= tag 'meta', property: 'og:image:height', content: '512' %>
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
   <%= tag 'meta', property: 'og:title', content: 'Bókatíðindi' %>
-  <%= tag 'meta', property: 'og:description', content: @meta_description %>
+  <%= tag 'meta', property: 'og:description', content: WelcomeController::META_DESCRIPTION %>
   <%= tag 'meta', property: 'og:url', content: 'https://www.bokatidindi.is/' %>
   <%= tag 'meta', property: 'og:locale', content: 'is_IS' %>
   <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
 
   <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
   <%= tag 'meta', name: 'twitter:title', content: 'Bókatíðindi' %>
-  <%= tag 'meta', name: 'twitter:description', content: @meta_description %>
+  <%= tag 'meta', name: 'twitter:description', content: WelcomeController::META_DESCRIPTION %>
 
+  <script type="application/ld+json"><%= raw @website_ld_json.to_json %></script>
 <% end %>
 
 <main role="main">
