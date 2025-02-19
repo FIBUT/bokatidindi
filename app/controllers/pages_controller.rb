@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
     @page_content    = Page.find_by(slug: 'um_bokatidindi')
     @image_format    = image_format
-    @current_edition = Edition.current_edition
+    @current_edition = Edition.current.last
   end
 
   def privacy_policy
