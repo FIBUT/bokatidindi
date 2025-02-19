@@ -1,7 +1,7 @@
 <% content_for :meta do %>
-  <title>Bókatíðindi - Um <%= @current_edition.title %></title>
+  <title>Um Bókatíðindi</title>
 
-  <% if @current_edition.cover_image.attached? %>
+  <% if @current_edition&.cover_image&.attached? %>
   <%= tag 'meta', property: 'og:image', content: @current_edition.cover_image_url %>
   <% end %>
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
@@ -11,7 +11,7 @@
 
   <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
   <%= tag 'meta', name: 'twitter:title', content: 'Um Bókatíðindi' %>
-  <% if @current_edition.cover_image.attached? %>
+  <% if @current_edition&.cover_image&.attached? %>
   <%= tag 'meta', name: 'twitter:image', content: @current_edition.cover_image_url %>
   <% end %>
 <% end %>
