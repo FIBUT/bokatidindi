@@ -87,6 +87,7 @@ GEM
       statsd-ruby (~> 1.1)
     base64 (0.2.0)
     bcrypt (3.1.20)
+    benchmark (0.4.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -127,6 +128,7 @@ GEM
     diff-lcs (1.5.1)
     digest-crc (0.6.5)
       rake (>= 12.0.0, < 14.0.0)
+    drb (2.2.1)
     e2mmap (0.1.0)
     ean13 (2.0.2)
     erubi (1.13.0)
@@ -477,6 +479,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   barnes
+  benchmark
   bigdecimal
   bootsnap (>= 1.4.4)
   browser
@@ -487,6 +490,7 @@ DEPENDENCIES
   country_select (~> 8.0.3)
   database_cleaner-active_record
   devise
+  drb
   ean13
   factory_bot_rails
   faker

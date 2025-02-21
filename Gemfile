@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.4.2'
 
 gem 'bigdecimal'
+gem 'benchmark'
+gem 'drb'
 
 gem 'rack-timeout'
 
