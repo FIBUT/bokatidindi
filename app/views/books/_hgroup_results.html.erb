@@ -1,6 +1,6 @@
-<hgroup id="book-<%= local_assigns[:book].id %>-hgroup" class="mt-4 md-lg-0 inline-block">
+<hgroup id="book-<%= local_assigns[:book].id %>-hgroup" class="mt-4 mb-2 inline-block">
 
-  <h2 class="h2 title">
+  <h2 class="h2 title mb-0">
     <% unless local_assigns[:book].pre_title.empty? %>
     <span class="pre-title"><%= Shyguy.display_shy(local_assigns[:book].pre_title) %></span>
     <% end %>
@@ -8,6 +8,6 @@
   </h2>
 
   <% unless local_assigns[:book].post_title.empty? %>
-    <h3 class="post-title"><%= Shyguy.display_shy(raw local_assigns[:book].post_title) %></h3>
+    <h3 class="post-title mb-0"><%= Shyguy.display_shy(raw local_assigns[:book].post_title) %></h3>
   <% end %>
 </hgroup>

@@ -74,6 +74,28 @@ class BookBindingType < ApplicationRecord
     Time.at(60 * minutes).utc.strftime('%H:%M')
   end
 
+  def structured_data
+    result = {
+      '@type': 'Book',
+      disambiguatingDescription: binding_type.name
+    }
+
+    if binding_type.group == 'audiobooks'
+      result['@type'] = ['Book', 'Audiobook']
+    end
+
+    if binding_type.barcode_type == 'ISSN'
+      result['@type'] = ['Book', 'Periodical']
+    end
+
+    result[:isbn]          = barcode if binding_type.barcode_type == 'ISBN'
+    result[:datePublished] = publication_date if publication_date
+    result[:numberOfPages] = page_count if page_count
+    result[:inLanguage]    = language if language
+
+    result
+  end
+
   private
 
   def sanitize_barcode

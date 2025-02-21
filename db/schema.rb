@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_17_185735) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_21_004145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_17_185735) do
     t.datetime "updated_at", null: false
     t.string "abbreviation"
     t.string "plural_name"
+    t.integer "schema_role", default: 0
     t.index ["slug"], name: "index_author_types_on_slug", unique: true
     t.index ["source_id"], name: "index_author_types_on_source_id", unique: true
   end
@@ -113,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_17_185735) do
     t.string "order_by_name"
     t.string "name"
     t.integer "added_by_id"
+    t.integer "schema_type", default: 0, null: false
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
     t.index ["slug"], name: "index_authors_on_slug", unique: true
@@ -384,6 +386,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_17_185735) do
     t.string "email_address"
     t.string "kennitala"
     t.boolean "is_member", default: true
+    t.integer "schema_type", default: 1, null: false
     t.index ["kennitala"], name: "index_publishers_on_kennitala"
     t.index ["slug"], name: "index_publishers_on_slug", unique: true
     t.index ["source_id"], name: "index_publishers_on_source_id", unique: true

@@ -40,6 +40,8 @@ class Book < ApplicationRecord
 
   PRINT_RES = 330 / 25.4
 
+  PAGINATION = 18
+
   multisearchable against: %i[pre_title title_noshy post_title description
                               long_description]
 
@@ -77,7 +79,7 @@ class Book < ApplicationRecord
 
   has_many_attached :sample_pages, dependent: :destroy
 
-  paginates_per 18
+  paginates_per PAGINATION
 
   before_validation :sanitize_title, :sanitize_description
   before_create :set_title_hypenation, :set_slug
@@ -163,31 +165,6 @@ class Book < ApplicationRecord
     column_names
   end
 
-  def structured_data_article
-    result = {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      '@id': "https://www.bokatidindi.is/bok/#{slug}",
-      '@url': "https://www.bokatidindi.is/bok/#{slug}",
-      additionalType: ['AdvertiserContentArticle'],
-      headline: full_title_noshy,
-      description: description,
-      isPartOf: structured_data_publication,
-      image: [],
-      maintainer: publisher.ld_json,
-      dateModified: updated_at,
-      datePublished: created_at
-    }
-
-    result[:image] << cover_image_url('jpg') if cover_image.attached?
-
-    sample_pages.each_with_index do |_sp, i|
-      result[:image] << sample_page_url(i, 'jpg')
-    end
-
-    result
-  end
-
   def structured_data
     result = {
       '@context': 'https://schema.org',
@@ -196,16 +173,23 @@ class Book < ApplicationRecord
       '@url': "https://www.bokatidindi.is/bok/#{slug}",
       name: full_title_noshy,
       author: structured_data_authors,
+      translator: structured_data_authors(:translator),
+      editor: structured_data_authors(:editor),
+      illustrator: structured_data_authors(:illustrator),
+      contributor: structured_data_authors(:contributor),
+      producer: structured_data_authors(:producer),
       description: description,
-      review: structured_data_reviews,
-      isbn: book_binding_types.pluck(:barcode),
+      genre: categories.map { |c| c.name_with_group('>') },
+      workExample: book_binding_types.map(&:structured_data),
       publisher: publisher.ld_json,
-      dateModified: updated_at
+      maintainer: structured_data_fibut
     }
 
-    unless structured_data_translator.empty?
-      result[:translator] = structured_data_translator
+    unless original_title.empty?
+      result[:translationOfWork] = { type: 'Book', name: original_title }
     end
+
+    result[:inLanguage] = language_codes if language_codes
 
     result[:sameAs] = structured_data_url unless structured_data_url.empty?
 
@@ -262,16 +246,6 @@ class Book < ApplicationRecord
     }
   end
 
-  def structured_data_reviews
-    blockquotes.map do |bq|
-      {
-        '@type': 'Review',
-        reviewBody: bq.quote,
-        author: bq.citation
-      }
-    end
-  end
-
   def structured_data_isbn
     book_binding_types.joins(
       :binding_type
@@ -284,19 +258,17 @@ class Book < ApplicationRecord
     book_binding_types.where.not(url: '').pluck(:url).uniq
   end
 
-  def structured_data_authors
-    book_authors.includes(:author_type, :author).map do |ba|
+  def structured_data_authors(schema_role = :author)
+    book_authors.includes(
+      :author_type, :author
+    ).where(author_type: { schema_role: schema_role }).map do |ba|
       {
-        '@type': 'Person',
+        '@type': ba.author.schema_type,
         name: ba.name,
         jobTitle: ba.author_type.name,
         url: "https://www.bokatidindi.is/baekur/hofundur/#{ba.author.slug}"
       }
     end
-  end
-
-  def main_authors_string
-    authors.where(id: main_authors_ids).pluck(:name).to_sentence
   end
 
   def other_authors_string

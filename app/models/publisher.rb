@@ -3,6 +3,8 @@
 class Publisher < ApplicationRecord
   has_many :books, dependent: :restrict_with_error
 
+  enum schema_type: { Person: 0, Organization: 1 }
+
   before_create :set_slug
 
   default_scope { order(:name) }
@@ -31,22 +33,13 @@ class Publisher < ApplicationRecord
   def ld_json
     {
       '@id': "https://www.bokatidindi.is/baekur/utgefandi/#{slug}",
-      '@type': 'Organization',
-      url: ld_json_urls,
+      '@type': schema_type,
+      url: "https://www.bokatidindi.is/baekur/utgefandi/#{slug}",
       name: name
     }
   end
 
   private
-
-  def ld_json_urls
-    urls = ["https://www.bokatidindi.is/baekur/utgefandi/#{slug}"]
-    urls << url if URI(url).scheme
-
-    return urls.first if urls.length == 1
-
-    urls
-  end
 
   def set_slug
     self.slug = name.parameterize(locale: :is)

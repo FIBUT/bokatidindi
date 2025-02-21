@@ -6,7 +6,7 @@
   <% end %>
 >
 
-  <h1 class="h2 title">
+  <h1 class="h2 title mb-0">
     <% unless local_assigns[:book].pre_title.empty? %>
     <span class="pre-title"><%= local_assigns[:book].pre_title %></span>
     <% end %>
@@ -14,6 +14,6 @@
   </h1>
 
   <% unless local_assigns[:book].post_title.empty? %>
-    <h2 class="post-title"><%= raw local_assigns[:book].post_title %></h2>
+    <h2 class="post-title mb-0"><%= raw local_assigns[:book].post_title %></h2>
   <% end %>
 </hgroup>

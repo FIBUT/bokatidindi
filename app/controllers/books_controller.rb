@@ -94,6 +94,15 @@ class BooksController < ApplicationController
     @books = author_books.current.with_attached_cover_image
 
     @books_from_old_editions = author_books - @books
+
+    prepare_navigation_metadata(
+      "https://www.bokatidindi.is/baekur/hofundur/#{@author.slug}",
+      @author[:name]
+    )
+
+    return unless @books.page(params[:page]).out_of_range?
+
+    render file: 'public/404.html', status: :not_found, layout: false
   end
 
   def render_publisher
@@ -106,6 +115,15 @@ class BooksController < ApplicationController
     @books = Book.current.for_web.by_publisher(
       @publisher.id
     ).with_attached_cover_image
+
+    prepare_navigation_metadata(
+      "https://www.bokatidindi.is/baekur/utgefandi/#{@publisher.slug}",
+      @publisher[:name]
+    )
+
+    return unless @books.page(params[:page]).out_of_range?
+
+    render file: 'public/404.html', status: :not_found, layout: false
   end
 
   def render_category
@@ -119,5 +137,68 @@ class BooksController < ApplicationController
     @books = Book.current.for_web.by_category(
       @category.id
     ).with_attached_cover_image
+
+    prepare_navigation_metadata(
+      "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",
+      @category.name_with_group
+    )
+
+    return unless @books.page(params[:page]).out_of_range?
+
+    render file: 'public/404.html', status: :not_found, layout: false
+  end
+
+  def prepare_navigation_metadata(base_url, name)
+    current_page = @books.page(params[:page]).current_page
+    last_page    = @books.page(params[:page]).last_page?
+    first_page   = @books.page(params[:page]).first_page?
+
+    @base_url = base_url
+    @canonical_path = unless current_page == 1
+                        "/sida/#{@books.page(params[:page]).total_pages}"
+                      end
+    @canonical_url = "#{@base_url}#{@canonical_path}"
+
+    unless first_page
+      @prev_path = if current_page == 2
+                     ''
+                   else
+                     "/sida/#{@books.page(params[:page]).prev_page}"
+                   end
+    end
+
+    unless last_page
+      @next_path = "/sida/#{@books.page(params[:page]).next_page}"
+    end
+
+    @itemlist_ld_json = ld_json_category(@books, @base_url, name)
+  end
+
+  def ld_json_category(books, url, name)
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': url,
+      url: url,
+      name: name,
+      numberOfItems: books.count,
+      itemListElement: books.page(params[:page]).map.with_index do |b, i|
+        ld_json_item(b, i, params[:page])
+      end
+    }
+  end
+
+  def ld_json_item(book, index, page)
+    position = if page
+                 index + 1 + Book::PAGINATION * (page.to_i - 1)
+               else
+                 index + 1
+               end
+
+    {
+      '@type': 'ListItem',
+      position: position,
+      url: "https://www.bokatidindi.is/bok/#{book.slug}"
+    }
   end
 end

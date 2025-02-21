@@ -1,14 +1,19 @@
 <% content_for :meta do %>
+  <% if params[:search].nil? && @books.total_pages > 1 %>
+  <title><%= @title_tag %> - Síða <%= @books.current_page %> af <%= @books.total_pages %></title>
+  <% else %>
   <title><%= @title_tag %></title>
-  <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
-  <%= tag 'meta', name: 'description', content: @meta_description %>
+  <% end %>
 
-  <%= tag 'link', rel: 'canonical', href: author_url(params[:author]) unless params[:author].nil? %>
-  <%= tag 'link', rel: 'canonical', href: publisher_url(params[:publisher]) unless params[:publisher].nil? %>
-  <%= tag 'link', rel: 'canonical', href: category_url(params[:category]) unless params[:category].nil? %>
+  <%= tag 'link', rel: 'canonical', href: @canonical_url if @canonical_url %>
+  <%= tag 'link', rel: 'prev', href: "#{@base_url}#{@prev_path}" if @prev_path %>
+  <%= tag 'link', rel: 'next', href: "#{@base_url}#{@next_path}" if @next_path %>
+
+  <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
+  <%= tag 'meta', name: 'description', content: @meta_description unless params[:search] %>
 
   <%= tag 'meta', property: 'og:title', content: @title_tag %>
-  <%= tag 'meta', property: 'og:description', content: @meta_description %>
+  <%= tag 'meta', property: 'og:description', content: @meta_description unless params[:search] %>
   <%= tag 'meta', property: 'og:image', content: asset_path('favicon-512.png') %>
   <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
 
@@ -22,6 +27,10 @@
   <%= tag 'link', rel: 'preload', as: 'image', href: book.cover_image_url, imagesrcset: book.cover_image_srcsets[@image_format], imagesizes: @image_sizes %>
   <% end %>
   <% end %>
+
+  <% if @itemlist_ld_json %>
+  <script type="application/ld+json"><%= raw @itemlist_ld_json.to_json %></script>
+  <% end %>
 <% end %>
 
 <main id="books-index" class="my-5" role="main" aria-labelledby="results-heading">
@@ -29,6 +38,12 @@
   <div class="container-fluid px-5">
 
     <%= render 'books/results_heading' %>
+
+    <% if (! params[:search] ) && @books.total_pages > 1 %>
+      <p>Síða <%= @books.current_page %> af <%= @books.total_pages %></p>
+    <% end %>
+
+    <%= render 'books/zero_search_results' if @books.length.zero? && params[:search] %>
 
     <%= render 'books/results' %>
 

@@ -3,7 +3,7 @@
 ActiveAdmin.register Author do
   config.sort_order = 'order_by_name_asc'
 
-  permit_params :firstname, :lastname, :is_icelandic
+  permit_params :firstname, :lastname, :is_icelandic, :schema_type
 
   filter :firstname_contains
   filter :lastname_contains
@@ -56,6 +56,10 @@ ActiveAdmin.register Author do
         :is_icelandic,
         label: 'Höfundur er íslenskur'
       )
+    end
+
+    f.inputs 'Flokkunarfræðilegar upplýsingar' do
+      f.input :schema_type, include_blank: false
     end
 
     f.actions
