@@ -506,6 +506,12 @@ header {
   .book-single {
     background-color: $white;
   }
+  #search-results-from-older-editions {
+    overflow-x: scroll;
+    table {
+      min-width: 768px;
+    }
+  }
 }
 
 @include media-breakpoint-down(xs) {
