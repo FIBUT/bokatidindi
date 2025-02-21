@@ -17,7 +17,7 @@ ActiveAdmin.register Publisher do
   # end
   config.sort_order = 'name_asc'
 
-  permit_params :name, :email_address, :url
+  permit_params :name, :email_address, :url, :schema_type
 
   filter :name_contains
 
@@ -109,6 +109,7 @@ ActiveAdmin.register Publisher do
       f.input :name
       f.input :email_address
       f.input :url
+      f.input :schema_type
     end
 
     f.actions

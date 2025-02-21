@@ -15,7 +15,7 @@ ActiveAdmin.register AuthorType do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  permit_params :name, :plural_name, :abbreviation, :rod
+  permit_params :name, :plural_name, :abbreviation, :schema_role, :rod
 
   config.sort_order = 'rod_asc'
   config.filters = false
@@ -27,6 +27,7 @@ ActiveAdmin.register AuthorType do
     end
     column :plural_name
     column :abbreviation
+    column :schema_role
     column :rod
     actions
   end
@@ -37,6 +38,7 @@ ActiveAdmin.register AuthorType do
         row :name
         row :plural_name
         row :abbreviation
+        row :schema_role
         row :rod
       end
     end
@@ -49,6 +51,7 @@ ActiveAdmin.register AuthorType do
       f.input :name
       f.input :plural_name
       f.input :abbreviation
+      f.input :schema_role, include_blank: false
       f.input :rod
     end
 

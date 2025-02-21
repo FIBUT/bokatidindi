@@ -47,7 +47,7 @@
   <% end %>
 
   <script type="application/ld+json">
-  <%= raw JSON.pretty_generate @book.structured_data_article %>
+  <%= raw @book.structured_data.to_json %>
   </script>
 
   <script type="module">
@@ -92,7 +92,7 @@
       >
 
         <% if @book.current_edition? == false %>
-          <p class="book-meta-old-edition mt-3 mt-md-5" role="note">
+          <p class="book-meta-old-edition mt-3 mt-md-5" data-nosnippet role="note">
           <strong>
             Athugið að þessi bók er úr eldri útgáfu Bókatíðinda og birt hér með
             fyrirvara um mögulega sé ekki um að ræða nýjustu upplýsingar.
@@ -121,17 +121,17 @@
         >
 
         <div class="book-description mb-5 bt-5 overflow-hidden">
-          <article id="book_description">
+          <section id="book_description">
             <%= simple_format @book.description, tags: ['em'] %>
-          </article>
+          </section>
 
           <% @book.blockquotes.where(location: :below_book_description).each do |blockquote, i| %>
             <%= render 'books/blockquote', blockquote: blockquote %>
           <% end %>
 
-          <article id="book_long_description">
+          <section id="book_long_description">
             <%= simple_format @book.long_description, tags: ['em'] %>
-          </article>
+          </section>
 
           <% @book.blockquotes.where(location: :below_long_description).each do |blockquote, i| %>
             <%= render 'books/blockquote', blockquote: blockquote %>

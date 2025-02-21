@@ -2,13 +2,16 @@
 
 <%= tag 'link', rel: 'dns-prefetch', href: 'https://cdn.jsdelivr.net/' %>
 <%= tag 'link', rel: 'dns-prefetch', href: 'https://cdn.bokatidindi.is/' %>
+<%= tag 'link', rel: 'dns-prefetch', href: 'https://plausible.io/' %>
 
 <%= tag 'link', rel: 'preconnect', href: 'https://cdn.jsdelivr.net/' %>
 <%= tag 'link', rel: 'preconnect', href: 'https://cdn.bokatidindi.is/' %>
+<%= tag 'link', rel: 'preconnect', href: 'https://plausible.io/' %>
 
 <%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/lora-v17-latin-500.woff2', as: 'font', crossorigin: 'anonymous' %>
 <%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/lora-v17-latin-700.woff2', as: 'font', crossorigin: 'anonymous' %>
 <%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/montserrat-v18-latin-500.woff2', as: 'font', crossorigin: 'anonymous' %>
+<%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/montserrat-v18-latin-500italic.woff2', as: 'font', crossorigin: 'anonymous' %>
 <%= preload_link_tag 'https://cdn.bokatidindi.is/fonts/montserrat-v18-latin-700.woff2', as: 'font', crossorigin: 'anonymous' %>
 
 <%= tag 'link', rel: 'preload', as: 'image', href: image_url('logotype-cropped.svg') %>

@@ -5,6 +5,8 @@ class Author < ApplicationRecord
   has_many :books, through: :book_authors
   belongs_to :added_by, class_name: 'AdminUser'
 
+  enum schema_type: { Person: 0, Organization: 1 }
+
   before_validation :strip_text
   before_validation :set_name
   before_create :set_slug, :set_order_by_name
@@ -65,7 +67,7 @@ class Author < ApplicationRecord
 
   def structured_data
     {
-      '@type': 'Person',
+      '@type': schema_type,
       name: name,
       url: "https://www.bokatidindi.is/baekur/hofundur/#{slug}"
     }
