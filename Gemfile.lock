@@ -87,6 +87,7 @@ GEM
       statsd-ruby (~> 1.1)
     base64 (0.2.0)
     bcrypt (3.1.20)
+    bigdecimal (3.1.9)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -476,6 +477,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   barnes
+  bigdecimal
   bootsnap (>= 1.4.4)
   browser
   byebug
