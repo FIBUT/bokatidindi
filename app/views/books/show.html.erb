@@ -5,10 +5,9 @@
   <%= tag 'link', rel: 'canonical', href: url_for(controller: 'books', action: 'show', only_path: false) %>
 
   <%= tag 'meta', name: 'thumbnail', content: @book.cover_image_url('jpg') %>
-
   <%= tag 'meta', property: 'og:type', content: 'book' %>
-  <% @book.book_authors.joins(:author_type, :author).where(author_type: { name: 'Höfundur' }).each do |a| %>
-  <%= tag 'meta', property: 'book:author', content: a.author.name %>
+  <% @book.book_authors.includes(:author_type, :author).where(author_type: { schema_role: :author }).each do |ba| %>
+  <%= tag 'meta', property: 'og:book:author', content: ba.author.name %>
   <% end %>
   <% if @book.cover_image.attached? %>
   <%= tag 'meta', property: 'og:image', content: @book.cover_image_url('jpg') %>
@@ -21,7 +20,7 @@
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
   <%= tag 'meta', property: 'og:title', content: html_escape_once(@book.full_title_noshy) %>
   <% @book.book_binding_types.each do |book_binding_type| %>
-  <%= tag('meta', property: 'og:isbn', content: book_binding_type.barcode) if book_binding_type.barcode %>
+  <%= tag('meta', property: 'og:book:isbn', content: book_binding_type.barcode) if book_binding_type.barcode %>
   <% end %>
   <%= tag 'meta', property: 'og:description', content: html_escape_once(strip_tags(@book.description).squish) %>
   <%= tag 'meta', property: 'og:url', content: url_for(controller: 'books', action: 'show', only_path: false) %>
