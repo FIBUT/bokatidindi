@@ -109,7 +109,7 @@ ActiveAdmin.register Publisher do
       f.input :name
       f.input :email_address
       f.input :url
-      f.input :schema_type
+      f.input :schema_type, include_blank: false
     end
 
     f.actions

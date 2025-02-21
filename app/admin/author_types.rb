@@ -51,7 +51,7 @@ ActiveAdmin.register AuthorType do
       f.input :name
       f.input :plural_name
       f.input :abbreviation
-      f.input :schema_role, include_blank: false
+      f.input :schema_role, include_blank: true
       f.input :rod
     end
 
