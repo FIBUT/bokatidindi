@@ -32,6 +32,13 @@ class BooksController < ApplicationController
 
       @books = @books.order(:title).page(params[:page])
       @title_tag ||= 'Bókatíðindi - Allar bækur'
+
+      unless (%i[category publisher author] & params.keys).any?
+        prepare_navigation_metadata(
+          'https://www.bokatidindi.is/baekur/',
+          'Allar bækur'
+        )
+      end
     end
   end
 
@@ -181,7 +188,7 @@ class BooksController < ApplicationController
       '@id': url,
       url: url,
       name: name,
-      numberOfItems: books.count,
+      numberOfItems: books.page(params[:page]).total_count,
       itemListElement: books.page(params[:page]).map.with_index do |b, i|
         ld_json_item(b, i, params[:page])
       end
