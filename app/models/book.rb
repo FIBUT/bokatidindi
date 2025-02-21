@@ -185,7 +185,7 @@ class Book < ApplicationRecord
       maintainer: structured_data_fibut
     }
 
-    unless original_title.empty?
+    if original_title
       result[:translationOfWork] = { type: 'Book', name: original_title }
     end
 
