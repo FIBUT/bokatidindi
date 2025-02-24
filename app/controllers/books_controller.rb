@@ -13,7 +13,7 @@ class BooksController < ApplicationController
                    '(min-width: 720px) 550px, '\
                    '(min-width: 670px) 260px, '\
                    '(min-width: 420px) 550px, '\
-                   '(min-width: 460px) 260px'
+                   '(max-width: 420px) 260px'
 
     if params[:search]
       render_search

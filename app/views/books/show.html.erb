@@ -34,17 +34,6 @@
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_url('jpg') %>
   <% end %>
 
-  <% if @book.cover_image_srcsets.kind_of?(Array) %>
-  <%=
-  tag(
-    'link',
-    rel: 'preload', as: 'image', href: @book.cover_image_url,
-    imagesrcset: @book.cover_image_srcsets[@image_format],
-    imagesizes: @image_sizes, type: "image/#{@image_format}"
-  )
-  %>
-  <% end %>
-
   <script type="application/ld+json">
   <%= raw @book.structured_data.to_json %>
   </script>
