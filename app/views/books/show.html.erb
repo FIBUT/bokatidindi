@@ -133,6 +133,10 @@
         </div>
         <% end %>
 
+        <div class="d-md-none" aria-label="Lýsigögn">
+          <%= render 'books/meta', book: @book %>
+        </div>
+
         <%= render('books/binding_types', book: @book) unless @book.book_binding_types.length.zero? %>
 
         <%= render 'books/social_media', book: @book %>
