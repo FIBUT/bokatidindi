@@ -120,6 +120,10 @@ main {
     font-size: 12px;
   }
 
+  th {
+    min-width: 14em;
+  }
+
   p {
     font-size: 14px;
     font-weight: 600;
@@ -228,8 +232,6 @@ main {
     font-size: 1rem;
     font-weight: normal;
     display: block;
-  }
-  .pre-title {
   }
 
   .book-column-container {
@@ -471,7 +473,12 @@ header {
 }
 
 @include media-breakpoint-down(md) {
-
+  #search-results-from-older-editions {
+    overflow-x: scroll;
+    table {
+      min-width: 1000px;
+    }
+  }
 }
 
 @include media-breakpoint-down(sm) {
@@ -505,12 +512,6 @@ header {
   }
   .book-single {
     background-color: $white;
-  }
-  #search-results-from-older-editions {
-    overflow-x: scroll;
-    table {
-      min-width: 768px;
-    }
   }
 }
 

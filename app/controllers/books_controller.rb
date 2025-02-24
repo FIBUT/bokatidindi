@@ -52,7 +52,7 @@ class BooksController < ApplicationController
     @image_sizes = '( min-width: 1050px ) 550px, '\
                    '( min-width: 900px ) 260px, '\
                    '( min-width: 670px ) 150px, '\
-                   '( max-width: 670px ) 550px, '\
+                   '( max-width: 670px ) 550px'\
 
     unless @book
       render file: 'public/404.html', status: :not_found,
