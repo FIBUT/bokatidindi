@@ -22,12 +22,6 @@
   <%= tag 'meta', name: 'twitter:description', content: @meta_description %>
   <%= tag 'meta', name: 'twitter:image', content: asset_path('favicon-512.png') %>
 
-  <% @books.first(6).each_with_index do |book,i| %>
-  <% if book.cover_image.attached? %>
-  <%= tag 'link', rel: 'preload', as: 'image', href: book.cover_image_url, imagesrcset: book.cover_image_srcsets[@image_format], imagesizes: @image_sizes %>
-  <% end %>
-  <% end %>
-
   <% if @itemlist_ld_json %>
   <script type="application/ld+json"><%= raw @itemlist_ld_json.to_json %></script>
   <% end %>
