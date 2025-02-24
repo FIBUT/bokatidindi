@@ -10,10 +10,10 @@
   <%= tag 'link', rel: 'next', href: "#{@base_url}#{@next_path}" if @next_path %>
 
   <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
-  <%= tag 'meta', name: 'description', content: @meta_description unless params[:search] %>
+  <%= tag 'meta', name: 'description', content: @meta_description %>
 
   <%= tag 'meta', property: 'og:title', content: @title_tag %>
-  <%= tag 'meta', property: 'og:description', content: @meta_description unless params[:search] %>
+  <%= tag 'meta', property: 'og:description', content: @meta_description %>
   <%= tag 'meta', property: 'og:image', content: asset_path('favicon-512.png') %>
   <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
 

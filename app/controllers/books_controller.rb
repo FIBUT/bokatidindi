@@ -22,13 +22,14 @@ class BooksController < ApplicationController
         redirect_to book_path(book_results.first[:slug])
       end
     else
-      render_category if params[:category]
-      render_publisher if params[:publisher]
-      render_author if params[:author]
+      return render_category if params[:category]
+      return render_publisher if params[:publisher]
+      return render_author if params[:author]
 
       # List out all the books if we have chosen not to isolate them by
       # category, author or publisher
       @books = Book.current.for_web if @books.nil?
+      @meta_description = 'Allar bækur'
 
       @books = @books.order(:title).page(params[:page])
       @title_tag ||= 'Bókatíðindi - Allar bækur'
@@ -66,6 +67,7 @@ class BooksController < ApplicationController
 
   def render_search
     @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
+    @meta_description = "Leitarniðurstöður: #{params[:search]}"
 
     book_results = Book.search(params[:search]).joins(
       book_editions: :book_edition_categories
@@ -98,7 +100,8 @@ class BooksController < ApplicationController
 
     author_books = Book.by_author(@author)
 
-    @books = author_books.current.with_attached_cover_image
+    @books = author_books.current.with_attached_cover_image.order(:title)
+                         .page(params[:page])
 
     @books_from_old_editions = author_books - @books
 
@@ -119,9 +122,8 @@ class BooksController < ApplicationController
     @title_tag = "Bókatíðindi - Útgefandi - #{@publisher[:name]}"
     @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
 
-    @books = Book.current.for_web.by_publisher(
-      @publisher.id
-    ).with_attached_cover_image
+    @books = Book.current.for_web.by_publisher(@publisher.id)
+                 .with_attached_cover_image.order(:title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/utgefandi/#{@publisher.slug}",
@@ -141,9 +143,8 @@ class BooksController < ApplicationController
     @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
                         "#{@category.name_with_group}"
 
-    @books = Book.current.for_web.by_category(
-      @category.id
-    ).with_attached_cover_image
+    @books = Book.current.for_web.by_category(@category.id)
+                 .with_attached_cover_image.order(:title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",
