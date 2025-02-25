@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_21_004145) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_24_220123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -253,6 +253,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_21_004145) do
     t.integer "book_count"
     t.integer "book_count_web"
     t.integer "book_count_print"
+    t.index ["group"], name: "index_categories_on_group"
+    t.index ["rod"], name: "index_categories_on_rod"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
     t.index ["source_id"], name: "index_categories_on_source_id", unique: true
   end
@@ -266,7 +268,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_21_004145) do
     t.datetime "closing_date"
     t.datetime "opening_date"
     t.datetime "online_date"
-    t.json "cover_image_srcsets", default: {"webp"=>"", "jpg"=>""}
+    t.json "cover_image_srcsets", default: {"webp" => "", "jpg" => ""}
     t.boolean "is_legacy"
     t.integer "year"
     t.boolean "online", default: false
