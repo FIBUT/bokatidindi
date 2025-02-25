@@ -44,6 +44,7 @@
           class="product-image-link d-block"
           href="<%= book_path(book.slug) %>"
           title="Skoða upplýsingar um bókina <%= book.full_title_noshy %>"
+          tabindex="-1"
         >
           <div class="figure mt-4 w-100">
             <img
@@ -63,7 +64,7 @@
               width="420"
               alt="Mynd af bókakápu vantar"
               <% end %>
-              <% if i > 6 %>
+              <% if i >= 6 %>
               loading="lazy"
               <% end %>
             >
@@ -75,6 +76,6 @@
 
   </article>
 
-<% end %>
+  <% end %>
 
 </div>

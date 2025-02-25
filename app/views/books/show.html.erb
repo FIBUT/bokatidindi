@@ -160,7 +160,6 @@
               src="<%= @book.cover_image_url %>"
               height="<%= @book.cover_image.metadata[:height] %>"
               width="<%= @book.cover_image.metadata[:width] %>"
-              loading="eager"
               <% else %>
               src="<%= asset_url('blank.svg') %>"
               height="594"
@@ -198,7 +197,6 @@
               sizes="(max-width: 576px) 150px, (max-width: 1200px) 550px, 150px"
               <% end %>
               alt="Sýnidæmi <%= i + 1 %>"
-              loading="lazy"
               height="<%= sp.metadata[:height] %>"
               width="<%= sp.metadata[:width] %>"
             >
@@ -209,7 +207,7 @@
         <% end %>
 
         <div aria-label="Lýsigögn">
-          <%= render 'books/meta', book: @book %>
+          <%= render 'books/meta_mobile', book: @book %>
         </div>
 
       </aside>
