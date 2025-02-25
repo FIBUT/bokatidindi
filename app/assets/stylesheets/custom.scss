@@ -155,8 +155,11 @@ main {
 
 #mobile-menu-close-button {
   position: fixed;
-  right: 30px;
-  top: 30px;
+  right: 45px;
+  top: 45px;
+  z-index: 1100;
+  border: 2px solid #333;
+  border-radius: 6px;
 }
 
 #mobile-search-form {

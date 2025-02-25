@@ -10,63 +10,7 @@
       <%= render 'layouts/header' %>
     </header>
 
-    <nav id="mobile-menu" aria-label="Aðalvalmynd" class="d-none">
-      <button id="mobile-menu-close-button" class="btn btn-lightgrey" aria-label="Loka valmynd">
-        <%= image_tag 'close_menu_button.svg', height: '16', width: '16', alt: '' %>
-      </button>
-
-      <form
-        id="mobile-search-form"
-        class="m-5"
-        aria-label="Leit"
-        method="get"
-        action="/baekur"
-        role="search"
-      >
-        <label
-          for="mobile-search-field"
-          class="mb-0"
-        >
-          Leita í Bókatíðindum
-        </label>
-        <div class="input-group">
-          <input
-            id="mobile-search-field"
-            class="form-control form-control-sm"
-            aria-label="Leitarorð"
-            type="search"
-            name="search"
-            placeholder="Leitarorð…"
-            <% unless params[:search].nil? %>
-            value="<%= params[:search] %>"
-            <% end %>
-            role="searchbox"
-          >
-          <input
-            id="mobile-search-submit"
-            type="submit"
-            value="Leita"
-            class="btn btn-sm btn-lightgrey ml-2"
-          />
-        </div>
-      </form>
-
-      <ul class="nav-list list-unstyled mx-5">
-        <% Category.groups.each do |category_group| %>
-        <li>
-          <strong><%= I18n.t("activerecord.attributes.category.groups.#{category_group[0]}") %></strong>
-          <ul class="sub-nav-list list-unstyled mb-5">
-            <%
-            Category.where(group: category_group[1]).order('rod').each do |c|
-            next if c.book_count_web.zero?
-            %>
-            <li class="my-3"><%= link_to c.name, category_path(c.slug) %></li>
-            <% end %>
-          </ul>
-        </li>
-        <% end %>
-      </ul>
-    </nav>
+    <%= render 'layouts/mobile_menu' %>
 
     <div class="flex-shrink-0">
       <%= yield %>
