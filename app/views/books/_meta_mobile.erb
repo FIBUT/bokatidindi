@@ -1,0 +1,68 @@
+<ul
+  id="book-meta-list-<%= local_assigns[:book].id %>-mobile"
+  class="book-meta-list d-block pl-0 mt-0 t-md-3"
+>
+
+  <% if action_name == 'show' %>
+  <li
+    class="book-meta-publisher d-block pb-3"
+    aria-labelledby="book-meta-publisher-label<%= local_assigns[:book].id %>-mobile"
+  >
+    <strong
+      id="book-meta-publisher-label<%= local_assigns[:book].id %>-mobile"
+    >Útgefandi</strong>
+    <% if local_assigns[:book].publisher.book_count.positive? %>
+      <%=
+        link_to local_assigns[:book].publisher.name,
+        publisher_path(local_assigns[:book].publisher.slug),
+        title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
+      %>
+    <% else %>
+      <%= local_assigns[:book].publisher.name %>
+    <% end %>
+  </li>
+  <% unless local_assigns[:book].language_codes.count.zero? %>
+  <li
+    class="book-meta-languages d-block pb-3"
+    aria-labelledby="book-meta-languages-label-mobile"
+  >
+    <strong id="book-meta-languages-label">Tungumál</strong>
+    <%= local_assigns[:book].language_names %>
+  </li>
+  <% end %>
+  <% if local_assigns[:book].original_title.present? %>
+  <li
+    class="book-meta-original-title d-block pb-3"
+    aria-labelledby="book-meta-original-title-label-mobile"
+  >
+    <strong id="book-meta-original-title-label-mobile">Upprunalegur titill</strong>
+    <span
+      <% unless local_assigns[:book].original_language.blank? %>
+      lang="<%= local_assigns[:book].original_language %>"
+      <% end %>
+    >
+      <%= local_assigns[:book].original_title %>
+    </span>
+  </li>
+  <% end %>
+  <% else %>
+    <li
+    class="book-meta-publisher d-block pb-3"
+    aria-label="Útgefandi"
+  >
+    <%=
+      link_to local_assigns[:book].publisher.name,
+      publisher_path(local_assigns[:book].publisher.slug),
+      title: "Skoða fleiri bækur frá útgefandanum #{local_assigns[:book].publisher.name}"
+    %>
+  </li>
+  <% end %>
+
+  <li
+    class="book-meta-category d-block pb-3"
+    aria-label="Vöruflokkar"
+  >
+    <%= raw local_assigns[:book].category_links %>
+  </li>
+
+</ul>
