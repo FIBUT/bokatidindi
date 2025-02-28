@@ -88,7 +88,7 @@ class WelcomeController < ApplicationController
   def pwa_icon(size)
     {
       src: ActionController::Base.helpers.asset_url("favicon-#{size}.png"),
-      type: 'image/png', sizes: "#{size}x#{size}"
+      type: 'image/png', sizes: "#{size}x#{size}", purpose: 'maskable'
     }
   end
 
