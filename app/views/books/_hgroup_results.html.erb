@@ -8,6 +8,6 @@
   </h2>
 
   <% unless local_assigns[:book].post_title.empty? %>
-    <h3 class="post-title mb-0"><%= Shyguy.display_shy(raw local_assigns[:book].post_title) %></h3>
+    <p class="post-title h3 mb-0"><%= Shyguy.display_shy(raw local_assigns[:book].post_title) %></p>
   <% end %>
 </hgroup>
