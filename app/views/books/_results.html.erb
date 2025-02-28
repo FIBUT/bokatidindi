@@ -25,7 +25,7 @@
             aria-label="Lýsing"
             class="book-description"
           >
-            <%= sanitize book.short_description, tags: ['em'] %>
+            <%= sanitize book.short_description, { tags: ['em'] } %>
           </p>
 
         <%= render 'books/meta', book: book %>

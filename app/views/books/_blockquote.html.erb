@@ -12,9 +12,9 @@
     <% end %>
 >
 <% if local_assigns[:blockquote].quote_type == 'citation' %>
-<%= simple_format '„' + local_assigns[:blockquote].quote + '“', tags: ['em'] %>
+<%= simple_format '„' + local_assigns[:blockquote].quote + '“', {}, { sanitize_options: { tags: ['em'] } } %>
 <% else %>
-<%= simple_format local_assigns[:blockquote].quote, tags: ['em'] %>
+<%= simple_format local_assigns[:blockquote].quote, {}, { sanitize_options: { tags: ['em'] } } %>
 <% end %>
 <% if local_assigns[:blockquote].citation.present? %>
 <cite><%= local_assigns[:blockquote].citation %></cite>

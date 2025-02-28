@@ -26,14 +26,13 @@
         <% unless params[:search].nil? %>
         value="<%= params[:search] %>"
         <% end %>
-        role="searchbox"
       >
       <input
         id="header-search-submit"
         type="submit"
         value="Leita"
         class="btn btn-sm btn-lightgrey ml-2"
-        disabled="true"
+        disabled
       />
     </div>
   </form>
