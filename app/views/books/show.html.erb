@@ -110,7 +110,7 @@
 
         <div class="book-description mb-5 bt-5 overflow-hidden">
           <section id="book_description">
-            <%= simple_format @book.description, tags: ['em'] %>
+            <%= simple_format @book.description, {}, { sanitize_options: { tags: ['em'] } } %>
           </section>
 
           <% @book.blockquotes.where(location: :below_book_description).each do |blockquote, i| %>
@@ -118,7 +118,7 @@
           <% end %>
 
           <section id="book_long_description">
-            <%= simple_format @book.long_description, tags: ['em'] %>
+            <%= simple_format @book.long_description, {}, { sanitize_options: { tags: ['em'] } } %>
           </section>
 
           <% @book.blockquotes.where(location: :below_long_description).each do |blockquote, i| %>
