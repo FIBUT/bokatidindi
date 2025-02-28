@@ -18,7 +18,7 @@ class XmlFeedsController < ApplicationController
       dtd_path = if Rails.env.test?
                    Rails.root.join('public/edition.dtd').to_s
                  else
-                   asset_url('edition.dtd')
+                   'https://cdn.bokatidindi.is/edition.dtd'
                  end
       xml.doc.create_internal_subset('edition', nil, dtd_path)
       xml.edition do

@@ -271,6 +271,18 @@ class Book < ApplicationRecord
     end
   end
 
+  def main_authors_ids
+    book_authors.where(
+      author_type_id: 2
+    ).pluck(
+      :author_id
+    )
+  end
+
+  def main_authors_string
+    authors.where(id: main_authors_ids).pluck(:name).to_sentence
+  end
+
   def other_authors_string
     nodes = []
     records = book_authors.joins(
