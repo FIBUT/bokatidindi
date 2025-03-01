@@ -38,7 +38,7 @@
           </div>
           <% if @editions_with_cover.any? %>
           <nav class="hero-image-column d-flex flex-column justify-content-xl-end col-12 col-sm-4 col-lg-3">
-            <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda" tabindex="-1" role="presentation">
+            <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda" role="presentation">
               <img
                 width="<%= @editions_with_cover.first.cover_image.metadata['width'] %>"
                 height="<%= @editions_with_cover.first.cover_image.metadata['height'] %>"
@@ -48,11 +48,11 @@
                 sizes="( min-width: 576px ) 260px, (max-width: 576px ) 442px"
                 alt="Forsíðan fyrir <%= @editions_with_cover.first.title %>"
               />
+              <span class="hero-nav-link list-unstyled d-none d-lg-inline d-xl-none" href="/argangar">Sækja prentútgáfu</span>
             </a>
-            <a class="hero-nav-link list-unstyled d-none d-lg-inline d-xl-none" href="/argangar">Sækja prentútgáfu</a>
           </nav>
           <nav class="col-12 col-xl-3 d-sm-none d-xl-block offset-xl-9 text-xl-right">
-            <a class="hero-nav-link" href="/argangar">Sækja prentútgáfu</a></li>
+            <a class="hero-nav-link" href="/argangar">Sækja prentútgáfu</a>
           </nav>
           <% end %>
         </div>

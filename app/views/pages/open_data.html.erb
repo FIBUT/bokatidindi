@@ -20,18 +20,18 @@
     <table class="table">
       <thead>
         <tr>
-          <th span="tow">Árgangur</th>
-          <th span="tow">Vefslóð</th>
+          <th span="col">Árgangur</th>
+          <th span="col">Vefslóð</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr scope="row">
           <td>Núverandi árgangur</td>
           <td><a title="Vefslóð á JSON-tendapunkt núverandi árgangs" href="<%= argangar_url %>/current.json"><%= argangar_url %>/current.json</a></td>
         </tr>
         <% Edition.all.each do |edition| %>
         <% next if edition.books.count.zero? %>
-        <tr>
+        <tr scope="row">
           <td><%= edition.title %></td>
           <td><a title="Vefslóð á JSON-endapunkt árgangsins" href="<%= argangar_url %>/<%= edition.id %>.json"><%= argangar_url %>/<%= edition.id %>.json</a></td>
         </tr>
