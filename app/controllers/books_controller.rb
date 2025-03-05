@@ -100,10 +100,10 @@ class BooksController < ApplicationController
 
     author_books = Book.by_author(@author)
 
-    @books = author_books.with_attached_cover_image.order(:title)
+    @books = author_books.current.with_attached_cover_image.order(:title)
                          .page(params[:page])
 
-    @books_from_old_editions = author_books - @books
+    @books_from_old_editions = (author_books.order(:title) - @books)
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/hofundur/#{@author.slug}",
