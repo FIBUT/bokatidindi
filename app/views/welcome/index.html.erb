@@ -38,7 +38,7 @@
           </div>
           <% if @editions_with_cover.any? %>
           <nav class="hero-image-column d-flex flex-column justify-content-xl-end col-12 col-sm-4 col-lg-3">
-            <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda" role="presentation">
+            <a href="/argangar" title="Skoða prentútgáfu Bókatíðinda">
               <img
                 width="<%= @editions_with_cover.first.cover_image.metadata['width'] %>"
                 height="<%= @editions_with_cover.first.cover_image.metadata['height'] %>"
