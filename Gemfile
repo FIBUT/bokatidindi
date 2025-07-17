@@ -121,3 +121,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "good_job", "~> 3.19"
 
 gem "unicode-emoji", "~> 3.4"
+
+gem "logger", "~> 1.6"
+
+gem "concurrent-ruby", "= 1.3.4"
+
+gem "reline", "~> 0.6.0"
+
+gem "irb", "~> 1.15"
