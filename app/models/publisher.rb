@@ -19,9 +19,9 @@ class Publisher < ApplicationRecord
 
   def book_edition_categories_by_edition_id(edition_id)
     BookEditionCategory.joins(
-      book_edition: [book: [:publisher]]
+      book_edition: [:edition, book: [:publisher]]
     ).where(
-      'books.publisher_id': id, 'book_editions.edition.id': edition_id
+      'books.publisher_id': id, 'book_editions.edition_id': edition_id
     )
   end
 
