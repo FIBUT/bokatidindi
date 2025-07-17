@@ -1,3 +1,27 @@
+<% content_for :below_footer do %>
+  <script>
+    function toggleMobileMenu(event) {
+      document.querySelector('#mobile-menu').classList.toggle('d-none');
+      document.querySelector('main').classList.toggle('d-none');
+      document.querySelector('footer.footer-container').classList.toggle('d-none');
+    }
+
+    function focusOnMobileMenu(event) {
+      document.querySelector('#mobile-menu').focus();
+    }
+
+    document.querySelector('#mobile-menu-button').addEventListener(
+      'click',
+      function() { toggleMobileMenu(); focusOnMobileMenu(); }
+    );
+
+    document.querySelector('#mobile-menu-close-button').addEventListener(
+      'click',
+      function() { toggleMobileMenu() }
+    );
+  </script>
+<% end %>
+
 <nav id="mobile-menu" aria-label="Aðalvalmynd" class="d-none">
   <button id="mobile-menu-close-button" class="btn btn-lightgrey" aria-label="Loka valmynd">
     <%= image_tag 'close_menu_button.svg', height: '16', width: '16', alt: '' %>

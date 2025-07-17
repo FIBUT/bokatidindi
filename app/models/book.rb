@@ -337,6 +337,12 @@ class Book < ApplicationRecord
     cover_image.attached?
   end
 
+  def cover_image_proportions
+    return unless cover_image?
+
+    cover_image.metadata[:height] / cover_image.metadata[:width].to_f
+  end
+
   def audio_sample?
     audio_sample.attached?
   end

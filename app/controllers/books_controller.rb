@@ -110,7 +110,7 @@ class BooksController < ApplicationController
       @author[:name]
     )
 
-    return unless @books.page(params[:page]).out_of_range?
+    return if @books.page(params[:page]).any? || @books_from_old_editions.any?
 
     render file: 'public/404.html', status: :not_found, layout: false
   end
