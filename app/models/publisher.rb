@@ -13,6 +13,10 @@ class Publisher < ApplicationRecord
   validates :email_address, format: { with: Devise.email_regexp },
                             allow_blank: true
 
+  def self.ransackable_attributes(_auth_object = nil)
+    ['name', 'created_at', 'updated_at']
+  end
+
   def book_edition_categories_by_edition_id(edition_id)
     BookEditionCategory.joins(
       book_edition: [book: [:publisher]]
