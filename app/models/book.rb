@@ -442,7 +442,7 @@ class Book < ApplicationRecord
     cover_variant = cover_image.variant(format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
-    if [ 'local', 'test' ].include?(ActiveStorage::Blob.service.name.to_s)
+    if ['local', 'test'].include?(ActiveStorage::Blob.service.name.to_s)
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
@@ -450,7 +450,7 @@ class Book < ApplicationRecord
   end
 
   def audio_sample_url
-    if [ 'local', 'test' ].include?(ActiveStorage::Blob.service.name.to_s)
+    if ['local', 'test'].include?(ActiveStorage::Blob.service.name.to_s)
       return Rails.application.routes.url_helpers.url_for(audio_sample)
     end
 
@@ -462,7 +462,7 @@ class Book < ApplicationRecord
                                         format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
-    if [ 'local', 'test' ].include?(ActiveStorage::Blob.service.name.to_s)
+    if ['local', 'test'].include?(ActiveStorage::Blob.service.name.to_s)
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
