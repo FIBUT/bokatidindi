@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.2'
+ruby '3.4.5'
 
 gem 'bigdecimal'
 gem 'benchmark'
@@ -28,9 +28,8 @@ gem 'mimemagic'
 gem 'cocoon'
 
 gem 'rack', '~>2.2.14'
-gem 'rails', '~> 7.0.8.7'
+gem 'rails', '~> 7.2'
 gem 'nokogiri', '~>1.18.8'
-gem 'rails-html-sanitizer', '~>1.4.4'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.6.8'
@@ -116,7 +115,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: [:windows, :jruby]
 
 gem "good_job", "~> 3.19"
 
