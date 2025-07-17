@@ -289,7 +289,6 @@ GEM
     msgpack (1.8.0)
     multi_json (1.16.0)
     mutex_m (0.3.0)
-    mysql2 (0.5.6)
     net-http (0.6.0)
       uri
     net-imap (0.5.9)
@@ -329,19 +328,19 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (5.6.9)
+    puma (6.6.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (2.2.17)
-    rack-session (1.0.2)
-      rack (< 3)
+    rack (3.1.16)
+    rack-session (2.1.1)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
     rack-test (2.2.0)
       rack (>= 1.3)
     rack-timeout (0.7.0)
-    rackup (1.0.1)
-      rack (< 3)
-      webrick
+    rackup (2.2.1)
+      rack (>= 3)
     rails (8.0.2)
       actioncable (= 8.0.2)
       actionmailbox (= 8.0.2)
@@ -510,7 +509,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webrick (1.9.1)
     websocket (1.2.11)
     websocket-driver (0.8.0)
       base64
@@ -529,11 +527,11 @@ DEPENDENCIES
   barnes
   benchmark
   bigdecimal
-  bootsnap (>= 1.4.4)
+  bootsnap (>= 1.18)
   browser
   byebug
   cancancan
-  capybara (>= 3.26)
+  capybara (>= 3.40)
   cocoon
   concurrent-ruby (= 1.3.4)
   country_select (~> 8.0.3)
@@ -545,9 +543,9 @@ DEPENDENCIES
   faker
   ffaker
   good_job (~> 4.11)
-  google-cloud-storage (~> 1.11)
+  google-cloud-storage (~> 1.52)
   htmlentities
-  image_processing (~> 1.12)
+  image_processing (~> 1.14)
   irb (~> 1.15)
   isbn-calculator
   isbn_validation
@@ -557,27 +555,26 @@ DEPENDENCIES
   jsbundling-rails
   kaminari (>= 1.2.0)
   library_stdnums
-  listen (~> 3.3)
+  listen (~> 3.9)
   logger (~> 1.6)
   mimemagic
-  mysql2 (>= 0.5.3)
   nokogiri (~> 1.18.8)
   open-uri
-  pg (~> 1.5.2)
+  pg (~> 1.5)
   pg_search
-  puma (~> 5.6.8)
-  rack (~> 2.2.14)
+  puma (~> 6.6)
+  rack (~> 3.0)
   rack-timeout
   rails (~> 8.0)
   rails-controller-testing
   redcarpet
-  reline (~> 0.6.0)
+  reline (~> 0.6)
   rspec-rails (>= 6.0.0.rc1)
   rubocop (~> 1.69.2)
   rubocop-rails
   rubocop-rspec
   sass-rails (>= 6)
-  selenium-webdriver (>= 4.16.0)
+  selenium-webdriver (>= 4.34)
   shyguy (~> 0.1.1)
   spring
   sqlite3 (~> 1.4)
@@ -586,7 +583,7 @@ DEPENDENCIES
   tzinfo-data
   unicode-emoji (~> 3.4)
   validate_url
-  web-console (>= 4.1.0)
+  web-console (>= 4.2)
 
 RUBY VERSION
    ruby 3.4.5p51

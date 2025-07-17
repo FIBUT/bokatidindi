@@ -27,12 +27,12 @@ gem 'mimemagic'
 
 gem 'cocoon'
 
-gem 'rack', '~>2.2.14'
+gem 'rack', '~>3.0'
 gem 'rails', '~> 8.0'
 gem 'nokogiri', '~>1.18.8'
 
 # Use Puma as the app server
-gem 'puma', '~> 5.6.8'
+gem 'puma', '~> 6.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -48,18 +48,17 @@ gem 'jbuilder', '~> 2.7'
 gem 'jsbundling-rails'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.12'
+gem 'image_processing', '~> 1.14'
 
-gem 'pg', '~> 1.5.2'
+gem 'pg', '~> 1.5'
 
 gem 'htmlentities'
 
 gem 'redcarpet'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', '>= 1.18', require: false
 
-gem 'mysql2', '>= 0.5.3'
 gem 'rubocop', '~> 1.69.2', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
@@ -69,7 +68,7 @@ gem 'open-uri'
 
 gem 'browser'
 
-gem "google-cloud-storage", "~> 1.11", require: false
+gem "google-cloud-storage", "~> 1.52", require: false
 
 gem 'thwait'
 
@@ -102,16 +101,16 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 4.1.0'
-  gem 'listen', '~> 3.3'
+  gem 'web-console', '>= 4.2'
+  gem 'listen', '~> 3.9'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.16.0'
+  gem 'capybara', '>= 3.40'
+  gem 'selenium-webdriver', '>= 4.34'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -125,6 +124,6 @@ gem "logger", "~> 1.6"
 
 gem "concurrent-ruby", "= 1.3.4"
 
-gem "reline", "~> 0.6.0"
+gem "reline", "~> 0.6"
 
 gem "irb", "~> 1.15"
