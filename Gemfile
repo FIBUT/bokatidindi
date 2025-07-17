@@ -28,7 +28,7 @@ gem 'mimemagic'
 gem 'cocoon'
 
 gem 'rack', '~>2.2.14'
-gem 'rails', '~> 7.2'
+gem 'rails', '~> 8.0'
 gem 'nokogiri', '~>1.18.8'
 
 # Use Puma as the app server
@@ -83,7 +83,7 @@ gem 'shyguy', '~> 0.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: [:mri, :windows]
 
   gem 'database_cleaner-active_record'
 
@@ -117,7 +117,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:windows, :jruby]
 
-gem "good_job", "~> 3.19"
+gem "good_job", "~> 4.11"
 
 gem "unicode-emoji", "~> 3.4"
 
