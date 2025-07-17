@@ -29,7 +29,7 @@ gem 'cocoon'
 
 gem 'rack', '~>2.2.14'
 gem 'rails', '~> 7.0.8.7'
-gem 'nokogiri', '~>1.18.4'
+gem 'nokogiri', '~>1.18.8'
 gem 'rails-html-sanitizer', '~>1.4.4'
 
 # Use Puma as the app server
