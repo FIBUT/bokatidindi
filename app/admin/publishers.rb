@@ -19,8 +19,6 @@ ActiveAdmin.register Publisher do
 
   permit_params :name, :email_address, :url, :schema_type
 
-  filter :name_contains
-
   controller do
     def build_new_resource
       super.tap do |r|
@@ -30,6 +28,8 @@ ActiveAdmin.register Publisher do
       end
     end
   end
+
+  filter :name_cont, label: 'Nafn inniheldur'
 
   index do
     selectable_column

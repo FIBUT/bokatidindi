@@ -7,7 +7,7 @@ class AddPluralNameToAuthorType < ActiveRecord::Migration[7.0]
     plurals = { 'Höfundur' => 'Höfundar', 'Þýðandi' => 'Þýðendur',
                 'Ritstjóri' => 'Ritstjórar' }.freeze
 
-    AuthorType.all.each do |at|
+    AuthorType.all.find_each do |at|
       at.plural_name = if plurals.key? at.name
                          plurals[at.name]
                        else

@@ -3,7 +3,7 @@
 class Publisher < ApplicationRecord
   has_many :books, dependent: :restrict_with_error
 
-  enum schema_type: { Person: 0, Organization: 1 }
+  enum :schema_type, { Person: 0, Organization: 1 }
 
   before_create :set_slug
 
@@ -13,11 +13,15 @@ class Publisher < ApplicationRecord
   validates :email_address, format: { with: Devise.email_regexp },
                             allow_blank: true
 
+  def self.ransackable_attributes(_auth_object = nil)
+    ['name', 'created_at', 'updated_at']
+  end
+
   def book_edition_categories_by_edition_id(edition_id)
     BookEditionCategory.joins(
-      book_edition: [book: [:publisher]]
+      book_edition: [:edition, { book: [:publisher] }]
     ).where(
-      'books.publisher_id': id, 'book_editions.edition.id': edition_id
+      'books.publisher_id': id, 'book_editions.edition_id': edition_id
     )
   end
 

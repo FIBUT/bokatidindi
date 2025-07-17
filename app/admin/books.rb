@@ -233,10 +233,11 @@ ActiveAdmin.register Book do
   scope 'Allar', :all
   scope 'Í núverandi tbl.', :current
 
-  filter :title_contains
-  filter :description_contains
+  filter :title_cont, label: 'Titill inniheldur'
+  filter :description_cont, label: 'Lýsing inniheldur'
   filter :publisher
-  filter :id_equals
+  filter :slug_eq, label: 'Tilvísun'
+  filter :id_eq, label: 'Númer'
 
   includes :publisher, :authors
 
@@ -520,8 +521,7 @@ ActiveAdmin.register Book do
             collection: grouped_options_for_select(
               Category.order(rod: :asc).grouped_options, bc.object.category_id
             ),
-            selected: 3,
-            member_label: :name_with_group
+            selected: 3
           )
           bc.input :for_print
           bc.input :for_web

@@ -38,7 +38,11 @@
   <%= raw @book.structured_data.to_json %>
   </script>
 
-  <script type="module">
+  <%= tag 'link', rel: 'modulepreload', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.esm.min.js' %>
+<% end %>
+
+<% content_for :below_footer do %>
+<script type="module">
   import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.esm.min.js";
   Fancybox.bind('[data-fancybox="samples"]', {});
   Fancybox.defaults.l10n = {
@@ -49,15 +53,15 @@
     ERROR: "Eitthvað kom upp, reyndu aftur síðar",
     IMAGE_ERROR: "Myndin fannst ekki",
     ELEMENT_NOT_FOUND: "HTML-Element fannst ekki",
-    AJAX_NOT_FOUND: "Error Loading AJAX : Not Found",
-    AJAX_FORBIDDEN: "Error Loading AJAX : Forbidden",
-    IFRAME_ERROR: "Error Loading Page",
+    AJAX_NOT_FOUND: "Gat ekki sótt AJAX : Fannst ekki",
+    AJAX_FORBIDDEN: "Gat ekki sótt AJAX : Bannað",
+    IFRAME_ERROR: "Villa kom upp við að sækja síðu",
     TOGGLE_ZOOM: "Súma",
     TOGGLE_SLIDESHOW: "Sjálfvirk glærusýning",
     TOGGLE_FULLSCREEN: "Fullur skjár",
     TOGGLE_THUMBS: "Smámyndir"
   };
-  </script>
+</script>
 <% end %>
 
 <main class="m-md-5">
@@ -97,8 +101,8 @@
         <img
           src="<%= @book.cover_image_url %>"
           <% if @book.cover_image.attached? %>
-          height="<%= @book.cover_image.metadata[:height] %>"
-          width="<%= @book.cover_image.metadata[:width] %>"
+          height="<%= (550 * @book.cover_image_proportions).to_i %>"
+          width="<%= 550 %>"
           <% end %>
           <% unless @book.cover_image_srcsets.blank? %>
           srcset="<%= @book.cover_image_srcsets[@image_format] %>"
@@ -106,6 +110,7 @@
           <% end %>
           class="img-fluid w-100 d-md-none mb-5"
           alt="Forsíða kápu bókarinnar"
+          fetchpriority=high
         >
 
         <div class="book-description mb-5 bt-5 overflow-hidden">
@@ -157,9 +162,9 @@
           >
             <img
               <% if @book.cover_image.attached? %>
-              src="<%= @book.cover_image_url %>"
-              height="<%= @book.cover_image.metadata[:height] %>"
-              width="<%= @book.cover_image.metadata[:width] %>"
+              src="<%= @book.cover_image_url(@image_format, false) %>"
+              height="<%= (550 * @book.cover_image_proportions).to_i %>"
+              width="<%= 550 %>"
               <% else %>
               src="<%= asset_url('blank.svg') %>"
               height="594"
@@ -172,6 +177,7 @@
               <% end %>
               class="img-fluid w-100"
               alt="Forsíða kápu bókarinnar"
+              fetchpriority=high
             >
           </a>
         </figure>
@@ -194,7 +200,7 @@
               src="<%= @book.sample_page_url(i, @image_format) %>"
               <% unless @book.sample_pages_srcsets[@image_format].empty? %>
               srcset="<%= @book.sample_pages_srcsets[@image_format][i].join(', ') %>"
-              sizes="(max-width: 576px) 150px, (max-width: 1200px) 550px, 150px"
+              sizes="(min-width: 1200px) 100px, 50px"
               <% end %>
               alt="Sýnidæmi <%= i + 1 %>"
               height="<%= sp.metadata[:height] %>"
@@ -221,4 +227,3 @@
 </div>
 
 </main>
-

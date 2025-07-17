@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   PERMITTED_AUDIO_FORMATS = ['audio/aac', 'audio/mpeg', 'audio/ogg'].freeze
 
   COVER_IMAGE_VARIANTS = [150, 260, 550, 1200, 1600].freeze
-  SAMPLE_PAGE_VARIANTS = [150, 260, 550, 1200, 1600].freeze
+  SAMPLE_PAGE_VARIANTS = [50, 100, 150, 260, 550, 1200, 1600].freeze
   IMAGE_QUALITY        = 80
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
@@ -337,6 +337,12 @@ class Book < ApplicationRecord
     cover_image.attached?
   end
 
+  def cover_image_proportions
+    return unless cover_image?
+
+    cover_image.metadata[:height] / cover_image.metadata[:width].to_f
+  end
+
   def audio_sample?
     audio_sample.attached?
   end
@@ -429,14 +435,14 @@ class Book < ApplicationRecord
   def cover_image_url(image_format = 'webp', original = false)
     return '' unless cover_image.attached?
 
-    if original != true && cover_image_srcsets[image_format].present?
+    if original != true && cover_image_srcsets&.key?(image_format)
       return cover_image_srcsets[image_format].split(', ').last.split(' ').first
     end
 
     cover_variant = cover_image.variant(format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
-    if ActiveStorage::Blob.service.name.to_s == 'local'
+    if ['local', 'test'].include?(ActiveStorage::Blob.service.name.to_s)
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
@@ -444,7 +450,7 @@ class Book < ApplicationRecord
   end
 
   def audio_sample_url
-    if ActiveStorage::Blob.service.name.to_s == 'local'
+    if ['local', 'test'].include?(ActiveStorage::Blob.service.name.to_s)
       return Rails.application.routes.url_helpers.url_for(audio_sample)
     end
 
@@ -456,7 +462,7 @@ class Book < ApplicationRecord
                                         format: image_format,
                                         saver: { quality: IMAGE_QUALITY })
 
-    if ActiveStorage::Blob.service.name.to_s == 'local'
+    if ['local', 'test'].include?(ActiveStorage::Blob.service.name.to_s)
       return Rails.application.routes.url_helpers.url_for(cover_variant)
     end
 
@@ -623,10 +629,11 @@ class Book < ApplicationRecord
   def attach_sample_page_variants
     SAMPLE_PAGE_VARIANTS.each do |v|
       sample_pages.each do |s|
-        s.variant(resize_to_limit: [v, nil], format: 'webp').process
-        s.variant(resize_to_limit: [v, nil], format: 'jpg').process
+        s.variant(resize_to_limit: [v, nil], format: 'webp').processed
+        s.variant(resize_to_limit: [v, nil], format: 'jpg').processed
       end
     end
+    update_sample_pages_srcsets
   end
 
   def sample_page_variant_url(index, width, format)
@@ -645,7 +652,7 @@ class Book < ApplicationRecord
     cover_image.variant(resize_to_limit: [325, nil],
                         copy: { xres: PRINT_RES,
                                 yres: PRINT_RES },
-                        format: 'tiff').process
+                        format: 'tiff').processed
   end
 
   def print_image_variant_url
@@ -673,6 +680,7 @@ class Book < ApplicationRecord
       attach_cover_image_variant('jpg', v)
     end
     attach_print_image_variant
+    update_cover_image_srcsets
   end
 
   private
@@ -681,10 +689,10 @@ class Book < ApplicationRecord
     if width
       return cover_image.variant(resize_to_limit: [width, nil],
                                  format: image_format,
-                                 saver: { quality: IMAGE_QUALITY }).process
+                                 saver: { quality: IMAGE_QUALITY }).processed
     end
     cover_image.variant(format: image_format,
-                        saver: { quality: IMAGE_QUALITY }).process
+                        saver: { quality: IMAGE_QUALITY }).processed
   end
 
   def author_group_name_plural(count, singular, plural)

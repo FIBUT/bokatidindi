@@ -98,6 +98,11 @@ ActiveAdmin.register AdminUser do
     end
   end
 
+  filter :name_cont, label: 'Nafn inniheldur'
+  filter :email_cont, label: 'Tölvupótfang inniheldur'
+  filter :publishers, as: :select
+  filter :role, as: :check_boxes, collection: AdminUser.roles
+
   index do
     selectable_column
     column :name do |admin_user|
@@ -111,10 +116,6 @@ ActiveAdmin.register AdminUser do
     column :locked_at
     actions
   end
-
-  filter :name
-  filter :email
-  filter :publishers, as: :select
 
   form do |f|
     f.semantic_errors

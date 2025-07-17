@@ -11,7 +11,7 @@ class AdminUser < ApplicationRecord
 
   accepts_nested_attributes_for :admin_user_publishers
 
-  enum :role, %i[guest publisher admin]
+  enum :role, { guest: 0, publisher: 1, admin: 2 }
 
   validates :name, :email, presence: true
   validates :password, :password_confirmation, presence: true, on: :create
