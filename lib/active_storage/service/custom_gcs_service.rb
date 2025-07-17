@@ -3,6 +3,9 @@
 require 'active_storage/service/gcs_service'
 require 'uri'
 
+class ActiveStorage::Service::CustomGcsService
+end
+
 class ActiveStorage::Service::GCSService
   private
 
