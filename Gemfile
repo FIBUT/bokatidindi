@@ -31,6 +31,8 @@ gem 'rack', '~>3.0'
 gem 'rails', '~> 8.0'
 gem 'nokogiri', '~>1.18.8'
 
+gem 'appsignal'
+
 # Use Puma as the app server
 gem 'puma', '~> 6.6'
 # Use SCSS for stylesheets
