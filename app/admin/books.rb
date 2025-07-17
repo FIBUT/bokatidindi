@@ -521,8 +521,7 @@ ActiveAdmin.register Book do
             collection: grouped_options_for_select(
               Category.order(rod: :asc).grouped_options, bc.object.category_id
             ),
-            selected: 3,
-            member_label: :name_with_group
+            selected: 3
           )
           bc.input :for_print
           bc.input :for_web

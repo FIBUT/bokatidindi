@@ -51,7 +51,7 @@
               class="w-100 img-fluid"
               alt="Bókakápa: <%= book.full_title_noshy %>"
               <% if book.cover_image.attached? %>
-              src="<%= book.cover_image_url(@image_format, true) %>"
+              src="<%= book.cover_image_url(@image_format, false) %>"
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
               <% unless book.cover_image_srcsets.blank? || ActiveStorage::Blob.service.name.to_s == 'local' %>
