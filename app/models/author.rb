@@ -5,7 +5,7 @@ class Author < ApplicationRecord
   has_many :books, through: :book_authors
   belongs_to :added_by, class_name: 'AdminUser'
 
-  enum schema_type: { Person: 0, Organization: 1 }
+  enum :schema_type, %i[Person Organization]
 
   before_validation :strip_text
   before_validation :set_name

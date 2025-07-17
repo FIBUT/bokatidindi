@@ -3,7 +3,7 @@
 class Publisher < ApplicationRecord
   has_many :books, dependent: :restrict_with_error
 
-  enum schema_type: { Person: 0, Organization: 1 }
+  enum :schema_type, %i[Person Organization]
 
   before_create :set_slug
 
