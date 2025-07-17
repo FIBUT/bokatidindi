@@ -3,10 +3,10 @@
 ActiveAdmin.register Author do
   config.sort_order = 'order_by_name_asc'
 
-  permit_params :firstname, :lastname, :is_icelandic, :schema_type
+  permit_params :firstname, :lastname, :is_icelandic, :schema_type,
+                :firstname_contains, :firstname_contains
 
-  filter :firstname_contains
-  filter :lastname_contains
+  filter :name_cont, label: 'Nafn inniheldur'
 
   index do
     selectable_column
@@ -41,8 +41,7 @@ ActiveAdmin.register Author do
       para 'Athugið að og einn einstakling úr hópi eða tvíeyki þarf að skrá '\
            'sérstaklega og með fullu nafni.'
       para 'Fornafn og eftirnafn höfundar er skráð í sitt hvorn reitinn.'
-      para 'Munið einnig að skrá kyn höfundar svo rétt sé og hvort höfundur '\
-           'sé íslenskur eða erlendur.'
+      para 'Munið einnig að skrá hvort höfundur sé íslenskur eða erlendur.'
     end
 
     f.inputs 'Nafn' do

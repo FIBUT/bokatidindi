@@ -3,8 +3,9 @@
 ActiveAdmin.register Page do
   permit_params :title, :body, :slug
 
+  config.filters = false
+
   index do
-    selectable_column
     column :title
     column :body
     column :slug
