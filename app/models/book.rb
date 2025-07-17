@@ -435,7 +435,7 @@ class Book < ApplicationRecord
   def cover_image_url(image_format = 'webp', original = false)
     return '' unless cover_image.attached?
 
-    if original != true && cover_image_srcsets && cover_image_srcsets.key?(image_format)
+    if original != true && cover_image_srcsets&.key?(image_format)
       return cover_image_srcsets[image_format].split(', ').last.split(' ').first
     end
 

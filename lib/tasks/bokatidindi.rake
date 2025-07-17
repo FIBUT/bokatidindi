@@ -3,7 +3,7 @@
 namespace :bt do
   desc 'Update the hypenation processing of book titles'
   task update_hypenation: :environment do
-    Book.all.each do |b|
+    Book.all.find_each do |b|
       b.set_title_hypenation
       b.save
       puts "#{b.slug} - #{b.title_hypenated} (#{b.title})"
@@ -13,7 +13,7 @@ namespace :bt do
   desc 'Remove zero-page counts'
   task clean_zero_pages: :environment do
     count = 0
-    Book.where(page_count: 0).each do |b|
+    Book.where(page_count: 0).find_each do |b|
       count += 1 if b.update(page_count: nil)
     end
     puts "#{count} zero-page counts replaced with nil."
@@ -26,7 +26,7 @@ namespace :bt do
     audio_book_slugs = ['hljodbok-sami-utg', 'hljodbok-fra-hljodbok-is',
                         'hljodbok-fra-storytel']
 
-    Book.all.each do |book|
+    Book.all.find_each do |book|
       total_skus = BookBindingType.where(book_id: book.id)
 
       if total_skus.empty?
@@ -74,23 +74,23 @@ namespace :bt do
 
   desc 'Find and destroy orphaned has_many records'
   task destroy_bastards: :environment do
-    BookAuthor.all.each do |ba|
+    BookAuthor.all.find_each do |ba|
       ba.destroy if ba.book.nil? || ba.author.nil?
     end
-    BookCategory.all.each do |bc|
+    BookCategory.all.find_each do |bc|
       bc.destroy if bc.book.nil? || bc.category.nil?
     end
-    BookBindingType.all.each do |bb|
+    BookBindingType.all.find_each do |bb|
       bb.destroy if bb.book.nil? || bb.binding_type.nil?
     end
-    BookEdition.all.each do |be|
+    BookEdition.all.find_each do |be|
       be.destroy if be.book.nil? || be.edition.nil?
     end
   end
 
   desc 'Update the full name of every author'
   task set_author_names: :environment do
-    Author.all.each do |a|
+    Author.all.find_each do |a|
       a.update(name: "#{a.firstname} #{a.lastname}")
     end
   end
@@ -122,7 +122,7 @@ namespace :bt do
         availability: :pending
       ).where(
         "book_binding_types.publication_date < '#{DateTime.now.to_fs(:db)}'"
-      ).each do |bbt|
+      ).find_each do |bbt|
         puts "#{b.title} - #{bbt.publication_date}"
         bbt.availability = :available
         bbt.save
@@ -132,16 +132,16 @@ namespace :bt do
 
   desc 'Order main book author on top'
   task arrange_main_author_on_top: :environment do
-    Book.all.each do |b|
+    Book.all.find_each do |b|
       book_authors_array = []
-      b.book_authors.where(author_type_id: 2).each do |ba|
+      b.book_authors.where(author_type_id: 2).find_each do |ba|
         book_authors_array << {
           book_id: b.id,
           author_id: ba.author_id,
           author_type_id: ba.author_type_id
         }
       end
-      b.book_authors.where.not(author_type_id: 2).each do |ba|
+      b.book_authors.where.not(author_type_id: 2).find_each do |ba|
         book_authors_array << {
           book_id: b.id,
           author_id: ba.author_id,
@@ -161,28 +161,28 @@ namespace :bt do
 
   desc 'Create BookEditionCategory records from BookCategory records'
   task assign_categories_to_book_editions: :environment do
-    BookEdition.all.each do |book_edition|
+    BookEdition.all.find_each do |book_edition|
       pp book_edition
       book_edition.reset_book_edition_categories
     end
   end
 
   task nullify_barcodes: :environment do
-    BookBindingType.where(barcode: '').each do |bbt|
+    BookBindingType.where(barcode: '').find_each do |bbt|
       bbt[:barcode] = nil
     end
   end
 
   task identify_long_descriptions: :environment do
     puts ['Útgefandi', 'Raðnúmer', 'Titill'].to_csv
-    Book.current.where('LENGTH(description) > 380').each do |b|
+    Book.current.where('LENGTH(description) > 380').find_each do |b|
       puts [b.publisher.name, b.id, b.title].to_csv
     end
   end
 
   desc 'Update book counts per category'
   task update_category_counters: :environment do
-    Category.all.each do |c|
+    Category.all.find_each do |c|
       c.update_counts
       c.save
     end
@@ -214,7 +214,7 @@ namespace :bt do
 
   desc 'Reset book_edition_categories for all books'
   task reset_book_edition_categories: :environment do
-    Book.all.each(&:reset_book_edition_categories)
+    Book.all.find_each(&:reset_book_edition_categories)
   end
 
   desc 'Prewarm the database'
@@ -226,7 +226,7 @@ namespace :bt do
 
   desc 'Update image variant urls'
   task set_image_variant_urls: :environment do
-    Book.all.each do |b|
+    Book.all.find_each do |b|
       puts "#{b.id} - #{b.slug}"
       b.attach_cover_image_variants if b.cover_image.attached?
       b.attach_sample_page_variants if b.sample_pages.attached?
@@ -237,7 +237,7 @@ namespace :bt do
 
   desc 'Strip trailing spaces from author names'
   task strip_author_names: :environment do
-    Author.all.each do |a|
+    Author.all.find_each do |a|
       a.strip_text
       a.save
     end

@@ -3,7 +3,7 @@
 class Publisher < ApplicationRecord
   has_many :books, dependent: :restrict_with_error
 
-  enum :schema_type, %i[Person Organization]
+  enum :schema_type, { Person: 0, Organization: 1 }
 
   before_create :set_slug
 
@@ -19,7 +19,7 @@ class Publisher < ApplicationRecord
 
   def book_edition_categories_by_edition_id(edition_id)
     BookEditionCategory.joins(
-      book_edition: [:edition, book: [:publisher]]
+      book_edition: [:edition, { book: [:publisher] }]
     ).where(
       'books.publisher_id': id, 'book_editions.edition_id': edition_id
     )

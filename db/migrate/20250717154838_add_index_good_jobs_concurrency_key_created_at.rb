@@ -8,10 +8,12 @@ class AddIndexGoodJobsConcurrencyKeyCreatedAt < ActiveRecord::Migration[8.0]
       dir.up do
         # Ensure this incremental update migration is idempotent
         # with monolithic install migration.
-        return if connection.index_exists? :good_jobs, [:concurrency_key, :created_at]
+        if connection.index_exists? :good_jobs, %i[concurrency_key created_at]
+          return
+        end
       end
     end
 
-    add_index :good_jobs, [:concurrency_key, :created_at], algorithm: :concurrently
+    add_index :good_jobs, %i[concurrency_key created_at], algorithm: :concurrently
   end
 end

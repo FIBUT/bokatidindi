@@ -8,7 +8,7 @@ class AddAbbreviationToAuthorTypes < ActiveRecord::Migration[7.0]
                            '10' => 'Skrás', '8' => 'Umsj', '6' => 'Ristj',
                            '3' => 'Mndrtstj', '11' => 'Ljóð', '12' => 'Þýð.lj' }
 
-    AuthorType.all.each do |at|
+    AuthorType.all.find_each do |at|
       next unless role_abbrebiations.key? at.id.to_s
 
       at.abbreviation = role_abbrebiations[at.id.to_s]

@@ -3,9 +3,9 @@
 class BindingType < ApplicationRecord
   AUDIO_BOOK_SOURCES = [3, 14, 15].freeze
 
-  enum :group, %i[printed_books ebooks audiobooks]
+  enum :group, { printed_books: 0, ebooks: 1, audiobooks: 2 }
 
-  enum :barcode_type, %i[ISBN ISSN]
+  enum :barcode_type, { ISBN: 0, ISSN: 1 }
 
   default_scope { order('rod ASC, name ASC') }
   scope :open, -> { order('rod ASC, name ASC').where(open: true) }

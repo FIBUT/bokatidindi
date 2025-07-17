@@ -6,7 +6,9 @@ class AddJobsFinishedAtToGoodJobBatches < ActiveRecord::Migration[8.0]
       dir.up do
         # Ensure this incremental update migration is idempotent
         # with monolithic install migration.
-        return if connection.column_exists?(:good_job_batches, :jobs_finished_at)
+        if connection.column_exists?(:good_job_batches, :jobs_finished_at)
+          return
+        end
       end
     end
 
