@@ -110,7 +110,7 @@
           <% end %>
           class="img-fluid w-100 d-md-none mb-5"
           alt="Forsíða kápu bókarinnar"
-          fetchpriority="high"
+          fetchpriority=high
         >
 
         <div class="book-description mb-5 bt-5 overflow-hidden">
@@ -162,7 +162,7 @@
           >
             <img
               <% if @book.cover_image.attached? %>
-              src="<%= @book.cover_image_url %>"
+              src="<%= @book.cover_image_url(@image_format, true) %>"
               height="<%= (550 * @book.cover_image_proportions).to_i %>"
               width="<%= 550 %>"
               <% else %>
@@ -177,6 +177,7 @@
               <% end %>
               class="img-fluid w-100"
               alt="Forsíða kápu bókarinnar"
+              fetchpriority=high
             >
           </a>
         </figure>
@@ -199,7 +200,7 @@
               src="<%= @book.sample_page_url(i, @image_format) %>"
               <% unless @book.sample_pages_srcsets[@image_format].empty? %>
               srcset="<%= @book.sample_pages_srcsets[@image_format][i].join(', ') %>"
-              sizes="(max-width: 576px) 150px, (max-width: 1200px) 550px, 150px"
+              sizes="(min-width: 1200px) 100px, 50px"
               <% end %>
               alt="Sýnidæmi <%= i + 1 %>"
               height="<%= sp.metadata[:height] %>"

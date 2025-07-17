@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   PERMITTED_AUDIO_FORMATS = ['audio/aac', 'audio/mpeg', 'audio/ogg'].freeze
 
   COVER_IMAGE_VARIANTS = [150, 260, 550, 1200, 1600].freeze
-  SAMPLE_PAGE_VARIANTS = [150, 260, 550, 1200, 1600].freeze
+  SAMPLE_PAGE_VARIANTS = [50, 100, 150, 260, 550, 1200, 1600].freeze
   IMAGE_QUALITY        = 80
 
   PRIORITY_COUNTRIES_OF_ORIGIN = ['IS', 'US', 'GB', 'DK', 'FI', 'FR', 'IT',
@@ -435,7 +435,7 @@ class Book < ApplicationRecord
   def cover_image_url(image_format = 'webp', original = false)
     return '' unless cover_image.attached?
 
-    if original != true && cover_image_srcsets[image_format].present?
+    if original != true && cover_image_srcsets && cover_image_srcsets.key?(image_format)
       return cover_image_srcsets[image_format].split(', ').last.split(' ').first
     end
 

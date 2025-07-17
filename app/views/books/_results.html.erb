@@ -49,12 +49,12 @@
           <div class="figure mt-4 w-100">
             <img
               class="w-100 img-fluid"
+              alt="Bókakápa: <%= book.full_title_noshy %>"
               <% if book.cover_image.attached? %>
-              src="<%= book.cover_image_url %>"
+              src="<%= book.cover_image_url(@image_format, true) %>"
               height="<%= book.cover_image.metadata[:height] %>"
               width="<%= book.cover_image.metadata[:width] %>"
-              <% unless book.cover_image_srcsets.blank? %>
-              alt="Bókakápa: <%= book.full_title_noshy %>"
+              <% unless book.cover_image_srcsets.blank? || ActiveStorage::Blob.service.name.to_s == 'local' %>
               srcset="<%= book.cover_image_srcsets[@image_format] %>"
               sizes="<%= @image_sizes %>"
               <% end %>
@@ -66,6 +66,8 @@
               <% end %>
               <% if i >= 6 %>
               loading="lazy"
+              <% else %>
+              fetchpriority=high
               <% end %>
             >
           </div>
