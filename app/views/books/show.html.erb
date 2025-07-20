@@ -100,7 +100,7 @@
 
         <img
           src="<%= @book.cover_image_url %>"
-          <% if @book.cover_image.attached? %>
+          <% if @book.cover_image.attached? && ! @book.cover_image_proportions.zero? %>
           height="<%= (550 * @book.cover_image_proportions).to_i %>"
           width="<%= 550 %>"
           <% end %>

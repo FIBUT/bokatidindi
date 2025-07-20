@@ -30,6 +30,6 @@ module Bokatidindi
     config.active_storage.variant_processor = :vips
 
     config.active_job.queue_adapter = :good_job
-    config.good_job.execution_mode = ENV['JOB_EXECUTION_MODE']&.to_sym || :async
+    config.good_job.execution_mode = ENV['JOB_EXECUTION_MODE']&.to_sym || :inline
   end
 end

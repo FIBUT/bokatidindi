@@ -27,13 +27,28 @@ FactoryBot.define do
     post_title         { ['', '', '', FFaker::Book.title].sample }
     description        { FFaker::Lorem.paragraph }
     long_description   { FFaker::Lorem.paragraphs(4).join("\n\n") }
-    publisher          { Publisher.order(Arel.sql('RANDOM()')).limit(1).first }
+    publisher          do
+      Publisher.unscoped.order(Arel.sql('RANDOM()')).limit(1).first
+    end
     original_title     { FFaker::Book.title }
     country_of_origin  { ['IS', 'US', 'JP', 'DE', 'FO', 'GL', 'FI'].sample }
     book_categories    { [association(:book_category, book: instance)] }
     book_authors       { [association(:book_author, book: instance)] }
     book_binding_types { [association(:book_binding_type, book: instance)] }
     book_editions      { [association(:book_edition, book: instance)] }
+
+    trait :has_cover do
+      after(:create) do |b|
+        image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
+        image_contents = File.read(
+          Rails.root.join("spec/assets/#{image_file_name}")
+        )
+        b.cover_image.attach(
+          io: StringIO.new(image_contents),
+          filename: "#{SecureRandom.uuid}.jpg"
+        )
+      end
+    end
   end
 
   factory :book_category do
@@ -56,9 +71,16 @@ FactoryBot.define do
   end
 
   factory :book_binding_type do
-    barcode      { BookBindingType.random_isbn }
-    binding_type { BindingType.first }
-    page_count   { FFaker::Number.number }
+    barcode      { BookBindingType.unique_random_isbn }
+    binding_type do
+      BindingType.unscoped.where(
+        group: 'printed_books',
+        barcode_type: 'ISBN'
+      ).order(
+        Arel.sql('RANDOM()')
+      ).take
+    end
+    page_count { FFaker::Number.number }
     book
   end
 
@@ -74,27 +96,32 @@ FactoryBot.define do
   end
 
   factory :author do
-    source_id   { FFaker::Random.rand(1..999_999_999) }
     firstname   { FFaker::Name.first_name }
     lastname    { FFaker::Name.last_name }
-    association :added_by, factory: :admin_user
+    added_by    { AdminUser.order(Arel.sql('RANDOM()')).limit(1).first }
   end
 
   factory :author_type do
-    source_id { FFaker::Random.rand(1..999_999_999) }
     name      { FFaker::Job.title }
     rod       { FFaker::Random.rand(1..100) }
   end
 
   factory :edition do
-    title        { FFaker::Lorem.phrase.chop }
+    title        { "Bókatíðindi #{DateTime.now.year}" }
     opening_date { DateTime.now - 2.months }
     online_date  { DateTime.now - 1.month }
     closing_date { DateTime.now + 3.months }
     print_date   { DateTime.now + 3.months }
+    year         { DateTime.now.year }
 
     online                      { true }
     open_to_web_registrations   { true }
     open_to_print_registrations { true }
+  end
+
+  factory :page do
+    title { FFaker::Lorem.phrase.chop }
+    body  { FFaker::Lorem.paragraph }
+    slug  { FFaker::Internet.slug }
   end
 end

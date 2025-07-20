@@ -8,7 +8,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
     panel 'Frestir og dagsetningar' do
       table class: 'edition-dates-table' do
-        if edition.opening_date
+        if edition&.opening_date
           tr do
             th scope: 'row' do
               'Opnað fyrir skráningar'
@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Dashboard' do
             end
           end
         end
-        if edition.online_date
+        if edition&.online_date
           tr do
             th scope: 'row' do
               'Árgangur birtist á vef'
@@ -34,7 +34,7 @@ ActiveAdmin.register_page 'Dashboard' do
             end
           end
         end
-        if edition.closing_date
+        if edition&.closing_date
           tr do
             th scope: 'row' do
               'Lokað fyrir skráningar'
@@ -47,7 +47,7 @@ ActiveAdmin.register_page 'Dashboard' do
             end
           end
         end
-        if edition.print_date
+        if edition&.print_date
           tr do
             th scope: 'row' do
               'Gengið frá prentútgáfu'

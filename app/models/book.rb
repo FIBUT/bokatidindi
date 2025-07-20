@@ -338,7 +338,9 @@ class Book < ApplicationRecord
   end
 
   def cover_image_proportions
-    return unless cover_image?
+    return 0.0 unless cover_image.attached? &&
+                      cover_image.metadata.key?(:height) &&
+                      cover_image.metadata.key?(:width)
 
     cover_image.metadata[:height] / cover_image.metadata[:width].to_f
   end
@@ -592,7 +594,7 @@ class Book < ApplicationRecord
 
   def set_slug
     parameterized_title = title_noshy.parameterize(locale: :is).first(64)
-    random_string       = rand(1000..9999)
+    random_string       = rand(10_000..99_999)
 
     # Prevent the slug from ending with a dash
     if parameterized_title.end_with?('-')

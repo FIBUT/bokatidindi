@@ -81,14 +81,16 @@ RSpec.configure do |config|
       )
     end
 
+    FactoryBot.create :admin_user
+
     FactoryBot.create(:edition)
 
-    FactoryBot.create_list :publisher, 200
-    FactoryBot.create_list :author, 2000
+    FactoryBot.create_list :publisher, 20
+    FactoryBot.create_list :author, 200
 
-    FactoryBot.create(:author_type, name: 'Höfundur')
-    FactoryBot.create(:author_type, name: 'Þýðandi')
-    FactoryBot.create(:author_type, name: 'Myndhöfundur')
+    FactoryBot.create(:author_type, name: 'Höfundur', abbreviation: 'Höf')
+    FactoryBot.create(:author_type, name: 'Þýðandi', abbreviation: 'Þýð')
+    FactoryBot.create(:author_type, name: 'Myndhöfundur', abbreviation: 'Myndh')
 
     Category.create(
       source_id: 21, name: 'Skáldverk', group: :childrens_books, rod: 2
