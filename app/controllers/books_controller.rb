@@ -77,7 +77,7 @@ class BooksController < ApplicationController
       }
     ).includes(
       book_editions: [:book_edition_categories]
-    ).with_attached_cover_image.limit(100).uniq
+    ).limit(100).uniq
 
     @books                   = []
     @books_from_old_editions = []
@@ -100,7 +100,7 @@ class BooksController < ApplicationController
 
     author_books = Book.by_author(@author)
 
-    @books = author_books.current.with_attached_cover_image.order(:title)
+    @books = author_books.current.order(:title)
                          .page(params[:page])
 
     @books_from_old_editions = (author_books.order(:title) - @books)
@@ -123,7 +123,7 @@ class BooksController < ApplicationController
     @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
 
     @books = Book.current.for_web.by_publisher(@publisher.id)
-                 .with_attached_cover_image.order(:title).page(params[:page])
+                 .order(:title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/utgefandi/#{@publisher.slug}",
@@ -144,7 +144,7 @@ class BooksController < ApplicationController
                         "#{@category.name_with_group}"
 
     @books = Book.current.for_web.by_category(@category.id)
-                 .with_attached_cover_image.order(:title).page(params[:page])
+                 .order(:title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",
