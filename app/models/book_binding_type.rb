@@ -55,6 +55,14 @@ class BookBindingType < ApplicationRecord
     false
   end
 
+  def self.unique_random_isbn
+    loop do
+      isbn = BookBindingType.random_isbn
+
+      return isbn if BookBindingType.where(barcode: isbn).count.zero?
+    end
+  end
+
   def self.random_isbn
     isbn10            = rand(11_111..99_999).to_s
     prefix            = 978
