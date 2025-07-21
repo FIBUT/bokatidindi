@@ -43,7 +43,7 @@ class EditionsController < ApplicationController
       id: :asc
     ).where(
       book_editions: { edition_id: edition.id }
-    ).with_attached_cover_image.each do |b|
+    ).each do |b|
       book = edition_book(b, edition.id)
       if include_images && b.cover_image?
         book[:book_cover_image_url] = b.cover_image.url
