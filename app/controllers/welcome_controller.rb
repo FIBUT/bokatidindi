@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
 
     @editions_with_cover = Edition.joins(
       :cover_image_attachment
-    ).with_attached_cover_image.current
+    ).current
   end
 
   def manifest

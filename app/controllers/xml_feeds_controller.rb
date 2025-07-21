@@ -107,7 +107,7 @@ class XmlFeedsController < ApplicationController
         edition_id
       ).by_category(
         c.id
-      ).with_attached_cover_image
+      )
 
       books = books.where(publisher_id:) unless publisher_id.nil?
 
