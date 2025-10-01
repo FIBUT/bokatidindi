@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_154838) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_01_141305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -410,7 +410,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_154838) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_user_publishers", "admin_users"
   add_foreign_key "admin_user_publishers", "publishers"
-  add_foreign_key "authors", "admin_users", column: "added_by_id"
   add_foreign_key "book_authors", "author_types"
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"

@@ -21,5 +21,23 @@ RSpec.describe Author, type: :model do
       expect(author.name).to eq('Xavier Salomó')
       expect(author.order_by_name).to eq('Salomó, Xavier')
     end
+
+    it 'are checked for last name depending on who added it' do
+      publisher = build(:publisher)
+      publisher.save!
+
+      user = build(:publisher_user, publishers: [publisher])
+      user.save!
+
+      author = build(:author)
+      author.lastname = ''
+      author.added_by_id = user.id
+
+      expect(author.valid?).to eq(false)
+
+      author.lastname = 'Ipsumson'
+
+      expect(author.valid?).to eq(true)
+    end
   end
 end

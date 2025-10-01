@@ -25,6 +25,7 @@ class Author < ApplicationRecord
   end
 
   def lastname_has_to_be_set_if_not_admin
+    return nil if AdminUser.where(id: added_by).blank?
     return nil unless lastname.empty? && added_by.role != 'admin'
 
     errors.add(
