@@ -675,6 +675,8 @@ class Book < ApplicationRecord
   end
 
   def attach_cover_image_variants
+    return nil unless cover_image.attached?
+
     attach_cover_image_variant('webp')
     attach_cover_image_variant('jpg')
     COVER_IMAGE_VARIANTS.each do |v|
