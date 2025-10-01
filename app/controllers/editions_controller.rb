@@ -113,6 +113,7 @@ class EditionsController < ApplicationController
         name: ba.author.name,
         order_by_name: ba.author.order_by_name,
         is_icelandic: ba.author.is_icelandic,
+        birthyear: ba.author.birthyear,
         url: author_url(ba.author.slug)
       }
     end
