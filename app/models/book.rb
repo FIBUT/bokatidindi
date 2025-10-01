@@ -193,10 +193,12 @@ class Book < ApplicationRecord
 
     result[:sameAs] = structured_data_url unless structured_data_url.empty?
 
-    result[:image] = cover_image_url('jpg') if cover_image.attached?
+    if cover_image.attached?
+      result[:image] = cover_image_url('jpg')
 
-    sample_pages.each_with_index do |_sp, i|
-      result[:image] << sample_page_url(i, 'jpg')
+      sample_pages.each_with_index do |_sp, i|
+        result[:image] << sample_page_url(i, 'jpg')
+      end
     end
 
     result
