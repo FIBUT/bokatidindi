@@ -29,7 +29,7 @@ gem 'cocoon'
 
 gem 'rack', '~>3.0'
 gem 'rails', '~> 8.0'
-gem 'nokogiri', '~>1.18.8'
+gem 'nokogiri', '~>1.18.9'
 
 gem 'appsignal'
 
