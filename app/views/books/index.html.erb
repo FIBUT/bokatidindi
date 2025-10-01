@@ -33,10 +33,6 @@
 
     <%= render 'books/results_heading' %>
 
-    <% if (! params[:search] ) && @books.total_pages > 1 %>
-      <p>Síða <%= @books.current_page %> af <%= @books.total_pages %></p>
-    <% end %>
-
     <%= render 'books/zero_search_results' if @books.length.zero? && params[:search] %>
 
     <%= render 'books/results' %>

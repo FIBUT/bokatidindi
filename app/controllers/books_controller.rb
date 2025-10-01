@@ -140,15 +140,20 @@ class BooksController < ApplicationController
     return not_found if @category.nil?
 
     @title_tag = "Bókatíðindi - Flokkur - #{@category.name_with_group}"
-    @meta_description = 'Bækur í Bókatíðindum í vöruflokknum '\
-                        "#{@category.name_with_group}"
+    @meta_description = if @category.description != ''
+                          @category.description
+                        else
+                          'Bækur í Bókatíðindum í vöruflokknum '\
+                          "#{@category.name_with_group}"
+                        end
 
     @books = Book.current.for_web.by_category(@category.id)
                  .order(:title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",
-      @category.name_with_group
+      @category.name_with_group,
+      @category.description
     )
 
     return unless @books.page(params[:page]).out_of_range?
@@ -156,7 +161,7 @@ class BooksController < ApplicationController
     render file: 'public/404.html', status: :not_found, layout: false
   end
 
-  def prepare_navigation_metadata(base_url, name)
+  def prepare_navigation_metadata(base_url, name, description = '')
     current_page = @books.page(params[:page]).current_page
     last_page    = @books.page(params[:page]).last_page?
     first_page   = @books.page(params[:page]).first_page?
@@ -179,16 +184,17 @@ class BooksController < ApplicationController
       @next_path = "/sida/#{@books.page(params[:page]).next_page}"
     end
 
-    @itemlist_ld_json = ld_json_category(@books, @base_url, name)
+    @itemlist_ld_json = ld_json_category(@books, @base_url, name, description)
   end
 
-  def ld_json_category(books, url, name)
+  def ld_json_category(books, url, name, description)
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
       '@id': url,
       url: url,
       name: name,
+      description: description,
       numberOfItems: books.page(params[:page]).total_count,
       itemListElement: books.page(params[:page]).map.with_index do |b, i|
         ld_json_item(b, i, params[:page])

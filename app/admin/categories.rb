@@ -16,7 +16,7 @@ ActiveAdmin.register Category do
   #   permitted
   # end
 
-  permit_params :name, :group, :rod
+  permit_params :name, :group, :rod, :description
 
   config.filters = false
   config.sort_order = 'rod_asc'
@@ -43,6 +43,7 @@ ActiveAdmin.register Category do
     f.inputs do
       f.input :name
       f.input :group
+      f.input :description, hint: 'Stutt lýsing, hámark 155 slög.'
       f.input :rod
     end
     f.actions
