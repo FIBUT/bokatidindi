@@ -4,7 +4,7 @@ ActiveAdmin.register Author do
   config.sort_order = 'order_by_name_asc'
 
   permit_params :firstname, :lastname, :is_icelandic, :schema_type,
-                :firstname_contains, :firstname_contains
+                :firstname_contains, :firstname_contains, :birthyear
 
   filter :name_cont, label: 'Nafn inniheldur'
 
@@ -30,6 +30,7 @@ ActiveAdmin.register Author do
       attributes_table_for author do
         row :name, &:name
         row :book_count, &:book_count
+        row :birthyear, &:birthyear
       end
     end
   end
@@ -58,6 +59,8 @@ ActiveAdmin.register Author do
     end
 
     f.inputs 'Flokkunarfræðilegar upplýsingar' do
+      f.input :birthyear,
+              hint: 'Eingöngu notað ef annar höfundur er til með sama nafn'
       f.input :schema_type, include_blank: false
     end
 

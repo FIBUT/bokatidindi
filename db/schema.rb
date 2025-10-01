@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_01_141305) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_01_164901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -115,6 +115,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_01_141305) do
     t.string "name"
     t.integer "added_by_id"
     t.integer "schema_type", default: 0, null: false
+    t.integer "birthyear"
     t.index ["is_icelandic"], name: "index_authors_on_is_icelandic"
     t.index ["order_by_name"], name: "index_authors_on_order_by_name"
     t.index ["slug"], name: "index_authors_on_slug", unique: true

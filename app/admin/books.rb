@@ -360,7 +360,8 @@ ActiveAdmin.register Book do
                    hint: 'Vinsamlegast hafið samband við skrifstofu FÍBÚT ef '\
                          'hlutverk vantar í fellilista.'
           ba.input :author,
-                   collection: Author.order(:name),
+                   collection: Author.all.map { |a| [a.format_name, a.id] },
+                   label_method: :format_name,
                    hint: 'Hvern og einn höfund, þýðanda, myndhöfund o.s.frv. '\
                          'þarf að skrá í sitt hvoru lagi. Ef höfundur finnst '\
                          'ekki í fellilista þarf að skrá hann með því að '\
