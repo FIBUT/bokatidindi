@@ -262,6 +262,7 @@ is:
         firstname: "Fornafn"
         lastname: "Eftirnafn"
         is_icelandic: "Er íslenskur"
+        birthyear: "Fæðingarár"
       author_type:
         name: "Nafn"
         rod: "Röðun"
