@@ -291,6 +291,8 @@ is:
           childrens_books: "Barnabækur"
           fiction: "Skáldverk"
           non_fiction: "Fræðibækur"
+        description: "Lýsing"
+        rod: "Röðun"
       book_edition_category:
         book: "Bók"
         category: "Flokkur"

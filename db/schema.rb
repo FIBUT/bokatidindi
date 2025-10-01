@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_01_141305) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_01_173244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -253,6 +253,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_01_141305) do
     t.integer "book_count"
     t.integer "book_count_web"
     t.integer "book_count_print"
+    t.string "description", limit: 160, default: ""
     t.index ["group"], name: "index_categories_on_group"
     t.index ["rod"], name: "index_categories_on_rod"
     t.index ["slug"], name: "index_categories_on_slug", unique: true
