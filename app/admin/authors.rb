@@ -63,8 +63,4 @@ ActiveAdmin.register Author do
 
     f.actions
   end
-
-  before_create do |author|
-    author.added_by_id = current_admin_user.id
-  end
 end

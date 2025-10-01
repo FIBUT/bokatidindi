@@ -98,7 +98,6 @@ FactoryBot.define do
   factory :author do
     firstname   { FFaker::Name.first_name }
     lastname    { FFaker::Name.last_name }
-    added_by    { AdminUser.order(Arel.sql('RANDOM()')).limit(1).first }
   end
 
   factory :author_type do

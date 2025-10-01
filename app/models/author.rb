@@ -3,7 +3,6 @@
 class Author < ApplicationRecord
   has_many :book_authors, dependent: :restrict_with_error
   has_many :books, through: :book_authors
-  belongs_to :added_by, class_name: 'AdminUser'
 
   enum :schema_type, { Person: 0, Organization: 1 }
 
@@ -14,24 +13,12 @@ class Author < ApplicationRecord
 
   validates :firstname, presence: true
 
-  validate :lastname_has_to_be_set_if_not_admin
-
   def self.ransackable_attributes(_auth_object = nil)
     ['name', 'is_icelandic']
   end
 
   def self.ransackable_associations(_auth_object = nil)
     []
-  end
-
-  def lastname_has_to_be_set_if_not_admin
-    return nil unless lastname.empty? && added_by.role != 'admin'
-
-    errors.add(
-      :lastname,
-      I18n.t('activerecord.errors.models.author.attributes.'\
-             'lastname.has_to_be_set_if_not_admin')
-    )
   end
 
   def book_count
