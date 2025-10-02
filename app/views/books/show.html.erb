@@ -34,10 +34,6 @@
   <%= tag 'meta', name: 'twitter:image', content: @book.cover_image_url('jpg') %>
   <% end %>
 
-  <script type="application/ld+json">
-  <%= raw @book.structured_data.to_json %>
-  </script>
-
   <%= tag 'link', rel: 'modulepreload', href: 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.esm.min.js' %>
 <% end %>
 
