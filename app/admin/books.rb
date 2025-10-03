@@ -115,6 +115,9 @@ ActiveAdmin.register Book do
         end
 
         if permitted_params[:book][:cover_image_file]
+          Vips::Image.new_from_file(
+            permitted_params[:book][:cover_image_file].path
+          )
           @resource.cover_image.attach(
             io: permitted_params[:book][:cover_image_file].to_io,
             filename: SecureRandom.uuid
@@ -149,6 +152,8 @@ ActiveAdmin.register Book do
       end
 
       render(:edit, alert: 'Ekki var hægt að vista bókina.')
+    rescue Vips::Error => e
+      bad_request(e)
     end
 
     def create
@@ -193,6 +198,9 @@ ActiveAdmin.register Book do
 
       if @resource.errors.none? && @resource.save
         if permitted_params[:book][:cover_image_file]
+          Vips::Image.new_from_file(
+            permitted_params[:book][:cover_image_file].path
+          )
           @resource.cover_image.attach(
             io: permitted_params[:book][:cover_image_file].to_io,
             filename: SecureRandom.uuid
@@ -228,6 +236,8 @@ ActiveAdmin.register Book do
       flash[:warn] = 'Ekki var hægt að skrá bókina.'
       render :new
     end
+  rescue Vips::Error => e
+    bad_request(e)
   end
 
   scope 'Allar', :all
