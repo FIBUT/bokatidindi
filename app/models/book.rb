@@ -451,8 +451,6 @@ class Book < ApplicationRecord
     end
 
     cover_variant.processed.url
-  rescue Vips::Error
-    ''
   end
 
   def audio_sample_url
