@@ -93,11 +93,12 @@ class Book < ApplicationRecord
   attribute :delete_sample_pages
 
   validates :publisher, :title, :description, presence: true
-  validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
   validates :long_description, length: { maximum: LONG_DESCRIPTION_MAX_LENGTH }
 
   validates :book_authors, length: { minimum: 1 }
   validates :book_binding_types, length: { minimum: 1 }
+
+  validate :validate_description_length
 
   scope :old, lambda {
     includes(
@@ -156,6 +157,17 @@ class Book < ApplicationRecord
       :book_authors
     )
   }
+
+  def validate_description_length
+    return if description_sans_em.length <= DESCRIPTION_MAX_LENGTH
+
+    errors.add(:description,
+               "þarf að vera hámark #{DESCRIPTION_MAX_LENGTH} slög")
+  end
+
+  def description_sans_em
+    ActionController::Base.helpers.strip_tags description
+  end
 
   def self.ransackable_associations(_auth_object = nil)
     reflect_on_all_associations.map { |a| a.name.to_s }

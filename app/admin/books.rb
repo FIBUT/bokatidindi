@@ -411,7 +411,11 @@ ActiveAdmin.register Book do
                   input_html: {
                     rows: 5,
                     autocomplete: 'off',
-                    maxlength: Book::DESCRIPTION_MAX_LENGTH
+                    maxlength: if current_admin_user.admin?
+                                 nil
+                               else
+                                 Book::DESCRIPTION_MAX_LENGTH
+                               end
                   },
                   hint: 'Stuttur kynningartexti sem birtist á yfirlitssíðu '\
                         'vefsins og í prentútgáfu Bókatíðinda. '\
