@@ -521,7 +521,11 @@ ActiveAdmin.register Book do
         end
 
         f.has_many(
-          :book_categories, heading: 'Flokkar (hámark 3)', allow_destroy: true
+          :book_categories,
+          heading: 'Flokkar (hámark 3 viðeigandi flokkar en athugið að '\
+                   'birtingagjald er innheimt fyrir hverja '\
+                   'prentskráningu.)',
+          allow_destroy: true
         ) do |bc|
           bc.input(
             :category,
@@ -541,7 +545,7 @@ ActiveAdmin.register Book do
             collection: Edition.order(id: :desc).form_collection,
             input_html: { autocomplete: 'off' },
             hint: 'Þegar hakað hefur viðeigandi reit birtist bókin í '\
-                  'Bókatíðindum í þeim flokkum sem hafa verið valdir.'\
+                  'Bókatíðindum í þeim flokkum sem hafa verið valdir. '
           )
         end
       end
