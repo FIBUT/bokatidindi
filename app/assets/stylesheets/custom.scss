@@ -456,6 +456,27 @@ header {
   font-size: $font-size-sm;
 }
 
+#print-locations h2 {
+  font-size: 1.6em;
+}
+
+#print-locations h3 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#print-locations li {
+  font-size: $font-size-sm;
+}
+
+#capital-region-map {
+  height: 600px;
+}
+
+#regional-map {
+  height: 500px;
+}
+
 @include media-breakpoint-down(lg) {
   .welcome-content {
     .hero-heading {
@@ -516,6 +537,7 @@ header {
   .book-single {
     background-color: $white;
   }
+
 }
 
 @include media-breakpoint-down(xs) {

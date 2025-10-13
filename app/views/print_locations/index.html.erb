@@ -1,0 +1,227 @@
+<% content_for :meta do %>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
+  <title>Bókatíðindi - Afhendingarstaðir</title>
+<% end %>
+
+<main id="print-locations" class="page pb-5">
+  <div class="container py-4">
+    <div class="row">
+      <article class="col-12 mb-4">
+        <div class="page-container p-xl-5">
+          <h1 class="h1 mb-3">Dreifing prentútgáfu</h1>
+          <p class="my-1">Prentútgáfa Bókatíðinda er gefin út í 50.000 eintökum og liggur fyrir í bókaverslunum, hjá útgefendum og bókasöfnum um allt land á meðan eintök eru fáanleg.</p>
+          <p class="my-1">Einnig er hægt að sækja <a href="#">PDF-útgáfu</a> beint héðan af vefnum.</p>
+          <p class="my-1">Athugið að prentútgáfa Bókatíðinda er ekki lengur borin út beint í öll hús a landinu en hægt er að hafa samband við skrifstofu FÍBÚT til að óska eftir bunkum til dreifingar eða stökum eintökum.</p>
+        </div>
+      </article>
+    </div>
+    <section id="capital-section" class="row mx-xl-4">
+      <div class="col-12 order-0">
+        <h2 class="h2 mb-0 mb-lg-4">Höfuð&shy;borgar&shy;svæðið</h2>
+      </div>
+      <div class="col order-1 order-lg-2">
+        <ul id="capital-locations" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @capital_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-9 order-2 order-lg-1">
+        <div id="capital-region-map"></div>
+      </div>
+    </section>
+
+    <section id="regional-section" class="row mt-5 mx-xl-4">
+      <div class="col-12 order-0">
+        <h2 class="h2 mb-0 mb-lg-4">Lands&shy;byggð&shy;in</h2>
+      </div>
+      <div class="col order-1 order-lg-2">
+        <% if @sudurnes_locations.any? %>
+        <h3 class="h3 mt-2">Suðurnes</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @sudurnes_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <% if @vesturland_locations.any? %>
+        <h3 class="h3 mt-2">Vesturland</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @vesturland_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <% if @vestfirdir_locations.any? %>
+        <h3 class="h3 mt-2">Vestfirðir</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @vestfirdir_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <% if @nv_locations.any? %>
+        <h3 class="h3 mt-2">Norðurland vestra</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @nv_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <% if @na_locations.any? %>
+        <h3 class="h3 mt-2">Norðurland eystra</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @na_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <% if @austurland_locations.any? %>
+        <h3 class="h3 mt-2">Austurland</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @austurland_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <% if @sudurland_locations.any? %>
+        <h3 class="h3 mt-2">Suðurland</h3>
+        <ul id="regional-locations-vesturland" class="print-locations-list m-0 mb-4 p-0 d-block">
+          <% @sudurland_locations.each do |cl| %>
+            <li
+              class="d-block mb-1"
+              data-lat="<%= cl.latitude %>"
+              data-lon="<%= cl.longitude %>"
+            >
+              <strong class="d-block"><%= cl.name %></strong>
+              <span><%= cl.address %></span>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
+      <div class="col-12 col-lg-9 order-2 order-lg-1">
+        <div id="regional-map"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+  mapboxgl.accessToken = '<%= Rails.application.credentials.dig(:mapbox, :access_token) %>';
+
+  const defaultMapOptions = {
+    style: 'mapbox://styles/aldavigdis/cmgmcmho2003m01sh96x206ad',
+    interactive: true,
+    attributionControl: true,
+    language: 'is',
+    performanceMetricsCollection: false,
+    scrollZoom: false,
+  }
+
+  const nodeToMap = (node, map) => {
+    let lat       = node.dataset.lat;
+    let lon       = node.dataset.lon;
+    let name      = node.querySelector('strong').innerText;
+    let address   = node.querySelector('span').innerText;
+    let popupHTML = '<strong>' + name + '</strong><br />' + address;
+
+    new mapboxgl.Marker()
+                .setLngLat([lon, lat])
+                .setPopup(new mapboxgl.Popup().setHTML(popupHTML))
+                .addTo(map);
+  }
+
+  const capitalRegionMap = new mapboxgl.Map({
+    ...defaultMapOptions,
+    container: 'capital-region-map',
+    center: [-21.859, 64.112],
+    zoom: 10.5,
+    maxZoom: 10.5,
+    minZoom: 10.5,
+    maxBounds: [[-22.05, 64.18], [-21.65, 64.03]]
+  });
+
+  const regionalMap = new mapboxgl.Map({
+    ...defaultMapOptions,
+    container: 'regional-map',
+    center: [-19, 65],
+    zoom: 5.25,
+    maxZoom: 5.25,
+    minZoom: 5.25,
+    maxBounds: [[-25.2, 66.6], [-12.8, 63.3]]
+  });
+
+  const capitalLocations = document.querySelectorAll('#capital-locations li');
+
+  capitalLocations.forEach(
+    (node) => {
+      nodeToMap(node, capitalRegionMap);
+    }
+  );
+
+  const regionalLocations = document.querySelectorAll('#regional-section li');
+
+  regionalLocations.forEach(
+    (node) => {
+      nodeToMap(node, regionalMap)
+    }
+  );
+</script>
+
