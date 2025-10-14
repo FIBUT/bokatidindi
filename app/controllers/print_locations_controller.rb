@@ -2,6 +2,8 @@
 
 class PrintLocationsController < ApplicationController
   def index
+    @mapbox_token = Rails.application.credentials.dig(:mapbox, :access_token)
+
     @capital_locations    = PrintLocation.where(region: 1).visible
     @sudurnes_locations   = PrintLocation.where(region: 2).visible
     @vesturland_locations = PrintLocation.where(region: 3).visible

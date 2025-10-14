@@ -164,7 +164,7 @@
 </main>
 
 <script>
-  mapboxgl.accessToken = '<%= Rails.application.credentials.dig(:mapbox, :access_token) %>';
+  mapboxgl.accessToken = '<%= @mapbox_token %>';
 
   const defaultMapOptions = {
     style: 'mapbox://styles/aldavigdis/cmgmcmho2003m01sh96x206ad',
@@ -209,19 +209,9 @@
   });
 
   const capitalLocations = document.querySelectorAll('#capital-locations li');
-
-  capitalLocations.forEach(
-    (node) => {
-      nodeToMap(node, capitalRegionMap);
-    }
-  );
-
   const regionalLocations = document.querySelectorAll('#regional-section li');
 
-  regionalLocations.forEach(
-    (node) => {
-      nodeToMap(node, regionalMap)
-    }
-  );
+  capitalLocations.forEach( (node) => { nodeToMap(node, capitalRegionMap); } );
+  regionalLocations.forEach( (node) => { nodeToMap(node, regionalMap) } );
 </script>
 
