@@ -29,5 +29,7 @@ Rails.application.routes.draw do
   get 'argangar', to: 'editions#index'
   get 'argangar/:id', to: 'editions#show'
 
+  get 'print_locations', to: 'print_locations#index'
+
   get 'manifest.json', to: 'welcome#manifest'
 end

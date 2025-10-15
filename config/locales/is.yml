@@ -118,6 +118,9 @@ is:
             book_binding_types:
               too_short: 'þurfa að vera skilgreind'
     models:
+      print_location:
+        one: 'afhendingarstaður prentútgáfu'
+        other: 'afhendingarstaðir prentútgáfu'
       page:
         one: 'síða'
         other: 'síður'
@@ -154,6 +157,22 @@ is:
         one: 'flokkur'
         other: 'flokkar'
     attributes:
+      print_location:
+        name: 'Nafn'
+        address: 'Heimilisfang'
+        region: 'Landshluti'
+        latitude: 'Breiddargráða'
+        longitude: 'Lengdargráða'
+        visible: 'Sýnilegt'
+        regions:
+          capital: 'Höfuðborgarsvæðið'
+          sudurnes: 'Suðurnes'
+          vesturland: 'Vesturland'
+          vestfirdir: 'Vestfirðbroti'
+          nordurland_vestra: 'Norðurland vestra'
+          nordurland_eystra: 'Norðurland eystra'
+          austurland: 'Austurland'
+          sudurland: 'Suðurland'
       page:
         title: 'Titill'
         body: 'Meginmál'
