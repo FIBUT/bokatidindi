@@ -33,7 +33,7 @@
     "svgo-loader": "^4.0.0",
     "ts-node": "10.9.1",
     "typescript": "5.0.4",
-    "webpack": "5.94.0",
+    "webpack": "5.104.1",
     "webpack-cli": "^4.10.0",
     "webpack-remove-empty-scripts": "^0.8.1"
   },
