@@ -1,5 +1,5 @@
 <% content_for :meta do %>
-  <title>Bókatíðindi - Prentútgáfa</title>
+  <title>Bókatíðindi - Eldri árgangar prentútgáfu</title>
 <% end %>
 
 <main aria-label="Bækur" class="page">
@@ -11,34 +11,34 @@
         <h1><%= @page_content[:title] if @page_content %></h1>
       </div>
 
-      <div class="col-12 page-container px-5 py-xl-5">
+      <div class="col-12 page-container px-5 py-xl-5 mb-5">
         <%= markdown(@page_content.body) if @page_content %>
-      </div>
-    </article>
 
-    <div class="row mx-2 pb-5" role="list">
-      <% @editions.each do |edition| %>
-        <div class="col-6 col-md-4 col-lg-3 mb-2" role="listitem">
-        <a href="<%= edition.pdf_file_url %>" target="_blank" title="Skoða <%= edition.title %> í prentútgáfu" class="older-edition d-flex flex-column justify-content-end h-100 p-2 m-1">
-          <h2 class="title order-2 mt-2"><%= edition.title %></h2>
-          <% if edition.cover_image.attached? %>
-          <aside class="order-1">
-            <img
-              class="w-100 img-fluid"
-              src="<%= edition.cover_image_url %>"
-              srcset="<%= edition.cover_image_srcsets[@image_format] %>"
-              sizes="260px"
-              alt="Forsíðan fyrir <%= edition.title %>"
-              height="<%= edition.cover_image.metadata[:height] %>"
-              width="<%= edition.cover_image.metadata[:width] %>"
-            />
-          </aside>
+        <div class="row mx-2" role="list">
+          <% @editions.each do |edition| %>
+          <div class="col-6 col-md-4 col-lg-3 mb-2" role="listitem">
+          <a href="<%= edition.pdf_file_url %>" target="_blank" title="Skoða <%= edition.title %> í prentútgáfu" class="older-edition d-flex flex-column justify-content-end h-100 p-2 m-1">
+            <h2 class="title order-2 mt-2"><%= edition.title %></h2>
+            <% if edition.cover_image.attached? %>
+            <aside class="order-1">
+              <img
+                class="w-100 img-fluid"
+                src="<%= edition.cover_image_url %>"
+                srcset="<%= edition.cover_image_srcsets[@image_format] %>"
+                sizes="260px"
+                alt="Forsíðan fyrir <%= edition.title %>"
+                height="<%= edition.cover_image.metadata[:height] %>"
+                width="<%= edition.cover_image.metadata[:width] %>"
+              />
+            </aside>
+            <% end %>
+          </a>
+          </div>
           <% end %>
-        </a>
-        </div>
-      <% end %>
-    </div>
+      </div>
 
+      </div>
+
+    </article>
   </div>
-
 </main>
