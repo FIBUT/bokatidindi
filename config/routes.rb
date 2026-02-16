@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'pages/um_bokatidindi'
+  get 'pages/prentutgafa'
   get 'pages/privacy_policy'
   get 'pages/open_data'
 
