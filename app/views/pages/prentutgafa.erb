@@ -1,0 +1,32 @@
+<% content_for :meta do %>
+  <title>Um Bókatíðindi</title>
+
+  <% if @current_edition&.cover_image&.attached? %>
+  <%= tag 'meta', property: 'og:image', content: @current_edition.cover_image_url %>
+  <% end %>
+  <%= tag 'meta', property: 'og:site_name', content: 'Bókatíðindi' %>
+  <%= tag 'meta', property: 'og:title', content: 'Um Bókatíðindi' %>
+  <%= tag 'meta', property: 'og:locale', content: 'is_IS' %>
+  <%= tag 'meta', property: 'fb:app_id', content: '286582403328194' %>
+
+  <%= tag 'meta', name: 'twitter:card', content: 'summary' %>
+  <%= tag 'meta', name: 'twitter:title', content: 'Um Bókatíðindi' %>
+  <% if @current_edition&.cover_image&.attached? %>
+  <%= tag 'meta', name: 'twitter:image', content: @current_edition.cover_image_url %>
+  <% end %>
+<% end %>
+
+<main class="page">
+
+  <div class="container-xl">
+
+    <div class="row pb-5">
+      <div class="col-12 px-5 pb-3 pt-5 pb-xl-3">
+        <h1><%= @page_content[:title] if @page_content %></h1>
+      </div>
+      <div class="page-container col-12 px-5 py-xl-5">
+        <%= markdown(@page_content.body) if @page_content %>
+      </div>
+    </div>
+  </div>
+</main>
