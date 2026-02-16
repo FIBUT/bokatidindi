@@ -10,7 +10,7 @@ gem 'drb'
 gem 'rack-timeout'
 
 gem 'activeadmin'
-gem 'devise'
+gem 'devise', '< 5'
 gem 'cancancan'
 
 gem 'isbn-calculator'
@@ -30,8 +30,6 @@ gem 'cocoon'
 gem 'rack', '~>3.2'
 gem 'rails', '~> 8.0'
 gem 'nokogiri', '~>1.18.9'
-
-gem 'appsignal'
 
 # Use Puma as the app server
 gem 'puma', '> 7'
