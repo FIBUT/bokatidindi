@@ -185,6 +185,31 @@ main {
   font-size: 14px;
 }
 
+.prentutgafa-container {
+  h2 {
+    font-size: 1.75rem !important;
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem !important;
+    padding-bottom: 0.5rem;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  ul li strong {
+    display: block;
+  }
+}
+
 .logo-list {
   .sponsor {
     max-width: 80px;

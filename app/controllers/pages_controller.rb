@@ -20,4 +20,10 @@ class PagesController < ApplicationController
 
     @page_content = Page.find_by(slug: 'open_data')
   end
+
+  def prentutgafa
+    expires_in 1.hour, public: true
+
+    @page_content = Page.find_by(slug: 'prentutgafa')
+  end
 end
