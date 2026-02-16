@@ -10,7 +10,7 @@ gem 'drb'
 gem 'rack-timeout'
 
 gem 'activeadmin'
-gem 'devise', ' >= 4.9'
+gem 'devise', '< 5'
 gem 'cancancan'
 
 gem 'isbn-calculator'
