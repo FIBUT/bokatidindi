@@ -187,22 +187,30 @@ main {
 
 .prentutgafa-container {
   h2 {
+    font-family: $lora;
     font-size: 1.75rem !important;
     padding-bottom: 0.5rem;
+    margin-top: 1em;
   }
 
   h3 {
+    font-family: $montserrat;
     font-size: 1.2rem !important;
+    font-weight: bold;
     padding-bottom: 0.5rem;
   }
 
   ul {
     padding: 0;
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
   }
 
   li {
-    margin-bottom: 0.5em;
+    padding-right: 1.5em;
+    width: 16em;
   }
 
   ul li strong {
