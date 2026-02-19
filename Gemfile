@@ -29,7 +29,7 @@ gem 'cocoon'
 
 gem 'rack', '~>3.2'
 gem 'rails', '~> 8.0'
-gem 'nokogiri', '~>1.18.9'
+gem 'nokogiri', '~>1.19.1'
 
 # Use Puma as the app server
 gem 'puma', '> 7'
