@@ -10,7 +10,7 @@ gem 'drb'
 gem 'rack-timeout'
 
 gem 'activeadmin'
-gem 'devise', '< 5'
+gem 'devise', '< 6'
 gem 'cancancan'
 
 gem 'isbn-calculator'
@@ -28,7 +28,7 @@ gem 'mimemagic'
 gem 'cocoon'
 
 gem 'rack', '~>3.2'
-gem 'rails', '~> 8.0'
+gem 'rails', '~> 8.1'
 gem 'nokogiri', '~>1.19.1'
 
 # Use Puma as the app server
