@@ -28,7 +28,7 @@ gem 'mimemagic'
 gem 'cocoon'
 
 gem 'rack', '~>3.2'
-gem 'rails', '~> 8.0'
+gem 'rails', '~> 8.1'
 gem 'nokogiri', '~>1.18.9'
 
 # Use Puma as the app server
