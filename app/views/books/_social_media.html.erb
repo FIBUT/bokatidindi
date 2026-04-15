@@ -29,12 +29,12 @@
       <%= image_tag 'linkedin.svg', alt: "LinkedIn", width: 24, height: 24, class: 'bi bi-linkedin' %>
     </a>
     <a
-      href="https://twitter.com/intent/tweet?text=<%= url_encode "#{local_assigns[:book].full_title_noshy} #{book_url(local_assigns[:book].slug)}" %>"
-      title="Deila á Twitter"
+      href="https://bsky.app/intent/compose?text=<%= url_encode "#{local_assigns[:book].full_title_noshy} #{book_url(local_assigns[:book].slug)}" %>"
+      title="Deila á Bluesky"
       target="_blank"
       class="btn btn-lg"
     >
-      <%= image_tag 'twitter.svg', alt: "Twitter", width: 24, height: 24, class: 'bi bi-linkedin' %>
+      <%= image_tag 'bluesky.svg', alt: "Bluesky", width: 24, height: 24, class: 'bi bi-linkedin' %>
     </a>
   </div>
 </aside>
