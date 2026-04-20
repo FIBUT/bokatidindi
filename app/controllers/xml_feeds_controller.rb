@@ -5,7 +5,7 @@ class XmlFeedsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   include ActionView::Helpers::TextHelper
 
-  def edition_for_print
+  def edition_for_print_by_category
     edition = if params[:id] == 'current'
                 Edition.current.last
               else
@@ -43,7 +43,40 @@ class XmlFeedsController < ApplicationController
     render xml: builder
   end
 
-  private
+  def edition_for_print_by_publisher
+    edition = if params[:id] == 'current'
+                Edition.current.last
+              else
+                Edition.find(params[:id])
+              end
+
+    publishers = print_books_by_publisher(edition[:id])
+
+    builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
+      dtd_path = if Rails.env.test?
+                   Rails.root.join('public/edition.dtd').to_s
+                 else
+                   'https://cdn.bokatidindi.is/edition.dtd'
+                 end
+      xml.doc.create_internal_subset('edition', nil, dtd_path)
+      xml.edition do
+        xml.edition_id edition[:id]
+        xml.edition_title edition[:title]
+        xml.categories do
+          publishers.each do |p|
+            xml.category_name p[:name]
+            xml.books do
+              p[:books].each do |book|
+                book_markup(book, xml)
+              end
+            end
+          end
+        end
+      end
+    end
+
+    render xml: builder
+  end
 
   def book_markup(book, xml)
     xml.book do
@@ -121,5 +154,26 @@ class XmlFeedsController < ApplicationController
       }
     end
     categories
+  end
+
+  def print_books_by_publisher(edition_id = nil)
+    edition_id = Edition.current_edition[:id] if edition_id.nil?
+    publishers = []
+    Publisher.order(name: :asc).each do |p|
+      books = Book.for_print.by_edition(
+        edition_id
+      ).by_publisher(
+        p.id
+      )
+
+      next if books.empty?
+
+      publishers << {
+        id: p[:id],
+        name: p[:name],
+        books:
+      }
+    end
+    publishers
   end
 end
