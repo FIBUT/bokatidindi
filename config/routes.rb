@@ -31,4 +31,11 @@ Rails.application.routes.draw do
   get 'argangar/:id', to: 'editions#show'
 
   get 'manifest.json', to: 'welcome#manifest'
+
+  get 'sitemap.xml', to: 'sitemaps#index'
+  get 'pages_sitemap.xml', to: 'sitemaps#pages_feed'
+  get 'books_sitemap.xml', to: 'sitemaps#books_feed'
+  get 'categories_sitemap.xml', to: 'sitemaps#categories_feed'
+  get 'authors_sitemap.xml', to: 'sitemaps#authors_feed'
+  get 'publishers_sitemap.xml', to: 'sitemaps#publishers_feed'
 end
