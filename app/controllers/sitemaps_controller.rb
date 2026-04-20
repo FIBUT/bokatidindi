@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SitemapsController < ApplicationController
   def index
     build_xml pages + books + categories + authors + publishers
