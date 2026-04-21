@@ -39,7 +39,7 @@ ActiveAdmin.register Book do
         r.assign_attributes(
           book_authors: [BookAuthor.new],
           book_binding_types: [BookBindingType.new],
-          book_categories: [BookCategory.new],
+          book_categories: [BookCategory.new(for_print: false, for_web: false)],
           editions: Edition.where(open_to_web_registrations: true),
           country_of_origin: 'IS'
         )
