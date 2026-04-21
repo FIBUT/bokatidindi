@@ -41,3 +41,8 @@
 <% end %>
 
 <script type="speculationrules"><%= raw specification_rules.to_json %></script>
+
+<%= tag 'link', rel: 'sitemap', type: 'application/xml', title: I18n.t('activerecord.models.book.other'), href: '/books_sitemap.xml' %>
+<%= tag 'link', rel: 'sitemap', type: 'application/xml', title: I18n.t('activerecord.models.author.other'), href: '/authors_sitemap.xml' %>
+<%= tag 'link', rel: 'sitemap', type: 'application/xml', title: I18n.t('activerecord.models.publisher.other'), href: '/publishers_sitemap.xml' %>
+<%= tag 'link', rel: 'sitemap', type: 'application/xml', title: I18n.t('activerecord.models.page.other'), href: '/pages_sitemap.xml' %>
