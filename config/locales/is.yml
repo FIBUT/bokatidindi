@@ -55,6 +55,12 @@ is:
     :create: 'Ganga frá skráningu'
     :update: 'Uppfæra'
     :required: 'þarf að fylla út'
+  ransack:
+    predicates:
+      cont: 'Inniheldur'
+      eq: 'Jafngildir'
+      start: 'Byrjar á'
+      end: 'Endar á'
   activerecord:
     errors:
       models:
@@ -118,6 +124,9 @@ is:
             book_binding_types:
               too_short: 'þurfa að vera skilgreind'
     models:
+      tag:
+        one: 'efnisorð'
+        other: 'efnisorð'
       page:
         one: 'síða'
         other: 'síður'
@@ -154,6 +163,13 @@ is:
         one: 'flokkur'
         other: 'flokkar'
     attributes:
+      tag:
+        title: 'Nafn'
+        title_plural: 'Nafn í fleirtölu'
+        slug: 'Tilvísun'
+        description: 'Lýsing'
+        active: 'Virkt'
+        rod: 'Röðun'
       page:
         title: 'Titill'
         body: 'Meginmál'
