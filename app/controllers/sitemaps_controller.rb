@@ -29,19 +29,27 @@ class SitemapsController < ApplicationController
 
   def build_xml(records)
     builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
-      xml.urlset(xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9') do
+      xml.urlset(
+        'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+        'xmlns:image' => 'http://www.google.com/schemas/sitemap-image/1.1'
+      ) do
         records.each do |r|
           xml.url do
             xml.loc r[:loc]
             xml.lastmod r[:lastmod]
             xml.priority r[:priority]
             xml.changefreq r[:changefreq]
+            if r[:image]
+              xml.send 'image:image' do
+                xml.send 'image:loc', r[:image]
+              end
+            end
           end
         end
       end
     end
 
-    render xml: builder
+    render xml: builder.to_xml
   end
 
   def pages
@@ -64,15 +72,24 @@ class SitemapsController < ApplicationController
     urls  = []
 
     books.each do |b|
-      urls << {
-        loc: "https://www.bokatidindi.is/bok/#{b.slug}",
-        lastmod: b.updated_at.time.iso8601,
-        priority: book_priority_from_date(b),
-        changefreq: book_changefreq_from_date(b)
-      }
+      urls << book_hash(b)
     end
 
     urls
+  end
+
+  def book_hash(book)
+    hash = {
+      loc: "https://www.bokatidindi.is/bok/#{book.slug}",
+      lastmod: book.updated_at.time.iso8601,
+      priority: book_priority_from_date(book),
+      changefreq: book_changefreq_from_date(book)
+    }
+    return hash unless book.cover_image.attached?
+
+    hash[:image] = Book.last.cover_image_variant_url(550)
+
+    hash
   end
 
   def categories
@@ -87,9 +104,10 @@ class SitemapsController < ApplicationController
     }
 
     categories.each do |c|
+      continue if c.books.current.empty?
       urls << {
         loc: "https://www.bokatidindi.is/baekur/flokkur/#{c.slug}",
-        lastmod: c.books.last.updated_at.time.iso8601,
+        lastmod: c.books.current.last.updated_at.time.iso8601,
         priority: 0.8,
         changefreq: 'weekly'
       }
