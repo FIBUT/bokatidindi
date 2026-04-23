@@ -19,11 +19,13 @@
     </h1>
   </div>
   <div class="col-12 col-lg-6 pb-2">
-    <% if (! params[:search] ) && @books.total_pages > 1 %>
+    <% if (! params[:search] ) %>
       <% if params[:category] && @category %>
         <p class="category-description"><%= @category.description %></p>
       <% end %>
-      <p class="page-counter">Síða <%= @books.current_page %> af <%= @books.total_pages %></p>
+      <% if @books.total_pages > 1 %>
+        <p class="page-counter">Síða <%= @books.current_page %> af <%= @books.total_pages %></p>
+      <% end %>
     <% end %>
   </div>
 </div>
