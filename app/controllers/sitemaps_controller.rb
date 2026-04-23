@@ -104,7 +104,8 @@ class SitemapsController < ApplicationController
     }
 
     categories.each do |c|
-      continue if c.books.current.empty?
+      next if c.books.current.empty?
+
       urls << {
         loc: "https://www.bokatidindi.is/baekur/flokkur/#{c.slug}",
         lastmod: c.books.current.last.updated_at.time.iso8601,
