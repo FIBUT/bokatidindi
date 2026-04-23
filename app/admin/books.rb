@@ -24,6 +24,9 @@ ActiveAdmin.register Book do
                   blockquotes_attributes: %i[
                     id quote_type location heading quote citation _destroy
                   ],
+                  book_tags_attributes: %i[
+                    id tag_id
+                  ],
                   edition_ids: [],
                   sample_pages_files: []
                 }
@@ -655,6 +658,9 @@ ActiveAdmin.register Book do
 
       tab I18n.t('active_admin.tabs.book.bibliography') do
         f.inputs 'Nánari upplýsingar' do
+          f.has_many :book_tags, heading: 'Efnisorð bókar' do |book_tag|
+            book_tag.input :tag, collection: Tag.where(active: true)
+          end
           f.input :original_title, hint: 'Upprunalegur titill bókar ef erlend.'
           f.input(
             :country_of_origin,

@@ -3,6 +3,17 @@
   class="book-meta-list d-block pl-0 mt-0 t-md-3"
 >
 
+  <li
+    class="book-meta-tags d-block pb-3"
+    aria-label="Efnisorð"
+  >
+    <ul class="d-block p-0">
+      <% local_assigns[:book].tags.order(rod: :asc).each do |t| %>
+      <li id="book-tag-<%= t.slug %>" class="badge badge-primary"><%= t.title %></li>
+      <% end %>
+    </ul>
+  </li>
+
   <% if action_name == 'show' %>
   <li
     class="book-meta-publisher d-block pb-3"

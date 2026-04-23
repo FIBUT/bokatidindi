@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :book_tag do
+  end
+
+  factory :tag do
+  end
+
   factory :blockquote do
   end
 
