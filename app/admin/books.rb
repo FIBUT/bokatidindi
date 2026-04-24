@@ -502,24 +502,9 @@ ActiveAdmin.register Book do
                   'söluaðila.'
           )
           bb.input(
-            :availability,
-            collection: BookBindingType::AVAILABILITIES.map do |s|
-              [
-                I18n.t(
-                  'activerecord.attributes.book_binding_type'\
-                  ".availabilities.#{s}"
-                ),
-                s
-              ]
-            end,
-            include_blank: false
-          )
-          bb.input(
             :publication_date,
             as: :datepicker,
-            class: 'publication-date',
-            hint: 'Ef bók er skráð sem væntanleg er hún sjálfkrafa skráð sem '\
-                  'fáanleg á útgáfudegi.'
+            class: 'publication-date'
           )
         end
 
