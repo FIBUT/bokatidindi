@@ -79,7 +79,7 @@ class BookBindingType < ApplicationRecord
   def hours
     return nil unless minutes
 
-    Time.at(60 * minutes).utc.strftime('%H:%M')
+    Time.at(60 * minutes).utc.strftime('%k:%M')
   end
 
   def structured_data
