@@ -61,6 +61,8 @@ is:
       eq: 'Jafngildir'
       start: 'Byrjar á'
       end: 'Endar á'
+      gt: 'Stærra en'
+      lt: 'Minna en'
   activerecord:
     errors:
       models:
