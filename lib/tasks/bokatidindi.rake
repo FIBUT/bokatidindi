@@ -115,21 +115,6 @@ namespace :bt do
     )
   end
 
-  desc 'Mark pending book binding types as available on publication day'
-  task label_available_on_publication_date: :environment do
-    Edition.current_edition.books.each do |b|
-      b.book_binding_types.where(
-        availability: :pending
-      ).where(
-        "book_binding_types.publication_date < '#{DateTime.now.to_fs(:db)}'"
-      ).find_each do |bbt|
-        puts "#{b.title} - #{bbt.publication_date}"
-        bbt.availability = :available
-        bbt.save
-      end
-    end
-  end
-
   desc 'Order main book author on top'
   task arrange_main_author_on_top: :environment do
     Book.all.find_each do |b|

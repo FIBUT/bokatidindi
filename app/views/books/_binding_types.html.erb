@@ -14,11 +14,6 @@
   >
     <%= book_binding_type.binding_type.corrected_name %>
   </h3>
-    <% unless book_binding_type.availability == 'unknown' %>
-    <p class="availability d-inline-block mb-0">
-      <%= I18n.t "activerecord.attributes.book_binding_type.availabilities.#{book_binding_type.availability}" %>
-    </p>
-    <% end %>
     <ul class="list-unstyled d-block">
     <% if book_binding_type.page_count %>
     <li class="page_count d-inline-block mr-2">
