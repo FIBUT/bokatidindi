@@ -121,6 +121,8 @@ class SitemapsController < ApplicationController
     urls = []
 
     Author.find_each do |a|
+      next if a.books.current.empty?
+
       urls << {
         loc: "https://www.bokatidindi.is/baekur/hofundur/#{a.slug}",
         lastmod: a.updated_at.time.iso8601,
@@ -136,6 +138,8 @@ class SitemapsController < ApplicationController
     urls = []
 
     Publisher.find_each do |p|
+      next if p.books.current.empty?
+
       urls << {
         loc: "https://www.bokatidindi.is/baekur/utgefandi/#{p.slug}",
         lastmod: p.updated_at.time.iso8601,
