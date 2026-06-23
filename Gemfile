@@ -122,7 +122,7 @@ gem "unicode-emoji", "~> 3.4"
 
 gem "logger", "~> 1.6"
 
-gem "concurrent-ruby", "= 1.3.4"
+gem "concurrent-ruby", "1.3.7"
 
 gem "reline", "~> 0.6"
 
