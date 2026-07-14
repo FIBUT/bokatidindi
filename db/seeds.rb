@@ -18,17 +18,60 @@ AdminUser.create(
 
 FactoryBot.create(:edition)
 
-Category.create(name: 'Skáldverk', group: :childrens_books, rod: 2)
-Category.create(name: 'Fræði og bækur almenns efnis', group: :non_fiction, rod: 9)
-Category.create(name: 'Fræðibækur', group: :childrens_books, rod: 3)
-Category.create(name: 'Ungmennabækur', group: :childrens_books, rod: 4)
-Category.create(name: 'Ljóð og leikrit', group: :fiction, rod: 7)
-Category.create(name: 'Myndskreyttar 0 - 6 ára', group: :childrens_books, rod: 1)
-Category.create(name: 'Þýdd skáldverk', group: :fiction, rod: 6)
-Category.create(name: 'Íslensk skáldverk', group: :fiction, rod: 5)
-Category.create(name: 'Ævisögur og endurminningar', group: :non_fiction, rod: 11)
-Category.create(name: 'Saga, ættfræði og héraðslýsingar', group: :non_fiction, rod: 10)
-Category.create(name: 'Listir og ljósmyndir', group: :non_fiction, rod: 8)
+Category.create name: 'Skáldverk',
+                description: FFaker::Lorem.sentence,
+                group: :childrens_books,
+                rod: 2
+
+Category.create name: 'Fræði og bækur almenns efnis',
+                description: FFaker::Lorem.sentence,
+                group: :non_fiction,
+                rod: 9
+
+Category.create name: 'Fræðibækur',
+                description: FFaker::Lorem.sentence,
+                group: :childrens_books,
+                rod: 3
+
+Category.create name: 'Ungmennabækur',
+                description: FFaker::Lorem.sentence,
+                group: :childrens_books,
+                rod: 4
+
+Category.create name: 'Ljóð og leikrit',
+                description: FFaker::Lorem.sentence,
+                group: :fiction,
+                rod: 7
+
+Category.create name: 'Myndskreyttar 0 - 6 ára',
+                description: FFaker::Lorem.sentence,
+                group: :childrens_books,
+                rod: 1
+
+Category.create name: 'Þýdd skáldverk',
+                description: FFaker::Lorem.sentence,
+                group: :fiction,
+                rod: 6
+
+Category.create name: 'Íslensk skáldverk',
+                description: FFaker::Lorem.sentence,
+                group: :fiction,
+                rod: 5
+
+Category.create name: 'Ævisögur og endurminningar',
+                description: FFaker::Lorem.sentence,
+                group: :non_fiction,
+                rod: 11
+
+Category.create name: 'Saga, ættfræði og héraðslýsingar',
+                description: FFaker::Lorem.sentence,
+                group: :non_fiction,
+                rod: 10
+
+Category.create name: 'Listir og ljósmyndir',
+                description: FFaker::Lorem.sentence,
+                group: :non_fiction,
+                rod: 8
 
 FactoryBot.create(:author_type, name: 'Höfundur', abbreviation: 'Höf')
 FactoryBot.create(:author_type, name: 'Þýðandi', abbreviation: 'Þýð')
@@ -41,7 +84,7 @@ BindingType.create(name: 'Tímarit', rod: 1, open: true, barcode_type: 'ISSN')
 FactoryBot.create_list :publisher, 50
 FactoryBot.create_list :author, 100
 
-FactoryBot.create_list :book, 500, :has_cover
+FactoryBot.create_list :book, 600, :has_cover
 
 Category.update_all_counts
 

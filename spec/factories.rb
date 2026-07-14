@@ -46,13 +46,11 @@ FactoryBot.define do
     trait :has_cover do
       after(:create) do |b|
         image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
-        image_contents = File.read(
-          Rails.root.join("spec/assets/#{image_file_name}")
-        )
         b.cover_image.attach(
-          io: StringIO.new(image_contents),
+          io: File.open(Rails.root.join("spec/assets/#{image_file_name}")),
           filename: "#{SecureRandom.uuid}.jpg"
         )
+        b.attach_cover_image_variants
       end
     end
   end
