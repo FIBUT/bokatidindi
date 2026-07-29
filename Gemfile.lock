@@ -490,8 +490,9 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (1.7.3)
+    sqlite3 (2.9.5)
       mini_portile2 (~> 2.8.0)
+    sqlite3 (2.9.5-x86_64-linux-gnu)
     stringio (3.2.0)
     thor (1.5.0)
     thwait (0.2.0)
@@ -592,7 +593,7 @@ DEPENDENCIES
   selenium-webdriver (>= 4.34)
   shyguy (~> 0.1.1)
   spring
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 2.9)
   thwait
   turbolinks (~> 5)
   tzinfo-data

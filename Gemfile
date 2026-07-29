@@ -93,7 +93,7 @@ group :development, :test do
   gem 'ffaker'
 
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.9'
 
   # Rspec 6 RC1 is in use here. Must be updated on final replease of 6.0.
   gem 'rspec-rails', '>= 6.0.0.rc1'
