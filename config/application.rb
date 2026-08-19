@@ -31,5 +31,7 @@ module Bokatidindi
 
     config.active_job.queue_adapter = :good_job
     config.good_job.execution_mode = ENV['JOB_EXECUTION_MODE']&.to_sym || :inline
+
+    config.assets.initialize_on_precompile = false
   end
 end

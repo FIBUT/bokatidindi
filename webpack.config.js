@@ -42,7 +42,20 @@ module.exports = {
             },
         ],
     },
-    optimization: {},
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin({
+                minimizerOptions: {
+                    preset: [ "default",
+                        {
+                            reduceIdents: true,
+                        },
+                    ],
+                },
+            }),
+        ]
+    },
     plugins: [
         new MiniCssExtractPlugin(),
     ],
