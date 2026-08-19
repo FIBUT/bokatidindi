@@ -29,8 +29,6 @@ jobs:
       run: sudo apt-get update && sudo apt-get -y install libpq-dev libvips42
     - name: Run bundle install
       run: bundle install && yarn install
-    - name: Build static assets
-      run: bundle exec rake assets:precompile
     - name: Load the database schema
       run: bundle exec rake db:schema:load && bundle exec rake db:migrate:redo
       env:
