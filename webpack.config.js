@@ -59,4 +59,7 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin(),
     ],
+    ignoreWarnings: [
+        (warning) => true,
+    ],
 }
