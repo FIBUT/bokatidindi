@@ -89,10 +89,11 @@ ActiveAdmin.register Book do
 
       if permitted_params[:book][:cover_image_file]
         cover_image_file = permitted_params[:book][:cover_image_file]
-        if cover_image_file.instance_of?(ActionDispatch::Http::UploadedFile)
-          unless Book::PERMITTED_IMAGE_FORMATS.include?(cover_image_file.content_type)
-            @resource.errors.add(:cover_image_file, :invalid_file_format)
-          end
+        if cover_image_file.instance_of?(ActionDispatch::Http::UploadedFile) &&
+           !Book::PERMITTED_IMAGE_FORMATS.include?(
+             cover_image_file.content_type
+           )
+          @resource.errors.add(:cover_image_file, :invalid_file_format)
         end
       end
 
@@ -135,7 +136,7 @@ ActiveAdmin.register Book do
         end
 
         if permitted_params[:book][:cover_image_file]
-          cover_image_file = permitted_params[:book][:cover_image_file];
+          cover_image_file = permitted_params[:book][:cover_image_file]
           if cover_image_file.instance_of?(ActionDispatch::Http::UploadedFile)
             @resource.cover_image.attach(
               io: permitted_params[:book][:cover_image_file].to_io,
