@@ -194,6 +194,24 @@ ActiveAdmin.register Book do
         id: (@resource.inactive_edition_ids + edition_ids)
       )
 
+      if permitted_params[:book][:cover_image_file]
+        cover_image_file = permitted_params[:book][:cover_image_file]
+        if cover_image_file.instance_of?(ActionDispatch::Http::UploadedFile) &&
+           !Book::PERMITTED_IMAGE_FORMATS.include?(
+             cover_image_file.content_type
+           )
+          @resource.errors.add(:cover_image_file, :invalid_file_format)
+        end
+      end
+
+      permitted_params[:book][:sample_pages_files].each do |c|
+        next unless c.instance_of?(ActionDispatch::Http::UploadedFile)
+
+        unless Book::PERMITTED_IMAGE_FORMATS.include?(c.content_type)
+          @resource.errors.add(:sample_pages_files, :invalid_file_format)
+        end
+      end
+
       if permitted_params[:book][:audio_sample_file]
         audio_sample_contents = permitted_params[:book][:audio_sample_file].read
 
@@ -216,7 +234,9 @@ ActiveAdmin.register Book do
       end
 
       if @resource.errors.none? && @resource.save
-        if permitted_params[:book][:cover_image_file]
+        cover_image_file = permitted_params[:book][:cover_image_file]
+
+        if cover_image_file.instance_of?(ActionDispatch::Http::UploadedFile)
           @resource.cover_image.attach(
             io: permitted_params[:book][:cover_image_file].to_io,
             filename: SecureRandom.uuid
