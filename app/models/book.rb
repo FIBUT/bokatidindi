@@ -705,6 +705,26 @@ class Book < ApplicationRecord
     update_cover_image_srcsets
   end
 
+  def current_book_edition_categories
+    BookEditionCategory.where(
+      book_edition: BookEdition.where(book: self, edition: Edition.current)
+    )
+  end
+
+  def current_print_placement_count
+    current_book_edition_categories.where(for_print: true).count
+  end
+
+  def current_web_placement_count
+    current_book_edition_categories.where(for_web: true).count
+  end
+
+  def cover_image_processed?
+    return false unless cover_image_srcsets.key?('webp')
+
+    !cover_image_srcsets['webp'].split(',').count.zero?
+  end
+
   private
 
   def attach_cover_image_variant(image_format, width = nil)
