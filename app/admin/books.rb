@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Book do
+  includes :publisher, :book_authors, :editions, :book_editions, :editions
+
   permit_params :id, :pre_title, :title, :post_title,
                 :description, :long_description,
                 :blockquote, :blockquote_source,
@@ -294,8 +296,9 @@ ActiveAdmin.register Book do
     column :authors
     column :description, &:short_description
     column :current_edition, &:current_edition?
-    column :record_valid, &:valid?
-    column :cover_image, &:cover_image?
+    column :cover_image, &:cover_image_processed?
+    column :print_placements, &:current_print_placement_count
+    column :web_placements, &:current_web_placement_count
     actions defaults: false do |book|
       unless book.editions.any?
         item 'Eyða', admin_book_path(book), method: 'delete',

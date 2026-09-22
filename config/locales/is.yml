@@ -208,6 +208,8 @@ is:
         cover_image: 'Forsíðumynd'
         book_authors: 'Höfundar bókar'
         book_binding_types: 'Útgáfuform bókar'
+        print_placements: 'Prent­birtingar'
+        web_placements: 'Vef­birtingar'
       blockquote:
         heading: 'Fyrirsögn'
         quote_type: 'Gerð'
