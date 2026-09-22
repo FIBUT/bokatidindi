@@ -44,12 +44,7 @@ class WelcomeController < ApplicationController
         ActionController::Base.helpers.asset_url('favicon-512.png'),
         ActionController::Base.helpers.asset_url('logotype-cropped.svg')
       ],
-      url: 'https://www.bokatidindi.is/',
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: 'https://www.bokatidindi.is/baekur?search={search_term_string}',
-        'query-input': 'required name=search_term_string'
-      }
+      url: 'https://www.bokatidindi.is/'
     }
   end
 

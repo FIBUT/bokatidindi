@@ -233,12 +233,7 @@ class Book < ApplicationRecord
         ActionController::Base.helpers.asset_url('logotype-cropped.svg')
       ],
       maintainer: structured_data_fibut,
-      url: 'https://www.bokatidindi.is/',
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: 'https://www.bokatidindi.is/baekur?search={search_term_string}',
-        'query-input': 'required name=search_term_string'
-      }
+      url: 'https://www.bokatidindi.is/'
     }
 
     temporal_coverage = editions.pluck(:year) - [nil]
