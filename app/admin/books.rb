@@ -11,6 +11,7 @@ ActiveAdmin.register Book do
                 :audio_sample_file,
                 :delete_sample_pages,
                 :delete_audio_sample,
+                :original_language,
                 :publisher_id,
                 {
                   book_binding_types_attributes: %i[
@@ -87,6 +88,13 @@ ActiveAdmin.register Book do
 
       if permitted_params[:book][:book_categories_attributes].values.count > 3
         @resource.errors.add(:book_categories, :too_many)
+      end
+
+      permitted_params[:book][:book_categories_attributes].each do |bca|
+        if bca[1][:for_print] == '0' && bca[1][:for_web] == '0'
+          @resource.errors.add(:book_categories, :invalid)
+          break
+        end
       end
 
       if permitted_params[:book][:cover_image_file]
@@ -233,6 +241,13 @@ ActiveAdmin.register Book do
 
       if permitted_params[:book][:book_categories_attributes].values.count > 3
         @resource.errors.add(:book_categories, :too_many)
+      end
+
+      permitted_params[:book][:book_categories_attributes].each do |bca|
+        if bca[1][:for_print] == '0' && bca[1][:for_web] == '0'
+          @resource.errors.add(:book_categories, :invalid)
+          break
+        end
       end
 
       if @resource.errors.none? && @resource.save
