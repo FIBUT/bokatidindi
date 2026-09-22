@@ -16,6 +16,8 @@ class BooksController < ApplicationController
                    '(max-width: 420px) 260px'
 
     if params[:search]
+      return render_four_oh_three unless search_key_okay
+
       render_search
       book_results = @books + @books_from_old_editions
       if book_results.length == 1
@@ -64,6 +66,15 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def search_key_okay
+    !params[:search_key].nil? && params[:search_key] == session[:search_key]
+  end
+
+  def render_four_oh_three
+    render(status: :unauthorized,
+           file: Rails.root.join('public/403.html'), layout: false)
+  end
 
   def render_search
     @title_tag = "Bókatíðindi - Leitarniðurstöður - #{params[:search]}"
