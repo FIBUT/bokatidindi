@@ -64,4 +64,11 @@ module ApplicationHelper
       ]
     }
   end
+
+  def search_key
+    return session[:search_key] if session[:search_key]
+
+    session[:search_key] = SecureRandom.alphanumeric(10)
+    session[:search_key]
+  end
 end
