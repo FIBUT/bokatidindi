@@ -715,6 +715,7 @@ class Book < ApplicationRecord
   end
 
   def cover_image_processed?
+    return false if cover_image_srcsets.nil?
     return false unless cover_image_srcsets.key?('webp')
 
     !cover_image_srcsets['webp'].split(',').count.zero?

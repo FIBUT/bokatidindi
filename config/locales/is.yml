@@ -108,6 +108,7 @@ is:
           attributes:
             book_categories:
               too_many: 'eru of margir'
+              invalid: 'þurfa að vera með skráningu á vef eða í prent'
             title:
               blank: 'er tómur'
             description:
