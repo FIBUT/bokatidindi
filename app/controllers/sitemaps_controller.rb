@@ -86,7 +86,10 @@ class SitemapsController < ApplicationController
 
     srcsets = book.cover_image_srcsets
 
-    return hash unless srcsets.is_a?(Hash) && srcsets.key?('webp')
+    unless srcsets.is_a?(Hash) && srcsets.key?('webp') &&
+           !srcsets['webp'].lenght.zero?
+      return hash
+    end
 
     hash[:image] = srcsets['webp'].split(', ').last.split(' ').first
 
