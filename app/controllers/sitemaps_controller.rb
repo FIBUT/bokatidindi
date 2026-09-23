@@ -87,7 +87,7 @@ class SitemapsController < ApplicationController
     srcsets = book.cover_image_srcsets
 
     unless srcsets.is_a?(Hash) && srcsets.key?('webp') &&
-           !srcsets['webp'].lenght.zero?
+           !srcsets['webp'].empty?
       return hash
     end
 
