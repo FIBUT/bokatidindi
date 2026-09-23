@@ -25,8 +25,6 @@ class SitemapsController < ApplicationController
     build_xml publishers
   end
 
-  private
-
   def build_xml(records)
     builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |xml|
       xml.urlset(
@@ -85,9 +83,12 @@ class SitemapsController < ApplicationController
       priority: book_priority_from_date(book),
       changefreq: book_changefreq_from_date(book)
     }
-    return hash unless book.cover_image.attached?
 
-    hash[:image] = book.cover_image_variant_url(550)
+    srcsets = book.cover_image_srcsets
+
+    return hash unless srcsets.is_a?(Hash) && srcsets.key?('webp')
+
+    hash[:image] = srcsets['webp'].split(', ').last.split(' ').first
 
     hash
   end
