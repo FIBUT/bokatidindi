@@ -87,7 +87,7 @@ class SitemapsController < ApplicationController
     }
     return hash unless book.cover_image.attached?
 
-    hash[:image] = Book.last.cover_image_variant_url(550)
+    hash[:image] = book.cover_image_variant_url(550)
 
     hash
   end
