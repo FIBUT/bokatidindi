@@ -16,7 +16,10 @@ class BooksController < ApplicationController
                    '(max-width: 420px) 260px'
 
     if params[:search]
-      return render_four_oh_three unless search_key_okay
+      unless search_key_okay
+        sleep 25
+        return render_four_oh_three
+      end
 
       render_search
       book_results = @books + @books_from_old_editions
