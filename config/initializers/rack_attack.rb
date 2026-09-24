@@ -17,3 +17,11 @@ end
 Rack::Attack.blocklist('block access to cofiguration related urls') do |request|
   request.path.include? '.env'
 end
+
+Rack::Attack.blocklisted_responder = lambda do |_request|
+  [
+    403,
+    { 'Content-Type' => 'text/html' },
+    File.read(Rails.root.join('public/403.html'))
+  ]
+end
