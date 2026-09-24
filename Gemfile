@@ -127,3 +127,5 @@ gem "concurrent-ruby", "1.3.7"
 gem "reline", "~> 0.6"
 
 gem "irb", "~> 1.15"
+
+gem "rack-attack", "~> 6.8"
