@@ -715,10 +715,11 @@ class Book < ApplicationRecord
   end
 
   def cover_image_processed?
-    return false if cover_image_srcsets.nil?
+    return false unless cover_image_srcsets.is_a?(Hash)
     return false unless cover_image_srcsets.key?('webp')
+    return false if cover_image_srcsets['webp'].empty?
 
-    !cover_image_srcsets['webp'].split(',').count.zero?
+    true
   end
 
   private
