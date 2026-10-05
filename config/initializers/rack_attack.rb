@@ -8,6 +8,8 @@ require 'rack/attack'
 # Rack::Attack.blocklist_ip '157.55.0.0/16'
 # Rack::Attack.blocklist_ip '103.96.36.0/22'
 
+Rack::Attack.blocklist_ip '157.157.114.33'
+
 Rack::Attack.blocklist('block access to WP related URLs') do |request|
   request.path.start_with? '/wp-admin'
   request.path.start_with? '/wp-content'
