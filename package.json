@@ -28,7 +28,7 @@
     "prop-types": "^15.8.1",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
-    "serialize-javascript": "7.0.5",
+    "serialize-javascript": "7.1.2",
     "style-loader": "^3.3.1",
     "svgo": "^4.1.0",
     "svgo-loader": "^5.0.0",
