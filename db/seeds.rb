@@ -84,7 +84,7 @@ BindingType.create(name: 'Tímarit', rod: 1, open: true, barcode_type: 'ISSN')
 FactoryBot.create_list :publisher, 50
 FactoryBot.create_list :author, 100
 
-FactoryBot.create_list :book, 600, :has_cover
+FactoryBot.create_list :book, 20, :has_cover
 
 Category.update_all_counts
 

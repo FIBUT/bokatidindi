@@ -9,13 +9,15 @@
     "@rails/actioncable": "^6.0.5",
     "@rails/activestorage": "^6.0.5",
     "@rails/ujs": "^6.0.5",
-    "@types/node": "^18.16.0",
+    "@types/node": "^26.6.4",
     "babel-loader": "^8.2.5",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "4.6.2",
     "browserslist": "^4.24.4",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^8.0.0",
+    "cypress": "^16.1.1",
+    "cypress-accessibility-checker": "^4.0.34",
     "file-loader": "^6.2.0",
     "image-minimizer-webpack-plugin": "^5.0.0",
     "lightningcss": "^1.29.1",
@@ -33,20 +35,31 @@
     "svgo": "^4.1.0",
     "svgo-loader": "^5.0.0",
     "ts-node": "10.9.1",
-    "typescript": "5.0.4",
+    "typescript": "^7.0.2",
     "webpack": "5.104.1",
     "webpack-cli": "^4.10.0",
     "webpack-remove-empty-scripts": "^0.8.1"
   },
   "version": "0.1.0",
   "scripts": {
+    "start": "bundle exec rails s",
+    "clear-db": "bundle exec rails db:drop && bundle exec rails db:create && bundle exec rails db:schema:load",
+    "seed-db": "bundle exec rails db:seed",
+    "reset-db": "yarn clear-db && yarn seed-db",
+    "reset-and-start": "yarn reset-db && yarn start",
     "build": "webpack --config webpack.config.js",
-    "prebuild": "svgo -rf ./app/assets/images/ -o ./app/assets/builds/"
+    "prebuild": "svgo -rf ./app/assets/images/ -o ./app/assets/builds/",
+    "cy:open": "cypress open",
+    "cy:test": "cypress run --browser firefox --headless",
+    "ci:e2e": "start-server-and-test reset-and-start http://localhost:3000 cy:test"
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
     ]
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "devDependencies": {
+    "start-server-and-test": "^3.0.13"
+  }
 }
