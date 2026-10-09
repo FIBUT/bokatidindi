@@ -1,0 +1,1981 @@
+{
+    "results": [
+        {
+            "ruleId": "style_color_misuse",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/link[17]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 6,
+            "reasonId": "Potential_1",
+            "message": "Verify color is not used as the only visual means of conveying information",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<link href=\"/assets/application-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css\" rel=\"stylesheet\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_color_misuse.html#%7B%22message%22%3A%22Verify%20color%20is%20not%20used%20as%20the%20only%20visual%20means%20of%20conveying%20information%22%2C%22snippet%22%3A%22%3Clink%20href%3D%5C%22%2Fassets%2Fapplication-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css%5C%22%20rel%3D%5C%22stylesheet%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22Potential_1%22%2C%22ruleId%22%3A%22style_color_misuse%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_highcontrast_visible",
+            "value": [
+                "RECOMMENDATION",
+                "MANUAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/link[17]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Manual_1",
+            "message": "Confirm Windows high contrast mode is supported when using CSS to include, position or alter non-decorative content",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<link href=\"/assets/application-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css\" rel=\"stylesheet\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "manual",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_highcontrast_visible.html#%7B%22message%22%3A%22Confirm%20Windows%20high%20contrast%20mode%20is%20supported%20when%20using%20CSS%20to%20include%2C%20position%20or%20alter%20non-decorative%20content%22%2C%22snippet%22%3A%22%3Clink%20href%3D%5C%22%2Fassets%2Fapplication-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css%5C%22%20rel%3D%5C%22stylesheet%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22MANUAL%22%5D%2C%22reasonId%22%3A%22Manual_1%22%2C%22ruleId%22%3A%22style_highcontrast_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_navigation_label_unique",
+            "value": [
+                "VIOLATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/header[1]/div[1]/nav[1]",
+                "aria": "/document[1]/banner[1]/navigation[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_label_not_unique",
+            "message": "Multiple elements with \"navigation\" role do not have unique labels",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 48,
+                "top": 24,
+                "height": 45,
+                "width": 220
+            },
+            "snippet": "<nav class=\"site-logo mb-4 mb-lg-0 d-flex\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "violation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_navigation_label_unique.html#%7B%22message%22%3A%22Multiple%20elements%20with%20%5C%22navigation%5C%22%20role%20do%20not%20have%20unique%20labels%22%2C%22snippet%22%3A%22%3Cnav%20class%3D%5C%22site-logo%20mb-4%20mb-lg-0%20d-flex%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22fail_label_not_unique%22%2C%22ruleId%22%3A%22aria_navigation_label_unique%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/header[1]/div[1]/form[1]/div[1]/input[1]",
+                "aria": "/document[1]/banner[1]/search[1]/searchbox[1]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 670,
+                "top": 38,
+                "height": 31,
+                "width": 220
+            },
+            "snippet": "<input name=\"search\" type=\"search\" aria-label=\"Leitarorð\" class=\"form-control form-control-sm\" id=\"header-search-field\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Cinput%20name%3D%5C%22search%5C%22%20type%3D%5C%22search%5C%22%20aria-label%3D%5C%22Leitaror%C3%B0%5C%22%20class%3D%5C%22form-control%20form-control-sm%5C%22%20id%3D%5C%22header-search-field%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "input_label_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/header[1]/div[1]/form[1]/div[1]/input[1]",
+                "aria": "/document[1]/banner[1]/search[1]/searchbox[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_no_label",
+            "message": "The input element does not have an associated visible label",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 670,
+                "top": 38,
+                "height": 31,
+                "width": 220
+            },
+            "snippet": "<input name=\"search\" type=\"search\" aria-label=\"Leitarorð\" class=\"form-control form-control-sm\" id=\"header-search-field\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/input_label_visible.html#%7B%22message%22%3A%22The%20input%20element%20does%20not%20have%20an%20associated%20visible%20label%22%2C%22snippet%22%3A%22%3Cinput%20name%3D%5C%22search%5C%22%20type%3D%5C%22search%5C%22%20aria-label%3D%5C%22Leitaror%C3%B0%5C%22%20class%3D%5C%22form-control%20form-control-sm%5C%22%20id%3D%5C%22header-search-field%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_no_label%22%2C%22ruleId%22%3A%22input_label_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[1]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[1]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 549,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[1]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[1]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 675,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/action-men-72517\" title=\"Nánar um bókina Action Men\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Faction-men-72517%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Action%20Men%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[1]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[1]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 316,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Action Men Dangerous Cousins\" href=\"/bok/action-men-72517\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Action%20Men%20Dangerous%20Cousins%5C%22%20href%3D%5C%22%2Fbok%2Faction-men-72517%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[2]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[2]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 551,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[2]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[2]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 675,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/action-wizard-47509\" title=\"Nánar um bókina Action Wizard\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Faction-wizard-47509%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Action%20Wizard%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[2]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[2]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 316,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Action Wizard\" href=\"/bok/action-wizard-47509\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Action%20Wizard%5C%22%20href%3D%5C%22%2Fbok%2Faction-wizard-47509%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[3]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[3]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 1103,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[3]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[3]/link[2]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 1227,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/a-fistful-of-blue-ninja-76193\" title=\"Nánar um bókina A Fistful of Blue Ninja\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fa-fistful-of-blue-ninja-76193%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20A%20Fistful%20of%20Blue%20Ninja%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[3]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[3]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 767,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Dangerous Tentacle A Fistful of Blue Ninja Death Brains\" href=\"/bok/a-fistful-of-blue-ninja-76193\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Dangerous%20Tentacle%20A%20Fistful%20of%20Blue%20Ninja%20Death%20Brains%5C%22%20href%3D%5C%22%2Fbok%2Fa-fistful-of-blue-ninja-76193%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[4]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[4]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 1029,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[4]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[4]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 1227,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/a-fistful-of-dangerous-ninja-48341\" title=\"Nánar um bókina A Fistful of Dangerous Ninja\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fa-fistful-of-dangerous-ninja-48341%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20A%20Fistful%20of%20Dangerous%20Ninja%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[4]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[4]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 767,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina A Fistful of Dangerous Ninja\" href=\"/bok/a-fistful-of-dangerous-ninja-48341\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20A%20Fistful%20of%20Dangerous%20Ninja%5C%22%20href%3D%5C%22%2Fbok%2Fa-fistful-of-dangerous-ninja-48341%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[5]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[5]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 1636,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[5]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[5]/link[2]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 1781,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/american-world-25233\" title=\"Nánar um bókina American World\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Famerican-world-25233%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20American%20World%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[5]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[5]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 1319,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina American World Death Wizard\" href=\"/bok/american-world-25233\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20American%20World%20Death%20Wizard%5C%22%20href%3D%5C%22%2Fbok%2Famerican-world-25233%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[6]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[6]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 1613,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[6]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[6]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 1781,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/blonde-blow-62403\" title=\"Nánar um bókina Blonde Blow\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fblonde-blow-62403%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Blonde%20Blow%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[6]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[6]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 1319,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina I Married a American Hills Blonde Blow Electric Journals\" href=\"/bok/blonde-blow-62403\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20I%20Married%20a%20American%20Hills%20Blonde%20Blow%20Electric%20Journals%5C%22%20href%3D%5C%22%2Fbok%2Fblonde-blow-62403%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[7]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[7]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 2177,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[7]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[7]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 2301,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/case-of-the-missing-dangerous-beast-43390\" title=\"Nánar um bókina Case of the Missing Dangerous Beast\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fcase-of-the-missing-dangerous-beast-43390%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Case%20of%20the%20Missing%20Dangerous%20Beast%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[7]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[7]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 1873,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Case of the Missing Dangerous Beast\" href=\"/bok/case-of-the-missing-dangerous-beast-43390\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Case%20of%20the%20Missing%20Dangerous%20Beast%5C%22%20href%3D%5C%22%2Fbok%2Fcase-of-the-missing-dangerous-beast-43390%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[8]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[8]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 2085,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[8]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[8]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 2301,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/champagne-brains-54720\" title=\"Nánar um bókina Champagne Brains\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fchampagne-brains-54720%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Champagne%20Brains%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[8]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[8]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 1873,
+                "height": 187,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Champagne Brains A Fistful of Hungry Beast\" href=\"/bok/champagne-brains-54720\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Champagne%20Brains%20A%20Fistful%20of%20Hungry%20Beast%5C%22%20href%3D%5C%22%2Fbok%2Fchampagne-brains-54720%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[9]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[9]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 2607,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[9]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[9]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 2794,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/codename-ultra-beast-68215\" title=\"Nánar um bókina Codename: Ultra Beast\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fcodename-ultra-beast-68215%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Codename%3A%20Ultra%20Beast%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[9]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[9]/link[3]"
+            },
+            "ruleTime": 1,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 2393,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Codename: Ultra Beast\" href=\"/bok/codename-ultra-beast-68215\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Codename%3A%20Ultra%20Beast%5C%22%20href%3D%5C%22%2Fbok%2Fcodename-ultra-beast-68215%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[10]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[10]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 2670,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[10]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[10]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 2794,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/day-of-the-death-fly-87958\" title=\"Nánar um bókina Day of the Death Fly\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fday-of-the-death-fly-87958%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Day%20of%20the%20Death%20Fly%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[10]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[10]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 2393,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Day of the Death Fly\" href=\"/bok/day-of-the-death-fly-87958\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Day%20of%20the%20Death%20Fly%5C%22%20href%3D%5C%22%2Fbok%2Fday-of-the-death-fly-87958%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[11]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[11]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 3183,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[11]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[11]/link[2]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 3307,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/death-blow-29860\" title=\"Nánar um bókina Death Blow\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fdeath-blow-29860%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Death%20Blow%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[11]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[11]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 2886,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Death Blow\" href=\"/bok/death-blow-29860\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Death%20Blow%5C%22%20href%3D%5C%22%2Fbok%2Fdeath-blow-29860%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[12]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[12]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 3141,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[12]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[12]/link[2]"
+            },
+            "ruleTime": 3,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 3307,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/forbidden-men-10526\" title=\"Nánar um bókina Forbidden Men\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fforbidden-men-10526%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Forbidden%20Men%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[12]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[12]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 2886,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Forbidden Men\" href=\"/bok/forbidden-men-10526\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Forbidden%20Men%5C%22%20href%3D%5C%22%2Fbok%2Fforbidden-men-10526%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[13]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[13]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 3634,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[13]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[13]/link[2]"
+            },
+            "ruleTime": 3,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 3821,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/green-ninja-72843\" title=\"Nánar um bókina Green Ninja\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fgreen-ninja-72843%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Green%20Ninja%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[13]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[13]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 3399,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Green Ninja\" href=\"/bok/green-ninja-72843\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Green%20Ninja%5C%22%20href%3D%5C%22%2Fbok%2Fgreen-ninja-72843%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[14]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[14]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 3697,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[14]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[14]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 3821,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/i-am-tokyo-journals-88909\" title=\"Nánar um bókina I am Tokyo Journals\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fi-am-tokyo-journals-88909%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20I%20am%20Tokyo%20Journals%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[14]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[14]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 3399,
+                "height": 187,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina I am Tokyo Journals\" href=\"/bok/i-am-tokyo-journals-88909\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20I%20am%20Tokyo%20Journals%5C%22%20href%3D%5C%22%2Fbok%2Fi-am-tokyo-journals-88909%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[15]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[15]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 4217,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[15]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[15]/link[2]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 4356,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/journey-of-the-forbidden-man-65939\" title=\"Nánar um bókina Journey of the Forbidden Man\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fjourney-of-the-forbidden-man-65939%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Journey%20of%20the%20Forbidden%20Man%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[15]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[15]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 3913,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Journey of the Forbidden Man\" href=\"/bok/journey-of-the-forbidden-man-65939\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Journey%20of%20the%20Forbidden%20Man%5C%22%20href%3D%5C%22%2Fbok%2Fjourney-of-the-forbidden-man-65939%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[16]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[16]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 4232,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[16]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[16]/link[2]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 4356,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/killer-fly-31286\" title=\"Nánar um bókina Killer Fly\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fkiller-fly-31286%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Killer%20Fly%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[16]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[16]/link[3]"
+            },
+            "ruleTime": 1,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 3913,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Killer Fly\" href=\"/bok/killer-fly-31286\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Killer%20Fly%5C%22%20href%3D%5C%22%2Fbok%2Fkiller-fly-31286%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[17]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[17]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 212,
+                "top": 4640,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[17]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[17]/link[2]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 401,
+                "top": 4867,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/killer-world-86697\" title=\"Nánar um bókina Killer World\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Fkiller-world-86697%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Killer%20World%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[17]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[17]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 65,
+                "top": 4448,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Killer World\" href=\"/bok/killer-world-86697\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Killer%20World%5C%22%20href%3D%5C%22%2Fbok%2Fkiller-world-86697%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[18]/div[1]/div[1]/ul[2]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/region[18]/list[2]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 679,
+                "top": 4743,
+                "height": 0,
+                "width": 263
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[18]/div[1]/div[1]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[18]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 868,
+                "top": 4867,
+                "height": 38,
+                "width": 73
+            },
+            "snippet": "<a href=\"/bok/legend-of-bloody-city-40641\" title=\"Nánar um bókina Legend of Bloody City\" class=\"btn btn-primary\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbok%2Flegend-of-bloody-city-40641%5C%22%20title%3D%5C%22N%C3%A1nar%20um%20b%C3%B3kina%20Legend%20of%20Bloody%20City%5C%22%20class%3D%5C%22btn%20btn-primary%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "widget_tabbable_exists",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[2]/article[18]/div[1]/aside[1]/a[1]",
+                "aria": "/document[1]/main[1]/region[18]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_no_tabbable",
+            "message": "Component with \"link\" role does not have a tabbable element",
+            "messageArgs": [
+                "link"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 532,
+                "top": 4448,
+                "height": 177,
+                "width": 117
+            },
+            "snippet": "<a tabindex=\"-1\" title=\"Skoða upplýsingar um bókina Forbidden Fly Legend of Bloody City\" href=\"/bok/legend-of-bloody-city-40641\" class=\"product-image-link d-block\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/widget_tabbable_exists.html#%7B%22message%22%3A%22Component%20with%20%5C%22link%5C%22%20role%20does%20not%20have%20a%20tabbable%20element%22%2C%22snippet%22%3A%22%3Ca%20tabindex%3D%5C%22-1%5C%22%20title%3D%5C%22Sko%C3%B0a%20uppl%C3%BDsingar%20um%20b%C3%B3kina%20Forbidden%20Fly%20Legend%20of%20Bloody%20City%5C%22%20href%3D%5C%22%2Fbok%2Flegend-of-bloody-city-40641%5C%22%20class%3D%5C%22product-image-link%20d-block%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22fail_no_tabbable%22%2C%22ruleId%22%3A%22widget_tabbable_exists%22%2C%22msgArgs%22%3A%5B%22link%22%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/nav[1]/ul[1]/li[1]/a[1]",
+                "aria": "/document[1]/main[1]/navigation[1]/list[1]/listitem[1]/link[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 374,
+                "top": 4986,
+                "height": 42,
+                "width": 34
+            },
+            "snippet": "<a href=\"/baekur\" aria-label=\"Síða 1\" class=\"page-link\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbaekur%5C%22%20aria-label%3D%5C%22S%C3%AD%C3%B0a%201%5C%22%20class%3D%5C%22page-link%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/nav[1]/ul[1]/li[2]/a[1]",
+                "aria": "/document[1]/main[1]/navigation[1]/list[1]/listitem[2]/link[1]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 406,
+                "top": 4986,
+                "height": 42,
+                "width": 38
+            },
+            "snippet": "<a href=\"/baekur/sida/2\" aria-label=\"Síða 2\" class=\"page-link\" rel=\"next\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbaekur%2Fsida%2F2%5C%22%20aria-label%3D%5C%22S%C3%AD%C3%B0a%202%5C%22%20class%3D%5C%22page-link%5C%22%20rel%3D%5C%22next%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/nav[1]/ul[1]/li[3]/a[1]",
+                "aria": "/document[1]/main[1]/navigation[1]/list[1]/listitem[3]/link[1]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 442,
+                "top": 4986,
+                "height": 42,
+                "width": 90
+            },
+            "snippet": "<a href=\"/baekur/sida/2\" aria-label=\"Næsta síða\" class=\"page-link\" rel=\"next\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbaekur%2Fsida%2F2%5C%22%20aria-label%3D%5C%22N%C3%A6sta%20s%C3%AD%C3%B0a%5C%22%20class%3D%5C%22page-link%5C%22%20rel%3D%5C%22next%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/nav[1]/ul[1]/li[5]/a[1]",
+                "aria": "/document[1]/main[1]/navigation[1]/list[1]/listitem[5]/link[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 531,
+                "top": 4986,
+                "height": 42,
+                "width": 97
+            },
+            "snippet": "<a href=\"/baekur/sida/2\" aria-label=\"Síðasta síða\" class=\"page-link\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22%2Fbaekur%2Fsida%2F2%5C%22%20aria-label%3D%5C%22S%C3%AD%C3%B0asta%20s%C3%AD%C3%B0a%5C%22%20class%3D%5C%22page-link%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "a_target_warning",
+            "value": [
+                "RECOMMENDATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/footer[1]/div[1]/div[1]/div[1]/address[1]/a[2]",
+                "aria": "/document[1]/contentinfo[1]/group[1]/link[2]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_warn",
+            "message": "Inform the user when their input action will open a new window",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 820,
+                "top": 5266,
+                "height": 18,
+                "width": 103
+            },
+            "snippet": "<a href=\"mailto:fibut@fibut.is\" target=\"_blank\" rel=\"external\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialrecommendation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/a_target_warning.html#%7B%22message%22%3A%22Inform%20the%20user%20when%20their%20input%20action%20will%20open%20a%20new%20window%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22mailto%3Afibut%40fibut.is%5C%22%20target%3D%5C%22_blank%5C%22%20rel%3D%5C%22external%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_warn%22%2C%22ruleId%22%3A%22a_target_warning%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_navigation_label_unique",
+            "value": [
+                "VIOLATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/footer[1]/div[1]/div[1]/nav[1]",
+                "aria": "/document[1]/contentinfo[1]/navigation[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_label_not_unique",
+            "message": "Multiple elements with \"navigation\" role do not have unique labels",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 63,
+                "top": 5140,
+                "height": 161,
+                "width": 437
+            },
+            "snippet": "<nav class=\"d-flex align-items-start col-12 col-md-6 order-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "violation",
+            "ignored": false,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_navigation_label_unique.html#%7B%22message%22%3A%22Multiple%20elements%20with%20%5C%22navigation%5C%22%20role%20do%20not%20have%20unique%20labels%22%2C%22snippet%22%3A%22%3Cnav%20class%3D%5C%22d-flex%20align-items-start%20col-12%20col-md-6%20order-0%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22fail_label_not_unique%22%2C%22ruleId%22%3A%22aria_navigation_label_unique%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        }
+    ],
+    "numExecuted": 3931,
+    "ruleTime": 556,
+    "nls": {
+        "style_color_misuse": {
+            "0": "Combine color and descriptive markup to convey information",
+            "Potential_1": "Verify color is not used as the only visual means of conveying information"
+        },
+        "style_highcontrast_visible": {
+            "0": "Windows high contrast mode must be supported when using CSS to include, position or alter non-decorative content",
+            "Manual_1": "Confirm Windows high contrast mode is supported when using CSS to include, position or alter non-decorative content"
+        },
+        "aria_navigation_label_unique": {
+            "0": "Each element with \"navigation\" role must have a unique label that describes its purpose",
+            "fail_label_not_unique": "Multiple elements with \"navigation\" role do not have unique labels"
+        },
+        "style_focus_visible": {
+            "0": "The keyboard focus indicator should be visible when default border or outline is modified by CSS",
+            "potential_focus_not_visible": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'"
+        },
+        "widget_tabbable_exists": {
+            "0": "Component must have at least one tabbable element",
+            "fail_no_tabbable": "Component with \"{0}\" role does not have a tabbable element"
+        },
+        "input_label_visible": {
+            "0": "An input element must have an associated visible label",
+            "potential_no_label": "The input element does not have an associated visible label"
+        },
+        "aria_child_valid": {
+            "0": "An element with an ARIA role must own a required child",
+            "Fail_no_child": "The element with role \"{0}\" does not own any child element with any of the following role(s): \"{1}\""
+        },
+        "a_target_warning": {
+            "0": "Users should be warned in advance if their input action will open a new window",
+            "potential_warn": "Inform the user when their input action will open a new window"
+        }
+    },
+    "summary": {
+        "counts": {
+            "ignored": 0,
+            "elements": 63,
+            "elementsViolation": 2,
+            "elementsViolationReview": 44,
+            "violation": 2,
+            "potentialviolation": 43,
+            "recommendation": 18,
+            "potentialrecommendation": 1,
+            "manual": 1,
+            "pass": null
+        },
+        "scanTime": 1047,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "WCAG_2_2"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation",
+            "recommendation",
+            "potentialrecommendation",
+            "manual"
+        ],
+        "startScan": 1791474116088,
+        "URL": "http://localhost:3000/baekur"
+    },
+    "scanID": "1f92b7da-2952-4daa-91e5-52cd5bdbb937",
+    "toolID": "cypress-accessibility-checker-v4.0.34",
+    "label": "book-index"
+}

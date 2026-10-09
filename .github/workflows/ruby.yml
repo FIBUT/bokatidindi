@@ -2,7 +2,30 @@ name: Ruby Workflow
 on: [push]
 
 jobs:
-  test:
+
+  Rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v7
+    - name: Install Ruby version specified in `.ruby-version`
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Install required apt packages
+      run: sudo apt-get update && sudo apt-get -y install libpq-dev libvips42
+    - name: Run bundle install
+      run: bundle install
+      env:
+        RAILS_ENV: test
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_PORT: 5432
+    - name: Rubocop
+      run: bundle exec rubocop -c .rubocop.yml
+
+  Tests:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -18,9 +41,10 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v7
     - name: Install Ruby version specified in `.ruby-version`
       uses: ruby/setup-ruby@v1
       with:
@@ -47,5 +71,23 @@ jobs:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
         POSTGRES_PORT: 5432
-    - name: Rubocop
-      run: bundle exec rubocop -c .rubocop.yml
+    - name: Load the database schema and seed
+      run: bundle exec rake db:drop && bundle exec rake db:create && bundle exec rake db:schema:load && bundle exec rake db:seed
+      env:
+        RAILS_ENV: test
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_PORT: 5432
+    - name: Run Cypress tests
+      uses: cypress-io/github-action@v7
+      with:
+        start: bundle exec rails s -e test
+        wait-on: 'http://localhost:3000'
+        browser: firefox
+      env:
+        RAILS_ENV: test
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_PORT: 5432

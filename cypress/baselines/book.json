@@ -1,0 +1,529 @@
+{
+    "results": [
+        {
+            "ruleId": "style_color_misuse",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/link[17]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 5,
+            "reasonId": "Potential_1",
+            "message": "Verify color is not used as the only visual means of conveying information",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<link href=\"/assets/application-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css\" rel=\"stylesheet\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_color_misuse.html#%7B%22message%22%3A%22Verify%20color%20is%20not%20used%20as%20the%20only%20visual%20means%20of%20conveying%20information%22%2C%22snippet%22%3A%22%3Clink%20href%3D%5C%22%2Fassets%2Fapplication-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css%5C%22%20rel%3D%5C%22stylesheet%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22Potential_1%22%2C%22ruleId%22%3A%22style_color_misuse%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_highcontrast_visible",
+            "value": [
+                "RECOMMENDATION",
+                "MANUAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/link[17]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Manual_1",
+            "message": "Confirm Windows high contrast mode is supported when using CSS to include, position or alter non-decorative content",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<link href=\"/assets/application-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css\" rel=\"stylesheet\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "manual",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_highcontrast_visible.html#%7B%22message%22%3A%22Confirm%20Windows%20high%20contrast%20mode%20is%20supported%20when%20using%20CSS%20to%20include%2C%20position%20or%20alter%20non-decorative%20content%22%2C%22snippet%22%3A%22%3Clink%20href%3D%5C%22%2Fassets%2Fapplication-71034bd89cf79aa74aa77397ffa6ad82673784efbe67e4080d25cf350121f33d.css%5C%22%20rel%3D%5C%22stylesheet%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22MANUAL%22%5D%2C%22reasonId%22%3A%22Manual_1%22%2C%22ruleId%22%3A%22style_highcontrast_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_navigation_label_unique",
+            "value": [
+                "VIOLATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/header[1]/div[1]/nav[1]",
+                "aria": "/document[1]/banner[1]/navigation[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_label_not_unique",
+            "message": "Multiple elements with \"navigation\" role do not have unique labels",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 48,
+                "top": 24,
+                "height": 45,
+                "width": 220
+            },
+            "snippet": "<nav class=\"site-logo mb-4 mb-lg-0 d-flex\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "violation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_navigation_label_unique.html#%7B%22message%22%3A%22Multiple%20elements%20with%20%5C%22navigation%5C%22%20role%20do%20not%20have%20unique%20labels%22%2C%22snippet%22%3A%22%3Cnav%20class%3D%5C%22site-logo%20mb-4%20mb-lg-0%20d-flex%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22fail_label_not_unique%22%2C%22ruleId%22%3A%22aria_navigation_label_unique%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/header[1]/div[1]/form[1]/div[1]/input[1]",
+                "aria": "/document[1]/banner[1]/search[1]/searchbox[1]"
+            },
+            "ruleTime": 3,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 670,
+                "top": 38,
+                "height": 31,
+                "width": 220
+            },
+            "snippet": "<input name=\"search\" type=\"search\" aria-label=\"Leitarorð\" class=\"form-control form-control-sm\" id=\"header-search-field\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Cinput%20name%3D%5C%22search%5C%22%20type%3D%5C%22search%5C%22%20aria-label%3D%5C%22Leitaror%C3%B0%5C%22%20class%3D%5C%22form-control%20form-control-sm%5C%22%20id%3D%5C%22header-search-field%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "input_label_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/header[1]/div[1]/form[1]/div[1]/input[1]",
+                "aria": "/document[1]/banner[1]/search[1]/searchbox[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_no_label",
+            "message": "The input element does not have an associated visible label",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 670,
+                "top": 38,
+                "height": 31,
+                "width": 220
+            },
+            "snippet": "<input name=\"search\" type=\"search\" aria-label=\"Leitarorð\" class=\"form-control form-control-sm\" id=\"header-search-field\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/input_label_visible.html#%7B%22message%22%3A%22The%20input%20element%20does%20not%20have%20an%20associated%20visible%20label%22%2C%22snippet%22%3A%22%3Cinput%20name%3D%5C%22search%5C%22%20type%3D%5C%22search%5C%22%20aria-label%3D%5C%22Leitaror%C3%B0%5C%22%20class%3D%5C%22form-control%20form-control-sm%5C%22%20id%3D%5C%22header-search-field%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_no_label%22%2C%22ruleId%22%3A%22input_label_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_attribute_allowed",
+            "value": [
+                "VIOLATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_1",
+            "message": "The attribute(s) 'aria-description' referenced by the element <aside> is not a valid ARIA state or property",
+            "messageArgs": [
+                "aria-description",
+                "aside"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 441,
+                "top": 954,
+                "height": 111,
+                "width": 463
+            },
+            "snippet": "<aside aria-description=\"Deila bókinni á samfélagsmiðlum\" aria-labelledby=\"book-social-media-links-heading\" class=\"book-social-media-links pt-4 my-5 text-center justify-content-center align-items-center\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "violation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_attribute_allowed.html#%7B%22message%22%3A%22The%20attribute(s)%20'aria-description'%20referenced%20by%20the%20element%20%3Caside%3E%20is%20not%20a%20valid%20ARIA%20state%20or%20property%22%2C%22snippet%22%3A%22%3Caside%20aria-description%3D%5C%22Deila%20b%C3%B3kinni%20%C3%A1%20samf%C3%A9lagsmi%C3%B0lum%5C%22%20aria-labelledby%3D%5C%22book-social-media-links-heading%5C%22%20class%3D%5C%22book-social-media-links%20pt-4%20my-5%20text-center%20justify-content-center%20align-items-center%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_1%22%2C%22ruleId%22%3A%22aria_attribute_allowed%22%2C%22msgArgs%22%3A%5B%22aria-description%22%2C%22aside%22%5D%7D"
+        },
+        {
+            "ruleId": "a_target_warning",
+            "value": [
+                "RECOMMENDATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]/link[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_warn",
+            "message": "Inform the user when their input action will open a new window",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 569,
+                "top": 1017,
+                "height": 48,
+                "width": 58
+            },
+            "snippet": "<a class=\"btn btn-lg mr-3\" target=\"_blank\" title=\"Deila á Facebook\" href=\"https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fbok%2Faction-beast-84519\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialrecommendation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/a_target_warning.html#%7B%22message%22%3A%22Inform%20the%20user%20when%20their%20input%20action%20will%20open%20a%20new%20window%22%2C%22snippet%22%3A%22%3Ca%20class%3D%5C%22btn%20btn-lg%20mr-3%5C%22%20target%3D%5C%22_blank%5C%22%20title%3D%5C%22Deila%20%C3%A1%20Facebook%5C%22%20href%3D%5C%22https%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fbok%252Faction-beast-84519%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_warn%22%2C%22ruleId%22%3A%22a_target_warning%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]/div[1]/a[1]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]/link[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 569,
+                "top": 1017,
+                "height": 48,
+                "width": 58
+            },
+            "snippet": "<a class=\"btn btn-lg mr-3\" target=\"_blank\" title=\"Deila á Facebook\" href=\"https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fbok%2Faction-beast-84519\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20class%3D%5C%22btn%20btn-lg%20mr-3%5C%22%20target%3D%5C%22_blank%5C%22%20title%3D%5C%22Deila%20%C3%A1%20Facebook%5C%22%20href%3D%5C%22https%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fbok%252Faction-beast-84519%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "a_target_warning",
+            "value": [
+                "RECOMMENDATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]/div[1]/a[2]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]/link[2]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_warn",
+            "message": "Inform the user when their input action will open a new window",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 643,
+                "top": 1017,
+                "height": 48,
+                "width": 58
+            },
+            "snippet": "<a class=\"btn btn-lg mr-3\" target=\"_blank\" title=\"Deila á LinkedIn\" href=\"https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A3000%2Fbok%2Faction-beast-84519\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialrecommendation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/a_target_warning.html#%7B%22message%22%3A%22Inform%20the%20user%20when%20their%20input%20action%20will%20open%20a%20new%20window%22%2C%22snippet%22%3A%22%3Ca%20class%3D%5C%22btn%20btn-lg%20mr-3%5C%22%20target%3D%5C%22_blank%5C%22%20title%3D%5C%22Deila%20%C3%A1%20LinkedIn%5C%22%20href%3D%5C%22https%3A%2F%2Fwww.linkedin.com%2Fsharing%2Fshare-offsite%2F%3Furl%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fbok%252Faction-beast-84519%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_warn%22%2C%22ruleId%22%3A%22a_target_warning%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]/div[1]/a[2]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]/link[2]"
+            },
+            "ruleTime": 2,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 643,
+                "top": 1017,
+                "height": 48,
+                "width": 58
+            },
+            "snippet": "<a class=\"btn btn-lg mr-3\" target=\"_blank\" title=\"Deila á LinkedIn\" href=\"https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A3000%2Fbok%2Faction-beast-84519\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20class%3D%5C%22btn%20btn-lg%20mr-3%5C%22%20target%3D%5C%22_blank%5C%22%20title%3D%5C%22Deila%20%C3%A1%20LinkedIn%5C%22%20href%3D%5C%22https%3A%2F%2Fwww.linkedin.com%2Fsharing%2Fshare-offsite%2F%3Furl%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fbok%252Faction-beast-84519%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "a_target_warning",
+            "value": [
+                "RECOMMENDATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]/div[1]/a[3]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]/link[3]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_warn",
+            "message": "Inform the user when their input action will open a new window",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 717,
+                "top": 1017,
+                "height": 48,
+                "width": 58
+            },
+            "snippet": "<a class=\"btn btn-lg\" target=\"_blank\" title=\"Deila á Bluesky\" href=\"https://bsky.app/intent/compose?text=Action%20Beast%20http%3A%2F%2Flocalhost%3A3000%2Fbok%2Faction-beast-84519\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialrecommendation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/a_target_warning.html#%7B%22message%22%3A%22Inform%20the%20user%20when%20their%20input%20action%20will%20open%20a%20new%20window%22%2C%22snippet%22%3A%22%3Ca%20class%3D%5C%22btn%20btn-lg%5C%22%20target%3D%5C%22_blank%5C%22%20title%3D%5C%22Deila%20%C3%A1%20Bluesky%5C%22%20href%3D%5C%22https%3A%2F%2Fbsky.app%2Fintent%2Fcompose%3Ftext%3DAction%2520Beast%2520http%253A%252F%252Flocalhost%253A3000%252Fbok%252Faction-beast-84519%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_warn%22%2C%22ruleId%22%3A%22a_target_warning%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "style_focus_visible",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/article[1]/aside[2]/div[1]/a[3]",
+                "aria": "/document[1]/main[1]/generic[1]/article[1]/complementary[2]/link[3]"
+            },
+            "ruleTime": 1,
+            "reasonId": "potential_focus_not_visible",
+            "message": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 717,
+                "top": 1017,
+                "height": 48,
+                "width": 58
+            },
+            "snippet": "<a class=\"btn btn-lg\" target=\"_blank\" title=\"Deila á Bluesky\" href=\"https://bsky.app/intent/compose?text=Action%20Beast%20http%3A%2F%2Flocalhost%3A3000%2Fbok%2Faction-beast-84519\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialviolation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/style_focus_visible.html#%7B%22message%22%3A%22Check%20the%20keyboard%20focus%20indicator%20is%20visible%20when%20using%20CSS%20declaration%20for%20'border'%20or%20'outline'%22%2C%22snippet%22%3A%22%3Ca%20class%3D%5C%22btn%20btn-lg%5C%22%20target%3D%5C%22_blank%5C%22%20title%3D%5C%22Deila%20%C3%A1%20Bluesky%5C%22%20href%3D%5C%22https%3A%2F%2Fbsky.app%2Fintent%2Fcompose%3Ftext%3DAction%2520Beast%2520http%253A%252F%252Flocalhost%253A3000%252Fbok%252Faction-beast-84519%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_focus_not_visible%22%2C%22ruleId%22%3A%22style_focus_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_complementary_label_visible",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/aside[1]",
+                "aria": "/document[1]/main[1]/generic[1]/complementary[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_1",
+            "message": "Element with \"complementary\" role does not have a visible label",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 49,
+                "top": 227,
+                "height": 886,
+                "width": 301
+            },
+            "snippet": "<aside aria-label=\"Myndefni og lýsigögn\" class=\"d-none d-md-block pl-5 mt-4 mt-md-5 col col-lg-4 offset-xl-1 order-1 order-md-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_complementary_label_visible.html#%7B%22message%22%3A%22Element%20with%20%5C%22complementary%5C%22%20role%20does%20not%20have%20a%20visible%20label%22%2C%22snippet%22%3A%22%3Caside%20aria-label%3D%5C%22Myndefni%20og%20l%C3%BDsig%C3%B6gn%5C%22%20class%3D%5C%22d-none%20d-md-block%20pl-5%20mt-4%20mt-md-5%20col%20col-lg-4%20offset-xl-1%20order-1%20order-md-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_1%22%2C%22ruleId%22%3A%22aria_complementary_label_visible%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_child_valid",
+            "value": [
+                "RECOMMENDATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[1]/main[1]/div[1]/div[1]/div[1]/div[1]/aside[1]/div[1]/ul[1]/li[1]/ul[1]",
+                "aria": "/document[1]/main[1]/generic[1]/complementary[1]/generic[1]/list[1]/listitem[1]/list[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_no_child",
+            "message": "The element with role \"list\" does not own any child element with any of the following role(s): \"listitem\"",
+            "messageArgs": [
+                "list",
+                "listitem"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 97,
+                "top": 555,
+                "height": 0,
+                "width": 238
+            },
+            "snippet": "<ul class=\"d-block p-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "recommendation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_child_valid.html#%7B%22message%22%3A%22The%20element%20with%20role%20%5C%22list%5C%22%20does%20not%20own%20any%20child%20element%20with%20any%20of%20the%20following%20role(s)%3A%20%5C%22listitem%5C%22%22%2C%22snippet%22%3A%22%3Cul%20class%3D%5C%22d-block%20p-0%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22Fail_no_child%22%2C%22ruleId%22%3A%22aria_child_valid%22%2C%22msgArgs%22%3A%5B%22list%22%2C%22listitem%22%5D%7D"
+        },
+        {
+            "ruleId": "a_target_warning",
+            "value": [
+                "RECOMMENDATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/footer[1]/div[1]/div[1]/div[1]/address[1]/a[2]",
+                "aria": "/document[1]/contentinfo[1]/group[1]/link[2]"
+            },
+            "ruleTime": 0,
+            "reasonId": "potential_warn",
+            "message": "Inform the user when their input action will open a new window",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 820,
+                "top": 1335,
+                "height": 18,
+                "width": 103
+            },
+            "snippet": "<a href=\"mailto:fibut@fibut.is\" target=\"_blank\" rel=\"external\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "potentialrecommendation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/a_target_warning.html#%7B%22message%22%3A%22Inform%20the%20user%20when%20their%20input%20action%20will%20open%20a%20new%20window%22%2C%22snippet%22%3A%22%3Ca%20href%3D%5C%22mailto%3Afibut%40fibut.is%5C%22%20target%3D%5C%22_blank%5C%22%20rel%3D%5C%22external%5C%22%3E%22%2C%22value%22%3A%5B%22RECOMMENDATION%22%2C%22POTENTIAL%22%5D%2C%22reasonId%22%3A%22potential_warn%22%2C%22ruleId%22%3A%22a_target_warning%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        },
+        {
+            "ruleId": "aria_navigation_label_unique",
+            "value": [
+                "VIOLATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/footer[1]/div[1]/div[1]/nav[1]",
+                "aria": "/document[1]/contentinfo[1]/navigation[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "fail_label_not_unique",
+            "message": "Multiple elements with \"navigation\" role do not have unique labels",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 63,
+                "top": 1210,
+                "height": 161,
+                "width": 437
+            },
+            "snippet": "<nav class=\"d-flex align-items-start col-12 col-md-6 order-0\">",
+            "source": null,
+            "category": "Accessibility",
+            "level": "violation",
+            "ignored": true,
+            "help": "https://able.ibm.com/rules/archives/2026.07.13/doc/en-US/aria_navigation_label_unique.html#%7B%22message%22%3A%22Multiple%20elements%20with%20%5C%22navigation%5C%22%20role%20do%20not%20have%20unique%20labels%22%2C%22snippet%22%3A%22%3Cnav%20class%3D%5C%22d-flex%20align-items-start%20col-12%20col-md-6%20order-0%5C%22%3E%22%2C%22value%22%3A%5B%22VIOLATION%22%2C%22FAIL%22%5D%2C%22reasonId%22%3A%22fail_label_not_unique%22%2C%22ruleId%22%3A%22aria_navigation_label_unique%22%2C%22msgArgs%22%3A%5B%5D%7D"
+        }
+    ],
+    "numExecuted": 936,
+    "ruleTime": 111,
+    "nls": {
+        "style_color_misuse": {
+            "0": "Combine color and descriptive markup to convey information",
+            "Potential_1": "Verify color is not used as the only visual means of conveying information"
+        },
+        "style_highcontrast_visible": {
+            "0": "Windows high contrast mode must be supported when using CSS to include, position or alter non-decorative content",
+            "Manual_1": "Confirm Windows high contrast mode is supported when using CSS to include, position or alter non-decorative content"
+        },
+        "aria_navigation_label_unique": {
+            "0": "Each element with \"navigation\" role must have a unique label that describes its purpose",
+            "fail_label_not_unique": "Multiple elements with \"navigation\" role do not have unique labels"
+        },
+        "style_focus_visible": {
+            "0": "The keyboard focus indicator should be visible when default border or outline is modified by CSS",
+            "potential_focus_not_visible": "Check the keyboard focus indicator is visible when using CSS declaration for 'border' or 'outline'"
+        },
+        "aria_attribute_allowed": {
+            "0": "ARIA attributes must be valid for the element's role",
+            "Fail_1": "The attribute(s) '{0}' referenced by the element <{1}> is not a valid ARIA state or property"
+        },
+        "input_label_visible": {
+            "0": "An input element must have an associated visible label",
+            "potential_no_label": "The input element does not have an associated visible label"
+        },
+        "aria_child_valid": {
+            "0": "An element with an ARIA role must own a required child",
+            "Fail_no_child": "The element with role \"{0}\" does not own any child element with any of the following role(s): \"{1}\""
+        },
+        "aria_complementary_label_visible": {
+            "0": "Each element with \"complementary\" role should have a visible label that describes its purpose",
+            "Fail_1": "Element with \"complementary\" role does not have a visible label"
+        },
+        "a_target_warning": {
+            "0": "Users should be warned in advance if their input action will open a new window",
+            "potential_warn": "Inform the user when their input action will open a new window"
+        }
+    },
+    "summary": {
+        "counts": {
+            "ignored": 16,
+            "elements": 11,
+            "elementsViolation": 0,
+            "elementsViolationReview": 0,
+            "violation": 0,
+            "potentialviolation": 0,
+            "recommendation": 0,
+            "potentialrecommendation": 0,
+            "manual": 0,
+            "pass": null
+        },
+        "scanTime": 232,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "WCAG_2_2"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation",
+            "recommendation",
+            "potentialrecommendation",
+            "manual"
+        ],
+        "startScan": 1791468132087,
+        "URL": "http://localhost:3000/bok/action-beast-84519"
+    },
+    "scanID": "8c4c9f33-91c5-45d2-b372-c47515a8831e",
+    "toolID": "cypress-accessibility-checker-v4.0.34",
+    "label": "book"
+}
