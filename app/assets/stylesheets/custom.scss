@@ -94,10 +94,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-weight: 600;
-}
-
 a {
   text-decoration: underline;
 }
@@ -375,6 +371,9 @@ main {
 }
 
 .welcome-content {
+  #welcome-heading {
+    font-size: 3em;
+  }
   background-color: $white;
   height: 100%;
   h2 {
@@ -383,12 +382,6 @@ main {
   }
   p {
     font-size: 14px;
-  }
-  .hero-heading {
-    font-size: 4.5em;
-    font-weight: normal;
-    line-height: 1em;
-    margin-bottom: 0.12em;
   }
   .hero-nav-link {
     font-size: 14px;
@@ -490,11 +483,6 @@ header {
 }
 
 @include media-breakpoint-down(lg) {
-  .welcome-content {
-    .hero-heading {
-      font-size: 3.8em;
-    }
-  }
   .book {
     .book-description {
       font-size: 0.7em;
@@ -509,6 +497,11 @@ header {
 }
 
 @include media-breakpoint-down(md) {
+  .welcome-content {
+    #welcome-heading {
+      font-size: 2em;
+    }
+  }
   #search-results-from-older-editions {
     overflow-x: scroll;
     table {
@@ -538,11 +531,6 @@ header {
     padding: 14px 0;
     display: inline-block;
   }
-  .welcome-content {
-    .hero-heading {
-      font-size: 3em;
-    }
-  }
   .welcome-category-list li {
     font-size: 1em
   }
@@ -562,11 +550,6 @@ header {
   }
   .logo-list .sponsor {
     width: 20%;
-  }
-  .welcome-content {
-    .hero-heading {
-      font-size: 2em;
-    }
   }
   .book-single {
     .title {
