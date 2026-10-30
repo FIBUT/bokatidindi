@@ -123,7 +123,7 @@ GEM
       unaccent (~> 0.3)
     country_select (8.0.3)
       countries (~> 5.0)
-    crass (1.0.7)
+    crass (1.0.8)
     csv (3.3.6)
     database_cleaner-active_record (2.2.2)
       activerecord (>= 5.a)
