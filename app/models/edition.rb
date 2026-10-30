@@ -104,10 +104,10 @@ class Edition < ApplicationRecord
     if width
       return cover_image.variant(resize_to_limit: [width, width],
                                  format: image_format,
-                                 saver: { quality: IMAGE_QUALITY }).process
+                                 saver: { quality: IMAGE_QUALITY }).processed
     end
     cover_image.variant(format: image_format,
-                        saver: { quality: IMAGE_QUALITY }).process
+                        saver: { quality: IMAGE_QUALITY }).processed
   end
 
   def update_cover_image_srcsets
