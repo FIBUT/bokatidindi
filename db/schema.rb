@@ -107,11 +107,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_02_143104) do
     t.integer "added_by_id"
     t.integer "birthyear"
     t.datetime "created_at", null: false
-    t.string "firstname"
+    t.string "firstname", collation: "is_IS"
     t.boolean "is_icelandic"
-    t.string "lastname"
-    t.string "name"
-    t.string "order_by_name"
+    t.string "lastname", collation: "is_IS"
+    t.string "name", collation: "is_IS"
+    t.string "order_by_name", collation: "is_IS"
     t.integer "schema_type", default: 0, null: false
     t.string "slug"
     t.integer "source_id"
