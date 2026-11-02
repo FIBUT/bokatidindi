@@ -33,7 +33,7 @@ class BooksController < ApplicationController
       @books = Book.current.for_web if @books.nil?
       @meta_description = 'Allar bækur'
 
-      @books = @books.order(:title).page(params[:page])
+      @books = @books.order(:order_by_title).page(params[:page])
       @title_tag ||= 'Bókatíðindi - Allar bækur'
 
       unless (%i[category publisher author] & params.keys).any?
@@ -111,10 +111,10 @@ class BooksController < ApplicationController
 
     author_books = Book.by_author(@author)
 
-    @books = author_books.current.order(:title)
+    @books = author_books.current.order(:order_by_title)
                          .page(params[:page])
 
-    @books_from_old_editions = (author_books.order(:title) - @books)
+    @books_from_old_editions = (author_books.order(:order_by_title) - @books)
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/hofundur/#{@author.slug}",
@@ -134,7 +134,7 @@ class BooksController < ApplicationController
     @meta_description = "Bækur í Bókatíðindum frá #{@publisher[:name]}"
 
     @books = Book.current.for_web.by_publisher(@publisher.id)
-                 .order(:title).page(params[:page])
+                 .order(:order_by_title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/utgefandi/#{@publisher.slug}",
@@ -159,7 +159,7 @@ class BooksController < ApplicationController
                         end
 
     @books = Book.current.for_web.by_category(@category.id)
-                 .order(:title).page(params[:page])
+                 .order(:order_by_title).page(params[:page])
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",

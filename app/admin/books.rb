@@ -13,6 +13,7 @@ ActiveAdmin.register Book do
                 :delete_audio_sample,
                 :original_language,
                 :publisher_id,
+                :order_by,
                 {
                   book_binding_types_attributes: %i[
                     id barcode binding_type_id language page_count
@@ -723,6 +724,7 @@ ActiveAdmin.register Book do
             input_html: { autocomplete: 'off', class: 'language' },
             hint: 'Upprunalegt tungumál bókar.'
           )
+          f.input :order_by, as: :radio
         end
       end
     end
