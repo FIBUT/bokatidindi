@@ -45,6 +45,8 @@ class Book < ApplicationRecord
   multisearchable against: %i[pre_title title_noshy post_title description
                               long_description]
 
+  enum :order_by, { title: 0, pre_title: 1 }
+
   pg_search_scope :search,
                   against: SEARCH_COLUMNS, associated_against: {
                     authors: AUTHORS_SEARCH_COLUMMNS,
@@ -86,8 +88,8 @@ class Book < ApplicationRecord
   paginates_per PAGINATION
 
   before_validation :sanitize_title, :sanitize_description
-  before_create :set_title_hypenation, :set_slug
-  before_update :set_title_hypenation
+  before_create :set_title_hypenation, :set_slug, :set_order_by_title
+  before_update :set_title_hypenation, :set_order_by_title
   after_update :reset_book_edition_categories
 
   attribute :cover_image_file
@@ -111,7 +113,7 @@ class Book < ApplicationRecord
       book_editions: %i[book_edition_categories edition]
     ).where.not(
       book_editions: { edition_id: Edition.current_edition[:id] }
-    ).order(:title)
+    ).order(:order_by_title)
   }
 
   scope :by_edition, lambda { |edition_id|
@@ -121,7 +123,7 @@ class Book < ApplicationRecord
       book_editions: %i[book_edition_categories edition]
     ).where(
       book_editions: { edition_id: }
-    ).order(:title)
+    ).order(:order_by_title)
   }
 
   scope :current, -> { by_edition(Edition.current) }
@@ -161,6 +163,20 @@ class Book < ApplicationRecord
       :book_authors
     )
   }
+
+  def set_order_by_title
+    if order_by == 1
+      title_array = [ pre_title, title_noshy, post_title ]
+      title = title_array.reject(&:blank?).flatten.compact.join(' ')
+      self.order_by_title = title
+    end
+
+    title_array = [ title_noshy, post_title ]
+    title = title_array.reject(&:blank?).flatten.compact.join(' ')
+    self.order_by_title = title
+
+    self.order_by_title = full_title_noshy
+  end
 
   def validate_description_length
     return if description_sans_em.length <= DESCRIPTION_MAX_LENGTH

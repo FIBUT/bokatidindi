@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_21_191300) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_02_143104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -243,6 +243,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_21_191300) do
     t.string "uri_to_audiobook"
     t.string "uri_to_buy"
     t.string "uri_to_sample"
+    t.integer "order_by", default: 0
+    t.string "order_by_title"
     t.index ["country_of_origin"], name: "index_books_on_country_of_origin"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true

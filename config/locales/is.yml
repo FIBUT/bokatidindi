@@ -211,6 +211,10 @@ is:
         book_binding_types: 'Útgáfuform bókar'
         print_placements: 'Prent­birtingar'
         web_placements: 'Vef­birtingar'
+        order_by: 'Raða eftir'
+        order_bies:
+          title: 'Titli'
+          pre_title: 'Yfirtitli'
       blockquote:
         heading: 'Fyrirsögn'
         quote_type: 'Gerð'
