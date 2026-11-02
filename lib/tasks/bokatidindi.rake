@@ -106,6 +106,10 @@ namespace :bt do
       'SET DATA TYPE character varying COLLATE "is_IS"'
     )
     ActiveRecord::Base.connection.execute(
+      'ALTER TABLE authors ALTER COLUMN order_by_name '\
+      'SET DATA TYPE character varying COLLATE "is_IS"'
+    )
+    ActiveRecord::Base.connection.execute(
       'ALTER TABLE authors ALTER COLUMN firstname '\
       'SET DATA TYPE character varying COLLATE "is_IS"'
     )
