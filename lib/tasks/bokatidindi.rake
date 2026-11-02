@@ -98,7 +98,7 @@ namespace :bt do
   desc 'Maintain the Icelandic database collation'
   task maintain_collation: :environment do
     ActiveRecord::Base.connection.execute(
-      'ALTER TABLE authors ALTER COLUMN order_by_name '\
+      'ALTER TABLE books ALTER COLUMN order_by_title '\
       'SET DATA TYPE character varying COLLATE "is_IS"'
     )
     ActiveRecord::Base.connection.execute(
