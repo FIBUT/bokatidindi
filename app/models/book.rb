@@ -166,12 +166,12 @@ class Book < ApplicationRecord
 
   def set_order_by_title
     if order_by == 1
-      title_array = [ pre_title, title_noshy, post_title ]
+      title_array = [pre_title, title_noshy, post_title]
       title = title_array.reject(&:blank?).flatten.compact.join(' ')
       self.order_by_title = title
     end
 
-    title_array = [ title_noshy, post_title ]
+    title_array = [title_noshy, post_title]
     title = title_array.reject(&:blank?).flatten.compact.join(' ')
     self.order_by_title = title
 

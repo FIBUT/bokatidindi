@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SetOrderByTitlesJob < ApplicationJob
   queue_as :default
 
