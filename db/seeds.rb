@@ -8,6 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts '👤 Creating Admin User'
 AdminUser.create(
   email: 'admin@example.com',
   name: 'admin',
@@ -16,6 +17,7 @@ AdminUser.create(
   password_confirmation: 'password'
 )
 
+puts "📁 Creating Categories"
 FactoryBot.create(:edition)
 
 Category.create name: 'Skáldverk',
@@ -73,19 +75,38 @@ Category.create name: 'Listir og ljósmyndir',
                 group: :non_fiction,
                 rod: 8
 
+puts '🖊️ Creating Author Types'
 FactoryBot.create(:author_type, name: 'Höfundur', abbreviation: 'Höf')
 FactoryBot.create(:author_type, name: 'Þýðandi', abbreviation: 'Þýð')
 FactoryBot.create(:author_type, name: 'Myndhöfundur', abbreviation: 'Myndh')
 
+puts '📚 Creating Binding Types'
 BindingType.create(name: 'Innbundin', rod: 1, open: true, barcode_type: 'ISBN')
 BindingType.create(name: 'Kilja', rod: 1, open: true, barcode_type: 'ISBN')
 BindingType.create(name: 'Tímarit', rod: 1, open: true, barcode_type: 'ISSN')
 
-FactoryBot.create_list :publisher, 50
-FactoryBot.create_list :author, 100
+puts '🧑‍💼 Creating Publishers'
+publishers_progressbar = ProgressBar.create(total: 50)
+50.times do
+  FactoryBot.create :publisher
+  publishers_progressbar.increment
+end
 
-FactoryBot.create_list :book, 600, :has_cover
+puts '🖊️ Creating Authors'
+authors_progressbar = ProgressBar.create(total: 200)
+200.times do
+  FactoryBot.create :author
+  authors_progressbar.increment
+end
 
+puts '📘 Creating books'
+books_progressbar = ProgressBar.create(total: 600)
+600.times do
+  FactoryBot.create :book, :has_cover
+  books_progressbar.increment
+end
+
+puts '#️ Updating Category Counts'
 Category.update_all_counts
 
 %i[forsida um_bokatidindi argangar open_data privacy_policy].each do |slug|
