@@ -56,6 +56,8 @@ ActiveAdmin.register Book do
     def update
       @resource = Book.find(permitted_params[:id])
 
+      @resource.edited_by = current_admin_user
+
       # Check if the current can update the book resource, as is.
       authorize! :update, @resource
 
@@ -192,6 +194,8 @@ ActiveAdmin.register Book do
           :edition_ids, :cover_image_file
         )
       )
+
+      @resource.edited_by = current_admin_user
 
       if !permitted_params[:book][:publisher_id] &&
          current_admin_user.publisher?

@@ -74,6 +74,8 @@ class Book < ApplicationRecord
 
   belongs_to :publisher
 
+  belongs_to :edited_by, class_name: 'AdminUser'
+
   accepts_nested_attributes_for :book_authors, allow_destroy: true
   accepts_nested_attributes_for :book_categories, allow_destroy: true
   accepts_nested_attributes_for :book_binding_types, allow_destroy: true
@@ -179,6 +181,8 @@ class Book < ApplicationRecord
   end
 
   def validate_description_length
+    return if self.edited_by.role == 'admin'
+
     return if description_sans_em.length <= DESCRIPTION_MAX_LENGTH
 
     errors.add(:description,
