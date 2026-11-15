@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddEditedByToBook < ActiveRecord::Migration[8.1]
   def up
     add_column :books, :edited_by_id, :integer
