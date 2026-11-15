@@ -42,6 +42,9 @@ FactoryBot.define do
     book_authors       { [association(:book_author, book: instance)] }
     book_binding_types { [association(:book_binding_type, book: instance)] }
     book_editions      { [association(:book_edition, book: instance)] }
+    edited_by_id       do
+      AdminUser.unscoped.order(Arel.sql('RANDOM()')).limit(1).first.id
+    end
 
     trait :has_cover do
       after(:create) do |b|
