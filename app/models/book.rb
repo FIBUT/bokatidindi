@@ -181,7 +181,7 @@ class Book < ApplicationRecord
   end
 
   def validate_description_length
-    return if edited_by.role == 'admin'
+    return if edited_by && edited_by.role == 'admin'
 
     return if description_sans_em.length <= DESCRIPTION_MAX_LENGTH
 
