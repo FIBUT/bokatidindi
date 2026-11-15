@@ -107,11 +107,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_194314) do
     t.integer "added_by_id"
     t.integer "birthyear"
     t.datetime "created_at", null: false
-    t.string "firstname", collation: "is_IS"
+    t.string "firstname"
     t.boolean "is_icelandic"
-    t.string "lastname", collation: "is_IS"
-    t.string "name", collation: "is_IS"
-    t.string "order_by_name", collation: "is_IS"
+    t.string "lastname"
+    t.string "name"
+    t.string "order_by_name"
     t.integer "schema_type", default: 0, null: false
     t.string "slug"
     t.integer "source_id"
@@ -244,7 +244,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_194314) do
     t.string "uri_to_buy"
     t.string "uri_to_sample"
     t.integer "order_by", default: 0
-    t.string "order_by_title", collation: "is_IS"
+    t.string "order_by_title"
     t.integer "edited_by_id"
     t.index ["country_of_origin"], name: "index_books_on_country_of_origin"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
