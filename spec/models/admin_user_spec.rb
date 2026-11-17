@@ -19,7 +19,7 @@ RSpec.describe AdminUser, type: :model do
       publisher = build(:publisher)
       publisher.save
 
-      user = build(:publisher_user, publishers: [publisher])
+      user = build(:admin_user, :has_publisher)
       user.save
 
       author = build(:author)

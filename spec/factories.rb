@@ -18,12 +18,15 @@ FactoryBot.define do
   factory :admin_user do
     name                  { FFaker::Name.name }
     email                 { FFaker::Internet.email }
-    role                  { AdminUser.roles[:admin] }
+    role                  { 'admin' }
     password              { 'password123456' }
     password_confirmation { 'password123456' }
 
-    factory :publisher_user do
-      role { AdminUser.roles[:publisher] }
+    trait :has_publisher do
+      role { 'publisher' }
+      publishers do
+        [Publisher.unscoped.order(Arel.sql('RANDOM()')).limit(1).first]
+      end
     end
   end
 
@@ -48,12 +51,7 @@ FactoryBot.define do
 
     trait :has_cover do
       after(:create) do |b|
-        image_file_name = "book#{[1, 2, 3, 4, 5].sample}.jpg"
-        b.cover_image.attach(
-          io: File.open(Rails.root.join("spec/assets/#{image_file_name}")),
-          filename: "#{SecureRandom.uuid}.jpg"
-        )
-        b.attach_cover_image_variants
+        AttachRandomCoverImageJob.perform_later(b)
       end
     end
   end
