@@ -5,6 +5,10 @@ FactoryBot.define do
   end
 
   factory :tag do
+    active { true }
+    rod { 0 }
+    title { FFaker::Lorem.word&.upcase_first }
+    description { FFaker::Lorem.sentence }
   end
 
   factory :blockquote do

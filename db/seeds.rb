@@ -10,19 +10,19 @@
 
 progressbar_format = '%t |%B| %e'
 
-Rails.logger.debug '=' * `tput cols`.to_i
-Rails.logger.debug 'Seeding the development database'
-Rails.logger.debug '=' * `tput cols`.to_i
-Rails.logger.debug ''
+puts '=' * `tput cols`.to_i
+puts 'Seeding the development database'
+puts '=' * `tput cols`.to_i
+puts ''
 
 unless ['external', 'async'].include?(ENV['JOB_EXECUTION_MODE'])
-  Rails.logger.debug 'Pro Tip: Set the JOB_EXECUTION_MODE env variable to `external` or '
-  Rails.logger.debug '`async` and run the good_job job scheduler in a separate process to '
-  Rails.logger.debug 'speed up the seeding process 5-10x.'
-  Rails.logger.debug ''
+  puts 'Pro Tip: Set the JOB_EXECUTION_MODE env variable to'
+  puts '`external` or `async` and run the good_job job scheduler '
+  puts 'in a separate process to speed up the seeding process.'
+  puts ''
 end
 
-Rails.logger.debug 'Creating Admin User'
+puts 'Creating Admin User'
 AdminUser.create(
   email: 'admin@example.com',
   name: 'admin',
@@ -31,18 +31,26 @@ AdminUser.create(
   password_confirmation: 'password'
 )
 
-Rails.logger.debug 'Creating Categories'
+puts 'Creating Edition'
 FactoryBot.create(:edition)
+
+categories_progressbar = ProgressBar.create(
+  title: 'Creating Categories',
+  total: 10,
+  format: progressbar_format
+)
 
 Category.create name: 'Skáldverk',
                 description: FFaker::Lorem.sentence,
                 group: :childrens_books,
                 rod: 2
+categories_progressbar.increment
 
 Category.create name: 'Fræði og bækur almenns efnis',
                 description: FFaker::Lorem.sentence,
                 group: :non_fiction,
                 rod: 9
+categories_progressbar.increment
 
 Category.create name: 'Fræðibækur',
                 description: FFaker::Lorem.sentence,
@@ -53,48 +61,56 @@ Category.create name: 'Ungmennabækur',
                 description: FFaker::Lorem.sentence,
                 group: :childrens_books,
                 rod: 4
+categories_progressbar.increment
 
 Category.create name: 'Ljóð og leikrit',
                 description: FFaker::Lorem.sentence,
                 group: :fiction,
                 rod: 7
+categories_progressbar.increment
 
 Category.create name: 'Myndskreyttar 0 - 6 ára',
                 description: FFaker::Lorem.sentence,
                 group: :childrens_books,
                 rod: 1
+categories_progressbar.increment
 
 Category.create name: 'Þýdd skáldverk',
                 description: FFaker::Lorem.sentence,
                 group: :fiction,
                 rod: 6
+categories_progressbar.increment
 
 Category.create name: 'Íslensk skáldverk',
                 description: FFaker::Lorem.sentence,
                 group: :fiction,
                 rod: 5
+categories_progressbar.increment
 
 Category.create name: 'Ævisögur og endurminningar',
                 description: FFaker::Lorem.sentence,
                 group: :non_fiction,
                 rod: 11
+categories_progressbar.increment
 
 Category.create name: 'Saga, ættfræði og héraðslýsingar',
                 description: FFaker::Lorem.sentence,
                 group: :non_fiction,
                 rod: 10
+categories_progressbar.increment
 
 Category.create name: 'Listir og ljósmyndir',
                 description: FFaker::Lorem.sentence,
                 group: :non_fiction,
                 rod: 8
+categories_progressbar.increment
 
-Rails.logger.debug 'Creating Author Types'
+puts 'Creating Author Types'
 FactoryBot.create(:author_type, name: 'Höfundur', abbreviation: 'Höf')
 FactoryBot.create(:author_type, name: 'Þýðandi', abbreviation: 'Þýð')
 FactoryBot.create(:author_type, name: 'Myndhöfundur', abbreviation: 'Myndh')
 
-Rails.logger.debug 'Creating Binding Types'
+puts 'Creating Binding Types'
 BindingType.create(name: 'Innbundin', rod: 1, open: true, barcode_type: 'ISBN')
 BindingType.create(name: 'Kilja', rod: 1, open: true, barcode_type: 'ISBN')
 BindingType.create(name: 'Tímarit', rod: 1, open: true, barcode_type: 'ISSN')
@@ -130,6 +146,10 @@ authors_progressbar = ProgressBar.create(
   authors_progressbar.increment
 end
 
+puts 'Creating Tags'
+FactoryBot.create(:tag, title: 'Glæpasaga', title_plural: 'Glæpasögur')
+FactoryBot.create(:tag, title: 'Hrollvekja', title_plural: 'Hrollvekjur')
+
 books_progressbar = ProgressBar.create(
   title: 'Creating Books',
   total: 600,
@@ -140,10 +160,10 @@ books_progressbar = ProgressBar.create(
   books_progressbar.increment
 end
 
-Rails.logger.debug 'Updating Category Counts'
+puts 'Updating Category Counts'
 Category.update_all_counts
 
-Rails.logger.debug 'Creating Pages'
+puts 'Creating Pages'
 
 %i[forsida um_bokatidindi argangar open_data privacy_policy].each do |slug|
   FactoryBot.create(:page, slug: slug)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_194314) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_18_083250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -265,6 +265,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_194314) do
     t.string "slug"
     t.integer "source_id"
     t.datetime "updated_at", null: false
+    t.json "tag_ids", default: [], null: false
     t.index ["group"], name: "index_categories_on_group"
     t.index ["rod"], name: "index_categories_on_rod"
     t.index ["slug"], name: "index_categories_on_slug", unique: true

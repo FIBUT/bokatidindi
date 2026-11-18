@@ -28,4 +28,28 @@
       <% end %>
     <% end %>
   </div>
+  <% if @available_tags %>
+  <nav class="col pb-2 justify-content-md-end">
+    <ul class="nav nav-pills justify-content-md-end">
+      <% if @home_path %>
+        <li class="nav-item">
+         <% if params[:tag_slug] %>
+          <%= link_to 'Allar', @home_path, class: "nav-link" %>
+          <% else %>
+          <%= link_to 'Allar', @home_path, class: 'nav-link active' %>
+          <% end %>
+        </li>
+      <% end %>
+      <% @available_tags.each do |t| %>
+        <li class="nav-item">
+          <% if t.slug == params[:tag_slug]  %>
+          <%= link_to t.title_plural, t.path(@category), class: "nav-link active" %>
+          <% else %>
+          <%= link_to t.title_plural, t.path(@category), class: 'nav-link' %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+  <% end %>
 </div>

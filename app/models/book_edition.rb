@@ -17,7 +17,7 @@ class BookEdition < ApplicationRecord
 
   # Editions that are currently visible online
   scope :current, lambda {
-    joins(:edition).where(online: true)
+    joins(:edition).where(edition: { online: true })
   }
 
   after_create :create_book_edition_categories

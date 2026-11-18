@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   get 'pages/open_data'
 
   get 'baekur/', to: 'books#index'
+  get 'baekur/:tag_slug', to: 'books#index'
   get 'baekur/sida/:page', to: 'books#index'
 
   get 'baekur/flokkur/:category', to: 'books#index', as: 'category'
+  get 'baekur/flokkur/:category/:tag_slug', to: 'books#index', as: 'category_with_tag'
   get 'baekur/flokkur/:category/sida/:page', to: 'books#index'
 
   get 'baekur/utgefandi/:publisher', to: 'books#index', as: 'publisher'

@@ -31,6 +31,8 @@ $link-color: #4a242e;
 $link-hover-color: #30131a;
 
 $navbar-nav-link-padding-x: 0;
+$nav-pills-link-active-bg: theme-color("primary");
+$nav-pills-link-active-color: $component-active-color !default;
 
 $header-link-color: theme-color("lightgrey");
 

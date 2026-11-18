@@ -10,6 +10,8 @@ class Category < ApplicationRecord
 
   before_create :set_slug
 
+  before_update :update_tags
+
   def self.grouped_options
     optgroups = {}
     GROUPS.each do |group|
@@ -42,6 +44,20 @@ class Category < ApplicationRecord
     self.book_count       = book_count_collection.count
     self.book_count_web   = book_count_collection.where(for_web: true).count
     self.book_count_print = book_count_collection.where(for_print: true).count
+  end
+
+  def update_tags
+    self.tag_ids = current_tags.ids
+  end
+
+  def tags
+    Tag.where(id: tag_ids)
+  end
+
+  def current_tags
+    book_tag_ids = BookTag.where(book_id: books.current.for_web.ids).ids
+
+    Tag.where(id: book_tag_ids)
   end
 
   private
