@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row align-items-end">
   <div class="col-12 pb-2">
     <h1 id="results-heading">
       <% unless params[:publisher] || params[:category] || params[:author] || params[:search] %>
@@ -32,7 +32,7 @@
   <nav class="col pb-2 justify-content-md-end">
     <ul class="nav nav-pills justify-content-md-end">
       <% if @home_path %>
-        <li class="nav-item">
+        <li class="nav-item small">
          <% if params[:tag_slug] %>
           <%= link_to 'Allar', @home_path, class: "nav-link" %>
           <% else %>
@@ -41,7 +41,7 @@
         </li>
       <% end %>
       <% @available_tags.each do |t| %>
-        <li class="nav-item">
+        <li class="nav-item small">
           <% if t.slug == params[:tag_slug]  %>
           <%= link_to t.title_plural, t.path(@category), class: "nav-link active" %>
           <% else %>
