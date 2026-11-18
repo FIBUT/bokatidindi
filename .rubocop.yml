@@ -94,6 +94,9 @@ Rails/BulkChangeTable:
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
 
+Rails/Output:
+  Enabled: false
+
 Style/OptionalBooleanParameter:
   Enabled: false
 

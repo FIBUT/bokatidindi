@@ -173,6 +173,7 @@ namespace :bt do
   task update_category_counters: :environment do
     Category.all.find_each do |c|
       c.update_counts
+      c.update_tags
       c.save
     end
   end

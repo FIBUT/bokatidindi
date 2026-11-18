@@ -28,20 +28,7 @@ class BooksController < ApplicationController
       return render_publisher if params[:publisher]
       return render_author if params[:author]
 
-      # List out all the books if we have chosen not to isolate them by
-      # category, author or publisher
-      @books = Book.current.for_web if @books.nil?
-      @meta_description = 'Allar bækur'
-
-      @books = @books.order(:order_by_title).page(params[:page])
-      @title_tag ||= 'Bókatíðindi - Allar bækur'
-
-      unless (%i[category publisher author] & params.keys).any?
-        prepare_navigation_metadata(
-          'https://www.bokatidindi.is/baekur/',
-          'Allar bækur'
-        )
-      end
+      render_all
     end
   end
 
@@ -74,6 +61,30 @@ class BooksController < ApplicationController
   def render_four_oh_three
     render(status: :unauthorized,
            file: Rails.root.join('public/403.html'), layout: false)
+  end
+
+  def render_all
+    @books = Book.current.for_web if @books.nil?
+    @meta_description = 'Allar bækur'
+    @home_path = '/baekur'
+
+    @books = @books.order(:order_by_title).page(params[:page])
+    @title_tag ||= 'Bókatíðindi - Allar bækur'
+
+    @available_tags = Tag.current
+
+    if params[:tag_slug]
+      tag        = Tag.find_by(slug: params[:tag_slug])
+      @books     = @books.where(id: tag.books.current.ids)
+      @title_tag = "Bókatíðindi - #{tag.title_plural}"
+    end
+
+    return if (%i[category publisher author] & params.keys).any?
+
+    prepare_navigation_metadata(
+      'https://www.bokatidindi.is/baekur/',
+      'Allar bækur'
+    )
   end
 
   def render_search
@@ -158,8 +169,16 @@ class BooksController < ApplicationController
                           "#{@category.name_with_group}"
                         end
 
+    @available_tags = @category.tags
+    @home_path = "/baekur/flokkur/#{@category.slug}"
+
     @books = Book.current.for_web.by_category(@category.id)
                  .order(:order_by_title).page(params[:page])
+    if params[:tag_slug]
+      tag        = Tag.find_by(slug: params[:tag_slug])
+      @books     = @books.where(id: tag.books.current.ids)
+      @title_tag = "#{@title_tag} - #{tag.title_plural}"
+    end
 
     prepare_navigation_metadata(
       "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",
