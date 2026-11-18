@@ -55,7 +55,13 @@ class Category < ApplicationRecord
   end
 
   def current_tags
-    book_tag_ids = BookTag.where(book_id: books.current.for_web.ids).ids
+    book_tag_ids = BookTag.where(
+      book_id: books.current.for_web.ids
+    ).group(
+      :tag_id
+    ).pluck(
+      :tag_id
+    )
 
     Tag.where(id: book_tag_ids)
   end
