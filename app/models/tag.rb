@@ -8,6 +8,10 @@ class Tag < ApplicationRecord
     ['title', 'title_plural', 'slug', 'description', 'active', 'rod']
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    ['book_tags', 'books']
+  end
+
   scope :current, lambda {
     where(
       id: BookTag.where(
