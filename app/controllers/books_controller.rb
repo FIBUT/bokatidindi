@@ -170,12 +170,19 @@ class BooksController < ApplicationController
                         end
 
     @available_tags = @category.tags
-    @home_path = "/baekur/flokkur/#{@category.slug}"
+
+    unless @available_tags.empty?
+      @home_path = "/baekur/flokkur/#{@category.slug}"
+    end
 
     @books = Book.current.for_web.by_category(@category.id)
                  .order(:order_by_title).page(params[:page])
     if params[:tag_slug]
-      tag        = Tag.find_by(slug: params[:tag_slug])
+      tag = Tag.find_by(slug: params[:tag_slug])
+      if tag.nil?
+        return render file: 'public/404.html', status: :not_found, layout: false
+      end
+
       @books     = @books.where(id: tag.books.current.ids)
       @title_tag = "#{@title_tag} - #{tag.title_plural}"
     end
