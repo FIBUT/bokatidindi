@@ -4,14 +4,6 @@ class Tag < ApplicationRecord
   has_many :book_tags, dependent: :destroy
   has_many :books, through: :book_tags
 
-  def self.ransackable_attributes(_auth_object = nil)
-    ['title', 'title_plural', 'slug', 'description', 'active', 'rod']
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    ['book_tags', 'books']
-  end
-
   scope :current, lambda {
     where(
       id: BookTag.where(
@@ -23,6 +15,16 @@ class Tag < ApplicationRecord
       )
     )
   }
+
+  default_scope { order(:rod, :title) }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['title', 'title_plural', 'slug', 'description', 'active', 'rod']
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['book_tags', 'books']
+  end
 
   before_create :pluralize_title, :generate_slug
 
