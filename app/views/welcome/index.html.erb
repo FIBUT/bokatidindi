@@ -38,7 +38,11 @@
           <div class="col-12 col-md-5">
             <% if @editions_with_cover.any? %>
             <nav>
-              <a href="<%= @editions_with_cover.first.pdf_file_url %>" target="_blank" title="Skoða prentútgáfu Bókatíðinda">
+              <a
+                href="<%= @editions_with_cover.first.pdf_file_url %>"
+                target="_blank"
+                title="Skoða prentútgáfu Bókatíðinda"
+              >
                 <img
                   width="<%= @editions_with_cover.first.cover_image.metadata['width'] %>"
                   height="<%= @editions_with_cover.first.cover_image.metadata['height'] %>"
@@ -58,12 +62,49 @@
     </div>
   </div>
 
+  <div id="welcome-random-books" class="container-lg">
+    <nav class="row mx-4 mb-4 d-flex">
+      <% @random_books.each_with_index do |book,i| %>
+      <li class="col-3 order-0 mb-4 d-flex flex-row">
+        <a
+          href="<%= book_path(book.slug) %>"
+          title="Skoða upplýsingar um bókina <%= book.full_title_noshy %>"
+        >
+          <img
+            class="w-100 img-fluid"
+            alt="Bókakápa: <%= book.full_title_noshy %>"
+            <% if book.cover_image.attached? %>
+            src="<%= book.cover_image_url(@image_format, false) %>"
+            height="<%= book.cover_image.metadata[:height] %>"
+            width="<%= book.cover_image.metadata[:width] %>"
+            <% unless book.cover_image_srcsets.blank? || ActiveStorage::Blob.service.name.to_s == 'local' %>
+            srcset="<%= book.cover_image_srcsets[@image_format] %>"
+            sizes="<%= @image_sizes %>"
+            <% end %>
+            <% else %>
+            src="<%= asset_url('blank.svg') %>"
+            height="594"
+            width="420"
+            alt="Mynd af bókakápu vantar"
+            <% end %>
+            <% if i >= 6 %>
+            loading="lazy"
+            <% else %>
+            fetchpriority=high
+            <% end %>
+          >
+        </a>
+      </li>
+      <% end %>
+    </nav>
+  </div>
+
   <div id="welcome-current-edition" class="container-lg">
 
-    <div class="row mx-4 mb-4" aria-labelledby="current-edition-categories-heading">
+    <div class="row mx-4 mb-4 mt-4" aria-labelledby="current-edition-categories-heading">
 
       <div class="col-12">
-        <h2 id="current-edition-categories-heading">Nýjasti árgangur</h2>
+        <h2 id="current-edition-categories-heading">Fleiri bækur eftir flokkum</h2>
       </div>
 
     </div>
