@@ -21,6 +21,8 @@ class WelcomeController < ApplicationController
     @editions_with_cover = Edition.joins(
       :cover_image_attachment
     ).current
+
+    @random_books = Book.order('RANDOM()').limit(12).current.for_web
   end
 
   def manifest
