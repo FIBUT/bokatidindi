@@ -23,6 +23,10 @@ class WelcomeController < ApplicationController
     ).current
 
     @random_books = Book.order('RANDOM()').limit(12).current.for_web
+
+    @image_sizes = '( min-width: 1050px ) 260px, '\
+                   '( min-width: 670px ) 150px, '\
+                   '( max-width: 670px ) 260px'\
   end
 
   def manifest
