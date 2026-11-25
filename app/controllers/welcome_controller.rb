@@ -22,20 +22,7 @@ class WelcomeController < ApplicationController
       :cover_image_attachment
     ).current
 
-    rand_books = Book.order('RANDOM()').for_web.current
-
-    childrens_category = Category.where(group: 'childrens_books')
-    childrens_books    = rand_books.by_category(childrens_category).limit(4)
-
-    fiction_category = Category.where(group: 'fiction')
-    fiction_books    = rand_books.by_category(fiction_category).limit(4)
-
-    non_fiction_categoy = Category.where(group: 'non_fiction')
-    non_fiction_books   = rand_books.by_category(non_fiction_categoy).limit(4)
-
-    @random_books = (
-      childrens_books + fiction_books + non_fiction_books
-    ).to_a.shuffle
+    @random_books = random_books
 
     @image_sizes = '( min-width: 1050px ) 260px, '\
                    '( min-width: 670px ) 150px, '\
@@ -49,6 +36,29 @@ class WelcomeController < ApplicationController
   end
 
   private
+
+  def random_books
+    stem_query = Book.joins(
+      :cover_image_attachment
+    ).order(
+      'RANDOM()'
+    ).for_web.current
+
+    childrens_category = Category.where(group: 'childrens_books')
+    childrens_books    = stem_query.by_category(childrens_category).limit(4)
+
+    fiction_category = Category.where(group: 'fiction')
+    fiction_books    = stem_query.by_category(fiction_category).where.not(
+      id: childrens_books.ids
+    ).limit(4)
+
+    non_fiction_categoy = Category.where(group: 'non_fiction')
+    non_fiction_books   = stem_query.by_category(non_fiction_categoy).where.not(
+      id: fiction_books.ids + childrens_books.ids
+    ).limit(4)
+
+    childrens_books + fiction_books + non_fiction_books
+  end
 
   def ld_json
     {
