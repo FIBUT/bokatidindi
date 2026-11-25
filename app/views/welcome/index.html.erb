@@ -65,13 +65,14 @@
   <div id="welcome-random-books" class="container-lg">
     <nav class="row mx-4 mb-4 d-flex">
       <% @random_books.each_with_index do |book,i| %>
-      <li class="col-6 col-lg-3 order-0 mb-5 d-flex flex-row">
+      <li class="col-6 col-md-3 order-0 mb-5 w-100 d-flex flex-row">
         <a
+          class="p-4"
           href="<%= book_path(book.slug) %>"
           title="Skoða upplýsingar um bókina <%= book.full_title_noshy %>"
         >
           <img
-            class="w-100 img-fluid"
+            class="img-fluid"
             alt="Bókakápa: <%= book.full_title_noshy %>"
             <% if book.cover_image.attached? %>
             src="<%= book.cover_image_url(@image_format, false) %>"
