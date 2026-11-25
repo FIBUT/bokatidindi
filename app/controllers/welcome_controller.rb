@@ -33,7 +33,9 @@ class WelcomeController < ApplicationController
     non_fiction_categoy = Category.where(group: 'non_fiction')
     non_fiction_books   = rand_books.by_category(non_fiction_categoy).limit(4)
 
-    @random_books = (childrens_books + fiction_books + non_fiction_books).to_a.shuffle
+    @random_books = (
+      childrens_books + fiction_books + non_fiction_books
+    ).to_a.shuffle
 
     @image_sizes = '( min-width: 1050px ) 260px, '\
                    '( min-width: 670px ) 150px, '\
