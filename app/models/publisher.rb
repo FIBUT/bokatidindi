@@ -17,6 +17,10 @@ class Publisher < ApplicationRecord
     ['name', 'created_at', 'updated_at']
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    ['books', 'admin_users']
+  end
+
   def book_edition_categories_by_edition_id(edition_id)
     BookEditionCategory.joins(
       book_edition: [:edition, { book: [:publisher] }]
