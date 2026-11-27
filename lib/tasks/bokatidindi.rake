@@ -86,6 +86,13 @@ namespace :bt do
     BookEdition.all.find_each do |be|
       be.destroy if be.book.nil? || be.edition.nil?
     end
+    BookEditionCategory.all.find_each do |bec|
+      if bec.book_edition.nil? || (
+        bec.for_web == false && bec.for_print == false
+      )
+        bec.destroy
+      end
+    end
   end
 
   desc 'Update the full name of every author'
