@@ -38,26 +38,11 @@ class WelcomeController < ApplicationController
   private
 
   def random_books
-    stem_query = Book.joins(
+    Book.distinct.unscoped.joins(
       :cover_image_attachment
     ).order(
       'RANDOM()'
-    ).for_web.current
-
-    childrens_category = Category.where(group: 'childrens_books')
-    childrens_books    = stem_query.by_category(childrens_category).limit(4)
-
-    fiction_category = Category.where(group: 'fiction')
-    fiction_books    = stem_query.by_category(fiction_category).where.not(
-      id: childrens_books.ids
-    ).limit(4)
-
-    non_fiction_categoy = Category.where(group: 'non_fiction')
-    non_fiction_books   = stem_query.by_category(non_fiction_categoy).where.not(
-      id: fiction_books.ids + childrens_books.ids
-    ).limit(4)
-
-    childrens_books + fiction_books + non_fiction_books
+    ).current.for_web.limit(12).shuffle
   end
 
   def ld_json
