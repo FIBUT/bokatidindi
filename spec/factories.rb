@@ -58,6 +58,10 @@ FactoryBot.define do
         AttachRandomCoverImageJob.perform_later(b)
       end
     end
+
+    trait :has_tag do
+      tags { [Tag.unscoped.order(Arel.sql('RANDOM()')).limit(1).first] }
+    end
   end
 
   factory :book_category do

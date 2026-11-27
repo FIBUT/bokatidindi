@@ -11,7 +11,7 @@
         Útgefandi: <%= @publisher.name %>
       <% end %>
       <% unless params[:category].nil? %>
-        <%= @category.name_with_group %>
+        <%= @nav_title %>
       <% end %>
       <% unless params[:search].nil? %>
         Leitarorð: <%= params[:search] %>
