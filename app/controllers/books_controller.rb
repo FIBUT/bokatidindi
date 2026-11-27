@@ -171,6 +171,8 @@ class BooksController < ApplicationController
 
     @available_tags = @category.tags
 
+    home_baseurl = 'https://www.bokatidindi.is/baekur/flokkur/'
+
     unless @available_tags.empty?
       @home_path = "/baekur/flokkur/#{@category.slug}"
     end
@@ -185,11 +187,16 @@ class BooksController < ApplicationController
 
       @books     = @books.where(id: tag.books.current.ids)
       @title_tag = "#{@title_tag} - #{tag.title_plural}"
+      @nav_title = "#{@category.name_with_group} - #{tag.title_plural}"
+      base_url   = "#{home_baseurl}#{@category.slug}/#{tag.slug}}"
+    else
+      @nav_title = @category.name
+      base_url = "#{home_baseurl}#{@category.slug}"
     end
 
     prepare_navigation_metadata(
-      "https://www.bokatidindi.is/baekur/flokkur/#{@category.slug}",
-      @category.name_with_group,
+      base_url,
+      @nav_title,
       @category.description
     )
 

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'baekur/flokkur/:category', to: 'books#index', as: 'category'
   get 'baekur/flokkur/:category/:tag_slug', to: 'books#index', as: 'category_with_tag'
   get 'baekur/flokkur/:category/sida/:page', to: 'books#index'
+  get 'baekur/flokkur/:category/:tag_slug/:page', to: 'books#index'
 
   get 'baekur/utgefandi/:publisher', to: 'books#index', as: 'publisher'
   get 'baekur/utgefandi/:publisher/sida/:page', to: 'books#index'
